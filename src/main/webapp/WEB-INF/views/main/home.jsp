@@ -1,6 +1,6 @@
 <div class="container">
     <div class="loginForm">
-        <tiles:form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form">
           <div class="form-group" style="margin-top: 10px;">
             <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
             <div class="col-sm-10">
@@ -15,7 +15,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary myBtn" >Register</button>
+              <button  type="submit" class="btn btn-primary myBtn" >Register</button>
                <button type="submit" class="btn btn-default myBtn" >Sign in</button>
             </div>
           </div>
