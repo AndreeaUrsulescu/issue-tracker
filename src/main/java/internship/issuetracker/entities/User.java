@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -15,11 +17,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
+@NamedQueries({
+	@NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
+	@NamedQuery(name = User.FIND, query = "select a from User a where id = :id") })
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
+    public static final String FIND_ALL = "User.findAll";
+    public static final String FIND = "User.find";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -71,22 +79,19 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-	return new HashCodeBuilder().append(userName)
-                                    .append(email)
-                                    .append(password)
-                                    .toHashCode();
+	return new HashCodeBuilder().append(userName).append(email)
+		.append(password).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-	if(obj instanceof User){
-	    if (this == obj){
-		User user = (User)obj;
+	if (obj instanceof User) {
+	    if (this == obj) {
+		User user = (User) obj;
 		return new EqualsBuilder().append(this.email, user.email)
-			                  .append(this.userName, user.userName)
-			                  .append(this.password, user.password)
-			                  .isEquals();
-	    }	   
+			.append(this.userName, user.userName)
+			.append(this.password, user.password).isEquals();
+	    }
 	}
 	return false;
     }
