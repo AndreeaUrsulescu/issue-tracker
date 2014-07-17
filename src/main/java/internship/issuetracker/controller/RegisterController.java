@@ -26,7 +26,7 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute(new User());
-		return "/register";
+		return "register";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -34,7 +34,7 @@ public class RegisterController {
 		//userValidator.validate(user, bindingResult);
 		
 		if (bindingResult.hasErrors())
-			return "/register";
+			return "register";
 		
 		userService.addUser(user);
 		return "redirect:/index";
