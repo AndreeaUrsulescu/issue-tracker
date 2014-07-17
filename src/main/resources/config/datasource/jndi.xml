@@ -12,10 +12,10 @@
 	You should make sure the connection details match your settings.
 -->
 <!--
-    <Resource name="jdbc/skelet"
+    <Resource name="jdbc/issueTracker"
               auth="Container" type="javax.sql.DataSource"
               maxActive="100" maxIdle="30" maxWait="10000"
-              username="postgres" password="postgres"
+              username="postgres" password="parola"
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://localhost:5432/skelet"/>
 -->

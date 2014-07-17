@@ -5,8 +5,14 @@
 <tiles-definitions>
     <definition name="mainLayout" template="/WEB-INF/views/main/layout.jsp"/>
 
-    <definition name="home" extends="mainLayout">
+    <definition name="register" extends="mainLayout">
         <put-attribute name="header" value="Home page" />
         <put-attribute name="body" value="/WEB-INF/views/main/home.jsp" />
     </definition>
+    
+<!--     <definition name="login" extends="mainLayout"> -->
+    	
+<!--     	<put-attribute name="header" value="/WEB-INF/views/"></put-attribute> -->
+    
+<!--     </definition> -->
 </tiles-definitions>
