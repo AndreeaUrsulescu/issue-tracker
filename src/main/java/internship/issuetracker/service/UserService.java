@@ -3,6 +3,8 @@ package internship.issuetracker.service;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.UserRepository;
 
@@ -33,6 +35,10 @@ public class UserService {
 	
 	public List<User> findUsers(){
 		return this.userRepository.getAll();
+	}
+	
+	public boolean exists(String userName){
+		return this.userRepository.exists(userName);
 	}
 }
 
