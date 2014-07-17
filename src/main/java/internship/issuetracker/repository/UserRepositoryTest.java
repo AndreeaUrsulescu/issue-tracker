@@ -1,21 +1,20 @@
 package internship.issuetracker.repository;
 
 import static org.junit.Assert.fail;
+import internship.issuetracker.entities.User;
 
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRepositoryTest {
 
-	ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
-			"config/application-context.xml");
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Test
 	public void testGetAll() {
 		
-		UserRepository userRepository=context.getBean(UserRepository.class);
-		System.out.println(userRepository.getAll());
-		fail("Not yet implemented");
+		assert(userRepository.getAll().size()==0);
 	}
 
 	@Test
@@ -25,7 +24,15 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testCreate() {
-		fail("Not yet implemented");
+		User user=new User();
+		user.setUserName("User1");
+		user.setEmail("email@1.c");
+		user.setPassword("pass");
+		
+		int expRez=userRepository.getAll().size()+1;
+		userRepository.create(user);
+		int Rez=userRepository.getAll().size();
+		assert(expRez==Rez);
 	}
 
 	@Test
