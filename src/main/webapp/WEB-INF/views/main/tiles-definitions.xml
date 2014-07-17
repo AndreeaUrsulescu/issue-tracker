@@ -9,4 +9,11 @@
         <put-attribute name="header" value="Home page" />
         <put-attribute name="body" value="/WEB-INF/views/main/home.jsp" />
     </definition>
+    
+    <definition name="register" extends="mainLayout">
+    	
+    	<put-attribute name="header" value="/WEB-INF/views/"></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/register.jsp"></put-attribute>
+    	
+    </definition>
 </tiles-definitions>
