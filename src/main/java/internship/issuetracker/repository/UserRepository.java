@@ -2,8 +2,6 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.User;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserRepository {
 	@PersistenceContext
     private EntityManager em;
-	
-	
 
 	public void create(User user){
 		em.persist(user);
