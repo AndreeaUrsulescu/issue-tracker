@@ -14,7 +14,7 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testGetAll() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		int size=userRepository.getAll().size();
@@ -23,7 +23,7 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testRemove() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		int expRez=userRepository.getAll().size()-1;
@@ -34,7 +34,7 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testCreate() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		int i=userRepository.getAll().size()+1;
@@ -48,7 +48,7 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testUpdate() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user=userRepository.getAll().get(0);
@@ -61,11 +61,13 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testFind() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user=userRepository.find((long) 1);
 		assert(user.getUserName().equals("user1"));
 	}
 
+
+	
 }

@@ -27,6 +27,14 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.0</version>
         </dependency>
+        
+        <dependency>
+ 		 <groupId>org.springframework</groupId>
+  			<artifactId>spring-test</artifactId>
+ 			 <version>2.5.6.SEC03</version>
+ 				 <scope>test</scope>
+		</dependency>
+ 
 
         <!--         Spring Security -->
         <dependency>
@@ -47,6 +55,12 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
         </dependency>
+		
+		<dependency>
+   			 <groupId>org.springframework</groupId>
+   			 <artifactId>spring-orm</artifactId>
+   			 <version>3.2.5.RELEASE</version>
+		</dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -66,7 +80,7 @@
             <artifactId>hsqldb</artifactId>
             <version>2.2.9</version>
         </dependency>
-
+		
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -155,7 +169,14 @@
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
-
+		
+		<dependency>
+   			 <groupId>com.h2database</groupId>
+   				 <artifactId>h2</artifactId>
+   				 <version>1.4.180</version>
+   				 <scope>test</scope>
+		</dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
