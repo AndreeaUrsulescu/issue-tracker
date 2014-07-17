@@ -3,6 +3,7 @@ package internship.issuetracker.repository;
 import internship.issuetracker.entities.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -24,8 +25,8 @@ public class UserRepository {
 	}
 
 	public boolean exists(String userName){
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
-        query.setParameter("user_name", userName);
+		TypedQuery<User> query = em.createQuery( "select a from User a where lower(user_name) = :user_name",User.class);
+        query.setParameter("user_name", userName.toCharArray());
         if(query.getResultList().size()>0)
         	return true;
         return false;        
