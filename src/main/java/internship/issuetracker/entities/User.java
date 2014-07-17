@@ -61,7 +61,8 @@ public class User implements Serializable {
     }
 
     public void setUserName(String userName) {
-	this.userName = userName;
+	//force lowercase
+	this.userName = userName.toLowerCase();
     }
 
     public String getEmail() {
