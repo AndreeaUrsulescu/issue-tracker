@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -35,9 +35,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_name", nullable = false, unique = true, length = 12)
-    @Min(5)
-    @Max(12)
+    @Column(name = "user_name", nullable = false, unique = true)
+    @Size(min=2,max=12)
     private String userName;
 
     @Column(name = "user_email", nullable = false)
@@ -45,7 +44,7 @@ public class User implements Serializable {
     private String email;
 
     @Column(name = "user_password", nullable = false)
-    @Min(5)
+    @Size(min=5)
     private String password;
 
     public Long getId() {

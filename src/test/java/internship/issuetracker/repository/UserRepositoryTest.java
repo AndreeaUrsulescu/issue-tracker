@@ -38,13 +38,16 @@ public class UserRepositoryTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
-		long i=userRepository.getAll().get(userRepository.getAll().size()-1).getId()+1;
 		User user=new User();
-		user.setUserName("User"+i);
-		user.setEmail("email@1.c");
-		user.setPassword("pass");			
-		userRepository.create(user);		
-		assert(userRepository.exists("User"+i));
+		long i=userRepository.getAll().get(userRepository.getAll().size()-1).getId()+1;
+		user.setUserName("testuser"+i);
+		user.setEmail("testmail@yahoo.com");
+		user.setPassword("pasdsdsxy");			
+		userRepository.create(user);
+		
+		
+		System.out.println("testuser"+i);
+		assert(userRepository.exists("testuser"+i));
 	}
 
 	@Test
@@ -53,8 +56,7 @@ public class UserRepositoryTest {
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user=userRepository.getAll().get(0);
-		int i=userRepository.getAll().size()+1;
-		user.setPassword("changedPass"+i);
+				user.setPassword("chpassssa");
 		userRepository.update(user);
 		assert(user.getPassword()==userRepository.getAll().get(0).getPassword());
 		
@@ -66,7 +68,7 @@ public class UserRepositoryTest {
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user=userRepository.find((long) 1);
-		assert(user.getUserName().equals("user1"));
+		assert(user.getUserName().equals("userxx1"));
 	}
 
 	@Test
