@@ -16,27 +16,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-
     @Autowired
     private UserService userService;
 
     @Autowired
     private UserValidator userValidator;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String registerPage(Model model) {
-	model.addAttribute(new User());
-	return "/register";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public String registerUser(@Valid User user, BindingResult bindingResult) {
-	userValidator.validate(user, bindingResult);
-
-	if (bindingResult.hasErrors())
-	    return "/register";
-
-	userService.addUser(user);
-	return "redirect:/index";
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public String registerPage(Model model) {
+		model.addAttribute(new User());
+		return "register";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String registerUser(@Valid User user, BindingResult bindingResult) {
+		//userValidator.validate(user, bindingResult);
+		
+		if (bindingResult.hasErrors())
+			return "register";
+		
+		userService.addUser(user);
+		return "redirect:/index";
+	}
 }
