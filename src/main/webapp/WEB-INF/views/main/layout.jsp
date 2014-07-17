@@ -11,16 +11,10 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		
-		<link rel="stylesheet" href="/resources/assets/stylesheets/style.css">
+		<link rel="stylesheet" href="resources/assets/stylesheets/style.css" type="text/css">
 
 	</head>
 
-
-	<table>
-		<tr>
-			<td colspan="2"><tiles:insertAttribute name="header" /></td>
-		</tr>
-		<tr>
-			<td><tiles:insertAttribute name="body" /></td>
-		</tr>
-	</table>
+			<tiles:insertAttribute name="header" />
+	
+			<tiles:insertAttribute name="body" />
