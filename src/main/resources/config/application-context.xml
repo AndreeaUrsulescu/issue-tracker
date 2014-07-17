@@ -32,5 +32,7 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="txManager" />
+    
+    <bean id="userValidator" class="internship.issuetracker.validator.UserValidator" />
 
 </beans>

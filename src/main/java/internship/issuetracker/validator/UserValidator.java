@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 public class UserValidator implements Validator {
 
     @Autowired
-    private UserService userRepo;
+    private UserService userService;
     @Override
     public boolean supports(Class<?> clazz) {
 	return User.class.equals(clazz);
@@ -19,10 +19,12 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object object, Errors error) {
-	ValidationUtils.rejectIfEmpty(e, "name", "name.empty");
+	ValidationUtils.rejectIfEmptyOrWhitespace(error, "userName", "username.empty");
+	ValidationUtils.rejectIfEmptyOrWhitespace(error, "email", "email.empty");
+	ValidationUtils.rejectIfEmptyOrWhitespace(error, "password", "password.empty");
         User p = (User) object;
-        if (userRepo.exists(p.getUserName())) {
-            error.rejectValue("username", "already exists");
+        if (userService.exists(p.getUserName()) == true) {
+            error.rejectValue("username", "username.exists");
         }	
     }
 
