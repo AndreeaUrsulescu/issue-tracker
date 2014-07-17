@@ -27,6 +27,8 @@ public class UserRepository {
 	public boolean exists(String userName){
 		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
         query.setParameter("user_name", userName.toCharArray());
+        //crw: you may consider replacing the code below with
+        //crw  return !query.getResultList().isEmpty()
         if(query.getResultList().size()>0)
         	return true;
         return false;        

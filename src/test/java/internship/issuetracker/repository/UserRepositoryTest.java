@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+//crw: you may consider using spring-test to remove boiler plate code for context configuration
+//crw: you'll have to add spring-test dependency in pom and add the code below to your test class
+//crw: @RunWith(SpringJUnit4ClassRunner.class)
+//crw: @ContextConfiguration(locations = {"/config/datasource/postgres.xml",
+//crw:        "/config/application-context.xml"})
 public class UserRepositoryTest {
 
 	UserRepository userRepository;
