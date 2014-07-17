@@ -1,5 +1,8 @@
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.User;
+import internship.issuetracker.service.UserService;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +36,7 @@ public class RegisterController {
 		userValidator.validate(user, bindingResult);
 		
 		if (bindingResult.hasErrors())
-			return "";
+			return "/register";
 		
 		userService.addUser(user);
 		return "redirect:/index";
