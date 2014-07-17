@@ -35,9 +35,6 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testMatchPassword() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
-				"config/application-context.xml");
-		UserRepository userRepository = context.getBean(UserRepository.class);
 		assert(userRepository.matchPassword("foobar","parola") && !userRepository.matchPassword("foobarx","parolax") );
 	}
 	

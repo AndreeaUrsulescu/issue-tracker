@@ -25,7 +25,7 @@ public class UserRepository {
 	}
 
 	public boolean exists(String userName){
-		TypedQuery<User> query = em.createQuery( "select a from User a where lower(user_name) = :user_name",User.class);
+		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
         query.setParameter("user_name", userName.toCharArray());
         if(query.getResultList().size()>0)
         	return true;
