@@ -34,4 +34,13 @@ public class UserRepository {
         	return true;
         return false;        
 	}
+	
+	public boolean matchPassword(String userName,String password){
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
+        query.setParameter("user_name", userName);
+        query.setParameter("user_password", password);
+        if(query.getResultList().size()>0)
+        	return true;
+		return false;
+	}
 }

@@ -11,21 +11,20 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class UserRepositoryTest {
 
 	
-	
-	@Test
-	public void testCreate() {
-		
-	}
-
-	@Test
-	public void testUpdate() {
-		
-	}
-
-
-
 	@Test
 	public void testExists() {
-		
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		assert(userRepository.exists("foobar"));
 	}
+	
+	@Test
+	public void testMatchPassword() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		assert(userRepository.matchPassword("foobar","parola") && !userRepository.matchPassword("foobarx","parolax") );
+	}
+	
 }

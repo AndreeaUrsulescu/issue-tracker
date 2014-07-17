@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Email;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	
+	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where user_name = :user_name AND user_password = :user_password"),
 	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
 @Entity
 @Table(name = "Users")
@@ -28,6 +28,7 @@ public class User implements Serializable {
 
     
     public static final String FIND_NAME = "User.findName";
+    public static final String FIND_PASS = "User.findPass";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
