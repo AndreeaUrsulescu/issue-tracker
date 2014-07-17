@@ -19,12 +19,11 @@ public class UserRepository {
     private EntityManager em;
 	
 	public List<User> getAll(){
-		TypedQuery<User> query = em.createNamedQuery("Select * from users;", User.class);
-        return query.getResultList();
+		return null;
 	}
 	
 	public void remove(User user){
-		em.remove(user);
+		//em.remove(user);
 	}
 	
 	public void create(User user){
@@ -32,7 +31,7 @@ public class UserRepository {
 	}
 	
 	public void update(User user){
-		em.merge(user);
+		//em.merge(user);
 	}
 	
 	public User find(long id){
