@@ -19,22 +19,11 @@ public class UserService {
 		this.userRepository.create(user);
 	}
 	
-	public void removeUser(User user){
-		this.userRepository.remove(user);
-	}
 	
 	public void updateUser(User user){
 		this.userRepository.update(user);
 	}
-	
-	public User findUser(Long id){
-		return this.userRepository.find(id);
-	}
-	
-	public List<User> findUsers(){
-		return this.userRepository.getAll();
-	}
-	
+		
 	public boolean exists(String userName){
 		return this.userRepository.exists(userName);
 	}
