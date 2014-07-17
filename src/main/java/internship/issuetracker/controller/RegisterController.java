@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-	
-	@Autowired
-	private UserService userService;
-	
-	//@Autowired
-	//private UserValidator userValidator;
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserValidator userValidator;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {

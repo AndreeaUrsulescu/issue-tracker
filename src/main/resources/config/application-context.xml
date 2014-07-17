@@ -26,6 +26,11 @@
             </bean>
         </property>
     </bean>
+    
+    <bean id="messageSource"
+    			class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
 
     <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />

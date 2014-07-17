@@ -10,25 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
-
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
-	@NamedQuery(name = User.FIND, query = "select a from User a where id = :id"),
-	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
+
+@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
-    public static final String FIND_ALL = "User.findAll";
-    public static final String FIND = "User.find";
     public static final String FIND_NAME = "User.findName";
 
     @Id
@@ -36,7 +31,7 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true)
-    @Size(min=2,max=12)
+    @Size(min = 2, max = 12)
     private String userName;
 
     @Column(name = "user_email", nullable = false)
@@ -44,7 +39,7 @@ public class User implements Serializable {
     private String email;
 
     @Column(name = "user_password", nullable = false)
-    @Size(min=5)
+    @Size(min = 5)
     private String password;
 
     public Long getId() {
@@ -60,7 +55,7 @@ public class User implements Serializable {
     }
 
     public void setUserName(String userName) {
-	//force lowercase
+	// force lowercase
 	this.userName = userName.toLowerCase();
     }
 
