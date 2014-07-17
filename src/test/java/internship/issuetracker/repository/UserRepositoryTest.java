@@ -2,6 +2,7 @@ package internship.issuetracker.repository;
 
 import static org.junit.Assert.fail;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.repository.UserRepository;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
