@@ -18,13 +18,18 @@ public class UserRepositoryTest {
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		int size=userRepository.getAll().size();
-		System.out.println(size);
 		assert(size>=0);
 	}
 
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		int expRez=userRepository.getAll().size()-1;
+		User user=userRepository.getAll().get(1);		
+		userRepository.remove(user);
+		assert(expRez==userRepository.getAll().size());
 	}
 
 	@Test
@@ -43,7 +48,15 @@ public class UserRepositoryTest {
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		User user=userRepository.getAll().get(0);
+		int i=userRepository.getAll().size()+1;
+		user.setPassword("changedPass"+i);
+		userRepository.update(user);
+		assert(user.getPassword()==userRepository.getAll().get(0).getPassword());
+		
 	}
 
 	@Test
@@ -52,7 +65,6 @@ public class UserRepositoryTest {
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		User user=userRepository.find((long) 1);
-		System.out.println(user.getUserName());
 		assert(user.getUserName().equals("user1"));
 	}
 
