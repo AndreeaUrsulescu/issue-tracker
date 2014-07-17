@@ -17,6 +17,6 @@
               maxActive="100" maxIdle="30" maxWait="10000"
               username="postgres" password="samsung12A"
               driverClassName="org.postgresql.Driver"
-              url="jdbc:postgresql://localhost:5432/skelet"/>
+              url="jdbc:postgresql://localhost:5432/issueTracker"/>
 -->
 </beans>
