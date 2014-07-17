@@ -17,17 +17,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
+
+@SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
 	@NamedQuery(name = User.FIND, query = "select a from User a where id = :id") })
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
     public static final String FIND_ALL = "User.findAll";
     public static final String FIND = "User.find";
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
