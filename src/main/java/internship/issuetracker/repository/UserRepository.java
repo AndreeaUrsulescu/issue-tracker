@@ -39,4 +39,12 @@ public class UserRepository {
         query.setParameter("id", id);
         return query.getSingleResult();	
 	}
+	
+	public boolean exists(String userName){
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
+        query.setParameter("user_name", userName);
+        if(query.getResultList().size()>0)
+        	return true;
+        return false;        
+	}
 }
