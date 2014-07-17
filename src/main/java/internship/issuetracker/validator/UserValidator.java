@@ -25,8 +25,7 @@ public class UserValidator implements Validator {
 	ValidationUtils.rejectIfEmptyOrWhitespace(error, "email", "email.empty");
 	ValidationUtils.rejectIfEmptyOrWhitespace(error, "password", "password.empty");
 	User p = (User) object;
-	String trimedUserName = p.getUserName().trim();
-	if (userService.exists(trimedUserName.toLowerCase()) == true) {
+	if (userService.exists(p.getUserName().trim())) {
 	    error.rejectValue("userName", "username.exists");
 	}
     }
