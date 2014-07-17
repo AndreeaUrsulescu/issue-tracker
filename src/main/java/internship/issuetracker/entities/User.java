@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.Email;
 @SuppressWarnings("serial")
 @NamedQueries({
 
-@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
+@NamedQuery(name = User.FIND_NAME, query = "SELECT u FROM User a WHERE u.userName = :user_name") })
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
@@ -55,8 +55,7 @@ public class User implements Serializable {
     }
 
     public void setUserName(String userName) {
-	// force lowercase
-	this.userName = userName.toLowerCase();
+	this.userName = userName;
     }
 
     public String getEmail() {
