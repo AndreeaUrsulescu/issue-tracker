@@ -1,5 +1,6 @@
 package internship.issuetracker.service;
 
+import static org.junit.Assert.*;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.UserRepository;
 
@@ -35,6 +36,21 @@ public class UserServiceTest {
 		userService.addUser(user);
 		Mockito.verify(userRepository).create(user);
 
+	}
+	
+	@Test
+	public void testLoginUser(){
+		
+		String userName = "corbu oana";
+		String password = "parola";
+		boolean actualResult;
+		
+		Mockito.when(userRepository.matchPassword(userName, password)).thenReturn(true);
+		actualResult = userService.matchPassword(userName, password);
+		
+		assertEquals(true,actualResult);
+		
+		
 	}
 
 }

@@ -23,4 +23,8 @@ public class UserService {
     public boolean exists(String userName) {
 	return this.userRepository.exists(userName);
     }
+    
+    public boolean matchPassword(String userName,String password){
+		return this.userRepository.matchPassword(userName, password);
+	}
 }
