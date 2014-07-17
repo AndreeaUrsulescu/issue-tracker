@@ -1,12 +1,10 @@
 package internship.issuetracker.service;
 
 
-import java.util.List;
-
-import javax.persistence.TypedQuery;
-
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.UserRepository;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
