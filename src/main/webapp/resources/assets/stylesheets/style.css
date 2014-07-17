@@ -1,0 +1,29 @@
+.registerForm{
+	border:1px solid #c8c9ca;
+	border-radius:15px;
+	padding:0 20px;
+	margin-top:10px;
+	width:450px;
+	margin:0 auto;
+}
+
+.registerForm .form-group:first-child{
+	margin-top:15px;
+}
+
+.registerForm label{
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 18px;
+	margin-left:20px;
+
+}
+.container{
+	margin:0 auto;
+}
+
+.registerForm .btn {
+	width:100px;
+	margin-top:10px;
+	font-size:15px;
+	font-weight:bold;
+}
