@@ -11,4 +11,11 @@ public class HomeController {
 
         return "home";
     }
+    
+    @RequestMapping(value = {"/register"})
+    public String register() {
+    	
+    	return "register";
+    	
+    }
 }
