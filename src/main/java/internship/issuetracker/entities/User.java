@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Email;
 @Table(name = "Users")
 public class User implements Serializable {
 
-	public static final String FIND_NAME = "User.findName";
+    public static final String FIND_NAME = "User.findName";
     public static final String FIND_PASS = "User.findPass";
 
     @Id
@@ -56,8 +56,7 @@ public class User implements Serializable {
     }
 
     public void setUserName(String userName) {
-	// force lowercase
-	this.userName = userName.toLowerCase();
+	this.userName = userName;
     }
 
     public String getEmail() {
