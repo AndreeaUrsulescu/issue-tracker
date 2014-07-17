@@ -37,13 +37,13 @@ public class UserRepositoryTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
-		int i=userRepository.getAll().size()+1;
+		long i=userRepository.getAll().get(userRepository.getAll().size()-1).getId()+1;
 		User user=new User();
 		user.setUserName("User"+i);
 		user.setEmail("email@1.c");
 		user.setPassword("pass");			
 		userRepository.create(user);		
-		assert(1==1);
+		assert(userRepository.exists("User"+i));
 	}
 
 	@Test
@@ -73,6 +73,6 @@ public class UserRepositoryTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
 				"config/application-context.xml");
 		UserRepository userRepository = context.getBean(UserRepository.class);
-		assert(userRepository.exists("user1"));
+		assert(userRepository.exists(userRepository.getAll().get(0).getUserName()));
 	}
 }
