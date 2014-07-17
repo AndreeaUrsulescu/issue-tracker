@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserRepository {
-	
 	@PersistenceContext
     private EntityManager em;
 	
