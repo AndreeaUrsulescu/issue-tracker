@@ -68,4 +68,11 @@ public class UserRepositoryTest {
 		assert(user.getUserName().equals("user1"));
 	}
 
+	@Test
+	public void testExists() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		UserRepository userRepository = context.getBean(UserRepository.class);
+		assert(userRepository.exists("user1"));
+	}
 }

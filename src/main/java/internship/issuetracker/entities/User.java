@@ -21,13 +21,15 @@ import org.hibernate.validator.constraints.Email;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
-	@NamedQuery(name = User.FIND, query = "select a from User a where id = :id") })
+	@NamedQuery(name = User.FIND, query = "select a from User a where id = :id"),
+	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
     public static final String FIND_ALL = "User.findAll";
     public static final String FIND = "User.find";
+    public static final String FIND_NAME = "User.findName";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
