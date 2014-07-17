@@ -1,21 +1,35 @@
 package internship.issuetracker.repository;
 
-import static org.junit.Assert.fail;
 import internship.issuetracker.entities.User;
-import internship.issuetracker.repository.UserRepository;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class UserRepositoryTest {
 
+	UserRepository userRepository;
+	
+	@Before
+	public void setUp(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
+				"config/application-context.xml");
+		userRepository = context.getBean(UserRepository.class);
+	}
 	
 	@Test
 	public void testExists() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/postgres.xml",
-				"config/application-context.xml");
-		UserRepository userRepository = context.getBean(UserRepository.class);
+		
+		if(!userRepository.exists("foobar")){
+			User user=new User();
+			user.setUserName("foobar");
+			user.setEmail("just@mail.a");
+			user.setPassword("parola");
+			
+			userRepository.create(user);
+		}				
+		
 		assert(userRepository.exists("foobar"));
 	}
 	
