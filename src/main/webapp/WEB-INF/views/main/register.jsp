@@ -33,7 +33,7 @@
 			
 			</div>	
 	
-		<div class="btn btn-primary center-block">Register</div>
+		<input type="submit" class="btn btn-primary center-block" value="Register" >
 		
 		</sf:form>
 	
