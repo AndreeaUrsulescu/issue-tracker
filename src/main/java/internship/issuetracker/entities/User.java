@@ -5,12 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+
+
+@NamedQueries({ @NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
+			    @NamedQuery(name = User.FIND, query = "select a from User a where id = :id") })
 
 @Entity
 @Table(name = "users")
 public class User {
 
+	public static final String FIND_ALL = "User.findAll";
+	public static final String FIND = "User.find";
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
