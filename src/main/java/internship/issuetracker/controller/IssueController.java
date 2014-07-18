@@ -25,7 +25,17 @@ public class IssueController {
 	@RequestMapping(value="/new",method=RequestMethod.GET)
 	public String createIssuePage(Model model)
 	{
+		Issue issue=new Issue();
+		User user=new User(); 
+		user.setEmail("user@user.com");   // the logged User (when spring security is done)
+		user.setPassword("password");
+		user.setUserName("username");
+		issue.setUpdate_date(new Date());
+		issue.setOwner(user);
+		model.addAttribute(issue);
+		
 		return "newIssue";
+		
 	}
 	
 	@RequestMapping(value="/new",method=RequestMethod.POST)
@@ -34,13 +44,7 @@ public class IssueController {
 		if (bindingResult.hasErrors())
 			return "newIssue";
 		
-		User user=new User(); 
-		user.setEmail("user@user.com");   // the logged User
-		user.setPassword("password");
-		user.setUserName("username");
-		issue.setOwner(user);
-		issue.setUpdate_date(new Date());
 		issueService.addIssue(issue);
-		return "register";
+		return "redirect:/index";    // or whatever
 	}
 }
