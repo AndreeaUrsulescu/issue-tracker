@@ -1,5 +1,7 @@
 package internship.issuetracker.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,30 +10,39 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 
 
-
-@NamedQueries({ @NamedQuery(name = User.FIND_ALL, query = "select a from User a order by a.id"),
-			    @NamedQuery(name = User.FIND, query = "select a from User a where id = :id") })
-
-@Entity
-@Table(name = "users")
-public class User {
-
-	public static final String FIND_ALL = "User.findAll";
-	public static final String FIND = "User.find";
+@SuppressWarnings("serial")
+@NamedQueries({
 	
+	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where user_name = :user_name") })
+@Entity
+@Table(name = "Users")
+public class User implements Serializable {
+
+    
+    public static final String FIND_NAME = "User.findName";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_name", nullable=false, unique=true, length=12)
+    @Column(name = "user_name", nullable = false, unique = true)
+    @Size(min=2,max=12)
     private String userName;
 
-    @Column(name = "user_email", nullable=false)
+    @Column(name = "user_email", nullable = false)
+    @Email
     private String email;
 
-    @Column(name = "user_password", nullable=false)
+    @Column(name = "user_password", nullable = false)
+    @Size(min=5)
     private String password;
 
     public Long getId() {
@@ -47,7 +58,7 @@ public class User {
     }
 
     public void setUserName(String userName) {
-	// enforce lowercase letters
+	//force lowercase
 	this.userName = userName.toLowerCase();
     }
 
@@ -66,4 +77,24 @@ public class User {
     public void setPassword(String password) {
 	this.password = password;
     }
+
+    @Override
+    public int hashCode() {
+	return new HashCodeBuilder().append(userName).append(email)
+		.append(password).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj instanceof User) {
+	    if (this == obj) {
+		User user = (User) obj;
+		return new EqualsBuilder().append(this.email, user.email)
+			.append(this.userName, user.userName)
+			.append(this.password, user.password).isEquals();
+	    }
+	}
+	return false;
+    }
+
 }

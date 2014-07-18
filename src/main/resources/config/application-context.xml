@@ -17,14 +17,12 @@
           class='org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean'>
         <property name="persistenceUnitName" value="IssueTracker" />
         <property name='dataSource' ref='dataSource' />
-        <property name="jpaVendorAdapter">
-            <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <!--<property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect" />-->
-                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
-                <property name="generateDdl" value="true" />
-                <property name="showSql" value="false" />
-            </bean>
-        </property>
+        <property name="jpaVendorAdapter" ref="jpaAdapter"/>
+    </bean>
+    
+    <bean id="messageSource"
+    			class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
     </bean>
 
     <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -32,5 +30,7 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="txManager" />
+    
+    <bean id="userValidator" class="internship.issuetracker.validator.UserValidator" />
 
 </beans>

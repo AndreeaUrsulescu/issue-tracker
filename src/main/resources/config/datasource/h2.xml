@@ -6,8 +6,14 @@
 	<bean id='dataSource'
 		  class='org.springframework.jdbc.datasource.DriverManagerDataSource'>
 		<property name='driverClassName' value='org.h2.Driver' />
-		<property name='url' value='jdbc:h2:mem:testdb' />
+		<property name='url' value='jdbc:h2:mem:test;DB_CLOSE_DELAY=-1' />
 		<property name='username' value='sa' />
 		<property name='password' value='' />
 	</bean>
+	
+	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" />
+                <property name="generateDdl" value="true" />
+                <property name="showSql" value="false" />
+            </bean>
 </beans>

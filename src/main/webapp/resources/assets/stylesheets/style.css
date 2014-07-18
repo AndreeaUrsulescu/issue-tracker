@@ -26,4 +26,18 @@
 	margin-top:10px;
 	font-size:15px;
 	font-weight:bold;
+
+
+.loginForm{
+    margin: 0 auto;
+    width: 520px;
+    border: 1px solid #c8c9ca;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+.myBtn{
+    width: 120px;
+    //margin-right: 20px;
 }

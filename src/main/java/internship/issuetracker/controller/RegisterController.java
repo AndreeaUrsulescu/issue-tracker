@@ -2,6 +2,7 @@ package internship.issuetracker.controller;
 
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.UserService;
+import internship.issuetracker.validator.UserValidator;
 
 import javax.validation.Valid;
 
@@ -9,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/register")
@@ -18,8 +20,8 @@ public class RegisterController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private UserValidator userValidator;
+	//@Autowired
+	//private UserValidator userValidator;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
@@ -29,7 +31,7 @@ public class RegisterController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String registerUser(@Valid User user, BindingResult bindingResult) {
-		userValidator.validate(user, bindingResult);
+		//userValidator.validate(user, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			return "/register";

@@ -17,15 +17,8 @@ public class UserRepository {
 	@PersistenceContext
     private EntityManager em;
 	
-	public List<User> getAll(){
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_ALL, User.class);
-        return query.getResultList();
-	}
 	
-	public void remove(User user){
-		em.remove(find(user.getId()));
-	}
-	
+
 	public void create(User user){
 		em.persist(user);
 	}
@@ -33,10 +26,12 @@ public class UserRepository {
 	public void update(User user){
 		em.merge(user);
 	}
-	
-	public User find(Long id){
-		TypedQuery<User> query = em.createNamedQuery(User.FIND, User.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();	
+
+	public boolean exists(String userName){
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
+        query.setParameter("user_name", userName);
+        if(query.getResultList().size()>0)
+        	return true;
+        return false;        
 	}
 }
