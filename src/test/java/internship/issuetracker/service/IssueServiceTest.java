@@ -1,8 +1,6 @@
 package internship.issuetracker.service;
 
-import static org.junit.Assert.fail;
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.IssueRepository;
 
 import org.junit.Before;
