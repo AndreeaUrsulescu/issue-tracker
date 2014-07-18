@@ -16,8 +16,8 @@ $(document).ready(function(){
 	$("#username").keyup(function(){
 		var value  = $("#username").val();
 		
-		var usernameRegex = '/^[a-zA-Z]{5,12}$/';
-		
+		var usernameRegex = '[a-zA-Z]+';
+			
 		var validationRegex = value.match(usernameRegex);
 		
 		$("#username").parent().find("span").text(" ");
@@ -30,11 +30,12 @@ $(document).ready(function(){
 
 			$("#username").parent().find("span").text("Your username must be between 5-12 characters long.");
 			
-		} else{
-			if(value.match(validationRegex)){
-				$("#username").parent().find("span").text("You can only use alphabetical characters.");
-			}
 		}
+		
+		if(usernameRegex.test(value)){
+				$("#username").parent().find("span").text("You can only use alphabetical characters."+value+" "+validationRegex+ " " +validationRegex.lenght);
+		}
+	    
 	});
 	
 	$("#password").keyup(function(){
