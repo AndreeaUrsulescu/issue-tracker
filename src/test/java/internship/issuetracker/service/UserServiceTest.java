@@ -34,7 +34,6 @@ public class UserServiceTest {
   User user = new User();
   user.setUserName("testxyz");
   user.setPassword("testpass");
-
   userService.addUser(user);
   Mockito.verify(userRepository).create(user);
 
