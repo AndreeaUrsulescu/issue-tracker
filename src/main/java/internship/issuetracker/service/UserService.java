@@ -6,6 +6,7 @@ import internship.issuetracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class UserService {
 
@@ -13,6 +14,8 @@ public class UserService {
     private UserRepository userRepository;
 
     public void addUser(User user) {
+    	String aux;
+    	
 	this.userRepository.create(user);
     }
 

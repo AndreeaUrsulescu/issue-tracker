@@ -166,20 +166,28 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
 		</dependency>
-		
-		<!-- 	Apache Commoons EqualsBuilder and HashCodeBuilder -->
+
+		<!-- Apache Commoons EqualsBuilder and HashCodeBuilder -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
- 
-		 <dependency>
-		   <groupId>org.mockito</groupId>
-		   <artifactId>mockito-all</artifactId>
-		   <version>1.8.4</version>
-		  </dependency>
-        
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+
+		<!-- for HASH pass -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
 
 	</dependencies>
 
