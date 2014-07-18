@@ -30,7 +30,7 @@ public class IssueController {
 		user.setEmail("user@user.com");   // the logged User (when spring security is done)
 		user.setPassword("password");
 		user.setUserName("username");
-		issue.setUpdate_date(new Date());
+		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
 		
