@@ -2,7 +2,7 @@ package internship.issuetracker.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Hash {
+public class EncryptData {
 	public static String sha256(String password){
 		String hashPassword="";
 		
