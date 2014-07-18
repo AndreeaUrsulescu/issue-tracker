@@ -4,19 +4,22 @@
     "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
     <definition name="mainLayout" template="/WEB-INF/views/main/layout.jsp"/>
+	<definition name="homeLayout" template="/WEB-INF/views/main/homeLayout.jsp"/>
 
-    <definition name="home" extends="mainLayout">
-        <put-attribute name="header" value="/WEB-INF/views/main/header.jsp" />
-        <put-attribute name="body" value="/WEB-INF/views/main/home.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+    <definition name="home" extends="homeLayout">
+        <put-attribute name="logo" value="/WEB-INF/views/main/home.jsp" />
     </definition>
     
-    <definition name="register" extends="mainLayout">
-    	
+    <definition name="register" extends="mainLayout">	
     	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
     	<put-attribute name="body" value="/WEB-INF/views/main/register.jsp"></put-attribute>
-    	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
-    	
+    	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>	
+    </definition>
+	
+	<definition name="createIssue" extends="mainLayout">	
+    	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/createIssue.jsp"></put-attribute>
+    	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>	
     </definition>
     
      <definition name="login" extends="mainLayout">
