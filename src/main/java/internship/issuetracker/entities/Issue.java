@@ -40,22 +40,23 @@ public class Issue implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_owner", nullable = false)
     User owner;
-
+    
     @Column(name = "title", nullable = false)
     @Size(min = 5, max = 50)
     String title;
-
+    
+    @Column(name="content")
+    @Size(max=150)
+    String content;
+    
 	@Column(name = "update_date", nullable = false)
 	Date updateDate;
 	
 	@Enumerated(EnumType.ORDINAL)
-
-    @Column(name = "update_date", nullable = false)
-    Date updateDate;
-
     @Column(name = "state", nullable = false)
     State state;
-    public Issue() {
+   
+	public Issue() {
 	state = State.New;
     }
 
@@ -86,7 +87,7 @@ public class Issue implements Serializable {
     public String getContent() {
 	return content;
     }
-
+    
     public void setContent(String content) {
 	this.content = content;
     }
