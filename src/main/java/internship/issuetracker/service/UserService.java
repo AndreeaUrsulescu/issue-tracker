@@ -15,11 +15,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public void addUser(User user) {
+    	
     	String hashPassword = EncryptData.sha256(user.getPassword());
     	user.setPassword(hashPassword);
-    	String aux;
     	
-	this.userRepository.create(user);
+	    this.userRepository.create(user);
     }
 
     public void updateUser(User user) {
