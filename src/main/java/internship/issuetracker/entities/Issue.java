@@ -1,5 +1,7 @@
 package internship.issuetracker.entities;
 
+import internship.issuetracker.enums.State;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,7 +20,6 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import Enums.State;
 
 @SuppressWarnings("serial")
 @NamedQueries({
