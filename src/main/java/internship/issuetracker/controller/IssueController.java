@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("/issue")
+@RequestMapping("/createIssue")
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
 	
-	@RequestMapping(value="/new",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public String createIssuePage(Model model)
 	{
 		Issue issue=new Issue();
@@ -30,19 +30,19 @@ public class IssueController {
 		user.setEmail("user@user.com");   // the logged User (when spring security is done)
 		user.setPassword("password");
 		user.setUserName("username");
-		issue.setUpdate_date(new Date());
+		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
 		
-		return "newIssue";
+		return "createIssue";
 		
 	}
 	
-	@RequestMapping(value="/new",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,BindingResult bindingResult)
 	{
 		if (bindingResult.hasErrors())
-			return "newIssue";
+			return "createIssue";
 		
 		issueService.addIssue(issue);
 		return "redirect:/index";    // or whatever
