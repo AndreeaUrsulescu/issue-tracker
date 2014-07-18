@@ -30,7 +30,7 @@ public class RegisterController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public String registerUser(@Valid User user, BindingResult bindingResult) {
-		//userValidator.validate(user, bindingResult);
+		userValidator.validate(user, bindingResult);
 		
 		if (bindingResult.hasErrors())
 			return "register";
