@@ -15,12 +15,7 @@ public class HomeController {
         return "home";
     }
    
-    @RequestMapping(value = {"/login"})
-    public String login(ModelMap model) {
-    	
-		model.addAttribute("user", new User());
-        return "login";
-    }
+    
     /*@RequestMapping(value = {"/register"})
     public String register() {
     	

@@ -25,12 +25,13 @@ public class AuthenticationServiceProvider implements AuthenticationProvider{
 		
 		User user ;
 		
-		if(userAlreadyLogedIn(authentication)){
-		      return authentication;
-		}
+//		if(userAlreadyLogedIn(authentication)){
+//		      return authentication;
+//		}
 		
 		String userName = authentication.getName();
 		String password = authentication.getCredentials().toString();
+		
 		
 		user = userService.findUserByUserName(userName);
 		
@@ -38,7 +39,7 @@ public class AuthenticationServiceProvider implements AuthenticationProvider{
 			throw new BadCredentialsException("UserName not found");
 		}
 		
-		if ( user != null && userService.matchPassword(userName, password) == false ){
+		if (userService.matchPassword(userName, password) == false ){
 			throw new BadCredentialsException("Wrong password");
 		}
 		
@@ -46,12 +47,12 @@ public class AuthenticationServiceProvider implements AuthenticationProvider{
 		return new UsernamePasswordAuthenticationToken(userName,password,grantedAuthorities);
 	}
 
-	private boolean userAlreadyLogedIn(Authentication authentication) {
-		if(authentication.getCredentials() == null){
-			return true;
-		}
-		return false;
-	}
+//	private boolean userAlreadyLogedIn(Authentication authentication) {
+//		if(authentication.getCredentials() == null){
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	@Override
 	public boolean supports(Class<? extends Object> authentication) {

@@ -11,8 +11,8 @@
 	<security:http auto-config="true" use-expressions="true">
 		<security:form-login login-page="/login"
 			authentication-failure-url="/login"
-			username-parameter="username"
-			password-parameter="password" />
+			default-target-url="/issues" 
+			always-use-default-target="true" />
 
         <security:intercept-url pattern="/home" access="permitAll" />
         <security:intercept-url pattern="/" access="permitAll" />
