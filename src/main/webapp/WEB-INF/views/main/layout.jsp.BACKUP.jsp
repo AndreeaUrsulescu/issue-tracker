@@ -27,5 +27,10 @@
 			<tiles:insertAttribute name="header" />
 	
 			<tiles:insertAttribute name="body" />
+<<<<<<< HEAD
+	</body>
+</html>
+=======
 			
 <%-- 			<tiles:insertAttribute name="footer"/> --%>
+>>>>>>> origin/master
