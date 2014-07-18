@@ -2,7 +2,7 @@ package internship.issuetracker.utils;
 
 import org.junit.Test;
 
-public class HashEncryptData {
+public class EncryptDataTest {
 
 	@Test
 	public void testSha256() {
