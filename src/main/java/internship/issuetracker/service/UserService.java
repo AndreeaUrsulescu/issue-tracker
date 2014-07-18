@@ -31,7 +31,7 @@ public class UserService {
     }
     
     public boolean matchPassword(String userName,String password){
-    	String hashPassword = EncryptData.sha256(password);
+    	String hashPassword = EncryptData.sha256(password);	
 		return this.userRepository.matchPassword(userName, hashPassword);
 	}
 }
