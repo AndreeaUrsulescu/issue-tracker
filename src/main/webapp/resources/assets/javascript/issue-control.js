@@ -73,6 +73,7 @@ $(document).ready(function(){
     }
     
     function addLabel(){
+    	//TODO: can still type the name over and over again...
     	if (validateLabel() == true){
 	    	//preia url-ul curent
 	    	var url = window.location.origin + window.location.pathname + "/addLabel";
@@ -86,12 +87,12 @@ $(document).ready(function(){
 	    		type: "POST",
 	    		url: url,
 	    		success: function(rsp) {
-	    			alert("succes");
-	    			$("active-labels").html('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+	    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
 	    					+'<span class="glyphicon glyphicon-remove"></span>');
-	    			if(availableTags.indexOf($("#tags").val().trim()) !== -1){
+	    			if(availableTags.indexOf($("#tags").val().trim()) != -1){
 	    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
 	    			}
+	    			$("#tags").val('');
 	    		}
 	    	});
     	}
@@ -100,7 +101,7 @@ $(document).ready(function(){
     $(".viewIssueTitleEdit").focus();
     $("#edit").click(editIssue);
     $("#send").click(updateIssue);
-    $("#label-btn").click(addLabel);
+    $("#label-add-btn").unbind().click(addLabel);
 	$(".editIssueContent").hide();
 	
     $("#reset").click(function(){
