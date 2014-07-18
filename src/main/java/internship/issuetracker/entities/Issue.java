@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +52,8 @@ public class Issue implements Serializable{
 
 	@Column(name = "update_date", nullable = false)
 	Date updateDate;
-
+	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	State state;
 
