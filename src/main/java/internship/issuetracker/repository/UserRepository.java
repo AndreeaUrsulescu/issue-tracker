@@ -3,7 +3,6 @@ package internship.issuetracker.repository;
 import internship.issuetracker.entities.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -31,7 +30,7 @@ public class UserRepository {
         //crw  return !query.getResultList().isEmpty()
         if(query.getResultList().size()>0)
         	return true;
-        return false;        
+        return false;
 	}
 	
 	public boolean matchPassword(String userName,String password){
@@ -41,5 +40,13 @@ public class UserRepository {
         if(query.getResultList().size()>0)
         	return true;
 		return false;
+	}
+	
+	public User findUserByUserName(String userName){
+		
+		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
+        query.setParameter("user_name", userName);
+        
+        return query.getSingleResult();
 	}
 }

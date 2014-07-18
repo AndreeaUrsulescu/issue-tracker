@@ -27,4 +27,8 @@ public class UserService {
     public boolean matchPassword(String userName,String password){
 		return this.userRepository.matchPassword(userName, password);
 	}
+    
+    public User findUserByUserName(String userName){
+    	return userRepository.findUserByUserName(userName);
+    }
 }

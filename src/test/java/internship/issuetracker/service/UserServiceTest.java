@@ -32,7 +32,7 @@ public class UserServiceTest {
 
   User user = new User();
   user.setUserName("test1");
-
+  
   userService.addUser(user);
   Mockito.verify(userRepository).create(user);
 
