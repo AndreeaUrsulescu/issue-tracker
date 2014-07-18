@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="resources/assets/stylesheets/style.css" type="text/css">
 		
 		<!-- Custom scripts -->
-		<script src='resources/assets/scripts/scripts.js'></script>
+<!-- 		<script src='resources/assets/scripts/scripts.js'></script> -->
 		<script src="resources/assets/javascript/script.js"></script>
 	
 	</head>

@@ -1,15 +1,14 @@
 package internship.issuetracker.controller;
 
-import java.util.Date;
-
-import javax.validation.Valid;
-
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 
+import java.util.Date;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +25,14 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String createIssuePage(Model model) {
 		Issue issue = new Issue();
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
+		
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user;
-		if (auth != null)
-			user = (User) auth;
+		if (o != null)
+			user = (User) o;
 		else
 			return "home";
+		
 		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);

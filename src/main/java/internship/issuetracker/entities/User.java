@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -31,9 +32,10 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "user_name", nullable = false, unique = true)
-	@Size(min = 5, max = 12)
-	private String userName;
+    @Column(name = "user_name", nullable = false, unique = true)
+    @Size(min = 5, max = 12)
+    @Pattern(regexp = "^[a-zA-Z]{5,12}$")
+    private String userName;
 
 	@Column(name = "user_email", nullable = false)
 	@Email
