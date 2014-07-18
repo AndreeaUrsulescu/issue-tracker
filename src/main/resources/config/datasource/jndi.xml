@@ -19,4 +19,10 @@
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://localhost:5432/issueTracker"/>
 -->
+
+	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
+                <property name="generateDdl" value="true" />
+                <property name="showSql" value="false" />
+    </bean>
 </beans>

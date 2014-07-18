@@ -32,7 +32,7 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true)
-    @Size(min = 2, max = 12)
+    @Size(min = 5, max = 12)
     private String userName;
 
     @Column(name = "user_email", nullable = false)
