@@ -1,5 +1,6 @@
 package internship.issuetracker.service;
 
+import static org.junit.Assert.*;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.UserRepository;
 
@@ -15,26 +16,41 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
 
-	@Mock
-	private UserRepository userRepository;
+ @Mock
+ private UserRepository userRepository;
 
-	@InjectMocks
-	private UserService userService=new UserService();
+ @InjectMocks
+ private UserService userService=new UserService();
 
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
+ @Before
+ public void setUp() {
+  MockitoAnnotations.initMocks(this);
+ }
 
-	@Test
-	public void testAddUser() {
+ @Test
+ public void testAddUser() {
 
-		User user = new User();
-		user.setUserName("test1");
+  User user = new User();
+  user.setUserName("test1");
 
-		userService.addUser(user);
-		Mockito.verify(userRepository).create(user);
+  userService.addUser(user);
+  Mockito.verify(userRepository).create(user);
 
-	}
+ }
+ 
+ @Test
+ public void testLoginUser(){
+  
+  String userName = "corbu oana";
+  String password = "parola";
+  boolean actualResult;
+  
+  Mockito.when(userRepository.matchPassword(userName, password)).thenReturn(true);
+  actualResult = userService.matchPassword(userName, password);
+  
+  assertEquals(true,actualResult);
+  
+  
+ }
 
 }

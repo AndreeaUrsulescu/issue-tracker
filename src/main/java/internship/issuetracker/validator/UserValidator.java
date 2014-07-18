@@ -12,6 +12,8 @@ public class UserValidator implements Validator {
 
     @Autowired
     private UserService userService;
+
+    //Can this Validator validate instances of the supplied clazz
     @Override
     public boolean supports(Class<?> clazz) {
 	return User.class.equals(clazz);
@@ -22,11 +24,10 @@ public class UserValidator implements Validator {
 	ValidationUtils.rejectIfEmptyOrWhitespace(error, "userName", "username.empty");
 	ValidationUtils.rejectIfEmptyOrWhitespace(error, "email", "email.empty");
 	ValidationUtils.rejectIfEmptyOrWhitespace(error, "password", "password.empty");
-        User p = (User) object;
-        if (userService.exists(p.getUserName()) == true) {
-            error.rejectValue("username", "username.exists");
-        }	
+	User p = (User) object;
+	if (userService.exists(p.getUserName().trim())) {
+	    error.rejectValue("userName", "username.exists");
+	}
     }
-
 
 }

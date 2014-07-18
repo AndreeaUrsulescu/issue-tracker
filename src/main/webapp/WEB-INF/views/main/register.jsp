@@ -1,26 +1,28 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
 <div class="container"> 	
 	<div class="registerForm">
 	
-		<form action="" role="form">
+		<sf:form method="POST" role="form" modelAttribute="user">
 			
 			<div class="form-group">
 			
 				<label for="username">Username</label>
-				<input type="text" class="form-control" id="username" placeholder="Enter username">
+				<sf:input type="text" class="form-control" id="username" placeholder="Enter username" path="userName"/>
 				
 			</div>
 			
 			<div class="form-group">
 			
 				<label  for="emailAdress">Email Adress</label>
-				<input type="email" class="form-control" id="emailAdress" placeholder="Enter email adress">
+				<sf:input type="email" class="form-control" id="emailAdress" placeholder="Enter email adress" path="email"/>
 			
 			</div>
 			
 			<div class="form-group">
 				
 				<label  for="password">Password</label>
-				<input type="password" class="form-control" id="password">
+				<sf:input type="password" class="form-control" id="password" path="password"/>
 				
 			</div>
 				
@@ -31,9 +33,9 @@
 			
 			</div>	
 	
-		<div class="btn btn-primary center-block">Register</div>
+		<input type="submit" class="btn btn-primary center-block" value="Register" >
 		
-		</form>
+		</sf:form>
 	
 	</div>
 </div>
