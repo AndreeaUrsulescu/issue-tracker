@@ -25,10 +25,6 @@ public class AuthenticationServiceProvider implements AuthenticationProvider{
 		
 		User user ;
 		
-//		if(userAlreadyLogedIn(authentication)){
-//		      return authentication;
-//		}
-		
 		String userName = authentication.getName();
 		String password = authentication.getCredentials().toString();
 		
@@ -46,13 +42,6 @@ public class AuthenticationServiceProvider implements AuthenticationProvider{
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		return new UsernamePasswordAuthenticationToken(userName,password,grantedAuthorities);
 	}
-
-//	private boolean userAlreadyLogedIn(Authentication authentication) {
-//		if(authentication.getCredentials() == null){
-//			return true;
-//		}
-//		return false;
-//	}
 	
 	@Override
 	public boolean supports(Class<? extends Object> authentication) {

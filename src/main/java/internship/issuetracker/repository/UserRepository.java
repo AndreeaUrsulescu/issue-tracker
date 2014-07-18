@@ -3,6 +3,7 @@ package internship.issuetracker.repository;
 import internship.issuetracker.entities.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -44,9 +45,17 @@ public class UserRepository {
 	
 	public User findUserByUserName(String userName){
 		
+		User user = null;
+		
 		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
         query.setParameter("user_name", userName);
         
-        return query.getSingleResult();
+        try {
+			user = query.getSingleResult();
+		}
+		catch(NoResultException ex) {
+		}
+		
+		return user;
 	}
 }
