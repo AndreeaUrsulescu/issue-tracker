@@ -26,7 +26,8 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String createIssuePage(Model model) {
 		Issue issue = new Issue();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
 		User user;
 		if (auth != null)
 			user = (User) auth;
@@ -47,6 +48,6 @@ public class IssueController {
 			return "createIssue";
 
 		issueService.addIssue(issue);
-		return "redirect:/index"; // or whatever
+		return "redirect:/issues";
 	}
 }

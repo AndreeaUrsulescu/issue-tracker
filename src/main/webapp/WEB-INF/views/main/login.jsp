@@ -18,7 +18,7 @@
           </div>
           <div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-			<input type="submit" value="Sign in"/>
+			<a class="btn btn-default myBtn" data-toggle="popover" data-placement="right" data-content="Parola" onclick="return validateForm();"><input type="submit" value="Sign in"/></a>
             </div>			  
           </div>
         </form>

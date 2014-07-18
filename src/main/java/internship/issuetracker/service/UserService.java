@@ -31,8 +31,8 @@ public class UserService {
 		String hashPassword = EncryptData.sha256(password);
 		return this.userRepository.matchPassword(userName, hashPassword);
 	}
-    
-    public User findUserByUserName(String userName){
-    	return userRepository.findUserByUserName(userName);
-    }
+
+	public User findUserByUserName(String userName) {
+		return userRepository.findUserByUserName(userName);
+	}
 }

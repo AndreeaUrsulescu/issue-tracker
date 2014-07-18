@@ -14,48 +14,50 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserRepository {
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 
-	public void create(User user){
+	public void create(User user) {
 		em.persist(user);
 	}
-	
-	public void update(User user){
+
+	public void update(User user) {
 		em.merge(user);
 	}
 
-	public boolean exists(String userName){
-		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
-        query.setParameter("user_name", userName.toCharArray());
-        //crw: you may consider replacing the code below with
-        //crw  return !query.getResultList().isEmpty()
-        if(query.getResultList().size()>0)
-        	return true;
-        return false;
-	}
-	
-	public boolean matchPassword(String userName,String password){
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
-        query.setParameter("user_name", userName);
-        query.setParameter("user_password", password);
-        if(query.getResultList().size()>0)
-        	return true;
+	public boolean exists(String userName) {
+		TypedQuery<User> query = em
+				.createNamedQuery(User.FIND_NAME, User.class);
+		query.setParameter("user_name", userName.toCharArray());
+		// crw: you may consider replacing the code below with
+		// crw return !query.getResultList().isEmpty()
+		if (query.getResultList().size() > 0)
+			return true;
 		return false;
 	}
-	
-	public User findUserByUserName(String userName){
-		
+
+	public boolean matchPassword(String userName, String password) {
+		TypedQuery<User> query = em
+				.createNamedQuery(User.FIND_PASS, User.class);
+		query.setParameter("user_name", userName);
+		query.setParameter("user_password", password);
+		if (query.getResultList().size() > 0)
+			return true;
+		return false;
+	}
+
+	public User findUserByUserName(String userName) {
+
 		User user = null;
-		
-		TypedQuery<User> query = em.createNamedQuery( User.FIND_NAME,User.class);
-        query.setParameter("user_name", userName);
-        
-        try {
+
+		TypedQuery<User> query = em
+				.createNamedQuery(User.FIND_NAME, User.class);
+		query.setParameter("user_name", userName);
+
+		try {
 			user = query.getSingleResult();
+		} catch (NoResultException ex) {
 		}
-		catch(NoResultException ex) {
-		}
-		
+
 		return user;
 	}
 }
