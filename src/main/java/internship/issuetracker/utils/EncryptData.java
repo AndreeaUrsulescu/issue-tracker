@@ -18,8 +18,9 @@ public class EncryptData {
 	        }
 	        hashPassword=sb.toString();
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			return "";
 		} 
 		return hashPassword;
 	}
