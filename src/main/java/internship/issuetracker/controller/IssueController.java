@@ -9,42 +9,46 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 @RequestMapping("/createIssue")
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public String createIssuePage(Model model)
-	{
-		Issue issue=new Issue();
-		User user=new User(); 
-		user.setEmail("user@user.com");   // the logged User (when spring security is done)
-		user.setPassword("password");
-		user.setUserName("username");
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String createIssuePage(Model model) {
+		Issue issue = new Issue();
+		
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user;
+		if (o != null)
+			user = (User) o;
+		else
+			return "home";
+		
 		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
-		
+
 		return "createIssue";
-		
+
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public String createIssuePage(@Valid Issue issue,BindingResult bindingResult)
-	{
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String createIssuePage(@Valid Issue issue,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "createIssue";
-		
+
 		issueService.addIssue(issue);
-		return "redirect:/index";    // or whatever
+		return "redirect:/index"; // or whatever
 	}
 }

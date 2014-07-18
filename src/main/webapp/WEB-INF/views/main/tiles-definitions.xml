@@ -24,4 +24,13 @@
         <put-attribute name="body" value="/WEB-INF/views/main/login.jsp" />
         <put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
     </definition>
+    
+    <definition name="issues" extends="mainLayout">
+    	
+    	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/issues.jsp"></put-attribute>
+    	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+    	
+    </definition>
+    
 </tiles-definitions>
