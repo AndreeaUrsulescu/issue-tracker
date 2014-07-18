@@ -3,6 +3,7 @@ package internship.issuetracker.service;
 import static org.junit.Assert.*;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.UserRepository;
+import internship.issuetracker.utils.EncryptData;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,8 @@ public class UserServiceTest {
  public void testAddUser() {
 
   User user = new User();
-  user.setUserName("test1");
+  user.setUserName("testxyz");
+  user.setPassword("testpass");
 
   userService.addUser(user);
   Mockito.verify(userRepository).create(user);
@@ -43,9 +45,10 @@ public class UserServiceTest {
   
   String userName = "corbu oana";
   String password = "parola";
+  String hashPassword = EncryptData.sha256(password);	
   boolean actualResult;
   
-  Mockito.when(userRepository.matchPassword(userName, password)).thenReturn(true);
+  Mockito.when(userRepository.matchPassword(userName, hashPassword)).thenReturn(true);
   actualResult = userService.matchPassword(userName, password);
   
   assertEquals(true,actualResult);

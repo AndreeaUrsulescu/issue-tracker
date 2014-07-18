@@ -1,16 +1,12 @@
-<div class="header">
-
-	<div class="headerImage">
+<div class="container">
+	<div class="header">
 	
-		<img src="resources/assets/images/dummyLogo.png"/>
-	
-	</div>
-	
-	<div class="headerTitle">
-	
-		Dummy
-		Dummy
+		<div class="headerImage">
+			
+				<a href="home"><img src="resources/assets/images/dummyLogo.png"/></a>
+			
+		</div>
+		
 	
 	</div>
-
 </div>

@@ -1,3 +1,53 @@
+/* Global header start */
+
+.headerImage {
+	width:600px;
+	margin:0 auto;
+}
+
+.headerTitle span{
+	font-size:44px;
+}
+
+/* Global header end */
+
+/* Global footer start */
+
+footer {
+  height:60px;
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  bottom:0;
+}
+
+footer small {
+ 
+  float: left;
+}
+
+footer ul {
+ 	
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
+
+
+footer a{
+	font-size: 20px;
+	line-height: 2.4;
+}
+
+/* Global footer end */
+
+/* Register form start */
+
 .registerForm{
 	border:1px solid #c8c9ca;
 	border-radius:15px;
@@ -24,9 +74,12 @@
 .registerForm .btn { 
 	width:100px;
 	margin-top:10px;
+	margin-bottom:10px;
 	font-size:15px;
 	font-weight:bold;
 }
+
+/* Register form end */
 
 .loginForm{
     margin: 0 auto;
