@@ -166,20 +166,42 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
 		</dependency>
-		
-		<!-- 	Apache Commoons EqualsBuilder and HashCodeBuilder -->
+
+		<!-- Apache Commoons EqualsBuilder and HashCodeBuilder -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
- 
-		 <dependency>
-		   <groupId>org.mockito</groupId>
-		   <artifactId>mockito-all</artifactId>
-		   <version>1.8.4</version>
-		  </dependency>
-        
+		
+		<!-- Mockito -->
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		
+		<!-- Spring Security -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
@@ -209,26 +231,12 @@
 			</plugin>
 
 			<!-- For generating Entities Metamodel classes -->
-			<plugin>
-				<groupId>org.bsc.maven</groupId>
-				<artifactId>maven-processor-plugin</artifactId>
-				<version>2.0.8</version>
-				<executions>
-					<execution>
-						<id>process</id>
-						<goals>
-							<goal>process</goal>
-						</goals>
-						<phase>generate-sources</phase>
-						<configuration>
-							<outputDirectory>target/generated-sources/domain/</outputDirectory>
-							<processors>
-								<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-							</processors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			<!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> 
+				<version>2.0.8</version> <executions> <execution> <id>process</id> <goals> 
+				<goal>process</goal> </goals> <phase>generate-sources</phase> <configuration> 
+				<outputDirectory>target/generated-sources/domain/</outputDirectory> <processors> 
+				<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor> 
+				</processors> </configuration> </execution> </executions> </plugin> -->
 		</plugins>
 	</build>
 </project>
