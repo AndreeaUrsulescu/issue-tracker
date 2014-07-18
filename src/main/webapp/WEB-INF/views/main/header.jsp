@@ -1,13 +1,12 @@
-<%-- 
-    Document   : header
-    Created on : Jul 17, 2014, 11:21:46 AM
-    Author     : lasoltanei
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-
-
-<div id="header">
-    
+<div class="container">
+	<div class="header">
+	
+		<div class="headerImage">
+			
+				<a href="home"><img src="resources/assets/images/dummyLogo.png"/></a>
+			
+		</div>
+		
+	
+	</div>
 </div>
