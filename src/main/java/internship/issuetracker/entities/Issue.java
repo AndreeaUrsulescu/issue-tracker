@@ -51,7 +51,7 @@ public class Issue implements Serializable{
 	@Column(name = "state", nullable = false)
 	State state;
 
-	Issue() {
+	public Issue() {
 		state = State.New;
 	}
 
