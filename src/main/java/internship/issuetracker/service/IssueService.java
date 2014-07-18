@@ -18,5 +18,9 @@ public class IssueService {
 	public void updateIssue(Issue issue) {
 		this.issueRepository.update(issue);
 	}
+	
+	public Issue getIssue(Long id){
+		return this.issueRepository.find(id);
+	}
 
 }

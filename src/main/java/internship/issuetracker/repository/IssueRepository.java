@@ -2,6 +2,9 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
 
+import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -24,12 +27,15 @@ public class IssueRepository {
 		em.merge(issue);
 	}
 
-	public Issue find(Long id) {
-		TypedQuery<Issue> query = em.createQuery(
-				"select issue from Issue issue where issue.id = ?1",
-				Issue.class);
-		Issue result = query.setParameter(1, id).getSingleResult();
+	public List<Issue> findTitle(String title) {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,Issue.class);
+		List<Issue> result = query.setParameter("title", title).getResultList();
 		return result;
-
+	}
+	
+	public List<Issue> findTitle(Date date) {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_DATE,Issue.class);
+		List<Issue> result = query.setParameter("updateDate", date).getResultList();
+		return result;
 	}
 }

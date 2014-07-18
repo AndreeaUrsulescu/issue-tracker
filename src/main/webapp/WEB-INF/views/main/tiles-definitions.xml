@@ -18,4 +18,10 @@
     	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
     	
     </definition>
+    
+     <definition name="login" extends="mainLayout">
+        <put-attribute name="header" value="/WEB-INF/views/main/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/main/login.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>
