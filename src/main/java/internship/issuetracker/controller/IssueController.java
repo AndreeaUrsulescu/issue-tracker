@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.service.IssueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +34,13 @@ public class IssueController {
 		if (bindingResult.hasErrors())
 			return "newIssue";
 		
-		User user=new User();
-		user.setEmail("user@user.com");
+		User user=new User(); 
+		user.setEmail("user@user.com");   // the logged User
 		user.setPassword("password");
 		user.setUserName("username");
 		issue.setOwner(user);
-		issue.setUpdate_date(new Date(2009,12,9));
+		issue.setUpdate_date(new Date());
+		issueService.addIssue(issue);
 		return "register";
 	}
 }
