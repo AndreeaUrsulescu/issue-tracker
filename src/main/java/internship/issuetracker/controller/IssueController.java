@@ -26,12 +26,14 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String createIssuePage(Model model) {
 		Issue issue = new Issue();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user;
-		if (auth != null)
-			user = (User) auth;
+		if (o != null)
+			user = (User) o;
 		else
 			return "home";
+		
 		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
