@@ -10,4 +10,5 @@
 		<property name='username' value='postgres' />
 		<property name='password' value='postgres' />
 	</bean>
+	
 </beans>
