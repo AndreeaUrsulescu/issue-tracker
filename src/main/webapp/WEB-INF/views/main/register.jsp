@@ -3,7 +3,7 @@
 <div class="container"> 	
 	<div class="registerForm">
 	
-		<sf:form method="POST" role="form" modelAttribute="user">
+		<sf:form id="registerForm" method="POST" role="form" modelAttribute="user">
 			
 			<div class="form-group">
 			
@@ -32,12 +32,12 @@
 			<div>
 			
 				<label  for="passwordConfirm">Confirm Password</label>
-				<input type="password" class="form-control" id="passwordConfirm"></input>
+				<input type="password" class="form-control" id="passwordConfirm" path="password"></input>
 				<span class="error"></span>
 				
 			</div>	
 			
-		<input type="submit" class="btn btn-primary center-block" value="Register" >
+		<input type="submit" id="submitButton" class="btn btn-primary center-block" value="Register" >
 		
 		</sf:form>
 	
