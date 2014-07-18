@@ -12,8 +12,9 @@
     
     <definition name="register" extends="mainLayout">
     	
-    	<put-attribute name="header" value="/WEB-INF/views/"></put-attribute>
+    	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
     	<put-attribute name="body" value="/WEB-INF/views/main/register.jsp"></put-attribute>
+<!--     	<put-attribute name="footer" value="WEB-INF/views/footer.jsp"></put-attribute> -->
     	
     </definition>
 </tiles-definitions>
