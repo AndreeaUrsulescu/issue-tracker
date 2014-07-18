@@ -39,11 +39,13 @@ public class Issue implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "id_owner", nullable = false)
 	User owner;
-
+	
 	@Column(name = "title", nullable = false)
+	@Size(min=5,max=50)
 	String title;
 
 	@Column(name = "content")
+	@Size(max=150)
 	String content;
 
 	@Column(name = "update_date", nullable = false)
