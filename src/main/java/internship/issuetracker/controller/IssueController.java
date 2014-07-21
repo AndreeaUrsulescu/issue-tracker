@@ -57,6 +57,7 @@ public class IssueController {
 	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
 		model.addAttribute(issueService.getIssue(id));
 		return "viewIssue";
+	}
 	
 	@RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
 	public String updateIssue(@PathVariable Long id, @Valid Issue issue, BindingResult bindingResult, Model model) {
