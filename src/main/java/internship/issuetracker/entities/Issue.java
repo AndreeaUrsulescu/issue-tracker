@@ -31,7 +31,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 		@NamedQuery(name = Issue.FIND_ID , query = "select a from Issue a where id = :id"),
 		@NamedQuery(name = Issue.FIND , query = "select a from Issue a order by updateDate"),
 		
-		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC"),
+		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC")
 		})
 @Entity
 @Table(name = "Issues")
