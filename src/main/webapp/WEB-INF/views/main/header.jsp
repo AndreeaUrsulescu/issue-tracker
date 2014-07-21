@@ -1,12 +1,4 @@
-<div class="container">
-	<div class="header">
-	
-		<div class="headerImage">
-			
-				<a href="home"><img src="resources/assets/images/dummyLogo.png"/></a>
-			
-		</div>
-		
-	
-	</div>
+<div>
+
+				<a style="margin-bottom: 100px;" href="home"><img src="resources/assets/images/banner.png"/></a>
 </div>

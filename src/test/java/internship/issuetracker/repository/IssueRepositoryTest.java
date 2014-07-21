@@ -16,8 +16,8 @@ public class IssueRepositoryTest {
 
     private IssueRepository issueRepository;
     private UserRepository userRepository;
-
-    static int count = 65;
+    
+    static int count =23;
 
     public Issue createIssue() {
 	User user = new User();
@@ -35,14 +35,15 @@ public class IssueRepositoryTest {
 	return issue;
     }
 
-    @Before
+    @SuppressWarnings("resource")
+	@Before
     public void setUp() {
 	ApplicationContext context = new ClassPathXmlApplicationContext(
 		"config/datasource/h2.xml", "config/application-context.xml");
 	issueRepository = context.getBean(IssueRepository.class);
 	userRepository = context.getBean(UserRepository.class);
     }
-
+    
     @Test
     public void testCreate() {
 	Issue issue = createIssue();
