@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-
+	
 	@Autowired
 	private UserService userService;;
 
@@ -38,7 +38,6 @@ public class IssueController {
 		model.addAttribute("user",user.getUserName());
 		model.addAttribute("issue",new Issue());
 		model.addAttribute("date",new Date());
-		System.out.println(user.getEmail()+"asdfsd");
 		return "createIssue";
 	}
 	
