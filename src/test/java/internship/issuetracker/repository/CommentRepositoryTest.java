@@ -1,6 +1,7 @@
 package internship.issuetracker.repository;
 
 import java.util.Date;
+import java.util.List;
 
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
@@ -31,6 +32,7 @@ public class CommentRepositoryTest {
     	issue.setTitle("title" + (char)count);
     	issue.setOwner(user);
     	issue.setUpdateDate(new Date());
+    	issueRepository.create(issue);
     	count++;
     	
     	Comment comment=new Comment();
@@ -43,18 +45,29 @@ public class CommentRepositoryTest {
     
 	@Before
     public void setUp() {
+	@SuppressWarnings("resource")
 	ApplicationContext context = new ClassPathXmlApplicationContext(
 		"config/datasource/h2.xml", "config/application-context.xml");
-	CommentRepository commentRepository= context.getBean(CommentRepository.class);
-	UserRepository userRepository= context.getBean(UserRepository.class);
-	IssueRepository issueRepository=context.getBean(IssueRepository.class);
+	 commentRepository= context.getBean(CommentRepository.class);
+	 userRepository= context.getBean(UserRepository.class);
+	 issueRepository=context.getBean(IssueRepository.class);
     }
 	
 	@Test
     public void testCreate() {
 	Comment comment = createComment();
 	commentRepository.create(comment);
-	assert.findComment
+	assert(commentRepository.findCommentByOwner(comment.getOwner()).size()>0);
+    }
+	
+	@Test
+    public void testUpdate() {
+	Comment comment = createComment();
+	commentRepository.create(comment);
+	comment.setContent("New content");
+	commentRepository.update(comment);
+	List<Comment> compare=commentRepository.findCommentByOwner(comment.getOwner());
+	assert(comment.equals(compare));
     }
 
 }

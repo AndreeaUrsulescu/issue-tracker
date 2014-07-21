@@ -1,6 +1,7 @@
 package internship.issuetracker.controller;
 
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 

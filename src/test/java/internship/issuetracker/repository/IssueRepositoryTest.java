@@ -16,7 +16,8 @@ public class IssueRepositoryTest {
 
     private IssueRepository issueRepository;
     private UserRepository userRepository;
-
+    
+    static int count =23;
 
     public Issue createIssue() {
 	User user = new User();
@@ -42,7 +43,7 @@ public class IssueRepositoryTest {
 	issueRepository = context.getBean(IssueRepository.class);
 	userRepository = context.getBean(UserRepository.class);
     }
-
+    
     @Test
     public void testCreate() {
 	Issue issue = createIssue();
