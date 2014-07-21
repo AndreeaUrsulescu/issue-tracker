@@ -26,9 +26,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) = lower(:title)"),
+		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) = lower(:title) order by updateDate"),
 		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
 		@NamedQuery(name = Issue.FIND_ID , query = "select a from Issue a where id = :id"),
+		@NamedQuery(name = Issue.FIND , query = "select a from Issue a order by updateDate"),
+		
 		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC"),
 		})
 @Entity
@@ -38,6 +40,9 @@ public class Issue implements Serializable {
 	public static final String FIND_TITLE = "Issue.findTitle";
 	public static final String FIND_DATE = "Issue.findDate";
 	public static final String FIND_ID = "Issue.findID";
+
+	public static final String FIND = "Issue.find";
+	
 	public static final String FIND_ALL = "Issue.findALL";
 
 	@Id

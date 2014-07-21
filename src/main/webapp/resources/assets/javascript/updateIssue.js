@@ -12,14 +12,13 @@ function updateIssue() {
 		type: "POST",
 		url: url,
 		success: function(rsp) {
-			//alert(rsp.issue);
 			if (rsp.issue == "success")
 			{
 				window.location = "http://localhost:8080/issue-tracker/issues";
 			}
 			else
 			{
-				// se completeaza inputurile cu valorile din rsp
+				// se completeaza inputurile cu valorile din rsp (rsp.issue.{nume-camp})
 			}
 		}
 	});

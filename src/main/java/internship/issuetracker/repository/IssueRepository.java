@@ -2,7 +2,7 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -39,6 +39,12 @@ public class IssueRepository {
 				Issue.class);
 		return query.setParameter("updateDate", date)
 			.getResultList();
+	}
+	
+	public List<Issue> findIssues() {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND,
+				Issue.class);
+		return query.getResultList();
 	}
 	
 	public List<Issue> findOrderedIssues() {
