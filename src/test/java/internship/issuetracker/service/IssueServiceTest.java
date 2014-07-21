@@ -1,5 +1,7 @@
 package internship.issuetracker.service;
 
+import java.util.List;
+
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.repository.IssueRepository;
 
@@ -36,5 +38,7 @@ public class IssueServiceTest {
 		Mockito.verify(issueRepository).create(issue);
 
 	}
+	
+
 
 }
