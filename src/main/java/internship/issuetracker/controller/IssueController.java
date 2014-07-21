@@ -43,7 +43,7 @@ public class IssueController {
 
 	}
 
-	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/createIssue"}, method = RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -57,6 +57,20 @@ public class IssueController {
 	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
 		model.addAttribute(issueService.getIssue(id));
 		return "viewIssue";
+	
+	@RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
+	public String updateIssue(@PathVariable Long id, @Valid Issue issue, BindingResult bindingResult, Model model) {
+		Issue initialIssue;
+		
+		if (bindingResult.hasErrors())
+		{
+			initialIssue = issueService.getIssue(id);
+			model.addAttribute(initialIssue);
+			return "viewIssue";
+		}
+		
+		issueService.updateIssue(issue);
+		return "redirect:/issues";
 	}
 
 }
