@@ -30,7 +30,6 @@ public class IssueController {
 	private UserService userService;;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String createIssuePage(Model model, HttpServletRequest request) {
 		Issue issue = new Issue();
 		Principal principal=request.getUserPrincipal();
 				
@@ -38,8 +37,6 @@ public class IssueController {
 			return "redirect:/issues";
 		
 		
-		issue.setOwner(userService.findUserByUserName(principal.getName()));
-		System.out.println(principal.getName());
 		issue.setUpdateDate(new Date());
 		model.addAttribute(issue);
 		return "createIssue";
