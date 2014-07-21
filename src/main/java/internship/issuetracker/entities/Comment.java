@@ -1,7 +1,7 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @Entity
@@ -34,6 +39,7 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "id_issue", nullable = false)
 	Issue issue;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date", nullable = false)
 	Date creationDate;
 
@@ -69,5 +75,23 @@ public class Comment implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(content).append(owner)
+				.append(issue).append(creationDate).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Comment) {
+			if (this == obj) {
+				Comment comment = (Comment) obj;
+				return new EqualsBuilder().append(this.content, comment.content)
+						.append(this.creationDate, comment.creationDate)
+						.append(this.owner, comment.owner)
+						.append(this.issue, comment.issue).isEquals();
+			}
+		}
+		return false;
+	}
 }

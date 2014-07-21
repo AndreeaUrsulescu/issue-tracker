@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -52,6 +54,7 @@ public class Issue implements Serializable {
 	@Size(max = 150)
 	String content;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "update_date", nullable = false)
 	Date updateDate;
 
