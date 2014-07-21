@@ -17,7 +17,6 @@ public class IssueRepositoryTest {
     private IssueRepository issueRepository;
     private UserRepository userRepository;
 
-    static int count = 65;
 
     public Issue createIssue() {
 	User user = new User();
