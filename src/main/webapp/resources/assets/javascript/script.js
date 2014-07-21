@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	$(".registerError").hide();
+	
+	if( $(".registerError").text().trim().length > 0){
+		$(".registerError").show();
+	}
 	
 	function validateEmail(){
 		var value  = $("#emailAdress").val();
@@ -82,4 +87,8 @@ $(document).ready(function(){
 	        event.preventDefault();
 	    }
 	});
+	
+	
+	
+	
 });
