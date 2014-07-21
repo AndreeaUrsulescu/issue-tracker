@@ -22,12 +22,13 @@ public class IssueService {
 		this.issueRepository.update(issue);
 	}
 
-	public List<Issue> getIssues(String title) {
+	public List<Issue> getIssuesByTitle(String title) {
 		return this.issueRepository.findTitle(title);
 	}
 
-	public List<Issue> getIssues(Date date) {
+	public List<Issue> getIssuesByDate(Date date) {
 		return this.issueRepository.findTitle(date);
 	}
 
+	
 }

@@ -28,6 +28,10 @@ public class IssueController {
 		
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user;
+		if(o instanceof User)
+		System.out.println("x"+o.getClass());
+		else
+		System.out.println("y"+o.getClass());
 		if (o != null)
 			user = (User) o;
 		else
@@ -36,7 +40,13 @@ public class IssueController {
 		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
-
+		
+		/*
+		User user=new User();
+		user.setUserName("username");
+		issue.setOwner(user);
+		model.addAttribute(issue);
+		*/
 		return "createIssue";
 
 	}

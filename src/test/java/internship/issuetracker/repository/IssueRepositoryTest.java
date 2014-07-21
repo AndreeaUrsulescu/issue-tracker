@@ -56,7 +56,7 @@ public class IssueRepositoryTest {
 	issueRepository.create(issue);
 	issue.setTitle("New dummy content");
 	issueRepository.update(issue);
-	List<Issue> compare = issueRepository.findTitle(issue.getTitle());
+	List<Issue> compare = issueRepository.findTitle("dummy");
 	assert (issue.equals(compare));
     }
 
