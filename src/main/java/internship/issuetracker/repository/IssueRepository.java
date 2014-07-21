@@ -2,7 +2,7 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;

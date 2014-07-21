@@ -3,7 +3,7 @@ package internship.issuetracker.service;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.repository.IssueRepository;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
