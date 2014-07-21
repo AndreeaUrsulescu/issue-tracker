@@ -20,7 +20,8 @@
 		
 		<!-- Custom scripts -->
 <!-- 		<script src='resources/assets/scripts/scripts.js'></script> -->
-		<script src="resources/assets/javascript/script.js"></script>
+		<script src="resources/assets/javascript/register-validation.js"></script>
+		<script src="resources/assets/javascript/comments.js"></script>
 	
 	</head>
 	<body>
