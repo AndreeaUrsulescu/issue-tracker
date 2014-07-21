@@ -36,4 +36,12 @@
     	
     </definition>
     
+    <definition name="comments" extends="mainLayout">
+    
+    	<put-attribute name="header" value=""></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/comments.jsp"></put-attribute>
+    	<put-attribute name="footer" value=""></put-attribute>
+    	
+    </definition>
+    
 </tiles-definitions>
