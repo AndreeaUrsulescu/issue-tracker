@@ -22,7 +22,7 @@ public class AuthenticationServiceProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
-
+		
 		String userName = authentication.getName();
 		String password = authentication.getCredentials().toString();
 
@@ -31,11 +31,11 @@ public class AuthenticationServiceProvider implements AuthenticationProvider {
 		if (user == null) {
 			throw new BadCredentialsException("UserName not found");
 		}
-
+		
 		if (!userService.matchPassword(userName, password)) {
 			throw new BadCredentialsException("Wrong password");
 		}
-
+		
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		return new UsernamePasswordAuthenticationToken(userName, null,
 				grantedAuthorities);

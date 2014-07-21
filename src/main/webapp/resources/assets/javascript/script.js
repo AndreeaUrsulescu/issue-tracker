@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	$(".registerError").hide();
+	
+	if( $(".registerError").text().trim().length > 0){
+		$(".registerError").show();
+	}
 	
 	function validateEmail(){
 		var value  = $("#emailAdress").val();
@@ -84,6 +89,17 @@ $(document).ready(function(){
 	});
 });
 
+	function getIssue(issueID) {
+         $.ajax({
+        	 type : "GET",
+        	 url : "http://localhost:8080/issue-tracker/issues/"+issueID,
+        	 dataType : "json" ,
+        	 success : function (result){
+        		 var issue = JSON.parse(result);
+        		 alert(issue.title);
+        	 }
+         });
+	}
 function updateIssue() {
 	
 	$.ajax({

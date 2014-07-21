@@ -1,7 +1,7 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,19 +10,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 @SuppressWarnings("serial")
+@NamedQueries({
+	@NamedQuery(name = Comment.FIND_ISSUE, query = "select a from Comment a where a.issue = :issue"),
+	@NamedQuery(name = Comment.FIND_OWNER, query = "select a from Comment a where a.owner= :owner"),
+	@NamedQuery(name = Comment.FIND_ID , query = "select a from Comment a where id = :id")
+	})
 @Entity
 @Table(name = "Comments")
 public class Comment implements Serializable {
+	
+	public static final String FIND_ISSUE = "Comment.findIssue";
+	public static final String FIND_OWNER = "Comment.findOwner";
+	public static final String FIND_ID = "Comment.findID";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
 	@Column(name = "content")
-	@Size(max = 150)	
+	@Size(max = 500)	
 	String content;
 	
 
@@ -34,8 +50,19 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "id_issue", nullable = false)
 	Issue issue;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date", nullable = false)
 	Date creationDate;
+
+	
+	
+	public Issue getIssue() {
+		return issue;
+	}
+
+	public void setIssue(Issue issue) {
+		this.issue = issue;
+	}
 
 	public Long getId() {
 		return id;
@@ -69,5 +96,23 @@ public class Comment implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(content).append(owner)
+				.append(issue).append(creationDate).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Comment) {
+			if (this == obj) {
+				Comment comment = (Comment) obj;
+				return new EqualsBuilder().append(this.content, comment.content)
+						.append(this.creationDate, comment.creationDate)
+						.append(this.owner, comment.owner)
+						.append(this.issue, comment.issue).isEquals();
+			}
+		}
+		return false;
+	}
 }

@@ -1,7 +1,6 @@
 package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.entities.User;
 
 import java.sql.Date;
 import java.util.List;

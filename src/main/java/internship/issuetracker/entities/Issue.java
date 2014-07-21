@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -49,9 +51,10 @@ public class Issue implements Serializable {
 	String title;
 
 	@Column(name = "content")
-	@Size(max = 150)
+	@Size(max = 1000)
 	String content;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "update_date", nullable = false)
 	Date updateDate;
 
@@ -75,8 +78,8 @@ public class Issue implements Serializable {
 		return owner;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setOwner(User user) {
+		this.owner = user;
 	}
 
 	public String getTitle() {
