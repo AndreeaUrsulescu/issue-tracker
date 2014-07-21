@@ -30,4 +30,7 @@ public class IssueService {
 		return this.issueRepository.findTitle(date);
 	}
 
+	public Issue getIssue(Long id){
+	    return this.issueRepository.findIssue(id);
+	}
 }
