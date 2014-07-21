@@ -30,6 +30,6 @@ public class AuthenticationSuccessHandler extends
 	@Override
 	protected String determineTargetUrl(HttpServletRequest request,
 			HttpServletResponse response) {
-		return "/home";
+		return "/issues";
 	}
 }
