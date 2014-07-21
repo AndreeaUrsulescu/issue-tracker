@@ -27,6 +27,7 @@ public class IssueRepository {
 		em.merge(issue);
 	}
 
+	public List<Issue> findIssuesByTitle(String title) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,
 				Issue.class);
 		return query.setParameter("title", title.toLowerCase()).getResultList();
