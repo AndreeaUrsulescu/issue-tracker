@@ -83,3 +83,15 @@ $(document).ready(function(){
 	    }
 	});
 });
+
+function updateIssue() {
+	
+	$.ajax({
+		dataType: "json",
+		type: "POST",
+		url: "http://localhost:8080/issue-tracker/issues/1",
+		success: function(rsp) {
+			alert(rsp.issue);
+		}
+	});
+}
