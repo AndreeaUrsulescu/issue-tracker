@@ -30,6 +30,9 @@ public class IssueService {
 		return this.issueRepository.findIssuesByDate(date);
 	}
 
+	public List<Issue> getIssues(){
+	    return this.issueRepository.findIssues();
+	}
 	
 	public Issue getIssue(Long id){
 	    return this.issueRepository.findIssue(id);

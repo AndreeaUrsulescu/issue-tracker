@@ -39,6 +39,7 @@ public class IssueController {
 		model.addAttribute("user",user.getUserName());
 		model.addAttribute("issue",new Issue());
 		model.addAttribute("date",new Date());
+		System.out.println(user.getEmail()+"asdfsd");
 		return "createIssue";
 	}
 	

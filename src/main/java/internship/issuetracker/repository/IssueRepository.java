@@ -41,6 +41,13 @@ public class IssueRepository {
 			.getResultList();
 	}
 	
+	public List<Issue> findIssues() {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND,
+				Issue.class);
+		return query.getResultList();
+	}
+	
+	
 	public Issue findIssue(Long id){
 		
 		Issue issue= null;
