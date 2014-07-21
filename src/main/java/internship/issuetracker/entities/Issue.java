@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -24,14 +26,17 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) LIKE :title"),
-		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate = :updateDate") })
+		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) = lower(:title)"),
+		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
+		@NamedQuery(name = Issue.FIND_ID , query = "select a from Issue a where id = :id")
+		})
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
 	public static final String FIND_TITLE = "Issue.findTitle";
 	public static final String FIND_DATE = "Issue.findDate";
+	public static final String FIND_ID = "Issue.findID";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,9 +51,10 @@ public class Issue implements Serializable {
 	String title;
 
 	@Column(name = "content")
-	@Size(max = 150)
+	@Size(max = 1000)
 	String content;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "update_date", nullable = false)
 	Date updateDate;
 

@@ -36,5 +36,7 @@ public class IssueServiceTest {
 		Mockito.verify(issueRepository).create(issue);
 
 	}
+	
+
 
 }

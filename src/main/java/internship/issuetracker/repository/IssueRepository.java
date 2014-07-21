@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -38,5 +39,21 @@ public class IssueRepository {
 				Issue.class);
 		return query.setParameter("updateDate", date)
 			.getResultList();
+	}
+	
+	public Issue findIssue(Long id){
+		
+		Issue issue= null;
+
+		TypedQuery<Issue> query = em
+				.createNamedQuery(Issue.FIND_ID, Issue.class);
+		query.setParameter("id", id);
+
+		try {
+			issue = query.getSingleResult();
+		} catch (NoResultException ex) {
+		}
+
+		return issue;
 	}
 }
