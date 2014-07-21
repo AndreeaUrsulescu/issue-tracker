@@ -103,6 +103,7 @@ footer a{
 
 #contentHome{
 	width:100%;
+	min-width:540px;
 	height:700px;
 	background-color: rgb(47, 95, 150);
 	margin-top: 150px;
@@ -113,8 +114,8 @@ footer a{
 	width: 580px;
 	height: 620px;
 	margin: 0 auto;
-	position:absolute;
-	margin-left: 700px;
+	 margin-left: auto ;
+  margin-right: auto ;
 }
 
 .homeBtn{

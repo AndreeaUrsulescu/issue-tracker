@@ -9,8 +9,8 @@
 		
 		<p id="motto">We see the point on your issues</p>
 		
-		<a href="/login" class="btn homeBtn" >Login</a>
-		<a href="/register" class="btn homeBtn">Register</a>
+		<a href="login" class="btn homeBtn" >Login</a>
+		<a href="register" class="btn homeBtn">Register</a>
 	</div>
 
 </div>
