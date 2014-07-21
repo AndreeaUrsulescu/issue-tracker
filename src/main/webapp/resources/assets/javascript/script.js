@@ -83,3 +83,15 @@ $(document).ready(function(){
 	    }
 	});
 });
+
+	function getIssue(issueID) {
+         $.ajax({
+        	 type : "GET",
+        	 url : "http://localhost:8080/issue-tracker/issues/"+issueID,
+        	 dataType : "json" ,
+        	 success : function (result){
+        		 var issue = JSON.parse(result);
+        		 alert(issue.title);
+        	 }
+         });
+	}

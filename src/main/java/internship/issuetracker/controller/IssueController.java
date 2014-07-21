@@ -20,8 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/issues")
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
@@ -53,12 +55,12 @@ public class IssueController {
 		return "redirect:/issues";
 	}
 
-	@RequestMapping(value = "issues/{id}", method = RequestMethod.GET)
-	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
-		model.addAttribute(issueService.getIssue(id));
-		return "viewIssue";
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public @ResponseBody Issue viewIssuePage(@PathVariable("id") Long id) {
+		return issueService.getIssue(id);
+	}
 	
-	@RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String updateIssue(@PathVariable Long id, @Valid Issue issue, BindingResult bindingResult, Model model) {
 		Issue initialIssue;
 		
@@ -73,4 +75,8 @@ public class IssueController {
 		return "redirect:/issues";
 	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public String viewIssuesPage() {
+		return "issues";
+	}
 }
