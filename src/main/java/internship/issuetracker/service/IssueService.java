@@ -23,11 +23,11 @@ public class IssueService {
 	}
 
 	public List<Issue> getIssuesByTitle(String title) {
-		return this.issueRepository.findTitle(title);
+		return this.issueRepository.findIssuesByTitle(title);
 	}
 
 	public List<Issue> getIssuesByDate(Date date) {
-		return this.issueRepository.findTitle(date);
+		return this.issueRepository.findIssuesByDate(date);
 	}
 
 	
