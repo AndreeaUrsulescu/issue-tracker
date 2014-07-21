@@ -22,6 +22,7 @@
 <!-- 		<script src='resources/assets/scripts/scripts.js'></script> -->
 		<script src="resources/assets/javascript/register-validation.js"></script>
 		<script src="resources/assets/javascript/comments.js"></script>
+		<script src="resources/assets/javascript/updateIssue.js"></script>
 	
 	</head>
 	<body>
