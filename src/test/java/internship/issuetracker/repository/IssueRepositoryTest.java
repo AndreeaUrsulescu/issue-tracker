@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+//TODO: load context using adnotations
 public class IssueRepositoryTest {
 
     private IssueRepository issueRepository;
@@ -46,7 +47,7 @@ public class IssueRepositoryTest {
     public void testCreate() {
 	Issue issue = createIssue();
 	issueRepository.create(issue);
-	assert (issueRepository.findTitle(issue.getTitle()).size() > 0);
+	assert (issueRepository.findIssuesByTitle(issue.getTitle()).size() > 0);
 
     }
 
@@ -56,7 +57,7 @@ public class IssueRepositoryTest {
 	issueRepository.create(issue);
 	issue.setTitle("New dummy content");
 	issueRepository.update(issue);
-	List<Issue> compare = issueRepository.findTitle(issue.getTitle());
+	List<Issue> compare = issueRepository.findIssuesByTitle(issue.getTitle());
 	assert (issue.equals(compare));
     }
 

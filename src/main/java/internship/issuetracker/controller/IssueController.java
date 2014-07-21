@@ -3,13 +3,17 @@ package internship.issuetracker.controller;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
+import internship.issuetracker.service.UserService;
 
+import java.security.Principal;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,21 +26,19 @@ public class IssueController {
 	@Autowired
 	private IssueService issueService;
 
-	@RequestMapping(value = {"/createIssue"}, method = RequestMethod.GET)
-	public String createIssuePage(Model model) {
-		Issue issue = new Issue();
-		
-		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		User user;
-		if (o != null)
-			user = (User) o;
-		else
-			return "home";
-		
-		issue.setUpdateDate(new Date());
-		issue.setOwner(user);
-		model.addAttribute(issue);
+	@Autowired
+	private UserService userService;;
 
+	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
+	public String createIssuePage(Model model, HttpServletRequest request) {
+		Issue issue = new Issue();
+		Principal principal = request.getUserPrincipal();
+		if (null == principal)
+			return "redirect:/issues";
+		
+		issue.setOwner(userService.findUserByUserName(principal.getName()));
+		issue.setUpdateDate(new Date());
+		model.addAttribute(issue);
 		return "createIssue";
 
 	}
@@ -50,6 +52,11 @@ public class IssueController {
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
+
+	@RequestMapping(value = "issues/{id}", method = RequestMethod.GET)
+	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
+		model.addAttribute(issueService.getIssue(id));
+		return "viewIssue";
 	
 	@RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
 	public String updateIssue(@PathVariable Long id, @Valid Issue issue, BindingResult bindingResult, Model model) {
@@ -65,4 +72,5 @@ public class IssueController {
 		issueService.updateIssue(issue);
 		return "redirect:/issues";
 	}
+
 }

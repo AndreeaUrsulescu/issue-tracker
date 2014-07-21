@@ -1,11 +1,13 @@
 package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.User;
 
 import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -27,18 +29,32 @@ public class IssueRepository {
 		em.merge(issue);
 	}
 
-	public List<Issue> findTitle(String title) {
+	public List<Issue> findIssuesByTitle(String title) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,
 				Issue.class);
-		List<Issue> result = query.setParameter("title", title).getResultList();
-		return result;
+		return query.setParameter("title", title.toLowerCase()).getResultList();
 	}
 
-	public List<Issue> findTitle(Date date) {
+	public List<Issue> findIssuesByDate(Date date) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_DATE,
 				Issue.class);
-		List<Issue> result = query.setParameter("updateDate", date)
-				.getResultList();
-		return result;
+		return query.setParameter("updateDate", date)
+			.getResultList();
+	}
+	
+	public Issue findIssue(Long id){
+		
+		Issue issue= null;
+
+		TypedQuery<Issue> query = em
+				.createNamedQuery(Issue.FIND_ID, Issue.class);
+		query.setParameter("id", id);
+
+		try {
+			issue = query.getSingleResult();
+		} catch (NoResultException ex) {
+		}
+
+		return issue;
 	}
 }
