@@ -37,4 +37,9 @@ public class IssueService {
 	public Issue getIssue(Long id){
 	    return this.issueRepository.findIssue(id);
 	}
+	
+	public List<Issue> getOrderedIssues() {
+		return this.issueRepository.findOrderedIssues();
+	}
+
 }

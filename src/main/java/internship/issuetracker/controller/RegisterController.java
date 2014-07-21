@@ -17,30 +17,30 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    private UserValidator userValidator;
+	@Autowired
+	private UserValidator userValidator;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String registerPage(Model model) {
-	model.addAttribute(new User());
-	return "register";
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView registerUser(@Valid User user,
-	    BindingResult bindingResult) {
-	userValidator.validate(user, bindingResult);
-	ModelAndView mv = new ModelAndView();
-	if (bindingResult.hasErrors()) {
-	    mv.setViewName("register");
-	    mv.addObject("errors", bindingResult.getAllErrors());
-	    return mv;
+	@RequestMapping(method = RequestMethod.GET)
+	public String registerPage(Model model) {
+		model.addAttribute(new User());
+		return "register";
 	}
-	userService.addUser(user);
-	mv.setViewName("redirect:/login");
-	return mv;
-    }
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView registerUser(@Valid User user,
+			BindingResult bindingResult) {
+		userValidator.validate(user, bindingResult);
+		ModelAndView mv = new ModelAndView();
+		if (bindingResult.hasErrors()) {
+			mv.setViewName("register");
+			mv.addObject("errors", bindingResult.getAllErrors());
+			return mv;
+		}
+		userService.addUser(user);
+		mv.setViewName("redirect:/login");
+		return mv;
+	}
 }
