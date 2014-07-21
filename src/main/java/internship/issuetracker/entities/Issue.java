@@ -24,8 +24,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where title = :title"),
-		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate= :updateDate") })
+		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) LIKE :title"),
+		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate = :updateDate") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {

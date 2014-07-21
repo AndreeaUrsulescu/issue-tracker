@@ -1,4 +1,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="container"> 	
 	<div class="registerForm">
@@ -6,7 +8,9 @@
 		<sf:form id="registerForm" method="POST" role="form" modelAttribute="user">
 			
 			<div class="form-group">
-			
+				<c:if test="$(hasError)">
+					<spring:message code="username.exists"/> <br>
+				</c:if>		
 				<label for="username">Username</label>
 				<sf:input type="text" class="form-control" id="username" placeholder="Enter username" path="userName"/>
 				<span class="error"></span>

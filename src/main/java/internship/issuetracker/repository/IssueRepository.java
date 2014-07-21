@@ -27,18 +27,16 @@ public class IssueRepository {
 		em.merge(issue);
 	}
 
-	public List<Issue> findTitle(String title) {
+	public List<Issue> findIssuesByTitle(String title) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,
 				Issue.class);
-		List<Issue> result = query.setParameter("title", title).getResultList();
-		return result;
+		return query.setParameter("title", title.toLowerCase()).getResultList();
 	}
 
-	public List<Issue> findTitle(Date date) {
+	public List<Issue> findIssuesByDate(Date date) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_DATE,
 				Issue.class);
-		List<Issue> result = query.setParameter("updateDate", date)
-				.getResultList();
-		return result;
+		return query.setParameter("updateDate", date)
+			.getResultList();
 	}
 }
