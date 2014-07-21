@@ -25,22 +25,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-	
+
 	@Autowired
 	private UserService userService;;
-	
+
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 		Issue issue = new Issue();
-		Principal principal=request.getUserPrincipal();
-				
-		if(null==principal)
+		Principal principal = request.getUserPrincipal();
+		if (null == principal)
 			return "redirect:/issues";
 		
-		
-		
 		issue.setOwner(userService.findUserByUserName(principal.getName()));
-
 		issue.setUpdateDate(new Date());
 		model.addAttribute(issue);
 		return "createIssue";
