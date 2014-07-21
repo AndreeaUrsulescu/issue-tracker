@@ -1,4 +1,4 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
-<button onclick="getIssue(1)">View Issue</button>
+<a href="issues/issue/1" >View Issue</a>

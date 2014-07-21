@@ -87,27 +87,6 @@ $(document).ready(function(){
 	        event.preventDefault();
 	    }
 	});
-});
-
-	function getIssue(issueID) {
-         $.ajax({
-        	 type : "GET",
-        	 url : "http://localhost:8080/issue-tracker/issues/"+issueID,
-        	 dataType : "json" ,
-        	 success : function (result){
-        		 var issue = JSON.parse(result);
-        		 alert(issue.title);
-        	 }
-         });
-	}
-function updateIssue() {
 	
-	$.ajax({
-		dataType: "json",
-		type: "POST",
-		url: "http://localhost:8080/issue-tracker/issues/1",
-		success: function(rsp) {
-			alert(rsp.issue);
-		}
-	});
-}
+	
+});

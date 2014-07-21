@@ -5,7 +5,6 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
-import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,12 +53,13 @@ public class IssueController {
 		return "redirect:/issues";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Issue viewIssuePage(@PathVariable("id") Long id) {
-		return issueService.getIssue(id);
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
+	public String viewIssuePage(@PathVariable("id") Long id ,Model model) {
+		model.addAttribute("viewIssue",issueService.getIssue(id));
+		return "viewIssue";
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -74,6 +74,7 @@ public class IssueController {
 		issueService.updateIssue(issue);
 		return map;
 	}
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage() {
 		return "issues";

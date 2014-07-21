@@ -4,16 +4,20 @@
 		<form role="form">
 		
 			<div class="form-group">
+				
+				<label for="comment-area">USERNAME GOES HERE:</label>
 			
-				<textarea class="form-control textArea" rows="7"></textarea>
+				<textarea id="comment-area" class="form-control textArea" rows="7" maxlength="500"></textarea>
 			
 			</div>
 				
 			<div class="commentFormButtons">
 				
+				<div id="counter" class="label label-default">500</div>
+				
 				<div class="btn btn-primary">Save</div>
 				
-				<div class="btn btn-default">Clear</div>
+				<div id="clear-btn" class="btn btn-default">Clear</div>
 			
 			</div>
 			
