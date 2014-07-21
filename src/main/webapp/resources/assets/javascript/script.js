@@ -87,16 +87,17 @@ $(document).ready(function(){
 	        event.preventDefault();
 	    }
 	});
+	
+	
 });
 
-	function getIssue(issueID) {
+	/*function getIssue(issueID) {
          $.ajax({
         	 type : "GET",
-        	 url : "http://localhost:8080/issue-tracker/issues/"+issueID,
-        	 dataType : "json" ,
+        	 url : "http://localhost:8080/issue-tracker/issues/" + issueID,
         	 success : function (result){
-        		 var issue = JSON.parse(result);
-        		 alert(issue.title);
+        		 console.log(result);
         	 }
          });
 	}
+*/

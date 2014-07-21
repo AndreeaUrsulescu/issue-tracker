@@ -5,7 +5,6 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
-import java.security.Principal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,8 +51,9 @@ public class IssueController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Issue viewIssuePage(@PathVariable("id") Long id) {
-		return issueService.getIssue(id);
+	public String viewIssuePage(@PathVariable("id") Long id ,Model model) {
+		model.addAttribute("viewIssue",issueService.getIssue(id));
+		return "viewIssue";
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
