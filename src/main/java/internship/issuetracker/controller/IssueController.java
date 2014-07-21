@@ -25,7 +25,7 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String createIssuePage(Model model) {
 		Issue issue = new Issue();
-		
+		/*
 		Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user;
 		if (o != null)
@@ -36,7 +36,14 @@ public class IssueController {
 		issue.setUpdateDate(new Date());
 		issue.setOwner(user);
 		model.addAttribute(issue);
-
+				*/
+		User u=new User();
+		u.setEmail("user@user.com");
+		u.setPassword("password");
+		u.setUserName("Username");
+		issue.setUpdateDate(new Date());
+		issue.setOwner(u);
+		model.addAttribute(issue);
 		return "createIssue";
 
 	}
@@ -44,6 +51,7 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,
 			BindingResult bindingResult) {
+	
 		if (bindingResult.hasErrors())
 			return "createIssue";
 

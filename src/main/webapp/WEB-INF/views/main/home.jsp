@@ -3,6 +3,7 @@
 <div id="contentHome" style="background-image: url('resources/assets/images/background.png');">
 
 	<p></p>
+	
 	<div id="middleHome" >
 		<img style="margin-top: 150px; margin-left: 90px; margin-bottom: 15px;" src="resources/assets/images/homeLogo.png">
 		
