@@ -59,6 +59,15 @@ public class IssueController {
 		return "viewIssue";
 	}
 	
+	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> editIssue(@PathVariable Long id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("issue", issueService.getIssue(id)); 
+		return map;
+	}
+	
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
@@ -72,6 +81,13 @@ public class IssueController {
 		
 		map.put("issue", "success");
 		issueService.updateIssue(issue);
+		return map;
+	}
+	
+	@RequestMapping(value = "/issue/{id}")
+	public Map<String, Object> addComment() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		return map;
 	}
 	
