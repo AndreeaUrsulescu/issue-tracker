@@ -51,7 +51,7 @@ public class Issue implements Serializable {
 	String title;
 
 	@Column(name = "content")
-	@Size(max = 150)
+	@Size(max = 1000)
 	String content;
 
 	@Temporal(TemporalType.DATE)

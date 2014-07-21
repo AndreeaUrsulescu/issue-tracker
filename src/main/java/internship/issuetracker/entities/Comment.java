@@ -27,7 +27,7 @@ public class Comment implements Serializable {
 	private Long id;
 	
 	@Column(name = "content")
-	@Size(max = 150)	
+	@Size(max = 500)	
 	String content;
 	
 
@@ -42,6 +42,16 @@ public class Comment implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date", nullable = false)
 	Date creationDate;
+
+	
+	
+	public Issue getIssue() {
+		return issue;
+	}
+
+	public void setIssue(Issue issue) {
+		this.issue = issue;
+	}
 
 	public Long getId() {
 		return id;
