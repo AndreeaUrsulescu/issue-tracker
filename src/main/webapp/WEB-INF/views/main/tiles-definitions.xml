@@ -52,4 +52,12 @@
     	
     </definition>
     
+    <definition name="viewIssue" extends="mainLayout">
+    
+    	<put-attribute name="header" value=""></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute>
+    	<put-attribute name="footer" value=""></put-attribute>
+    	
+    </definition>
+    
 </tiles-definitions>

@@ -6,6 +6,8 @@ import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -50,27 +52,28 @@ public class IssueController {
 		return "redirect:/issues";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
 	public String viewIssuePage(@PathVariable("id") Long id ,Model model) {
 		model.addAttribute("viewIssue",issueService.getIssue(id));
 		return "viewIssue";
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String updateIssue(@PathVariable Long id, @Valid Issue issue, BindingResult bindingResult, Model model) {
-		Issue initialIssue;
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if (bindingResult.hasErrors())
 		{
-			initialIssue = issueService.getIssue(id);
-			model.addAttribute(initialIssue);
-			return "viewIssue";
+			map.put("issue", issueService.getIssue(id));
+			return map;
 		}
 		
+		map.put("issue", "success");
 		issueService.updateIssue(issue);
-		return "redirect:/issues";
+		return map;
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage() {
 		return "issues";

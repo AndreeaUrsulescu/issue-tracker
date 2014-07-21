@@ -90,14 +90,3 @@ $(document).ready(function(){
 	
 	
 });
-
-	/*function getIssue(issueID) {
-         $.ajax({
-        	 type : "GET",
-        	 url : "http://localhost:8080/issue-tracker/issues/" + issueID,
-        	 success : function (result){
-        		 console.log(result);
-        	 }
-         });
-	}
-*/

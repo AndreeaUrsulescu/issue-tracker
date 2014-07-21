@@ -120,6 +120,7 @@ footer a{
 
 .textArea{
 	width:700px;
+	resize:none;
 }
 
 .line{
