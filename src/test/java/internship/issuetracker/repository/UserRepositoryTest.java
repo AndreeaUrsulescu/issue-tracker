@@ -11,6 +11,7 @@ public class UserRepositoryTest {
 
 	UserRepository userRepository;
 	
+	@SuppressWarnings("resource")
 	@Before
 	public void setUp(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("config/datasource/h2.xml",
