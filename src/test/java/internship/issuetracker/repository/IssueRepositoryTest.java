@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+//TODO: load context using adnotations
 public class IssueRepositoryTest {
 
     private IssueRepository issueRepository;

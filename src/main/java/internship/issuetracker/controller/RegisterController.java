@@ -37,7 +37,7 @@ public class RegisterController {
 	ModelAndView mv = new ModelAndView();
 	if (bindingResult.hasErrors()) {
 	    mv.setViewName("register");
-	    mv.addObject("hasError", true);
+	    mv.addObject("errors", bindingResult.getAllErrors());
 	    return mv;
 	}
 	userService.addUser(user);
