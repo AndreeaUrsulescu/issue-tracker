@@ -17,18 +17,18 @@ public class IssueRepositoryTest {
     private IssueRepository issueRepository;
     private UserRepository userRepository;
     
-    static int count =23;
+    static int count =65;
 
     public Issue createIssue() {
 	User user = new User();
-	user.setUserName("foobarxs" + (char)count);
-	user.setEmail("just@mail.ro");
+	user.setUserName("userx"+ (char)count);
+	user.setEmail("rp@rr.ro");
 	user.setPassword("parola");
 	userRepository.create(user);
 
 	Issue issue = new Issue();
-	issue.setContent("content");
-	issue.setTitle("title" + (char)count);
+	issue.setContent("contentx");
+	issue.setTitle("titlex" + (char)count);
 	issue.setOwner(user);
 	issue.setUpdateDate(new Date());
 	count++;

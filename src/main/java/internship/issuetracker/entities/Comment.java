@@ -22,9 +22,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = Comment.FIND_ISSUE, query = "select a from Comment a where a.issue = :issue"),
-	@NamedQuery(name = Comment.FIND_OWNER, query = "select a from Comment a where a.owner= :owner"),
-	@NamedQuery(name = Comment.FIND_ID , query = "select a from Comment a where id = :id")
+	@NamedQuery(name = Comment.FIND_ISSUE, query = "select a from Comment a where a.issue = :issue order by creationDate desc"),
+	@NamedQuery(name = Comment.FIND_OWNER, query = "select a from Comment a where a.owner= :owner order by creationDate desc")
 	})
 @Entity
 @Table(name = "Comments")
@@ -32,7 +31,6 @@ public class Comment implements Serializable {
 	
 	public static final String FIND_ISSUE = "Comment.findIssue";
 	public static final String FIND_OWNER = "Comment.findOwner";
-	public static final String FIND_ID = "Comment.findID";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

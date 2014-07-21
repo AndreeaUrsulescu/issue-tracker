@@ -1,13 +1,12 @@
 package internship.issuetracker.repository;
 
-import java.util.List;
-
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -32,22 +31,10 @@ public class CommentRepository {
 	public List<Comment> findCommentsByIssue(Issue issue) {
 		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_ISSUE,
 				Comment.class);
+		
 		return query.setParameter("issue", issue).getResultList();
 	}
 
-	public Comment findComment(long id) {
-		Comment comment = null;
-
-		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_ID,
-				Comment.class);
-		query.setParameter("id", id);
-
-		try {
-			comment = query.getSingleResult();
-		} catch (NoResultException ex) {
-		}
-		return comment;
-	}
 	
 	public List<Comment> findCommentByOwner(User user) {
 		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_OWNER,

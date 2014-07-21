@@ -5,7 +5,6 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
-import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +38,7 @@ public class IssueController {
 		model.addAttribute("user",user.getUserName());
 		model.addAttribute("issue",new Issue());
 		model.addAttribute("date",new Date());
+		System.out.println(user.getEmail()+"asdfsd");
 		return "createIssue";
 	}
 	
@@ -54,8 +54,9 @@ public class IssueController {
 	}
 
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
-	public @ResponseBody Issue viewIssuePage(@PathVariable("id") Long id) {
-		return issueService.getIssue(id);
+	public String viewIssuePage(@PathVariable("id") Long id ,Model model) {
+		model.addAttribute("viewIssue",issueService.getIssue(id));
+		return "viewIssue";
 	}
 	
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)

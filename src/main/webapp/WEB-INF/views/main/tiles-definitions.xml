@@ -36,6 +36,14 @@
     	
     </definition>
     
+     <definition name="viewIssue" extends="mainLayout">
+    	
+    	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+    	<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute>
+    	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+    	
+    </definition>
+    
     <definition name="comments" extends="mainLayout">
     
     	<put-attribute name="header" value=""></put-attribute>
