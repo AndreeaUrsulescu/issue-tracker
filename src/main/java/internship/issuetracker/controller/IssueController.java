@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-
+	
 	@Autowired
 	private UserService userService;;
 
