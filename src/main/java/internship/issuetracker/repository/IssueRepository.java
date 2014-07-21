@@ -41,6 +41,11 @@ public class IssueRepository {
 			.getResultList();
 	}
 	
+	public List<Issue> findOrderedIssues() {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+		return query.getResultList();
+	}
+	
 	public Issue findIssue(Long id){
 		
 		Issue issue= null;

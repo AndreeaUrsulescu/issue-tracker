@@ -7,6 +7,7 @@ import internship.issuetracker.service.UserService;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,49 +34,52 @@ public class IssueController {
 
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
-		
-		User user=(User)request.getSession().getAttribute("user");
-		model.addAttribute("user",user.getUserName());
-		model.addAttribute("issue",new Issue());
-		model.addAttribute("date",new Date());
+
+		User user = (User) request.getSession().getAttribute("user");
+		model.addAttribute("user", user.getUserName());
+		model.addAttribute("issue", new Issue());
+		model.addAttribute("date", new Date());
 		return "createIssue";
 	}
-	
-	@RequestMapping(value = {"/createIssue"}, method = RequestMethod.POST)
-	public String createIssuePage(@Valid Issue issue,HttpServletRequest request,BindingResult bindingResult) {
-		
+
+	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
+	public String createIssuePage(@Valid Issue issue,
+			HttpServletRequest request, BindingResult bindingResult) {
+
 		if (bindingResult.hasErrors())
 			return "createIssue";
-		
-		issue.setOwner((User)request.getAttribute("user"));
+
+		issue.setOwner((User) request.getAttribute("user"));
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
 
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
-	public String viewIssuePage(@PathVariable("id") Long id ,Model model) {
-		model.addAttribute("viewIssue",issueService.getIssue(id));
+	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("viewIssue", issueService.getIssue(id));
 		return "viewIssue";
 	}
-	
+
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
+	public Map<String, Object> updateIssue(@PathVariable Long id,
+			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if (bindingResult.hasErrors())
-		{
+
+		if (bindingResult.hasErrors()) {
 			map.put("issue", issueService.getIssue(id));
 			return map;
 		}
-		
+
 		map.put("issue", "success");
 		issueService.updateIssue(issue);
 		return map;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String viewIssuesPage() {
+	public String viewIssuesPage(Model model) {
+		List<Issue> issuesList = issueService.getOrderedIssues();
+		model.addAttribute("issuesList", issuesList);
 		return "issues";
 	}
 }
