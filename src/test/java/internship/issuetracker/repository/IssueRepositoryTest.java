@@ -34,7 +34,8 @@ public class IssueRepositoryTest {
 	return issue;
     }
 
-    @Before
+    @SuppressWarnings("resource")
+	@Before
     public void setUp() {
 	ApplicationContext context = new ClassPathXmlApplicationContext(
 		"config/datasource/h2.xml", "config/application-context.xml");
