@@ -1,8 +1,15 @@
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%-- 
+    Document   : createIssue
+    Created on : Jul 18, 2014, 1:25:41 PM
+    Author     : lasoltanei
+--%>
 
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container">
-    <div class="loginForm"> 
-        <form class="form-horizontal" method="POST" action='j_spring_security_check'>
+	<div id="createIssue">
+		<div class="issueTitle"></div>
+		<div id="inIssue">
+         <form class="form-horizontal" method="POST" action='j_spring_security_check'>
     
           <div class="form-group" style="margin-top: 10px;">
             <label for="inputEmail" class="col-sm-2 control-label">Username</label>
@@ -25,5 +32,6 @@
             </div>			  
           </div>
         </form>
-    </div>
-  </div>   
+		</div>
+	</div>
+  <div>   

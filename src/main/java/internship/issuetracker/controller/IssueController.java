@@ -43,6 +43,7 @@ public class IssueController {
 	@RequestMapping(value = {"/createIssue"}, method = RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,
 			BindingResult bindingResult) {
+	
 		if (bindingResult.hasErrors())
 			return "createIssue";
 
