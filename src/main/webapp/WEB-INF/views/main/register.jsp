@@ -8,7 +8,7 @@
 		<sf:form id="registerForm" method="POST" role="form" modelAttribute="user">
 			
 			<div class="form-group">
-				<c:if test="$(hasError)">
+				<c:if test="hasError">
 					<spring:message code="username.exists"/> <br>
 				</c:if>		
 				<label for="username">Username</label>
