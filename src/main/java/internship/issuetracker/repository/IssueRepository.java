@@ -83,4 +83,9 @@ public class IssueRepository {
 		else
 			return x/itemsPerPage;
 	}
+	
+	public List<Issue> findOrderedIssues() {
+		  TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+		  return query.getResultList();
+	}
 }
