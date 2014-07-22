@@ -16,7 +16,6 @@ public class CommentRepositoryTest {
     private CommentRepository commentRepository;
     private UserRepository userRepository;
     private IssueRepository issueRepository;
-
     static int count = 65;
 
     public Comment createComment()
@@ -26,7 +25,7 @@ public class CommentRepositoryTest {
     	user.setEmail("just@mail.ro");
     	user.setPassword("parola");
     	userRepository.create(user);
-
+    	
     	Issue issue = new Issue();
     	issue.setContent("content");
     	issue.setTitle("title" + (char)count);
@@ -69,5 +68,22 @@ public class CommentRepositoryTest {
 	List<Comment> compare=commentRepository.findCommentByOwner(comment.getOwner());
 	assert(comment.equals(compare));
     }
+	
+	@Test
+	public void testFindByUser()
+	{
+		Comment comment=createComment();
+		User creator=comment.getOwner();
+		commentRepository.create(comment);
+		assert(commentRepository.findCommentByOwner(creator).get(0).equals(creator));
+	}
+	@Test
+	public void testFindByIssue()
+	{
+		Comment comment=createComment();
+		Issue issue=comment.getIssue();
+		commentRepository.create(comment);
+		assert(commentRepository.findCommentsByIssue(issue).get(0).equals(issue));
+	}
 
 }
