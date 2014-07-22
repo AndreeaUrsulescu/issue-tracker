@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<a href="issues/issue/1" >View Issue</a>
+<a href="issue/1" >View Issue</a>
 <br>
-<a href="createIssue" >New Issue</a>
+<a href="issues/createIssue" >New Issue</a>
 <br>
 <a href="logout" >logout</a>
 

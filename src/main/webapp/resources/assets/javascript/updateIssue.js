@@ -38,6 +38,7 @@ function editIssue() {
 		url: url,
 		success: function(rsp) {
 			//se completeaza formularul cu datele din rsp.issue.{nume-camp}
+			//alert(rsp.issue.title);
 		}
 	});
 }
