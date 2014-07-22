@@ -153,7 +153,7 @@ return map;
 
 @RequestMapping(method = RequestMethod.GET)
 public String viewIssuesPage(Model model) {
-List<Issue> issuesList = issueService.getOrderedIssues();
+List<Issue> issuesList = issueService.getIssues();
 model.addAttribute("issuesList", issuesList);
 return "issues";
 }

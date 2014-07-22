@@ -1,4 +1,4 @@
-package com.endava.internship.authetication;
+package internship.issuetracker.authentication;
 
 import java.io.IOException;
 

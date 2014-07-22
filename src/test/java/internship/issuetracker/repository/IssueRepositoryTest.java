@@ -66,7 +66,7 @@ public class IssueRepositoryTest {
     }
     
     @Test
-    public void findIssuesForPagination() {
+    public void testFindIssuesForPagination() {
     	for (int i = 0; i < 20; i++) {
     		Issue issue = createIssue();
     		issueRepository.create(issue);
@@ -76,7 +76,7 @@ public class IssueRepositoryTest {
     }
     
     @Test
-    public void findIssuesForPagination2() {
+    public void testFindIssuesForPagination2() {
     	for (int i = 0; i < 40; i++) {
     		Issue issue = createIssue();
     		issueRepository.create(issue);
@@ -86,7 +86,7 @@ public class IssueRepositoryTest {
     }
     
     @Test
-    public void nrOfPagesTest(){
+    public void testNrOfPagesTest(){
     	for (int i = 0; i < 40; i++) {
     		Issue issue = createIssue();
     		issueRepository.create(issue);
