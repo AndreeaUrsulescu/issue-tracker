@@ -157,4 +157,10 @@ public class IssueController {
 		model.addAttribute("issuesList", issuesList);
 		return "issues";
 	}
+	
+	@RequestMapping(value = "/viewIssue",method=RequestMethod.GET)  //metoda adaugata de mine pentru a vedea pagina
+	public String viewIssue()
+	{
+		return "viewIssue";
+	}
 }

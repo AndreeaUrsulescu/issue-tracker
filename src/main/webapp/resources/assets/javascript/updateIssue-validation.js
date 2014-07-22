@@ -10,7 +10,7 @@ $(document).ready(function(){
 	
 	function ValidateTitle()
 	{
-		var value=$("#Title").val();
+		var value=$("#text").val();
 		
 		var titleRegex= /^[a-zA-Z]+$/;
 		
@@ -54,6 +54,7 @@ $(document).ready(function(){
 		return true;
 	};
 	
-	
+	$("#text").keyup(ValidateTitle);
+
 });
 	
