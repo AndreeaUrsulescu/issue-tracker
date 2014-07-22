@@ -84,13 +84,11 @@ public class IssueController {
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateIssue(@PathVariable Long id,
-			@RequestBody @Valid Issue issue, BindingResult bindingResult, HttpServletRequest request) {
+			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
 		
-		issue.setOwner(user);
 		issue.setUpdateDate(currentDate);
 
 		if (bindingResult.hasErrors()) {
@@ -102,7 +100,13 @@ public class IssueController {
 		}
 
 		map.put("issue", "success");
-		issueService.updateIssue(issue);
+		
+		Issue oldIssue = issueService.getIssue(id);
+		oldIssue.setContent(issue.getContent());
+		oldIssue.setState(issue.getState());
+		oldIssue.setTitle(issue.getTitle());
+		oldIssue.setUpdateDate(currentDate);
+		issueService.updateIssue(oldIssue);
 		return map;
 	}
 	
@@ -146,7 +150,7 @@ public class IssueController {
 			pojoComments.add(pojoComment);
 		}
 			
-		map.put("comments", comments);
+		map.put("comments", pojoComments);
 		return map;
 	}
 	

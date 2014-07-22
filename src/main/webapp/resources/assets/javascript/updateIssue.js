@@ -36,8 +36,18 @@ function editIssue() {
 		dataType: "json",
 		type: "GET",
 		url: url,
+		/*beforeSend : function(xhr) {
+			alert(this.url);
+		},
+		complete : function(){
+	        alert(this.url);
+	    },
+		error: function(xhr,status,error){
+			console.error("error");
+		},*/
 		success: function(rsp) {
 			//se completeaza formularul cu datele din rsp.issue.{nume-camp}
+			//alert(rsp.issue.title);
 		}
 	});
 }
