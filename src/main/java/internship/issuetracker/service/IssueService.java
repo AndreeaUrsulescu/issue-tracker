@@ -36,10 +36,13 @@ public class IssueService {
 	
 	public Issue getIssue(Long id){
 	    return this.issueRepository.findIssue(id);
-	}
+	}	
 	
-	public List<Issue> getOrderedIssues() {
-		return this.issueRepository.findOrderedIssues();
+	public List<Issue> getIssuesForPagination(int page){
+		return this.issueRepository.findIssuesForPagination(page);
 	}
 
+	public int getNrOfPages(){
+		return this.issueRepository.nrOfPages();
+	}
 }

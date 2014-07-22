@@ -76,11 +76,31 @@ $(document).ready(function(){
 		}
 		return true;
 	};
+	
+	//Pentru validarea titlului la createIssue
+	function validateTitle(){
+		$("#createTitle").parent().find("span").text("");
+		var value  = $("#createTitle").val();	
+		if((value.length == 0)||(value.length<3)||(value.length>50)){
+			$("#createTitle").parent().find("span").text("A title between 3 and 50 characters is required");
+			return false;
+		}
+		return true;
+	};
+	
+	$("#createTitle").keyup(validateTitle);	
+	$("#createIssueForm").submit(function(event){
+
+	    var isValid = validateTitle();
+	    
+	    if (!isValid) {
+	        event.preventDefault();
+	    }
+	});
 	$("#username").keyup(validateUserName);
 	$("#emailAdress").keyup(validateEmail);
 	$("#password").keyup(validatePassword);
 	$("#passwordConfirm").keyup(validateConfirm);
-	
 	$("#registerForm").submit(function(event){
 
 	    var isValid = validateEmail() && validateUserName();
@@ -90,6 +110,5 @@ $(document).ready(function(){
 	        event.preventDefault();
 	    }
 	});
-	
 	
 });
