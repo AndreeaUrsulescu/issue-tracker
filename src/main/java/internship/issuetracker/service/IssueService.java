@@ -41,5 +41,12 @@ public class IssueService {
 	public List<Issue> getOrderedIssues() {
 		return this.issueRepository.findOrderedIssues();
 	}
+	
+	public List<Issue> getIssuesForPagination(int page){
+		return this.issueRepository.findIssuesForPagination(page);
+	}
 
+	public int getNrOfPages(){
+		return this.issueRepository.nrOfPages();
+	}
 }

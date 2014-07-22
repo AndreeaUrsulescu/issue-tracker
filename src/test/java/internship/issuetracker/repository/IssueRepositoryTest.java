@@ -16,16 +16,11 @@ public class IssueRepositoryTest {
 
     private IssueRepository issueRepository;
     private UserRepository userRepository;
-    
-    static int count =65;
+    private User user;
+    static int count = 65;
+    static int ucount = 65;
 
     public Issue createIssue() {
-	User user = new User();
-	user.setUserName("userx"+ (char)count);
-	user.setEmail("rp@rr.ro");
-	user.setPassword("parola");
-	userRepository.create(user);
-
 	Issue issue = new Issue();
 	issue.setContent("contentx");
 	issue.setTitle("titlex" + (char)count);
@@ -42,6 +37,14 @@ public class IssueRepositoryTest {
 		"config/datasource/h2.xml", "config/application-context.xml");
 	issueRepository = context.getBean(IssueRepository.class);
 	userRepository = context.getBean(UserRepository.class);
+	
+	user = new User();
+	user.setUserName("userx"+(char)ucount);
+	user.setEmail("email@end.com");
+	user.setPassword("parola");
+	userRepository.create(user);
+	ucount++;
+
     }
     
     @Test
@@ -61,5 +64,33 @@ public class IssueRepositoryTest {
 	List<Issue> compare = issueRepository.findIssuesByTitle(issue.getTitle());
 	assert (issue.equals(compare));
     }
-
+    
+    @Test
+    public void findIssuesForPagination() {
+    	for (int i = 0; i < 20; i++) {
+    		Issue issue = createIssue();
+    		issueRepository.create(issue);
+		}
+    	int size=issueRepository.findIssuesForPagination(0).size();
+    	assert(size>0 && size<30);
+    }
+    
+    @Test
+    public void findIssuesForPagination2() {
+    	for (int i = 0; i < 40; i++) {
+    		Issue issue = createIssue();
+    		issueRepository.create(issue);
+		}
+    	int size=issueRepository.findIssuesForPagination(0).size();   	
+    	assert((size>0 && size<30));
+    }
+    
+    @Test
+    public void nrOfPagesTest(){
+    	for (int i = 0; i < 40; i++) {
+    		Issue issue = createIssue();
+    		issueRepository.create(issue);
+		}
+    	assert(issueRepository.nrOfPages()==2);
+    }
 }
