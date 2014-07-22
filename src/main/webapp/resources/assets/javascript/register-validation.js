@@ -89,6 +89,14 @@ $(document).ready(function(){
 	};
 	
 	$("#createTitle").keyup(validateTitle);	
+	$("#createIssueForm").submit(function(event){
+
+	    var isValid = validateTitle();
+	    
+	    if (!isValid) {
+	        event.preventDefault();
+	    }
+	});
 	$("#username").keyup(validateUserName);
 	$("#emailAdress").keyup(validateEmail);
 	$("#password").keyup(validatePassword);

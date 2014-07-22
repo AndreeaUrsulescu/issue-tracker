@@ -3,7 +3,7 @@
 
 <script src="resources/assets/javascript/login-validator.js"></script>
 <div class="container">
-<div class="loginForm">
+<div class="loginForm" style="margin-top: 300px;">
 <form id="login-form" class="form-horizontal" method="POST"
 action='j_spring_security_check'>
 

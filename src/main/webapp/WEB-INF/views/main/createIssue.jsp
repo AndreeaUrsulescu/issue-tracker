@@ -1,7 +1,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <div class="container">
-	<form class="form-horizontal" method="POST" action='j_spring_security_check'>
+	<form id="createIssueForm" class="form-horizontal" method="POST" action='j_spring_security_check'>
 	<div id="createIssue">
 		<div class="issueTitle">
 		
@@ -10,7 +10,7 @@
 		</div>
 		<div id="inIssue">
 
-			   <label for="inputEmail" class="comic" require="required">Title</label> <span style="margin-left:30px;" class="error"></span>
+			   <label for="inputEmail" class="comic" require="required">Title</label> <span style="margin-left:90px;" class="error"></span>
 			   <input type="text" class="form-control" id="createTitle" />
 			
 
