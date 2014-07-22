@@ -34,22 +34,26 @@ public class IssueController {
 
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
-
-		User user = (User) request.getSession().getAttribute("user");
-		model.addAttribute("user", user.getUserName());
-		model.addAttribute("issue", new Issue());
-		model.addAttribute("date", new Date());
+		
+		User user=(User)request.getSession().getAttribute("user");
+		Date d=new Date();
+		String data=d.toString();
+		data=data.substring(0, 11);
+		model.addAttribute("user",user.getUserName());
+		model.addAttribute("issue",new Issue());
+		model.addAttribute("date",data);
+	
 		return "createIssue";
 	}
-
+	
+	
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
-	public String createIssuePage(@Valid Issue issue,
-			HttpServletRequest request, BindingResult bindingResult) {
-
+	public String createIssuePage(@Valid Issue issue,HttpServletRequest request,BindingResult bindingResult) {
+		
 		if (bindingResult.hasErrors())
 			return "createIssue";
-
-		issue.setOwner((User) request.getAttribute("user"));
+		
+		issue.setOwner((User)request.getAttribute("user"));
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}

@@ -76,6 +76,18 @@ $(document).ready(function(){
 		}
 		return true;
 	};
+	
+	//Pentru validarea titlului la createIssue
+	function validateTitle(){
+		var value  = $("#createTitle").val();	
+		if((value.length == 0)||(value.length<3)||(value.length>15)){
+			$("#createTitle").parent().find("span").text("A title between 3 and 15 characters is required");
+			return false;
+		}
+		return true;
+	};
+	
+	
 	$("#username").keyup(validateUserName);
 	$("#emailAdress").keyup(validateEmail);
 	$("#password").keyup(validatePassword);
@@ -90,6 +102,5 @@ $(document).ready(function(){
 	        event.preventDefault();
 	    }
 	});
-	
 	
 });
