@@ -13,49 +13,56 @@
 			<div class="viewIssueHeaderTitle">
 				<h1> I have an issue, I'm an alcoholic. </h1>
 			</div>
-			
-			<div class="viewIssueHeaderState">
-				
-				<div class="new viewIssueState" >
-					New
-				</div>
-				
-				<div class="opened viewIssueState">
-					Opened
-				</div>
-				
-				<!-- Don't use progress as a class, bootstrap has it's own. Lesson learned. -->
-				
-				<div class="inProgress viewIssueState">
-					In progress
-				</div>
-				
-				<div class="testing viewIssueState">
-					In testing
-				</div>
-				
-				<div class="closed viewIssueState">
-					Closed
-				</div>
-				
-			</div>
 		
 		</div>
 		
 		<div class="viewIssueContent">
-		
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod felis vitae justo posuere euismod. Etiam sed interdum elit. Pellentesque interdum vel nisi ut sodales. Nullam pellentesque adipiscing felis, sed tristique velit mattis at. Sed et nulla molestie, fringilla mauris non, eleifend dui. In malesuada, orci non ullamcorper egestas, eros elit adipiscing purus, at eleifend massa lorem non erat. Duis iaculis erat a velit fringilla, ut porta quam blandit. Morbi ornare tempus pharetra. Vivamus vehicula tellus ut consectetur malesuada. Donec lobortis rutrum orci. Phasellus ut semper augue, at vestibulum magna. Maecenas sodales malesuada feugiat. Aliquam est nibh, imperdiet eget vulputate eget, dictum a libero. Praesent molestie mi sit amet ante blandit convallis non et lacus. Nunc facilisis vulputate nulla, quis congue odio interdum at. Aliquam erat volutpat.Proin eu rutrum tellus. Praesent nisl magna, tempor pellentesque elit sed, cursus vulputate ligula. Nulla facilisi. Etiam bibendum iaculis nulla. Nulla vitae sem varius, condimentum tortor in, rhoncus neque. Nulla iaculis nisi sed nibh dapibus facilisis. Sed mollis risus odio, viverra volutpat nisi accumsan non. Duis aliquam ligula eu pretium sodales. Morbi dignissim placerat metus, sit amet pharetra velit lacinia non. Duis mattis tempus convallis. Cum sociis natoque penatibus et magnis dis parturient.</p>
 		</div>
-		
+
 		<div class="viewIssueFooter">
+
+			<div class="viewIssueFooterDetails">	
+
+				<div class="viewIssueOwner">
+					User sir Usealot
+				</div>
+				
+				<div class="viewIssueDate">
+					<small>Dummy Date 7.22.2014</small>
+				</div>
 		
-			<div class="viewIssueOwner">
+			</div>	
+			
+			<div class="viewIssueFooterButtons">
+			
+				<button type="button" class="btn btn-primary" onclick="editIssue()">Update</button>
+			
+				<div class="new viewIssueState" >
+					New 
+				</div>
 			
 			</div>
 			
-			<div class="viewIssueDate">
-			
+			<div class="viewIssueFooterButtons hidden">
+
+				<button type="button" class="btn btn-default">Cancel</button>
+				<button type="button" class="btn btn-primary">Save</button>
+
 			</div>
-		
+			<!-- <div class="opened viewIssueState"> -->
+			<!-- 					Opened -->
+			<!-- 				</div> -->
+
+
+			<!-- 				<div class="testing viewIssueState"> -->
+			<!-- 					In testing -->
+			<!-- 				</div> -->
+
+			<!-- 				<div class="closed viewIssueState"> -->
+			<!-- 					Closed -->
+			<!-- 				</div> -->
+
 		</div>
 		
 		<!-- Pentru omul rau -->

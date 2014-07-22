@@ -29,11 +29,11 @@ public class AuthenticationServiceProvider implements AuthenticationProvider {
 		User user = userService.findUserByUserName(userName);
 
 		if (user == null) {
-			throw new BadCredentialsException("UserName not found");
+			throw new BadCredentialsException("Username not found");
 		}
 		
 		if (!userService.matchPassword(userName, password)) {
-			throw new BadCredentialsException("Wrong password");
+			throw new BadCredentialsException("Wrong username or password");
 		}
 		
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();

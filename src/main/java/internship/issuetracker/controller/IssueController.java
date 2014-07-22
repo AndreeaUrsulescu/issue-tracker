@@ -91,6 +91,37 @@ public class IssueController {
 		
 		issue.setUpdateDate(currentDate);
 
+
+@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
+public String viewIssuePage(@PathVariable("id") Long id, Model model) {
+model.addAttribute("viewIssue", issueService.getIssue(id));
+return "viewIssue";
+}
+
+
+@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> editIssue(@PathVariable Long id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Issue issue = issueService.getIssue(id);
+		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(),
+				issue.getUpdateDate(), issue.getState());
+		
+		map.put("issue", pojoIssue); 
+		return map;
+	}
+
+@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateIssue(@PathVariable Long id,
+			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Date currentDate = new Date();
+		
+		issue.setUpdateDate(currentDate);
+
 		if (bindingResult.hasErrors()) {
 			Issue oldIssue = issueService.getIssue(id);
 			IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner().getUserName(), oldIssue.getTitle(), oldIssue.getContent(), 
@@ -109,10 +140,6 @@ public class IssueController {
 		issueService.updateIssue(oldIssue);
 		return map;
 	}
-	
-	// Controller pt adaugarea unui comentariu (+ trimiterea tuturor clientului)
-	
-	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
