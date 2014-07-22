@@ -1,8 +1,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
+<script src="resources/assets/javascript/login-validator.js"></script>
 <div class="container">
     <div class="loginForm"> 
-        <form class="form-horizontal" method="POST" action='j_spring_security_check'>
+        <form id="login-form" class="form-horizontal" method="POST" action='j_spring_security_check'>
     
           <div class="form-group" style="margin-top: 10px;">
             <label for="inputEmail" class="col-sm-2 control-label">Username</label>

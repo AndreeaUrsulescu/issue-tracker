@@ -29,20 +29,20 @@ public class IssueRepository {
 	}
 
 	public List<Issue> findIssuesByTitle(String title) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_TITLE,
 				Issue.class);
 		return query.setParameter("title", title.toLowerCase()).getResultList();
 	}
 
 	public List<Issue> findIssuesByDate(Date date) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_DATE,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_DATE,
 				Issue.class);
 		return query.setParameter("updateDate", date)
 			.getResultList();
 	}
 	
 	public List<Issue> findIssues() {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL,
 				Issue.class);
 		return query.getResultList();
 	}
@@ -57,7 +57,7 @@ public class IssueRepository {
 		Issue issue= null;
 
 		TypedQuery<Issue> query = em
-				.createNamedQuery(Issue.FIND_ID, Issue.class);
+				.createNamedQuery(Issue.FIND_BY_ID, Issue.class);
 		query.setParameter("id", id);
 
 		try {
