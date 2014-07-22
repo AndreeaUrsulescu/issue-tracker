@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	
+	$("#username").focus();
+	
 	$(".registerError").hide();
 	
 	if( $(".registerError").text().trim().length > 0){
