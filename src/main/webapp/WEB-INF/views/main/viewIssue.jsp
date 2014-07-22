@@ -47,7 +47,7 @@
 			</div>
 			<div class="viewIssueFooterButtons">
 				<div class="new viewIssueState"></div>
-				<button type="button" class="btn btn-primary" onclick="editIssue()">Update
+				<button id="edit" type="button" class="btn btn-primary" onclick="editIssue()">Update
 					Issue</button>
 			</div>
 		</div>
@@ -67,11 +67,11 @@
 		</div>
 
 		<div class="editIssueFooterButtons">
-			<button type="button" class="btn btn-default">Cancel</button>
-			<button type="button" class="btn btn-primary">Save</button>
+			<button id="reset" type="button" class="btn btn-default">Cancel</button>
+			<button id="send" type="button" class="btn btn-primary">Save</button>
 		</div>
 
-		<div>
+		<div id="issue-states">
 			<span class="issue-label">Change state:</span>
 			<div class="new viewIssueState"></div>
 			<div class="opened viewIssueState"></div>
