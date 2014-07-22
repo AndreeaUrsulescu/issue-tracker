@@ -2,7 +2,7 @@
 
 <div class="container">
 	<form id="createIssueForm" class="form-horizontal" method="POST" action='j_spring_security_check'>
-	<div id="createIssue">
+	<div id="createIssWue">
 		<div class="issueTitle">
 		
 			<label class="addedBy2">${date}</label>
@@ -24,4 +24,4 @@
 				<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/pin.png"/>
 			</div>
 	</form>
-  <div>   
+ </div>   
