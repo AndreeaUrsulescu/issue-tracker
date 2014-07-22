@@ -33,10 +33,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
@@ -44,54 +44,40 @@ public class IssueController {
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
 		User user = (User) request.getSession().getAttribute("user");
+		Issue issue = new Issue();
 		model.addAttribute("user", user.getUserName());
-		model.addAttribute("issue", new Issue());
-		model.addAttribute("date", new Date());
+		model.addAttribute("issue", issue);
+		model.addAttribute("date",issue.getUpdateDate().toString().substring(0, 11));
 		return "createIssue";
 	}
 
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,
 			HttpServletRequest request, BindingResult bindingResult) {
-
-User user = (User) request.getSession().getAttribute("user");
-Issue issue=new Issue();
-issue.setOwner(user);
-model.addAttribute("user", user.getUserName());
-model.addAttribute("issue", issue);
-model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
-
-return "createIssue";
-}
-
-		issue.setOwner((User) request.getAttribute("user"));
+		if (bindingResult.hasErrors())
+			return "createIssue";
+		issue.setOwner((User) request.getSession().getAttribute("user"));
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
 
-if (bindingResult.hasErrors())
-return "createIssue";
-issue.setOwner((User) request.getSession().getAttribute("user"));
-issueService.addIssue(issue);
-return "redirect:/issues";
-}
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
+	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("viewIssue", issueService.getIssue(id));
+		return "viewIssue";
+	}
 
-@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
-public String viewIssuePage(@PathVariable("id") Long id, Model model) {
-model.addAttribute("viewIssue", issueService.getIssue(id));
-return "viewIssue";
-}
-
-@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> editIssue(@PathVariable Long id) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		Issue issue = issueService.getIssue(id);
-		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(),
-				issue.getUpdateDate(), issue.getState());
-		
-		map.put("issue", pojoIssue); 
+		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(),
+				issue.getTitle(), issue.getContent(), issue.getUpdateDate(),
+				issue.getState());
+
+		map.put("issue", pojoIssue);
 		return map;
 	}
 
@@ -99,22 +85,23 @@ return "viewIssue";
 	@ResponseBody
 	public Map<String, Object> updateIssue(@PathVariable Long id,
 			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		Date currentDate = new Date();
-		
+
 		issue.setUpdateDate(currentDate);
 
 		if (bindingResult.hasErrors()) {
 			Issue oldIssue = issueService.getIssue(id);
-			IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner().getUserName(), oldIssue.getTitle(), oldIssue.getContent(), 
+			IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner()
+					.getUserName(), oldIssue.getTitle(), oldIssue.getContent(),
 					oldIssue.getUpdateDate(), oldIssue.getState());
 			map.put("issue", pojoIssue);
 			return map;
 		}
 
 		map.put("issue", "success");
-		
+
 		Issue oldIssue = issueService.getIssue(id);
 		oldIssue.setContent(issue.getContent());
 		oldIssue.setState(issue.getState());
@@ -123,49 +110,52 @@ return "viewIssue";
 		issueService.updateIssue(oldIssue);
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult,
+	public Map<String, Object> addComment(@RequestBody @Valid Comment comment,
+			@PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<Comment> comments;
 		Issue issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
-		
+
 		comment.setCreationDate(currentDate);
 		comment.setOwner(user);
 		comment.setIssue(issue);
-		
+
 		if (bindingResult.hasErrors()) {
 			comments = commentService.getCommentsForIssue(issue);
-			
+
 			for (Comment com : comments) {
-				CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(), 
-						com.getIssue().getId());
+				CommentPojo pojoComment = new CommentPojo(user.getUserName(),
+						com.getContent(), com.getCreationDate(), com.getIssue()
+								.getId());
 				pojoComments.add(pojoComment);
 			}
-			
+
 			map.put("comments", pojoComments);
 			return map;
 		}
-			
+
 		commentService.addComment(comment);
 		comments = commentService.getCommentsForIssue(issue);
-		
+
 		for (Comment com : comments) {
-			CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(),
-					com.getIssue().getId());
+			CommentPojo pojoComment = new CommentPojo(user.getUserName(),
+					com.getContent(), com.getCreationDate(), com.getIssue()
+							.getId());
 			pojoComments.add(pojoComment);
 		}
-			
+
 		map.put("comments", pojoComments);
 		return map;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
 		List<Issue> issuesList = issueService.getOrderedIssues();
