@@ -22,35 +22,35 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = Comment.FIND_ISSUE, query = "select a from Comment a where a.issue = :issue order by creationDate desc"),
-	@NamedQuery(name = Comment.FIND_OWNER, query = "select a from Comment a where a.owner= :owner order by creationDate desc")
+	@NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by creationDate desc"),
+	@NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by creationDate desc")
 	})
 @Entity
 @Table(name = "Comments")
 public class Comment implements Serializable {
 	
-	public static final String FIND_ISSUE = "Comment.findIssue";
-	public static final String FIND_OWNER = "Comment.findOwner";
+	public static final String FIND_COMMENTS_BY_ISSUE = "Comment.findCommentsByIssue";
+	public static final String FIND_COMMENTS_BY_OWNER = "Comment.findCommentsByOwner";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "content")
 	@Size(max = 500)	
-	String content;
+	private String content;
 	
 
 	@ManyToOne
 	@JoinColumn(name = "id_owner", nullable = false)
-	User owner;
+	private User owner;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_issue", nullable = false)
-	Issue issue;
+	private Issue issue;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date", nullable = false)
-	Date creationDate;
+	private Date creationDate;
 
 	
 	
