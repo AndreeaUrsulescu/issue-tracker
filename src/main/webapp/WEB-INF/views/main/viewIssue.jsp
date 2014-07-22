@@ -12,6 +12,9 @@
 		
 			<div class="viewIssueHeaderTitle">
 				<h1> I have an issue, I'm an alcoholic. </h1>
+				<%-- <c:forEach items='${viewIssue.comments}' var='i'> 
+					<c:out value='${i.content}' />
+				</c:forEach> --%>
 			</div>
 		
 		</div>

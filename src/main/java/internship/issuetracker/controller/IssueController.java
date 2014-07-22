@@ -68,7 +68,7 @@ public class IssueController {
 		return "viewIssue";
 	}
 
-@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> editIssue(@PathVariable Long id) {
 		

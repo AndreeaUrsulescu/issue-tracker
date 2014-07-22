@@ -4,11 +4,13 @@ import internship.issuetracker.enums.State;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -64,6 +67,9 @@ public class Issue implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
+	private List<Comment> comments;
 
 	public Issue() {
 		state = State.New;
@@ -115,6 +121,14 @@ public class Issue implements Serializable {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override
