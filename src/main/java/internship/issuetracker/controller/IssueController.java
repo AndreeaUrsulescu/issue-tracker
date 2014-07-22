@@ -70,86 +70,90 @@ return "viewIssue";
 
 
 @RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
-@ResponseBody
-public Map<String, Object> editIssue(@PathVariable Long id) {
-
-Map<String, Object> map = new HashMap<String, Object>();
-Issue issue = issueService.getIssue(id);
-IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(),
-issue.getUpdateDate(), issue.getState());
-
-map.put("issue", pojoIssue);
-return map;
-}
+	@ResponseBody
+	public Map<String, Object> editIssue(@PathVariable Long id) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Issue issue = issueService.getIssue(id);
+		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(),
+				issue.getUpdateDate(), issue.getState());
+		
+		map.put("issue", pojoIssue); 
+		return map;
+	}
 
 @RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
-@ResponseBody
-public Map<String, Object> updateIssue(@PathVariable Long id,
-@RequestBody @Valid Issue issue, BindingResult bindingResult, HttpServletRequest request) {
+	@ResponseBody
+	public Map<String, Object> updateIssue(@PathVariable Long id,
+			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		Date currentDate = new Date();
+		
+		issue.setUpdateDate(currentDate);
 
-Map<String, Object> map = new HashMap<String, Object>();
-User user = (User) request.getSession().getAttribute("user");
-Date currentDate = new Date();
+		if (bindingResult.hasErrors()) {
+			Issue oldIssue = issueService.getIssue(id);
+			IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner().getUserName(), oldIssue.getTitle(), oldIssue.getContent(), 
+					oldIssue.getUpdateDate(), oldIssue.getState());
+			map.put("issue", pojoIssue);
+			return map;
+		}
 
-issue.setOwner(user);
-issue.setUpdateDate(currentDate);
-
-if (bindingResult.hasErrors()) {
-Issue oldIssue = issueService.getIssue(id);
-IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner().getUserName(), oldIssue.getTitle(), oldIssue.getContent(),
-oldIssue.getUpdateDate(), oldIssue.getState());
-map.put("issue", pojoIssue);
-return map;
-}
-
-map.put("issue", "success");
-issueService.updateIssue(issue);
-return map;
-}
+		map.put("issue", "success");
+		
+		Issue oldIssue = issueService.getIssue(id);
+		oldIssue.setContent(issue.getContent());
+		oldIssue.setState(issue.getState());
+		oldIssue.setTitle(issue.getTitle());
+		oldIssue.setUpdateDate(currentDate);
+		issueService.updateIssue(oldIssue);
+		return map;
+	}
 
 // Controller pt adaugarea unui comentariu (+ trimiterea tuturor clientului)
 
 @RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
-@ResponseBody
-public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult,
-HttpServletRequest request) {
-
-Map<String, Object> map = new HashMap<String, Object>();
-List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
-List<Comment> comments;
-Issue issue = issueService.getIssue(id);
-User user = (User) request.getSession().getAttribute("user");
-Date currentDate = new Date();
-
-comment.setCreationDate(currentDate);
-comment.setOwner(user);
-comment.setIssue(issue);
-
-if (bindingResult.hasErrors()) {
-comments = commentService.getCommentsForIssue(issue);
-
-for (Comment com : comments) {
-CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(),
-com.getIssue().getId());
-pojoComments.add(pojoComment);
-}
-
-map.put("comments", pojoComments);
-return map;
-}
-
-commentService.addComment(comment);
-comments = commentService.getCommentsForIssue(issue);
-
-for (Comment com : comments) {
-CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(),
-com.getIssue().getId());
-pojoComments.add(pojoComment);
-}
-
-map.put("comments", comments);
-return map;
-}
+	@ResponseBody
+	public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult,
+			HttpServletRequest request) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+		List<Comment> comments;
+		Issue issue = issueService.getIssue(id);
+		User user = (User) request.getSession().getAttribute("user");
+		Date currentDate = new Date();
+		
+		comment.setCreationDate(currentDate);
+		comment.setOwner(user);
+		comment.setIssue(issue);
+		
+		if (bindingResult.hasErrors()) {
+			comments = commentService.getCommentsForIssue(issue);
+			
+			for (Comment com : comments) {
+				CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(), 
+						com.getIssue().getId());
+				pojoComments.add(pojoComment);
+			}
+			
+			map.put("comments", pojoComments);
+			return map;
+		}
+			
+		commentService.addComment(comment);
+		comments = commentService.getCommentsForIssue(issue);
+		
+		for (Comment com : comments) {
+			CommentPojo pojoComment = new CommentPojo(user.getUserName(), com.getContent(), com.getCreationDate(),
+					com.getIssue().getId());
+			pojoComments.add(pojoComment);
+		}
+			
+		map.put("comments", pojoComments);
+		return map;
+	}
 
 @RequestMapping(method = RequestMethod.GET)
 public String viewIssuesPage(Model model) {
