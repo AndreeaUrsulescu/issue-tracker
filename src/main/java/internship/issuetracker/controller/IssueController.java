@@ -44,9 +44,12 @@ private CommentService commentService;
 public String createIssuePage(Model model, HttpServletRequest request) {
 
 User user = (User) request.getSession().getAttribute("user");
+Issue issue=new Issue();
+issue.setOwner(user);
 model.addAttribute("user", user.getUserName());
-model.addAttribute("issue", new Issue());
-model.addAttribute("date", new Date());
+model.addAttribute("issue", issue);
+model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
+
 return "createIssue";
 }
 
@@ -56,8 +59,7 @@ HttpServletRequest request, BindingResult bindingResult) {
 
 if (bindingResult.hasErrors())
 return "createIssue";
-
-issue.setOwner((User) request.getAttribute("user"));
+issue.setOwner((User) request.getSession().getAttribute("user"));
 issueService.addIssue(issue);
 return "redirect:/issues";
 }

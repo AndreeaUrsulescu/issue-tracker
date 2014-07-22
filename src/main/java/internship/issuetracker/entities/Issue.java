@@ -67,6 +67,7 @@ public class Issue implements Serializable {
 
 	public Issue() {
 		state = State.New;
+		updateDate=new Date();
 	}
 
 	public Long getId() {

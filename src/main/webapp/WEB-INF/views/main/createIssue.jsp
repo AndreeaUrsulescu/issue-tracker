@@ -1,37 +1,30 @@
-<%-- 
-    Document   : createIssue
-    Created on : Jul 18, 2014, 1:25:41 PM
-    Author     : lasoltanei
---%>
-
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div class="container">
+	<sf:form id="createIssueForm" class="form-horizontal" method="POST" action='createIssue'
+	modelAttribute="issue">
 	<div id="createIssue">
-		<div class="issueTitle"></div>
+		<div class="issueTitle">
+		
+			<label class="addedBy2">${date}</label>
+			<img class="pinB2" src="${pageContext.request.contextPath}/resources/assets/images/paperclip2.png"/>
+		</div>
 		<div id="inIssue">
-         <form class="form-horizontal" method="POST" action='j_spring_security_check'>
-    
-          <div class="form-group" style="margin-top: 10px;">
-            <label for="inputEmail" class="col-sm-2 control-label">Username</label>
-            <div class="col-sm-10">
-				<input type="text" class="form-control" id="username" placeholder="Username" name="j_username"/>
-              <span class="error"></span> <!--for UI validation-->
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-              <input  type="password" class="form-control" id="password" placeholder="Password" name="j_password"/>
-              <span class="error"></span> <!--for UI validation-->
-            </div>
-            
-          </div>
-          <div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-			<a  data-toggle="popover" data-placement="right" data-content="Parola" onclick="return validateForm();"><input class=" btn btn-primary myBtn"  type="submit" value="Sign in"/></a>
-            </div>			  
-          </div>
-        </form>
+
+			   <label for="inputEmail" class="comic" require="required">Title</label> <span style="margin-left:90px;" class="error"></span>
+			   <sf:input type="text" class="form-control" id="createTitle" path="title"/>
+			
+
+			   <label for="inputPassword" class="comic">Content</label>
+			   <sf:textarea  maxlength="1000" id="createContent" cols="62" rows="14" placeholder="Your message here.." path="content"></sf:textarea>
+			   <label class="addedBy">Added by ${user}</label>
 		</div>
 	</div>
-  <div>   
+			<div id="createBtn">
+				<a ><input type="submit" value="Add issue" class="noBtn"/></a>
+				<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/pin.png"/>
+			</div>
+	</sf:form>
+  </div>   
