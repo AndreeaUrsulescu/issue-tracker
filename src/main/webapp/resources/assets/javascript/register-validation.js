@@ -45,7 +45,8 @@ $(document).ready(function(){
 			$("#username").parent().find("span").text("Your username must be between 5-12 characters long.");
 			return false;
 		} else
-		if(validUsername == null){
+		if(validUsername == null)
+		{
 			$("#username").parent().find("span").text("You can only use alphabetical characters.");
 			return false;
 		}

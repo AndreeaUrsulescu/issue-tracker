@@ -3,7 +3,7 @@
 <!-- <button type="button" onclick="updateIssue()">Save</button> -->
 <!-- <button type="button" onclick="editIssue()">Edit</button> -->
 
-
+<script src="resources/assets/javascript/updateIssue-validation.js"></script>
 <div class="container">
 
 	<div class="viewIssue">
@@ -61,8 +61,8 @@
 		<!-- Pentru omul rau -->
 		
 		<div class="omRau">
-			<input type="text" class="form-control viewIssueTitleEdit" placeholder="Title">
-			<textarea class="viewIssueContentEdit" rows="10"></textarea>
+			<input type="text" class="form-control" id="Title" placeholder="Title">
+			<textarea class="viewIssueContentEdit" rows="10" id="Content"></textarea>
 		</div>
 		
 	</div>
