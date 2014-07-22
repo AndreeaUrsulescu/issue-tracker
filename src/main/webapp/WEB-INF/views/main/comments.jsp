@@ -5,8 +5,6 @@
 		
 			<div class="form-group">
 				
-				<label for="comment-area">USERNAME GOES HERE:</label>
-			
 				<textarea id="comment-area" class="form-control textArea" rows="7" maxlength="500"></textarea>
 			
 			</div>
@@ -24,7 +22,6 @@
 		</form>
 		
 		<br>
-		
 		
 		<div class="commentView">
 		
