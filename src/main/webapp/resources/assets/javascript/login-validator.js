@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	$("#username").focus();
 	function validateUserName(){
 		var value  = $("#username").val();
 		
