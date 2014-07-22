@@ -45,4 +45,8 @@ public class IssueService {
 	public int getNrOfPages(){
 		return this.issueRepository.nrOfPages();
 	}
+	
+	public List<Issue> getOrderedIssues() {
+		return this.issueRepository.findOrderedIssues();
+	}
 }

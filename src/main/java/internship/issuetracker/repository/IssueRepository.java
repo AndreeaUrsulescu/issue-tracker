@@ -55,18 +55,17 @@ public class IssueRepository {
 	
 	public Issue findIssue(Long id){
 		
-		Issue issue= null;
+		List<Issue> issues;
 
 		TypedQuery<Issue> query = em
 				.createNamedQuery(Issue.FIND_BY_ID, Issue.class);
 		query.setParameter("id", id);
-
-		try {
-			issue = query.getSingleResult();
-		} catch (NoResultException ex) {
+		
+		issues = query.getResultList();
+		if (issues.size() == 0){
+			return null;
 		}
-
-		return issue;
+		return issues.get(0);
 	}
 
 	public List<Issue> findIssuesForPagination(int page) {
@@ -83,5 +82,10 @@ public class IssueRepository {
 			return x/itemsPerPage+1;
 		else
 			return x/itemsPerPage;
+	}
+	
+	public List<Issue> findOrderedIssues() {
+		  TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+		  return query.getResultList();
 	}
 }
