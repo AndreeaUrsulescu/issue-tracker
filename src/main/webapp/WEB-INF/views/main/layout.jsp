@@ -19,8 +19,7 @@
 		<link rel="stylesheet" href="resources/assets/stylesheets/style.css" type="text/css">
 		
 		<!-- Custom scripts -->
-<!-- 		<script src='resources/assets/scripts/scripts.js'></script> -->
-		<script src="resources/assets/javascript/register-validation.js"></script>
+<!-- 		<script src='resources/assets/javascript/scripts.js'></script> -->
 		<script src="resources/assets/javascript/comments.js"></script>
 		<script src="resources/assets/javascript/updateIssue.js"></script>
 	

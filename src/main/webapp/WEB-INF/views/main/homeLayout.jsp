@@ -18,7 +18,7 @@
 		<!-- Loading custom style -->
 		<link rel="stylesheet" href="resources/assets/stylesheets/style.css" type="text/css">
 		
-		<script src='resources/assets/scripts/scripts.js'></script>
+		<script src='resources/assets/javascript/scripts.js'></script>
 		
 		<script src='resources/assets/scripts/jquery.js'></script>
 
