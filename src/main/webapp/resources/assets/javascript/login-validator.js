@@ -1,6 +1,13 @@
 $(document).ready(function(){
 
 	$("#username").focus();
+	
+	$(".registerError").hide();
+	
+	if( $(".registerError").text().trim().length > 0){
+		$(".registerError").show();
+	}
+	
 	function validateUserName(){
 		var value  = $("#username").val();
 		
