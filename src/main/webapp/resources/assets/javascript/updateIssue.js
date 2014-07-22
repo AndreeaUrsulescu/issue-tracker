@@ -4,7 +4,8 @@ function updateIssue() {
 			
 	};
 	
-	var url = "http://localhost:8080/issue-tracker/issues/issue/" + issue.id;
+	//preia url-ul curent
+	var url = window.location.origin + window.location.pathname;
 		
 	$.ajax({
 		data: issue,
@@ -12,15 +13,27 @@ function updateIssue() {
 		type: "POST",
 		url: url,
 		success: function(rsp) {
-			//alert(rsp.issue);
 			if (rsp.issue == "success")
 			{
 				window.location = "http://localhost:8080/issue-tracker/issues";
 			}
 			else
 			{
-				// se completeaza inputurile cu valorile din rsp
+				// se completeaza inputurile cu valorile din rsp (rsp.issue.{nume-camp})
 			}
+		}
+	});
+}
+
+function editIssue() {
+	var url = window.location.origin + window.location.pathname;
+	
+	$.ajax({
+		dataType: "json",
+		type: "GET",
+		url: url,
+		success: function(rsp) {
+			//se completeaza formularul cu datele din rsp.issue.{nume-camp}
 		}
 	});
 }
