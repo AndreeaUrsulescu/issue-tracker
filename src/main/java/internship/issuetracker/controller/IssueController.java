@@ -67,37 +67,6 @@ public class IssueController {
 		model.addAttribute("viewIssue", issueService.getIssue(id));
 		return "viewIssue";
 	}
-	
-	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> editIssue(@PathVariable Long id) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		Issue issue = issueService.getIssue(id);
-		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(),
-				issue.getUpdateDate(), issue.getState());
-		
-		map.put("issue", pojoIssue); 
-		return map;
-	}
-	
-	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> updateIssue(@PathVariable Long id,
-			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		Date currentDate = new Date();
-		
-		issue.setUpdateDate(currentDate);
-
-
-@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
-public String viewIssuePage(@PathVariable("id") Long id, Model model) {
-model.addAttribute("viewIssue", issueService.getIssue(id));
-return "viewIssue";
-}
-
 
 @RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -112,7 +81,7 @@ return "viewIssue";
 		return map;
 	}
 
-@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateIssue(@PathVariable Long id,
 			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
@@ -140,6 +109,8 @@ return "viewIssue";
 		issueService.updateIssue(oldIssue);
 		return map;
 	}
+	
+	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
