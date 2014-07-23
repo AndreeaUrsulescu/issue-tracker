@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="container" >
+<div class="container" script="$('#createTitle').text(''); $('#createContent').text('');">
 	<sf:form id="createIssueForm" class="form-horizontal" method="POST" action='createIssue'
 	modelAttribute="issue">
 	<div id="createIssue">
