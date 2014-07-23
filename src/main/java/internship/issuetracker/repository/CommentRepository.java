@@ -33,13 +33,10 @@ public class CommentRepository {
 				Comment.class);
 		
 		return query.setParameter("issue", issue).getResultList();
-	}
-
-	
+	}	
 	public List<Comment> findCommentByOwner(User user) {
 		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_OWNER,
 				Comment.class);
 		return query.setParameter("owner", user).getResultList();
 	}
-
 }

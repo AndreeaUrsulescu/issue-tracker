@@ -18,6 +18,8 @@
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 	</bean>
 
+	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
