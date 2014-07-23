@@ -40,12 +40,6 @@ public class IssueController {
 	@Autowired
 	private CommentService commentService;
 
-	/** THIS is a dummy method for creating the UI **/
-	@RequestMapping(value = { "/dummyIssue" }, method = RequestMethod.GET)
-	public String viewDummyIssue(Model model, HttpServletRequest request) {
-		return "viewIssue";
-	}
-
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
