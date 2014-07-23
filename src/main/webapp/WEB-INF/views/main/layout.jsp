@@ -24,7 +24,14 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/scripts.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 	
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/viewIssue.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />

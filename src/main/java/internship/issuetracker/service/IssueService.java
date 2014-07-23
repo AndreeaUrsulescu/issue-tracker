@@ -24,6 +24,7 @@ public class IssueService {
 
 	public List<Issue> getIssuesByTitle(String title) {
 		return this.issueRepository.findIssuesByTitle(title);
+
 	}
 
 	public List<Issue> getIssuesByDate(Date date) {
@@ -35,7 +36,8 @@ public class IssueService {
 	}
 	
 	public Issue getIssue(Long id){
-	    return this.issueRepository.findIssue(id);
+		return this.issueRepository.findIssue(id);
+
 	}	
 	
 	public List<Issue> getIssuesForPagination(int page){
@@ -46,7 +48,15 @@ public class IssueService {
 		return this.issueRepository.nrOfPages();
 	}
 	
-	public List<Issue> getOrderedIssues() {
-		return this.issueRepository.findOrderedIssues();
+	public List<Issue> getOrderedIssues(int currentPage) {
+		return this.issueRepository.findOrderedIssues(currentPage);
+	}
+    public int numberOfIssues(){
+		
+		return this.issueRepository.numberOfIssues();
+	}
+    
+    public int itemsPerPage(){
+		return this.issueRepository.itemsPerPage();
 	}
 }
