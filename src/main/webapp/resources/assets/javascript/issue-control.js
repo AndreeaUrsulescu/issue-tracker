@@ -2,8 +2,8 @@ $(document).ready(function(){
     function updateIssue() {
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
-    		'content' : $("#issueContent").val()+"fals",
-    		'title' : $("#issueTitle").val()+"fals",
+    		'content' : $("#issueContent").val(),
+    		'title' : $("#issueTitle").val(),
     		'state' : $('.current').attr("id")
     	};
     	
