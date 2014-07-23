@@ -6,8 +6,8 @@
 
 <c:set var="plus" value="+"/>
 <c:set var="minus" value="-"/>
-    <p id="numberOfIssues" display="none"><c:out value="${listLength}"/></p>
-    <p id="issuesPerPage" display="none"><c:out value="${itemsPerPage}"/></p>
+    <p id="numberOfIssues" style="display:none"><c:out value="${listLength}"/></p>
+    <p id="issuesPerPage" style="display:none"><c:out value="${itemsPerPage}"/></p>
     
     <button id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
     <button id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
