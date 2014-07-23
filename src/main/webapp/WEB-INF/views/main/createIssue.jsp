@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="container" >
+<div class="container" script="$('#createTitle').text(''); $('#createContent').text('');">
 	<sf:form id="createIssueForm" class="form-horizontal" method="POST" action='createIssue'
 	modelAttribute="issue">
 	<div id="createIssue">
@@ -22,6 +22,13 @@
 			   <label class="addedBy">Added by ${user}</label>
 		</div>
 	</div>
+		<a href="${pageContext.request.contextPath}/issues">
+			<!--<a onclick="window.location='./'; $('#createTitle').text(''); $('#createContent').text('');">-->
+		<div id="backBtn">
+ 			<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/large2.jpg"/>
+ 			<label class="backLabel"> Go back</label>
+ 		</div>
+ 		</a>
 			<div id="createBtn">
 				<a ><input type="submit" value="Add issue" class="noBtn"/></a>
 				<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/pin.png"/>
