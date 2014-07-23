@@ -5,40 +5,6 @@
 
 <div id="all">
 	<div id="meniu">
-		<a href="logout" class="meniuBtn btn btn-primary">Logout</a> <a
-			href="issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
-	</div>
-	<div id="issues">
-		<c:forEach var="issue" items="${issuesList}" varStatus="i">
-			<a href="issues/issue/${issue.id}">
-				<div class="issue" id="iss${i.index}">
-					<div class="border">
-						<!--					<img class="pinB3" src="${pageContext.request.contextPath}/resources/assets/images/pin2.png"/>-->
-						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
-					</div>
-					<div class="content">
-						<h4 class="title">${issue.title}</h4>
-						<p>
-							<c:choose>
-								<c:when test="${fn:length(issue.content)>150}">
-									<c:out value="${fn:substring(issue.content, 0, 150)} ..." />
-								</c:when>
-								<c:otherwise>
-									<c:out value="${issue.content}" />
-								</c:otherwise>
-							</c:choose>
-							<!--		<c:if test="${fn:length(issue.title)>150}">
-								<c:out value="${fn:substring(issue.title, 0, 150)} ..."/>
-						</c:if> -->
-						</p>
-					</div>
-					<label class="owner">Updated by ${issue.owner}</label>
-				</div>
-			</a>
-		</c:forEach>
-	</div>
-<div id="all">
-	<div id="meniu">
 		 <a href="issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
 	<div id="issues">
