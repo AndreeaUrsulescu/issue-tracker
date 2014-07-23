@@ -1,10 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!-- <button type="button" onclick="updateIssue()">Save</button> -->
-<!-- <button type="button" onclick="editIssue()">Edit</button> -->
 
+<script src="resources/assets/javascript/updateIssue.js"></script>
 <script src="resources/assets/javascript/updateIssue-validation.js"></script>
+<script src="resources/assets/javascript/issue-control.js"></script>
 
 <div class="container">
 
@@ -68,7 +68,7 @@
 
 		<div class="editIssueFooterButtons">
 			<button id="reset" type="button" class="btn btn-default">Cancel</button>
-			<button id="send" type="button" class="btn btn-primary">Save</button>
+			<button id="send" type="button" class="btn btn-primary" onclick="updateIssue()" >Save</button>
 		</div>
 
 		<div id="issue-states">

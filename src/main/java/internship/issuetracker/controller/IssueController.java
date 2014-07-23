@@ -169,4 +169,3 @@ public class IssueController {
 		return "issues";
 	}
 }
->>>>>>> origin
