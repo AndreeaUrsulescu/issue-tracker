@@ -74,7 +74,7 @@ public class IssueController {
 		return "viewIssue";
 	}
 
-	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/issue/{id}/api", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> editIssue(@PathVariable Long id) {
 
@@ -135,21 +135,10 @@ public class IssueController {
 		comment.setOwner(user);
 		comment.setIssue(issue);
 
-		if (bindingResult.hasErrors()) {
-			comments = commentService.getCommentsForIssue(issue);
-
-			for (Comment com : comments) {
-				CommentPojo pojoComment = new CommentPojo(user.getUserName(),
-						com.getContent(), com.getCreationDate(), com.getIssue()
-								.getId());
-				pojoComments.add(pojoComment);
-			}
-
-			map.put("comments", pojoComments);
-			return map;
+		if (!bindingResult.hasErrors()) {
+			commentService.addComment(comment);
 		}
-
-		commentService.addComment(comment);
+	
 		comments = commentService.getCommentsForIssue(issue);
 
 		for (Comment com : comments) {
