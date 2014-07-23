@@ -13,7 +13,7 @@ $(document).ready(function(){
 	
 	function ValidateTitle()
 	{
-		var value=$("#text").val();
+		var value=$("#issueTitle").val();
 		
 		var titleRegex= /^[a-zA-Z]+$/;
 		
@@ -33,31 +33,7 @@ $(document).ready(function(){
 		}
 		return true;
 	};
-	
-	function ValidateContent()
-	{
-		var value=$("#Content").val();
-		
-		var ContentRegex= /^[a-zA-Z]+$/;
-		
-		$("#Content").parent().find("span").text(" ");
 
-		if(value.length == 0){
-			$("#Content").parent().find("span").text("Your Content can not be empty, an input is required.");
-			return false;
-		} else
-		if(value.length>1000){
-			$("#Content").parent().find("span").text("Your Content must be maximum 1000 characters long.");
-			return false;
-		} else
-		if(validContent == null){
-			$("#Content").parent().find("span").text("You can only use alphabetical characters.");
-			return false;
-		}
-		return true;
-	};
-	
 	$("#text").keyup(ValidateTitle);
-
 });
 	

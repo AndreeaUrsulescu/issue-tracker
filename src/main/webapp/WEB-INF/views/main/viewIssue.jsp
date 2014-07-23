@@ -5,7 +5,6 @@
 <!-- <button type="button" onclick="editIssue()">Edit</button> -->
 
 <script src="resources/assets/javascript/updateIssue-validation.js"></script>
-
 <div class="container">
 
 	<div class="viewIssue">
@@ -56,9 +55,10 @@
 	<!-- not yet done -->
 	<div class="editIssueContent">
 		<div>
-			<label for="issueTitle">Title</label> <input id="issueTitle"
-				type="text" class="form-control viewIssueTitleEdit"
-				placeholder="Title">
+			<label for="issueTitle">Title</label> 
+			<input type="text" class="form-control viewIssueTitleEdit"
+				   id="issueTitle" placeholder="Title goes here..."/>
+				<span class="error"></span>
 		</div>
 
 		<div>
