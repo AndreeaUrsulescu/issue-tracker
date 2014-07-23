@@ -2,9 +2,9 @@ $(document).ready(function(){
     function updateIssue() {
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
-    		'content' : $("#issueContent").val(),
-    		'title' : $("#issueTitle").val(),
-    		'state' : $('div.current').index()
+    		'content' : $("#issueContent").val()+"fals",
+    		'title' : $("#issueTitle").val()+"fals",
+    		'state' : $('.current').attr("id")
     	};
     	
     	//preia url-ul curent
@@ -25,13 +25,18 @@ $(document).ready(function(){
     			else
     			{
     				// se completeaza inputurile cu valorile din rsp (rsp.issue.{nume-camp})
+					$('#issueTitle').val(rsp.issue.title);
+					var id ='#'+rsp.issue.state;
+					$('div').removeClass('current');
+					$(id).addClass('current');
+					$('#issueContent').val(rsp.issue.content);
     			}
     		}
     	});
     }
 
     function editIssue() {
-    	var url = window.location.origin + window.location.pathname;
+    	var url = window.location.origin + window.location.pathname + "/api";
     	$.ajax({
     		dataType: "json",
     		type: "GET",
@@ -39,32 +44,13 @@ $(document).ready(function(){
     		success: function(rsp) {
     			$("#issueTitle").val(rsp.issue.title);
     			$("#issueContent").val(rsp.issue.content);
-    			$("#issue-states:nth-child("+rsp.issue.state+")").addClass('current');
+				var id ='#'+rsp.issue.state; 
+				$(id).addClass('current');
+//    			$("#issue-states:nth-child("+rsp.issue.state+")").addClass('current');
     		}
     	});
     	$(".editIssueContent").show();
     	$(".viewIssue").hide();
-    }
-
-    function addComment() {
-    	var url = window.location.origin + window.location.pathname;
-    	var comment = {
-    			//se completeaza cu datele din pagina (contentul)
-    		'content': 'bla'
-    	};
-    	
-    	$.ajax({
-    		data: JSON.stringify(comment),
-    		contentType: "application/json;charset=UTF-8",
-    		dataType: "json",
-    		type: "POST",
-    		url: url,
-    		succes: function(rsp) {
-    			for (var i = 0; i < rsp.comments.length; i++) {
-    				//rsp.comments[i].{proprietate} - accesul la campul unui comment
-    			}
-    		}
-    	});
     }
     
     $(".viewIssueTitleEdit").focus();

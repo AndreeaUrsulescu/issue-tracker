@@ -145,9 +145,6 @@ public class IssueController {
 			pojoComments.add(pojoComment);
 			
 		}
-		for(CommentPojo com: pojoComments){
-		    System.out.println(com.getContent());
-		}
 		map.put("comments", pojoComments);
 				
 		
