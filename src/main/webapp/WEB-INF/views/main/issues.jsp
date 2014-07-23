@@ -53,6 +53,7 @@
 		</p>
 
 		<button id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
+		<p id="pageNumber">1</p>
 		<button id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
 	</div>
 </div>
