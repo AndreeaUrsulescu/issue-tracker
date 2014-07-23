@@ -31,7 +31,7 @@ public class RestIssueController {
 		
 		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
 			Issue issueEntity  = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
 		    issuesListPojo.add(index,issuePojo);
 			
 		}
