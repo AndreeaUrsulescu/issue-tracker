@@ -1,11 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div>
 	<a style="margin-bottom: 100px;" href="${pageContext.request.contextPath}/issues"><img
 		src="${pageContext.request.contextPath}/resources/assets/images/banner.png" /></a>
-	<%@ taglib prefix="sec"
-		uri="http://www.springframework.org/security/tags"%>
+	
 
 	<sec:authorize var="loggedIn" access="isAuthenticated()" />
 	<c:choose>

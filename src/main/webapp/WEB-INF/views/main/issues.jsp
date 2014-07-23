@@ -5,7 +5,7 @@
 
 <div id="all">
 	<div id="meniu">
-		 <a href="issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
+		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
