@@ -9,9 +9,10 @@ import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public class IssueController {
 		return "viewIssue";
 	}
 
-	@RequestMapping(value = "/api/issue/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/issue/{id}/api", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> editIssue(@PathVariable Long id) {
 
@@ -118,8 +119,8 @@ public class IssueController {
 			@PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		List<CommentPojo> pojoComments = new LinkedList<CommentPojo>();
 		List<Comment> comments;
 		Issue issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
@@ -129,21 +130,12 @@ public class IssueController {
 		comment.setOwner(user);
 		comment.setIssue(issue);
 
-		if (bindingResult.hasErrors()) {
-			comments = commentService.getCommentsForIssue(issue);
-
-			for (Comment com : comments) {
-				CommentPojo pojoComment = new CommentPojo(user.getUserName(),
-						com.getContent(), com.getCreationDate(), com.getIssue()
-								.getId());
-				pojoComments.add(pojoComment);
-			}
-
-			map.put("comments", pojoComments);
-			return map;
+		if (!bindingResult.hasErrors()) {
+		    commentService.addComment(comment);
+		    map.put("code", "success");
+		} else {
+		    map.put("code", "error");
 		}
-
-		commentService.addComment(comment);
 		comments = commentService.getCommentsForIssue(issue);
 
 		for (Comment com : comments) {
@@ -151,9 +143,14 @@ public class IssueController {
 					com.getContent(), com.getCreationDate(), com.getIssue()
 							.getId());
 			pojoComments.add(pojoComment);
+			
 		}
-
+		for(CommentPojo com: pojoComments){
+		    System.out.println(com.getContent());
+		}
 		map.put("comments", pojoComments);
+				
+		
 		return map;
 	}
 
