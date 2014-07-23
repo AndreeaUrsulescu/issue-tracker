@@ -4,11 +4,13 @@ import internship.issuetracker.enums.State;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,24 +29,20 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_TITLE, query = "select a from Issue a where lower(title) = lower(:title) order by updateDate"),
-		@NamedQuery(name = Issue.FIND_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
-		@NamedQuery(name = Issue.FIND_ID , query = "select a from Issue a where id = :id"),
-		@NamedQuery(name = Issue.FIND , query = "select a from Issue a order by updateDate"),
-		
+		@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) = lower(:title) order by updateDate DESC"),
+		@NamedQuery(name = Issue.FIND_BY_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
+		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
 		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC")
 		})
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
-	public static final String FIND_TITLE = "Issue.findTitle";
-	public static final String FIND_DATE = "Issue.findDate";
-	public static final String FIND_ID = "Issue.findID";
-
-	public static final String FIND = "Issue.find";
+	public static final String FIND_BY_TITLE = "Issue.findByTitle";
+	public static final String FIND_BY_DATE = "Issue.findByDate";
+	public static final String FIND_BY_ID = "Issue.findByID";
+	public static final String FIND_ALL = "Issue.findAll";
 	
-	public static final String FIND_ALL = "Issue.findALL";
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,26 +50,30 @@ public class Issue implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_owner", nullable = false)
-	User owner;
+	private User owner;
 
 	@Column(name = "title", nullable = false)
 	@Size(min = 5, max = 50)
-	String title;
+	private String title;
 
 	@Column(name = "content")
 	@Size(max = 1000)
-	String content;
+	private String content;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "update_date", nullable = false)
-	Date updateDate;
+	private Date updateDate;
 
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
-	State state;
+	private State state;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
+	private List<Comment> comments;
 
 	public Issue() {
 		state = State.New;
+		updateDate=new Date();
 	}
 
 	public Long getId() {
@@ -119,6 +122,14 @@ public class Issue implements Serializable {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override

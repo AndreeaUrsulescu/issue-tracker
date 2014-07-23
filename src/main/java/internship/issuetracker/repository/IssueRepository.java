@@ -9,6 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,20 +35,20 @@ public class IssueRepository {
 	}
 
 	public List<Issue> findIssuesByTitle(String title) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_TITLE,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_TITLE,
 				Issue.class);
 		return query.setParameter("title", title.toLowerCase()).getResultList();
 	}
 
 	public List<Issue> findIssuesByDate(Date date) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_DATE,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_DATE,
 				Issue.class);
 		return query.setParameter("updateDate", date)
 			.getResultList();
 	}
 	
 	public List<Issue> findIssues() {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND,
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL,
 				Issue.class);
 		return query.getResultList();
 	}
@@ -66,20 +70,35 @@ public class IssueRepository {
 	
 	public Issue findIssue(Long id){
 		
-		Issue issue= null;
+		List<Issue> issues;
 
 		TypedQuery<Issue> query = em
-				.createNamedQuery(Issue.FIND_ID, Issue.class);
+				.createNamedQuery(Issue.FIND_BY_ID, Issue.class);
 		query.setParameter("id", id);
-
-		try {
-			issue = query.getSingleResult();
-		} catch (NoResultException ex) {
+		
+		issues = query.getResultList();
+		if (issues.size() == 0){
+			return null;
 		}
+		return issues.get(0);
+	}
 
-		return issue;
+	public List<Issue> findIssuesForPagination(int page) {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+        query.setMaxResults(itemsPerPage);
+        query.setFirstResult(page * itemsPerPage);
+        return query.getResultList();
+
 	}
 	
+	public int nrOfPages(){
+		int x=findIssues().size();
+		if(x%itemsPerPage>0)
+			return x/itemsPerPage+1;
+		else
+			return x/itemsPerPage;
+	}
+
 	public int itemsPerPage(){
 		return itemsPerPage;
 	}
