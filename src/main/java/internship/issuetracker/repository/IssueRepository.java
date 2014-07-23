@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class IssueRepository {
 
-	private static int itemsPerPage = 10;
+	private static int itemsPerPage = 2;
 	
 	@PersistenceContext
 	private EntityManager em;

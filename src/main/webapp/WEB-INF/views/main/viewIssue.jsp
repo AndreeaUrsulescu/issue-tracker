@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+<script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
@@ -34,18 +35,26 @@
 	<div class="editIssueContent">
 		<div>
 			<label for="issueTitle">Title</label> <input id="issueTitle"
-				type="text" class="form-control viewIssueTitleEdit"
+				type="text" class="form-control viewIssueTitleEdit" 
+				onkeyup="ValidateTitle()"
 				placeholder="Title">
+				<span class="error"></span>
 		</div>
 
 		<div>
 			<label for="issueContent">Content</label>
-			<textarea id="issueContent" class="form-control viewIssueContentEdit" rows="10"></textarea>
+			<textarea 
+			id="issueContent" 
+			class="form-control viewIssueContentEdit" 
+			rows="10"
+			onkeyup="ValidateContent()" 
+			></textarea>
+			<span class="error"></span>
 		</div>
 
 		<div class="editIssueFooterButtons">
 			<button id="reset" type="button" class="btn btn-default">Cancel</button>
-			<button id="send" type="button" class="btn btn-primary">Save</button>
+			<button id="send" type="button" class="btn btn-primary" disabled >Save</button>
 		</div>
 
 		<div id="issue-states">
