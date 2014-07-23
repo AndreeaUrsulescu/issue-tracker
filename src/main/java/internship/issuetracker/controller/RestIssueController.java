@@ -1,11 +1,9 @@
 package internship.issuetracker.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.service.IssueService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,15 +24,7 @@ public class RestIssueController {
 	@ResponseBody
 	public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
 		
-		List<Issue> issuesListEntity =  issueService.getOrderedIssues(pageNumber);
-		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-		
-		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
-			Issue issueEntity  = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
-		    issuesListPojo.add(index,issuePojo);
-			
-		}
+		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(pageNumber);
 		return issuesListPojo;
 	}
 	
