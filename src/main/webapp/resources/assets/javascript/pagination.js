@@ -22,8 +22,12 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			$("#previousButton").css("visibility", "hidden");	
 		}
 	}
+	ajaxForPagination(count);
+}
+
+function ajaxForPagination(page){
 	$.ajax({
-		url : "http://localhost:8080/issue-tracker/issues/page/" + count,
+		url : "http://localhost:8080/issue-tracker/issues/page/" + page,
 		type : "GET",
 
 		beforeSend : function(xhr) {
@@ -45,5 +49,15 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			}
 		}
 	});
-
 }
+
+window.onload = function () {
+	
+	    numberOfIssues = $('#numberOfIssues').text();
+	    issuesPerPage = $('#issuesPerPage').text();
+	    
+	    if ((numberOfIssues - issuesPerPage) <= 0 )
+	    	$("#nextButton").css("visibility", "hidden");
+	    
+	    $("#previousButton").css("visibility", "hidden");	
+};
