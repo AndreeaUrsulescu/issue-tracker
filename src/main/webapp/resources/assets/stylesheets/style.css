@@ -546,7 +546,9 @@ footer a {
 }
 
 #pages{
-	margin:0 auto;
+	margin-left: 800px;
+	position: absolute;
+	margin-top: 700px;
 }
 
 #issues{
