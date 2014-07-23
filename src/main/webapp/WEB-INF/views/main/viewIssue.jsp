@@ -2,8 +2,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<div class="container">
-
+<div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
 			<h1>I have an issue, Lorem ipsum.</h1>

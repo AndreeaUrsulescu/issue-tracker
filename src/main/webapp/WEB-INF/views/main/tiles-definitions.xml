@@ -5,6 +5,7 @@
 <tiles-definitions>
     <definition name="mainLayout" template="/WEB-INF/views/main/layout.jsp"/>
 	<definition name="homeLayout" template="/WEB-INF/views/main/homeLayout.jsp"/>
+	<definition name="viewIssueLayout" template="/WEB-INF/views/main/viewIssueLayout.jsp"/>
 
     <definition name="home" extends="homeLayout">
         <put-attribute name="logo" value="/WEB-INF/views/main/home.jsp" />
@@ -36,27 +37,20 @@
     	
     </definition>
     
-     <definition name="viewIssue" extends="mainLayout">
+<!--      <definition name="viewIssue" extends="mainLayout"> -->
     	
+<!--     	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute> -->
+<!--     	<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute> -->
+<!--     	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute> -->
+    	
+<!--     </definition> -->
+    
+    <definition name="viewIssue" extends="viewIssueLayout" >
+    
     	<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
     	<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute>
+    	<put-attribute name="comments" value="/WEB-INF/views/main/comments.jsp"></put-attribute>
     	<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
-    	
-    </definition>
-    
-    <definition name="comments" extends="mainLayout">
-    
-    	<put-attribute name="header" value=""></put-attribute>
-    	<put-attribute name="body" value="/WEB-INF/views/main/comments.jsp"></put-attribute>
-    	<put-attribute name="footer" value=""></put-attribute>
-    	
-    </definition>
-    
-    <definition name="viewIssue" extends="mainLayout">
-    
-    	<put-attribute name="header" value=""></put-attribute>
-    	<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute>
-    	<put-attribute name="footer" value=""></put-attribute>
     	
     </definition>
     
