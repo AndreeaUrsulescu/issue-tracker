@@ -7,6 +7,7 @@
 		<div class="viewIssueTitle">
 			<h1><c:out value = "${viewIssue.title}" /></h1>
 		</div>
+		
 
 		<div class="viewIssueContent">
 			<p><c:out value="${viewIssue.content}"/></p>

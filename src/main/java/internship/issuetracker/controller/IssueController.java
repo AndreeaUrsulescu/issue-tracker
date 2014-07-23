@@ -40,12 +40,6 @@ public class IssueController {
 	@Autowired
 	private CommentService commentService;
 
-	/** THIS is a dummy method for creating the UI **/
-	@RequestMapping(value = { "/dummyIssue" }, method = RequestMethod.GET)
-	public String viewDummyIssue(Model model, HttpServletRequest request) {
-		return "viewIssue";
-	}
-
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
@@ -155,16 +149,7 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
 		
-		
-		List<Issue> issuesListEntity =  issueService.getOrderedIssues(1);
-		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-		
-		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
-			Issue issueEntity  = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
-		    issuesListPojo.add(index,issuePojo);
-			
-		}
+		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
 		
 		model.addAttribute("issuesList", issuesListPojo);
 		model.addAttribute("listLength",issueService.numberOfIssues());

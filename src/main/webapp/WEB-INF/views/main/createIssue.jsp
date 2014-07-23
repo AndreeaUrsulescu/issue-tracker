@@ -22,6 +22,12 @@
 			   <label class="addedBy">Added by ${user}</label>
 		</div>
 	</div>
+		<a onclick="window.location='./'; ">
+		<div id="backBtn">
+ 			<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/large2.jpg"/>
+ 			<label class="backLabel"> Go back</label>
+ 		</div>
+ 		</a>
 			<div id="createBtn">
 				<a ><input type="submit" value="Add issue" class="noBtn"/></a>
 				<img class="pinB" src="${pageContext.request.contextPath}/resources/assets/images/pin.png"/>
