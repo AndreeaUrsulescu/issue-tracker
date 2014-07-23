@@ -22,6 +22,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			$("#previousButton").css("visibility", "hidden");	
 		}
 	}
+	 document.getElementById("pageNumber").innerHTML = count;
 	ajaxForPagination(count);
 }
 
@@ -72,7 +73,14 @@ function ajaxForPagination(page){
 				 contentTitle.appendChild(document.createTextNode(response[index].title));
 				 
 				 var paragraf = document.createElement("P");
-				 paragraf.appendChild(document.createTextNode(response[index].content));
+				 var paragrafContent;
+				 
+				 if ( (response[index].content).length > 150 ){
+					 paragrafContent = (response[index].content).substring(0,145) + "...";
+					 }
+				 else paragrafContent = response[index].content;
+				 
+				 paragraf.appendChild(document.createTextNode(paragrafContent));
 				 
 				 content.appendChild(contentTitle);
 				 content.appendChild(paragraf);
