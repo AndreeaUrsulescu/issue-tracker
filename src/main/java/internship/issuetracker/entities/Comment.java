@@ -36,10 +36,9 @@ public class Comment implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "content")
-	@Size(max = 500)	
+	@Size(max = 500,min=1)	
 	private String content;
 	
-
 	@ManyToOne
 	@JoinColumn(name = "id_owner", nullable = false)
 	private User owner;
