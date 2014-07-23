@@ -5,32 +5,24 @@
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
-			<h1>
-				<c:out value="${viewIssue.getTitle()}"/>
-			</h1>
+			<h1><c:out value = "${viewIssue.title}" /></h1>
 		</div>
 		
 
 		<div class="viewIssueContent">
-			<p>
-				<c:out value="${viewIssue.getContent()}"/>
-			</p>
+			<p><c:out value="${viewIssue.content}"/></p>
 		</div>
 
 		<div class="viewIssueFooter">
 			<div class="viewIssueFooterDetails">
-				<div class="viewIssueOwner">
-					<c:out value="${viewIssue.getOwner().getUserName()}"/>
-				</div>
+				<div class="viewIssueOwner"><c:out value="${viewIssue.owner.userName}"/></div>
 				<div class="viewIssueDate">
-					<small>
-						<c:out value="${viewIssue.getUpdateDate()}"/>
-					</small>
+					<small><c:out value="${viewIssue.updateDate}"/></small>
 				</div>
 			</div>
 			<div class="viewIssueFooterButtons">
 				<div class="new viewIssueState"></div>
-				<button id="edit" type="button" class="btn btn-primary">Update
+				<button id="edit" type="button" class="btn btn-primary" onclick="editIssue()">Update
 					Issue</button>
 			</div>
 		</div>
@@ -50,15 +42,15 @@
 
 		<div class="editIssueFooterButtons">
 			<button id="reset" type="button" class="btn btn-default">Cancel</button>
-			<button id="send" type="button" class="btn btn-primary" >Save</button>
+			<button id="send" type="button" class="btn btn-primary" onclick="updateIssue()">Save</button>
 		</div>
 
 		<div id="issue-states">
 			<span class="issue-label">Change state:</span>
-			<div class="new viewIssueState"></div>
-			<div class="opened viewIssueState"></div>
-			<div class="testing viewIssueState"></div>
-			<div class="closed viewIssueState"></div>
+			<div class="new viewIssueState" id="New"></div>
+			<div class="opened viewIssueState" id="Opened"></div>
+			<div class="testing viewIssueState" id="InQA"></div>
+			<div class="closed viewIssueState" id="Closed"></div>
 		</div>
 	</div>
 </div>
