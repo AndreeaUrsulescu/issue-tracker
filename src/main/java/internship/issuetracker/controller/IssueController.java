@@ -166,11 +166,19 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
 		
-		List<Issue> issuesList = issueService.getOrderedIssues(1);
-		int listLength = issueService.numberOfIssues();
 		
-		model.addAttribute("issuesList", issuesList);
-		model.addAttribute("listLength",listLength);
+		List<Issue> issuesListEntity =  issueService.getOrderedIssues(1);
+		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
+		
+		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
+			Issue issueEntity  = issuesListEntity.get(index);
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
+		    issuesListPojo.add(index,issuePojo);
+			
+		}
+		
+		model.addAttribute("issuesList", issuesListPojo);
+		model.addAttribute("listLength",issueService.numberOfIssues());
 		model.addAttribute("itemsPerPage", issueService.itemsPerPage() );
 		
 		return "issues";

@@ -110,13 +110,13 @@ $(document)
 					function validateTitle() {
 						$("#createTitle").parent().find("span").text("");
 						var value = $("#createTitle").val();
-						if ((value.length == 0) || (value.length < 3)
+						if ((value.length == 0) || (value.length < 5)
 								|| (value.length > 50)) {
 							$("#createTitle")
 									.parent()
 									.find("span")
 									.text(
-											"A title between 3 and 50 characters is required");
+											"A title between 5 and 50 characters is required");
 							return false;
 						}
 						return true;
