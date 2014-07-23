@@ -1,39 +1,67 @@
-// waiting for the page to be ready...
+function ValidateTitle() {
+	
+	var title = $("#issueTitle");
+	var span = title.parent().find("span");
+	span.text("");
+	var titleRegex = /^[a-zA-Z0-9]+$/;
+	var validTitle = title.val().match(titleRegex);
+	var save = $("#send");
+	
+	save.prop('disabled',false);
+	if ((title.val().length == 0)) {
+		span.text("Your title cannot be empty");
+		save.prop('disabled',true);
+		return false;
+	}
 
+	if (validTitle == null) {
+		span.text("Only alpha-numeric characters please...");
+		save.prop('disabled',true);
+		return false;
+	}
 
-$(document).ready(function(){
+	if ((title.val().length < 5 || title.val().length > 50)) {
+		span.text("Your title has to be between 5 and 50 characters");
+		save.prop('disabled',true);
+		return false;
+	}
+	if (!validateContent()) {
+		save.prop('disabled',true);
+		}
+		
+	return true;
+};
+function ValidateContent() {
 	
-	$("#Title").focus();
+	var content = $("#issueContent");
+	var span = content.parent().find("span");
+	var save = $("#send");
+	span.text("");
+	var contentRegex = /^[a-zA-Z0-9]+$/;
+	var validcontent = content.val().match(contentRegex);
+	save.prop('disabled',false);
 	
-	$(".editError").hide();
-	
-	if( $(".editError").text().trim().length > 0){
-		$(".editError").show();
+	if ((content.val().length == 0)) {
+		span.text("Your content cannot be empty");
+		save.prop('disabled',true);
+		return false;
+	}
+
+	if (validcontent == null) {
+		span.text("Only alpha-numeric characters please...");
+		save.prop('disabled',true);
+		return false;
+	}
+
+	if (content.val().length > 1000) {
+		span.text("Your content limit is 1000 characters");
+		save.prop('disabled',true);
+		return false;
 	}
 	
-	function ValidateTitle()
-	{
-		var value=$("#issueTitle").val();
-		
-		var titleRegex= /^[a-zA-Z]+$/;
-		
-		$("#Title").parent().find("span").text(" ");
-
-		if(value.length == 0){
-			$("#Title").parent().find("span").text("Your Title can not be empty, an input is required.");
-			return false;
-		} else
-		if(value.length<5 || value.length>50){
-			$("#Title").parent().find("span").text("Your Title must be between 5-50 characters long.");
-			return false;
-		} else
-		if(validTitle == null){
-			$("#Title").parent().find("span").text("You can only use alphabetical characters.");
-			return false;
-		}
-		return true;
-	};
-
-	$("#text").keyup(ValidateTitle);
-});
+	if (ValidateTitle()) {
+		save.prop('disabled',true);
+	}
 	
+	return true;
+};
