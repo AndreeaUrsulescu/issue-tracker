@@ -40,12 +40,12 @@ public class IssueController {
 	@Autowired
 	private CommentService commentService;
 
-	/**THIS is a dummy method for creating the UI **/
+	/** THIS is a dummy method for creating the UI **/
 	@RequestMapping(value = { "/dummyIssue" }, method = RequestMethod.GET)
 	public String viewDummyIssue(Model model, HttpServletRequest request) {
-	    return "viewIssue";
+		return "viewIssue";
 	}
-	    
+
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
@@ -53,7 +53,8 @@ public class IssueController {
 		Issue issue = new Issue();
 		model.addAttribute("user", user.getUserName());
 		model.addAttribute("issue", issue);
-		model.addAttribute("date",issue.getUpdateDate().toString().substring(0, 11));
+		model.addAttribute("date",
+				issue.getUpdateDate().toString().substring(0, 11));
 		return "createIssue";
 	}
 
@@ -108,12 +109,12 @@ public class IssueController {
 
 		map.put("issue", "success");
 
-		Issue oldIssue = issueService.getIssue(id);
-		oldIssue.setContent(issue.getContent());
-		oldIssue.setState(issue.getState());
-		oldIssue.setTitle(issue.getTitle());
-		oldIssue.setUpdateDate(currentDate);
-		issueService.updateIssue(oldIssue);
+		Issue updatedIssue = issueService.getIssue(id);
+		updatedIssue.setContent(issue.getContent());
+		updatedIssue.setState(issue.getState());
+		updatedIssue.setTitle(issue.getTitle());
+		updatedIssue.setUpdateDate(currentDate);
+		issueService.updateIssue(updatedIssue);
 		return map;
 	}
 

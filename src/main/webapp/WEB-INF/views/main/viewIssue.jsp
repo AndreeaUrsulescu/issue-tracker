@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!-- <button type="button" onclick="updateIssue()">Save</button> -->
-<!-- <button type="button" onclick="editIssue()">Edit</button> -->
 
+<script src="resources/assets/javascript/updateIssue.js"></script>
 <script src="resources/assets/javascript/updateIssue-validation.js"></script>
+<script src="resources/assets/javascript/issue-control.js"></script>
+
 <div class="container">
 
 	<div class="viewIssue">
@@ -55,10 +56,9 @@
 	<!-- not yet done -->
 	<div class="editIssueContent">
 		<div>
-			<label for="issueTitle">Title</label> 
-			<input type="text" class="form-control viewIssueTitleEdit"
-				   id="issueTitle" placeholder="Title goes here..."/>
-				<span class="error"></span>
+			<label for="issueTitle">Title</label> <input id="issueTitle"
+				type="text" class="form-control viewIssueTitleEdit"
+				placeholder="Title">
 		</div>
 
 		<div>
@@ -68,7 +68,7 @@
 
 		<div class="editIssueFooterButtons">
 			<button id="reset" type="button" class="btn btn-default">Cancel</button>
-			<button id="send" type="button" class="btn btn-primary">Save</button>
+			<button id="send" type="button" class="btn btn-primary" onclick="updateIssue()" >Save</button>
 		</div>
 
 		<div id="issue-states">
