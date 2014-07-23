@@ -3,9 +3,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div id="all">
+
+<div id="all" >
 	<div id="meniu">
-		 <a href="issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
+		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
@@ -17,7 +18,9 @@
 						<label class="date">${issue.updateDate}</label>
 					</div>
 					<div class="content">
-						<h4 class="title">${issue.title}</h4>
+						<h4 class="title">
+							<c:out value="${issue.title}" />
+						</h4>
 						<p>
 							<c:choose>
 								<c:when test="${fn:length(issue.content)>150}">
