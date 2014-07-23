@@ -29,10 +29,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) = lower(:title) order by updateDate DESC"),
+		@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) = lower(:title) order by updateDate DESC,a.id DESC"),
 		@NamedQuery(name = Issue.FIND_BY_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
 		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
-		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC")
+		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC")
 		})
 @Entity
 @Table(name = "Issues")

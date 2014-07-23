@@ -2,9 +2,8 @@
 
 <a href="issue/1" >View Issue</a>
 <br>
-<a href="issues/createIssue" >New Issue</a>
+<a href="createIssue" >New Issue</a>
 <br>
-<a href="logout" >logout</a>
 
 
 <c:set var="plus" value="+"/>
@@ -19,7 +18,7 @@
 <div id="issuesContainer">
 
 	<c:forEach var="issue" items="${issuesList}">
-		<button onclick="viewIssue('${issue.getId()}')">${issue.getTitle()} ${issue.getUpdateDate()}</button>
+		<button onclick="viewIssue('${issue.getId()}')">	<c:out value="${issue.getTitle()}"/> ${issue.getUpdateDate()}</button>
 	</c:forEach>
 
 </div>
