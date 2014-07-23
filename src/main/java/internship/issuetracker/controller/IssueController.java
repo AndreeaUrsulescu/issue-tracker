@@ -9,12 +9,12 @@ import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
