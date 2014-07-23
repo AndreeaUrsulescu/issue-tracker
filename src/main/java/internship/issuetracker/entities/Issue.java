@@ -44,7 +44,7 @@ public class Issue implements Serializable {
 	public static final String FIND = "Issue.find";
 	
 	public static final String FIND_ALL = "Issue.findALL";
-
+    
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

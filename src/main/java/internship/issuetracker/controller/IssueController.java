@@ -5,11 +5,14 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -78,8 +81,14 @@ public class IssueController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
-		List<Issue> issuesList = issueService.getOrderedIssues();
+		
+		List<Issue> issuesList = issueService.getOrderedIssues(1);
+		int listLength = issueService.numberOfIssues();
+		
 		model.addAttribute("issuesList", issuesList);
+		model.addAttribute("listLength",listLength);
+		model.addAttribute("itemsPerPage", issueService.itemsPerPage() );
+		
 		return "issues";
 	}
 }

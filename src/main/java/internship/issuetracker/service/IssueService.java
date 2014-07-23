@@ -6,6 +6,8 @@ import internship.issuetracker.repository.IssueRepository;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,16 @@ public class IssueService {
 	    return this.issueRepository.findIssue(id);
 	}
 	
-	public List<Issue> getOrderedIssues() {
-		return this.issueRepository.findOrderedIssues();
+	public List<Issue> getOrderedIssues(int currentPage) {
+		return this.issueRepository.findOrderedIssues(currentPage);
 	}
 
+    public int numberOfIssues(){
+		
+		return this.issueRepository.numberOfIssues();
+	}
+    
+    public int itemsPerPage(){
+		return this.issueRepository.itemsPerPage();
+	}
 }

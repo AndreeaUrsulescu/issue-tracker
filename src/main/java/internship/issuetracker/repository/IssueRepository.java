@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class IssueRepository {
 
+	private static int itemsPerPage = 2 ;
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -47,8 +49,18 @@ public class IssueRepository {
 		return query.getResultList();
 	}
 	
-	public List<Issue> findOrderedIssues() {
+	public int numberOfIssues(){
+		
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND,
+				Issue.class);
+		return query.getResultList().size();
+	}
+	
+	public List<Issue> findOrderedIssues(int currentPage) {
+		
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+		query.setMaxResults(itemsPerPage);
+        query.setFirstResult((currentPage-1) * itemsPerPage);
 		return query.getResultList();
 	}
 	
@@ -66,5 +78,9 @@ public class IssueRepository {
 		}
 
 		return issue;
+	}
+	
+	public int itemsPerPage(){
+		return itemsPerPage;
 	}
 }

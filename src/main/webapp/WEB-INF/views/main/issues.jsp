@@ -6,3 +6,13 @@
 <c:forEach var="issue" items="${issuesList}">
    <p>${issue.getTitle()} ${issue.getUpdateDate()} </p>
 </c:forEach>
+
+<c:set var="plus" value="+"/>
+<c:set var="minus" value="-"/>
+
+    <button id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
+    <button id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
+
+<div id="issuesContainer">
+    <c:out value="${listLength}"/>
+</div>
