@@ -3,9 +3,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div id="all">
+
+<div id="all" >
 	<div id="meniu">
-		 <a href="issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
+		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
@@ -13,10 +14,13 @@
 				<div class="issue" id="iss${i.index}">
 					<div class="border">
 						<!--					<img class="pinB3" src="${pageContext.request.contextPath}/resources/assets/images/pin2.png"/>-->
-						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
+						<label class="state">${issue.state}</label> 
+						<label class="date">${issue.updateDate}</label>
 					</div>
 					<div class="content">
-						<h4 class="title">${issue.title}</h4>
+						<h4 class="title">
+							<c:out value="${issue.title}" />
+						</h4>
 						<p>
 							<c:choose>
 								<c:when test="${fn:length(issue.content)>150}">
@@ -48,9 +52,8 @@
 			<c:out value="${itemsPerPage}" />
 		</p>
 
-		<button id="previousButton"
-			onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
-		<button id="nextButton"
-			onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
+		<button id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
+		<p id="pageNumber">1</p>
+		<button id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
 	</div>
 </div>

@@ -48,6 +48,7 @@ footer a {
 /* Register form start */
 .registerContainer {
 	margin-top: 130px;
+	height: 795px;
 }
 
 .registerError {
@@ -532,7 +533,7 @@ footer a {
 
 #all{
 	width:100%;
-	min-height: 800px;
+	min-height: 795px;
 }
 
 #meniu{
@@ -576,7 +577,6 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 }
 
 .issue:hover{
-	//margin-top:35px;
 	transform: rotate(3deg) ;
 	-webkit-transform: rotate(3deg) ;
 	-moz-transform: rotate(3deg) ;
@@ -587,8 +587,8 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 .border{
 	width: 100%;
 	height: 17%;
-	background-color: rgba(0,0,0, 0.01);
-	border-bottom: 1px solid rgba(0,0,0,0.04);
+	background-color: rgba(0,0,0, 0.03);
+	border-bottom: 1px solid rgba(0,0,0,0.03);
 }
 
 .content{
