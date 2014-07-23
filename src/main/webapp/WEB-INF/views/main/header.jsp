@@ -17,10 +17,12 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="issues">Home</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="logout">Logout</a></li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="issues"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a>
+					</li>
 				</ul>
 			</div>
 		</c:when>
@@ -32,8 +34,9 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
-					<li role="presentation"><a role="menuitem" tabindex="-1"
-						href="home">Home</a></li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="home"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+					</li>
 				</ul>
 			</div>
 		</c:otherwise>
