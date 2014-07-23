@@ -31,7 +31,6 @@ public class CommentRepository {
 	public List<Comment> findCommentsByIssue(Issue issue) {
 		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_ISSUE,
 				Comment.class);
-		
 		return query.setParameter("issue", issue).getResultList();
 	}	
 	public List<Comment> findCommentByOwner(User user) {

@@ -48,6 +48,7 @@ footer a {
 /* Register form start */
 .registerContainer {
 	margin-top: 130px;
+	height: 795px;
 }
 
 .registerError {
@@ -450,6 +451,26 @@ footer a {
 	margin-left: 200px;
 }
 
+#backBtn{
+	float:left;
+	margin-top: 50px;
+	margin-left: 60px;
+}
+
+.backLabel{
+	color:rgb(66,139,202);
+	font-size: 18px;
+	font-weight: bold;
+	margin-left: 3px;
+}
+
+.comic{
+	color:rgb(66,139,202);//rgb(255,127,29);
+	font-size: 18px;
+	font-weight: bold; //
+	margin-left: 200px;
+}
+
 .pinB {
 	width: 40px;
 }
@@ -466,25 +487,6 @@ footer a {
 	border: 0px;
 }
 
-/*.pin{
-	margin-left: 235px;
-	width: 30px;
-	height: 30px;
-	border-radius:20px;
-	position: absolute;
-	margin-top: 5px;
-	background-color: red;
-	background: radial-gradient(circle at 50px 50px, rgb(198,29,4), rgb(253,184,176));
-	
-	background: #ea9d96;  Old browsers 
-background: -moz-linear-gradient(top, #ea9d96 0%, #ed1c3b 50%, #d80222 51%, #ea1029 100%);  FF3.6+ 
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ea9d96), color-stop(50%,#ed1c3b), color-stop(51%,#d80222), color-stop(100%,#ea1029));  Chrome,Safari4+ 
-background: -webkit-linear-gradient(top, #ea9d96 0%,#ed1c3b 50%,#d80222 51%,#ea1029 100%);  Chrome10+,Safari5.1+ 
-background: -o-linear-gradient(top, #ea9d96 0%,#ed1c3b 50%,#d80222 51%,#ea1029 100%);  Opera 11.10+ 
-background: -ms-linear-gradient(top, #ea9d96 0%,#ed1c3b 50%,#d80222 51%,#ea1029 100%);  IE10+ 
-background: linear-gradient(to bottom, #ea9d96 0%,#ed1c3b 50%,#d80222 51%,#ea1029 100%);  W3C 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea9d96', endColorstr='#ea1029',GradientType=0 );  IE6-9 */
-//
 .pin {
 	margin-left: 235px;
 	display: inline-block;
@@ -523,4 +525,147 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ea9d96', end
 	margin-right: 15px;
 	margin-top: 15px;
 	font-size: 16px;
+}
+
+#all{
+	width:100%;
+	min-height: 795px;
+}
+
+#meniu{
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid rgb(231,231,231);
+}
+
+.meniuBtn{
+	float:right;
+	text-decoration: none;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+#pages{
+	margin:0 auto;
+}
+
+#issues{
+	margin: 0 auto;
+	width: 1700px;
+	font-family:  "Comic Sans MS", cursive, sans-serif;
+	color: rgb(90,90,90);
+	word-wrap: break-word;
+}
+
+.issue{
+	width: 300px;
+	height:300px;
+	float:left;
+	margin-left: 40px;
+	margin-top: 40px;
+	color: rgb(90,90,90);
+
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+
+
+}
+
+.issue:hover{
+	transform: rotate(3deg) ;
+	-webkit-transform: rotate(3deg) ;
+	-moz-transform: rotate(3deg) ;
+	-o-transform: rotate(3deg) ;
+	-ms-transform: rotate(3deg) ;
+}
+
+.border{
+	width: 100%;
+	height: 17%;
+	background-color: rgba(0,0,0, 0.03);
+	border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+.content{
+	width: 270px;
+	height: 190px;
+	margin-left: 20px;
+}
+
+.title{
+	font-weight: bold;
+	//color:rgb(47,95,150);
+	//border-bottom: 1px solid rgba(0,0,0, 0.05);
+}
+
+.date{
+	float:right;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+
+.state{
+	margin-top:10px;
+	margin-left: 10px;
+	color: rgb(47,95,150);//rgb(66,139,202);
+}
+
+.addedBy2 {
+	color: rgb(66, 139, 202);
+	float: right;
+}
+.owner{
+	float:right;
+	margin-right: 15px;
+	margin-top:15px;
+	font-size: 16px;
+	margin-right: 15px;
+	margin-top: 15px;
+	font-size: 16px;
+	margin-right: 10px;
+	border-top: 1px solid rgba(0,0,0, 0.05);
+/*	color: rgb(47,95,150);*/
+}
+
+#iss0{
+	background-color: rgb(239,171,60);
+}
+#iss1{
+	background-color: rgb(198,167,209);
+}
+#iss2{
+	background-color: rgb(205,222,82);
+}
+#iss3{
+	background-color: rgb(231,118,169);//rgb(227,99,156);
+
+}
+#iss4{
+	background-color: rgb(189,218,226);
+	clear: right;
+}
+#iss5{
+	background-color: rgb(230,230,230);
+	
+}
+#iss6{
+	background-color: rgb(231,118,169);
+}
+#iss7{
+	background-color: rgb(181,211,219);
+	
+}
+#iss8{
+	background-color: rgb(198,167,209);
+}
+#iss9{
+	background-color: rgb(231,233,88);
+}
+
+.pinB3{
+	width:40px;
+	float:left;
+	margin-left: 140px;
+	margin-top: -5px;
 }
