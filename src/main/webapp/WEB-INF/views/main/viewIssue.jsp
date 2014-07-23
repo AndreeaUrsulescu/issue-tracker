@@ -6,7 +6,7 @@
 <script src="resources/assets/javascript/updateIssue-validation.js"></script>
 <script src="resources/assets/javascript/issue-control.js"></script>
 
-<div class="container">
+<div class="container viewIssueContainer">
 
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
@@ -78,7 +78,6 @@
 			<div class="testing viewIssueState"></div>
 			<div class="closed viewIssueState"></div>
 		</div>
-		<!-- <div class="form-group"></div> -->
 
 	</div>
 

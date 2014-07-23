@@ -1,4 +1,4 @@
-<footer class="footer nav navbar-default navbar-fixed-bottom">
+<footer class="footer nav navbar-default">
 	<div class="container">
 		<small> <a href="#" target="blank"> &copy; Issue Tracker</a>
 		</small>
