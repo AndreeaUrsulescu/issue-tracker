@@ -28,7 +28,30 @@ $(document).ready(function(){
 	function sendContent(){
 		var valid = validateComment();
 		if (valid){
-			//do stuff
+			var comment = {
+					'content' : $("#comment-area").val().trim()
+				};
+				
+				//preia url-ul curent
+				var url = window.location.origin + window.location.pathname + "/comment";
+					
+				$.ajax({
+					data: JSON.stringify(comment),
+					dataType: "json",
+					contentType: "application/json;charset=UTF-8",
+					type: "POST",
+					url: url,
+					success: function(rsp) {
+						if (rsp.code == "success")
+						{
+							location.reload();
+						}
+						else
+						{
+							alert(rsp.comments[0].content);
+						}
+					}
+				});
 		}
 	}
 	$("#clear-btn").click(clearContent);

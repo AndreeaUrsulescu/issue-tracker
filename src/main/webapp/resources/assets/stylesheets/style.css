@@ -573,7 +573,6 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 }
 
 .issue:hover{
-	//margin-top:35px;
 	transform: rotate(3deg) ;
 	-webkit-transform: rotate(3deg) ;
 	-moz-transform: rotate(3deg) ;
