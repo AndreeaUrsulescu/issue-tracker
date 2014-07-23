@@ -5,7 +5,6 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.repository.CommentRepository;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class CommentService {
 	public void updateComment(Comment comment) {
 		this.commentRepository.update(comment);
 	}
+
 
 	public List<Comment> getCommentsForIssue(Issue issue) {
 		return this.commentRepository.findCommentsByIssue(issue);

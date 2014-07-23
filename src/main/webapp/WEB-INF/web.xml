@@ -15,6 +15,11 @@
             classpath:config/security-config.xml
         </param-value>
     </context-param>
+	<!--XSS -->
+    <context-param>
+   	 		<param-name>defaultHtmlEscape</param-name>
+   	 		<param-value>true</param-value>
+	</context-param>
     
 
     <listener>

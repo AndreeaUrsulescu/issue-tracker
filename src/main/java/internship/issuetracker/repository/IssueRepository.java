@@ -6,13 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class IssueRepository {
 
-	private static int itemsPerPage=30;
+	private static int itemsPerPage = 2 ;
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -51,7 +47,21 @@ public class IssueRepository {
 				Issue.class);
 		return query.getResultList();
 	}
-
+	
+	public int numberOfIssues(){
+		
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL,
+				Issue.class);
+		return query.getResultList().size();
+	}
+	
+	public List<Issue> findOrderedIssues(int currentPage) {
+		
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
+		query.setMaxResults(itemsPerPage);
+        query.setFirstResult((currentPage-1) * itemsPerPage);
+		return query.getResultList();
+	}
 	
 	public Issue findIssue(Long id){
 		
@@ -83,9 +93,8 @@ public class IssueRepository {
 		else
 			return x/itemsPerPage;
 	}
-	
-	public List<Issue> findOrderedIssues() {
-		  TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
-		  return query.getResultList();
+
+	public int itemsPerPage(){
+		return itemsPerPage;
 	}
 }

@@ -1,5 +1,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!DOCTYPE html>
+
 <html>
 	<head>	
 		<!-- Loading JQuery latest build -->
@@ -32,11 +33,14 @@
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/viewIssue.js"></script>
 	    
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
+	
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />
 	
 			<tiles:insertAttribute name="body" />
+			
+			<tiles:insertAttribute name="comments" />
 			
 			<tiles:insertAttribute name="footer"/> 
 			

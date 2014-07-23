@@ -40,12 +40,6 @@ public class IssueController {
 	@Autowired
 	private CommentService commentService;
 
-	/** THIS is a dummy method for creating the UI **/
-	@RequestMapping(value = { "/dummyIssue" }, method = RequestMethod.GET)
-	public String viewDummyIssue(Model model, HttpServletRequest request) {
-		return "viewIssue";
-	}
-
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
@@ -80,7 +74,7 @@ public class IssueController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		Issue issue = issueService.getIssue(id);
-		IssuePojo pojoIssue = new IssuePojo(issue.getOwner().getUserName(),
+		IssuePojo pojoIssue = new IssuePojo(id, issue.getOwner().getUserName(),
 				issue.getTitle(), issue.getContent(), issue.getUpdateDate(),
 				issue.getState());
 
@@ -100,7 +94,7 @@ public class IssueController {
 
 		if (bindingResult.hasErrors()) {
 			Issue oldIssue = issueService.getIssue(id);
-			IssuePojo pojoIssue = new IssuePojo(oldIssue.getOwner()
+			IssuePojo pojoIssue = new IssuePojo(id, oldIssue.getOwner()
 					.getUserName(), oldIssue.getTitle(), oldIssue.getContent(),
 					oldIssue.getUpdateDate(), oldIssue.getState());
 			map.put("issue", pojoIssue);
@@ -165,8 +159,13 @@ public class IssueController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
-		List<Issue> issuesList = issueService.getOrderedIssues();
-		model.addAttribute("issuesList", issuesList);
+		
+		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
+		
+		model.addAttribute("issuesList", issuesListPojo);
+		model.addAttribute("listLength",issueService.numberOfIssues());
+		model.addAttribute("itemsPerPage", issueService.itemsPerPage() );
+		
 		return "issues";
 	}
 }
