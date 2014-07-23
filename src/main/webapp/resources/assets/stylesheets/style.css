@@ -276,6 +276,10 @@ footer a {
 	margin-bottom: 15px;
 }
 
+.current{
+	box-shadow: 10px 10px 5px black;
+}
+
 .new {
 	background: #10ce26; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
