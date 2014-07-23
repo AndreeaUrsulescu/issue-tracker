@@ -22,8 +22,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by creationDate desc"),
-	@NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by creationDate desc")
+	@NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by a.creationDate DESC,a.id DESC"),
+	@NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by a.creationDate DESC,a.id DESC")
 	})
 @Entity
 @Table(name = "Comments")
