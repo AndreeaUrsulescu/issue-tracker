@@ -2,6 +2,7 @@ package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.utils.XSSescape;
 
 import java.util.Date;
 import java.util.List;
@@ -15,31 +16,46 @@ public class IssueService {
 	private IssueRepository issueRepository;
 
 	public void addIssue(Issue issue) {
+		issue.setTitle(XSSescape.revert(issue.getTitle()));
+		issue.setContent(XSSescape.revert(issue.getContent()));
 		this.issueRepository.create(issue);
 	}
 
 	public void updateIssue(Issue issue) {
+		issue.setTitle(XSSescape.revert(issue.getTitle()));
+		issue.setContent(XSSescape.revert(issue.getContent()));
 		this.issueRepository.update(issue);
 	}
 
+	private List<Issue> escape(List<Issue> issuesList){
+		for (Issue issue : issuesList) {
+			issue.setTitle(XSSescape.convert(issue.getTitle()));
+			issue.setContent(XSSescape.convert(issue.getContent()));			
+			}			
+		return issuesList;
+	}
 	public List<Issue> getIssuesByTitle(String title) {
-		return this.issueRepository.findIssuesByTitle(title);
+		return escape(this.issueRepository.findIssuesByTitle(title));
+
 	}
 
 	public List<Issue> getIssuesByDate(Date date) {
-		return this.issueRepository.findIssuesByDate(date);
+		return escape(this.issueRepository.findIssuesByDate(date));
 	}
 
 	public List<Issue> getIssues(){
-	    return this.issueRepository.findIssues();
+	    return escape(this.issueRepository.findIssues());
 	}
 	
 	public Issue getIssue(Long id){
-	    return this.issueRepository.findIssue(id);
+		Issue issue = this.issueRepository.findIssue(id);
+		issue.setTitle(XSSescape.convert(issue.getTitle()));
+		issue.setContent(XSSescape.convert(issue.getContent()));			
+	    return issue;
 	}	
 	
 	public List<Issue> getIssuesForPagination(int page){
-		return this.issueRepository.findIssuesForPagination(page);
+		return escape(this.issueRepository.findIssuesForPagination(page));
 	}
 
 	public int getNrOfPages(){
@@ -47,6 +63,6 @@ public class IssueService {
 	}
 	
 	public List<Issue> getOrderedIssues() {
-		return this.issueRepository.findOrderedIssues();
+		return escape(this.issueRepository.findOrderedIssues());
 	}
 }

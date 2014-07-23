@@ -8,6 +8,7 @@ import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
+import internship.issuetracker.utils.XSSescape;
 
 import java.util.ArrayList;
 import java.util.Date;
