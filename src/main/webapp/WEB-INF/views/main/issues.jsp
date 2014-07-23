@@ -19,7 +19,7 @@
 <div id="issuesContainer">
 
 	<c:forEach var="issue" items="${issuesList}">
-		<button onclick="viewIssue('${issue.getId()}')">${issue.getTitle()} ${issue.getUpdateDate()}</button>
+		<button onclick="viewIssue('${issue.getId()}')"> <c:out value="${issue.getTitle()}"/> {issue.getUpdateDate()}</button>
 	</c:forEach>
 
 </div>
