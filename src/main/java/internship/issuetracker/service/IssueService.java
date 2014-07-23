@@ -6,8 +6,6 @@ import internship.issuetracker.repository.IssueRepository;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +24,7 @@ public class IssueService {
 
 	public List<Issue> getIssuesByTitle(String title) {
 		return this.issueRepository.findIssuesByTitle(title);
+
 	}
 
 	public List<Issue> getIssuesByDate(Date date) {
@@ -37,7 +36,8 @@ public class IssueService {
 	}
 	
 	public Issue getIssue(Long id){
-	    return this.issueRepository.findIssue(id);
+		return this.issueRepository.findIssue(id);
+
 	}	
 	
 	public List<Issue> getIssuesForPagination(int page){
