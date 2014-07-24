@@ -8,7 +8,6 @@ import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
-import internship.issuetracker.service.UserService;
 
 import java.util.Date;
 import java.util.HashMap;

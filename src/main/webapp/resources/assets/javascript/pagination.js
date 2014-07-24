@@ -71,11 +71,11 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
-
+// TODO: if needed change val() with text()
 function searchIssues(){
      countOnSort = 1 ; 
 
-     var searchCriteria = $("#selectS").val(); 
+     var searchCriteria = $("#selectS").val().trim(); 
      var input ; 
      var state ; 
      var filterData ;
@@ -87,8 +87,8 @@ function searchIssues(){
     		 searchCriteria : searchCriteria ,
     		 state : state,
     		 pageNumber : 1,
-    		 sortCriteria : $("#criteria").text(),
-    		 sortType : $("#order").text()
+    		 sortCriteria : $("#criteria").val().trim(),
+    		 sortType : $("#order").val().trim()
       	};
      }
      else {
@@ -97,30 +97,30 @@ function searchIssues(){
         		 searchCriteria : searchCriteria ,
         		 input : input,
         		 pageNumber : 1,
-        		 sortCriteria : $("#criteria").text(),
-        		 sortType : $("#order").text()
+        		 sortCriteria : $("#criteria").val().trim(),
+        		 sortType : $("#order").val().trim()
           	};
      }
      
      if (searchCriteria == "state") {
     	 
-      state = $("#selectT").val();
+      state = $("#selectT").val().trim();
       filterData = {
     		 searchCriteria : searchCriteria ,
     		 state : state,
     		 pageNumber : 1,
-    		 sortCriteria : $("#criteria").text(),
-    		 sortType : $("#order").text()
+    		 sortCriteria : $("#criteria").val().trim(),
+    		 sortType : $("#order").val().trim()
       	};
      }
      else {
-    	 input = $("#searchField").val();
+    	 input = $("#searchField").val().trim();
     	 filterData = {
         		 searchCriteria : searchCriteria ,
         		 input : input,
         		 pageNumber : 1,
-        		 sortCriteria : $("#criteria").text(),
-        		 sortType : $("#order").text()
+        		 sortCriteria : $("#criteria").val().trim(),
+        		 sortType : $("#order").val().trim()
           	};
      }
      

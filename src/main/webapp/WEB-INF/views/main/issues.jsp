@@ -3,21 +3,27 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-		<c:set var="plus" value="+" />
-		<c:set var="minus" value="-" />
-		<label id="numberOfIssues" style="display: none">
-			<c:out value="${listLength}" />
-		</label>
-		<label id="issuesPerPage" style="display: none">
-			<c:out value="${itemsPerPage}" />
-		</label>
-						
-		<a id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">
-			<img id="left" src="${pageContext.request.contextPath}/resources/assets/images/left.png"/></a>
-		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
-			<img id="right" src="${pageContext.request.contextPath}/resources/assets/images/right.png"/></a>
+<c:set var="plus" value="+" />
+<c:set var="minus" value="-" />
+<label id="numberOfIssues" style="display: none"> <c:out
+		value="${listLength}" />
+</label>
+<label id="issuesPerPage" style="display: none"> <c:out
+		value="${itemsPerPage}" />
+</label>
 
-<div id="all" >
+<a id="previousButton"
+	onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">
+	<img id="left"
+	src="${pageContext.request.contextPath}/resources/assets/images/left.png" />
+</a>
+<a id="nextButton"
+	onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
+	<img id="right"
+	src="${pageContext.request.contextPath}/resources/assets/images/right.png" />
+</a>
+
+<div id="all">
 	<div id="meniu">
 		<a href="${pageContext.request.contextPath}/issues/createIssue"
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
@@ -36,41 +42,20 @@
 					<option value="Opened">Opened</option>
 					<option value="Testing">Testing</option>
 					<option value="Closed">Closed</option>
+				</select> <label class="searchBy">Ordered by </label> <select
+					class="searchSelect" id="criteria">
+					<option value="Date" selected="selected">Date</option>
+				</select> <select class="searchSelect" id="order">
+					<option value="Descending" selected="selected">Descending</option>
+					<option value="Ascending">Ascending</option>
 				</select>
-				<div>
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Sorted by</a>
-				</div>
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" id="criteria">Date<span
-								class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a class="criteriaElement" href="#">Date</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" id="order"> Descending <span
-								class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a class="orderElement" href="#">Ascending</a></li>
-								<li><a class="orderElement" href="#">Descending</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-			<a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
+				<a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
 					<span class="glyphicon glyphicon-search">&nbsp;Search</span>
 				</a>
+			</div>
 		</div>
 	</div>
-
+	<div style="clear:both"></div>
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
 			<a href="issues/issue/${issue.id}"> <span class="issue"
@@ -95,8 +80,9 @@
 		</c:forEach>
 	</div>
 	<br>
-	
+
 	<div id="pages">
-		<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
+		<label id="pageNumber">1 </label><label
+			style="color: rgb(47, 95, 150); font-size: 17px;">/ ${pages}</label>
 	</div>
 </div>
