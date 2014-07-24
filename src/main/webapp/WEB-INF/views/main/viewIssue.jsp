@@ -60,7 +60,6 @@
 
 		<div id="issue-states">
 			<span class="issue-label">Change state:</span>
-			<div class="new viewIssueState" id="New"></div>
 			<div class="opened viewIssueState" id="Opened"></div>
 			<div class="testing viewIssueState" id="Testing"></div>
 			<div class="closed viewIssueState" id="Closed"></div>
