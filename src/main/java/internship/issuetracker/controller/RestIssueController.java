@@ -1,6 +1,7 @@
 package internship.issuetracker.controller;
 
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.SearchService;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,13 +41,14 @@ public class RestIssueController {
 	
 	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> search(@RequestBody ArrayList<Object> sortParameters) {
+	public Map<String,Object> search(@ModelAttribute SearchParameter sortParameters) {
 		
-		String searchCriteria = (String) sortParameters.get(0);
-		Integer pageNumber = (Integer) sortParameters.get(1);
+		String searchCriteria = sortParameters.getSearchCriteria();
+		int pageNumber = sortParameters.getPageNumber();
 		Map<String, Object> map = new HashMap<String,Object>();
 		
 		List<IssuePojo> resultList = searchService.findOrderedIssues(searchCriteria, pageNumber);
+		System.out.println(resultList);
 		map.put("issuesList", resultList);
 		map.put("listLength",searchService.numberOfIssues(searchCriteria));
 		map.put("issuesPerPage",SearchRepository.itemsPerPage );

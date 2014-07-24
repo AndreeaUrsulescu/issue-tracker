@@ -57,5 +57,5 @@
 			<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
 		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
 			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow.png"/></a>
-		
+		<button onclick="sortIssues()">click me</button>
 </div>
