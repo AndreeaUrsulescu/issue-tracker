@@ -749,6 +749,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-left: 5px;
 }
 
+<<<<<<< HEAD
 #left{
 	position: absolute;
 	margin-top: 340px;
@@ -763,4 +764,13 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 }
 .ordering{
 	float: left;
+=======
+.ordering{
+	float: left;
+}
+
+#meniu{
+	width:100%;
+	height: 50px;
+>>>>>>> origin
 }

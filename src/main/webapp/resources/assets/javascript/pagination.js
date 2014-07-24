@@ -79,6 +79,7 @@ function searchIssues(){
      var input ; 
      var state ; 
      var filterData ;
+<<<<<<< HEAD
      
      if (searchCriteria == "state") {
     	 
@@ -102,6 +103,31 @@ function searchIssues(){
           	};
      }
      
+=======
+     
+     if (searchCriteria == "state") {
+    	 
+      state = $("#selectT").val();
+      filterData = {
+    		 searchCriteria : searchCriteria ,
+    		 state : state,
+    		 pageNumber : 1,
+    		 sortCriteria : $("#criteria").text(),
+    		 sortType : $("#order").text()
+      	};
+     }
+     else {
+    	 input = $("#searchField").val();
+    	 filterData = {
+        		 searchCriteria : searchCriteria ,
+        		 input : input,
+        		 pageNumber : 1,
+        		 sortCriteria : $("#criteria").text(),
+        		 sortType : $("#order").text()
+          	};
+     }
+     
+>>>>>>> origin
      $.ajax({
  		url : "issues/searchBy" , // put some URL
  		type : "GET",
