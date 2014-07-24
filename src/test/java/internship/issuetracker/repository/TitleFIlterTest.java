@@ -73,7 +73,7 @@ public class TitleFIlterTest {
 	CriteriaBuilder cb = em.getCriteriaBuilder();
 	CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 	Root<Issue> root = cq.from(Issue.class);
-	TitleFilter tf = new TitleFilter("title");
+	TitleFilter tf = new TitleFilter("");
 	cq.where(tf.buildPredicate(cq, cb, root));
 	cq.orderBy(cb.desc(root.get("updateDate")),cb.desc(root.get("id")));
 	TypedQuery<Issue> tq = em.createQuery(cq);
