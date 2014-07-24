@@ -26,7 +26,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 		   $("#issues").fadeOut(1);
 		   $("#issues").animate({  marginLeft: '1800px' },0,function(){
 		   $("#issues").fadeIn(1);
-		   $("#issues").animate({  marginLeft: '0px' },1000);
+		   $("#issues").animate({  marginLeft: '80px' },1000);
 	   });
 	 });
 
@@ -51,7 +51,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 		   $("#issues").fadeOut(1);
 		   $("#issues").animate({  marginLeft: '-1800px' },0,function(){
 		   $("#issues").fadeIn(1);
-		   $("#issues").animate({  marginLeft: '0px' },1000);
+		   $("#issues").animate({  marginLeft: '80px' },1000);
 	   });
 	 });
 
@@ -71,18 +71,127 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
-function sortIssues(issuesListSize,issuesPerPage,sortCriteria){
+
+function searchIssues(){
      countOnSort = 1 ; 
+
+     var searchCriteria = $("#selectS").val(); 
+     var input ; 
+     var state ; 
+     var filterData ;
      
-     $("#nextButton").on( "click",sortIssuesPagination('+',issuesListSize,issuesPerPage));
- 	 $("#previousButton").on( "click",sortIssuesPagination('-',issuesListSize,issuesPerPage));
- 	 
-     if ((issuesListSize - issuesPerPage) <= 0 )
- 	   	$("#nextButton").css("visibility", "hidden");
- 	    
-      $("#previousButton").css("visibility", "hidden");	
-      
-      
+     if (searchCriteria == "state") {
+    	 
+      state = $("#selectT").val();
+      filterData = {
+    		 searchCriteria : searchCriteria ,
+    		 state : state,
+    		 pageNumber : 1,
+    		 sortCriteria : $("#criteria").text(),
+    		 sortType : $("#order").text()
+      	};
+     }
+     else {
+    	 input = $("#searchField").val();
+    	 filterData = {
+        		 searchCriteria : searchCriteria ,
+        		 input : input,
+        		 pageNumber : 1,
+        		 sortCriteria : $("#criteria").text(),
+        		 sortType : $("#order").text()
+          	};
+     }
+     
+     $.ajax({
+ 		url : "issues/searchBy" , // put some URL
+ 		type : "GET",
+        data : filterData, 
+ 		beforeSend : function(xhr) {
+ 			xhr.setRequestHeader("Accept", "application/json");
+ 			xhr.setRequestHeader("Content-Type", "application/json");
+ 		},
+ 		success : function(response) {
+ 			
+ 			document.getElementById("nextButton").setAttribute("onclick","sortIssuesPagination('+',"+response.listLength+","+response.issuesPerPage+");");
+ 			document.getElementById("previousButton").setAttribute("onclick","sortIssuesPagination('-',"+response.listLength+","+response.issuesPerPage+");");
+ 			
+ 			$("#nextButton").css("visibility", "visible");
+ 			if ((response.listLength - response.issuesPerPage) <= 0 )
+ 			   	$("#nextButton").css("visibility", "hidden");
+ 			    
+ 		     $("#previousButton").css("visibility", "hidden");	
+ 		     parsingAjaxResponse(response.issuesList);
+ 			}
+ 	});
+}
+
+function sortIssuesPagination(type,issuesListSize,issuesPerPage){
+	if (type == "+" && (issuesListSize - ( countOnSort*issuesPerPage )) > 0 ) {
+		countOnSort = countOnSort + 1 ;
+		if ( (issuesListSize - ( countOnSort*issuesPerPage )) <= 0 ){
+			$("#nextButton").css("visibility", "hidden");	
+			$("#previousButton").css("visibility", "visible");
+		}
+		else {
+			$("#nextButton").css("visibility", "visible");	
+			$("#previousButton").css("visibility", "visible");
+			
+		}
+	} else if (type == "-"  && countOnSort > 1 ) {
+		countOnSort = countOnSort -1 ;
+		$("#nextButton").css("visibility", "visible");	
+		
+		if(countOnSort == 1){
+			$("#previousButton").css("visibility", "hidden");	
+		}
+	}
+	 document.getElementById("pageNumber").innerHTML = countOnSort;
+	 ajaxForSearchPagination(countOnSort);
+	 
+}
+
+function ajaxForSearchPagination(page){
+	
+	var searchCriteria = $("#selectS").val(); 
+    var input ;  
+    var state ; 
+    var filterData ;
+    
+    if (searchCriteria == "state") {
+   	 
+        state = $("#selectT").val();
+        filterData = {
+      		 searchCriteria : searchCriteria ,
+      		 state : state,
+      		 pageNumber : page,
+      		 sortCriteria : $("#criteria").text(),
+      		 sortType : $("#order").text()
+        	};
+       }
+       else {
+      	 input = $("#searchField").val();
+      	 filterData = {
+          		 searchCriteria : searchCriteria ,
+          		 input : input,
+          		 pageNumber : page,
+          		 sortCriteria : $("#criteria").text(),
+          		 sortType : $("#order").text()
+            	};
+       }
+     
+	$.ajax({
+ 		url : "issues/searchBy" , 
+ 		type : "GET",
+        data : filterData, 
+ 		beforeSend : function(xhr) {
+ 			xhr.setRequestHeader("Accept", "application/json");
+ 			xhr.setRequestHeader("Content-Type", "application/json");
+ 		},
+ 		success : function(response) {
+ 			 
+ 			parsingAjaxResponse(response.issuesList);
+ 			}
+ 	});
 }
 
 function ajaxForPagination(page){

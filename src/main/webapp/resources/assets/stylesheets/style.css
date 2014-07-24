@@ -366,12 +366,18 @@ footer a {
 
 /* Menu on view all issues start */
 
+.navbar-center{
+	margin-top: 20px;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
 .issuesMenu{
 	border-bottom:1px solid rgb(231,231,231);
 	padding-bottom:15px;
 }
 
-.issuesMenuButtons{
+	.issuesMenuButtons{
 	text-decoration: none;
 	margin-right: 10px;
 	margin-top: 10px;
@@ -706,11 +712,9 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 
 #searchBar{
 	height: 100%;
-	width: 33%;
-	border-left: 1px solid rgb(231,231,231);
-	border-right: 1px solid rgb(231,231,231);
+	width: 50%;
 	float:left;
-	margin-left: 33%;
+	margin-left: 20%;
 }
 
 #inSearchBar{
@@ -718,7 +722,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	width:90%;
 	margin-left: 10%;
 	position: relative;
-	margin-top: 15px;;
+	margin-top: 15px;
 }
 
 .searchBy{
@@ -756,4 +760,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	//margin-left: 1848px;
 	float:right;
 	right:0px;
+}
+.ordering{
+	float: left;
 }

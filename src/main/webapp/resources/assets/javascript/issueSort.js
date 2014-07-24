@@ -1,16 +1,15 @@
 $(document).ready(function(){
 	
-//	function replaceValue(){
-//		
-//	};
-//	
-	$("#criteria").parent().find("a").on("click", function(){
+	$("#sort-navbar").hide();
+	$(".criteriaElement").on("click", function(){
 		var value = $(this).text();
-		$(this).parent().find(".dropdown-toggle").text(value);
-		alet(value);
+		value += '<span class="caret"></span>';
+		$("#criteria").html(value);
 	});
 	
-//	dropdownLinks
-		
-	
+	$(".orderElement").on("click", function(){
+		var value = $(this).text();
+		value += '<span class="caret"></span>';
+		$("#order").html(value);
+	});
 });

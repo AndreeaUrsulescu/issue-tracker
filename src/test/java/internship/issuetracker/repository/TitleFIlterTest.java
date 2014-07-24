@@ -67,14 +67,22 @@ public class TitleFIlterTest {
 	issueRepository.create(issue);
 	issue = createIssue("contact");
 	issueRepository.create(issue);
+	issue = createIssue("titlefsda");
+	issueRepository.create(issue);
 	
 	CriteriaBuilder cb = em.getCriteriaBuilder();
 	CriteriaQuery<Issue> cq = cb.createQuery(Issue.class);
 	Root<Issue> root = cq.from(Issue.class);
 	TitleFilter tf = new TitleFilter("title");
 	cq.where(tf.buildPredicate(cq, cb, root));
+	cq.orderBy(cb.desc(root.get("updateDate")),cb.desc(root.get("id")));
 	TypedQuery<Issue> tq = em.createQuery(cq);
 	List<Issue> list = tq.getResultList();
+	
+	for (Issue issue2 : list) {
+		
+		System.out.println(issue2.getUpdateDate()+" "+issue2.getId());
+	}
 	assert(list.size() == 1);
     }
 

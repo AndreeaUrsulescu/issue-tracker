@@ -36,6 +36,8 @@
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 		
 		 <script src="${pageContext.request.contextPath}/resources/assets/javascript/search.js"></script>
+		 
+		 <script src="${pageContext.request.contextPath}/resources/assets/javascript/issueSort.js"></script>
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />
