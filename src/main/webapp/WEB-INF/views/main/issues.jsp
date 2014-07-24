@@ -5,9 +5,12 @@
 
 
 <div id="all" >
-	<div id="meniu">
-		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
+	<div class="container issuesMenu">
+		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary issuesMenuButtons"><span class="glyphicon glyphicon-plus"></span> Add issue </a>
+		 <div class="btn btn-primary issuesMenuButtons"><span class="glyphicon glyphicon-search"></span> Search</div>
+		 <div class="btn btn-info issuesMenuButtons"><span class="glyphicon glyphicon-sort"></span> Sort</div>
 	</div>
+	<br>
 	<div class="container">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
@@ -36,6 +39,9 @@
 					    	</ul>
 				    	</li>
 				    </ul>
+				    <form class="navbar-form navbar-right" role="search">
+				        <button class="btn btn-info">Order</button>
+				    </form>
 		         </div>
 			</div>
 		</nav>
