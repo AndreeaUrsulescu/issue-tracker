@@ -1,10 +1,13 @@
 package internship.issuetracker.service;
 
+import internship.issuetracker.comparators.UpdateDateComparator;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.repository.IssueRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -73,4 +76,19 @@ public class IssueService {
     public int itemsPerPage(){
 		return this.issueRepository.itemsPerPage();
 	}
+    
+    
+    public List<Issue> SortByUpdateDate(List<Issue> issues,String order)
+    {
+    	
+    	if(order.equals("descending"))           // you have to specify that the order is descending, otherwise it will be ascending
+    	{
+    		Comparator<Issue> reverse=Collections.reverseOrder(new UpdateDateComparator());
+    		Collections.sort(issues, reverse);
+    		return issues;
+    	}
+    	
+    	Collections.sort(issues,new UpdateDateComparator());
+       	return issues;
+    }
 }

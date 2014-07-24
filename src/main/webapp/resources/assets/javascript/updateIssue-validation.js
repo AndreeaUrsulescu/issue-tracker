@@ -8,7 +8,7 @@ function ValidateTitle() {
 	var save = $("#send");
 	
 	save.prop('disabled',false);
-	if ((title.val().length == 0)) {
+	if ((title.val().trim().length == 0)) {
 		span.text("Your title cannot be empty");
 		save.prop('disabled',true);
 		return false;
@@ -20,7 +20,7 @@ function ValidateTitle() {
 		return false;
 	}*/
 
-	if ((title.val().length < 5 || title.val().length > 50)) {
+	if ((title.val().trim().length < 5 || title.val().length > 50)) {
 		span.text("Your title has to be between 5 and 50 characters");
 		save.prop('disabled',true);
 		return false;
@@ -54,7 +54,7 @@ function ValidateContent() {
 		return false;
 	}*/
 
-	if (content.val().length > 1000) {
+	if (content.val().trim().length > 1000) {
 		span.text("Your content limit is 1000 characters");
 		save.prop('disabled',true);
 		return false;
