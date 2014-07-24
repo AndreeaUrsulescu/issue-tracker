@@ -79,7 +79,6 @@ function searchIssues(){
      var input ; 
      var state ; 
      var filterData ;
-<<<<<<< HEAD
      
      if (searchCriteria == "state") {
     	 
@@ -103,8 +102,6 @@ function searchIssues(){
           	};
      }
      
-=======
-     
      if (searchCriteria == "state") {
     	 
       state = $("#selectT").val();
@@ -127,7 +124,6 @@ function searchIssues(){
           	};
      }
      
->>>>>>> origin
      $.ajax({
  		url : "issues/searchBy" , // put some URL
  		type : "GET",

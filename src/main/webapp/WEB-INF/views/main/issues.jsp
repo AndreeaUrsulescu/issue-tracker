@@ -17,11 +17,7 @@
 		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
 			<img id="right" src="${pageContext.request.contextPath}/resources/assets/images/right.png"/></a>
 
-<<<<<<< HEAD
 <div id="all" >
-=======
-<div id="all">
->>>>>>> origin
 	<div id="meniu">
 		<a href="${pageContext.request.contextPath}/issues/createIssue"
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
