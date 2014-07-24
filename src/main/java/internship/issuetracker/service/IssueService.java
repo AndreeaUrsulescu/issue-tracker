@@ -30,15 +30,13 @@ public class IssueService {
 		this.issueRepository.create(issue);
 	}
 
-	public void updateIssue(IssuePojo issuePojo) {
-		User owner = userRepository.findUserByUserName(issuePojo.getOwner());
-		Issue issue = issueRepository.findIssue(issuePojo.getId());
-		issue.setOwner(owner);
-		issue.setContent(issuePojo.getContent());
-		issue.setTitle(issuePojo.getTitle());
-		issue.setUpdateDate(issuePojo.getUpdateDate());
-		issue.setState(issuePojo.getState());
-		this.issueRepository.update(issue);
+	public void updateIssue(Issue issuePojo) {
+		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
+		issueToUpdate.setContent(issuePojo.getContent());
+		issueToUpdate.setTitle(issuePojo.getTitle());
+		issueToUpdate.setUpdateDate(new Date());
+		issueToUpdate.setState(issuePojo.getState());
+		this.issueRepository.update(issueToUpdate);
 	}
 
 	public List<Issue> getIssuesByTitle(String title) {
