@@ -22,19 +22,27 @@ public class SearchService {
 
 	}
 
-	public List<IssuePojo> findOrderedIssuesByTitle(String title,
-			int currentPage) {
+	public List<IssuePojo> findOrderedIssuesByTitle(String title, int currentPage) {
+		return findOrderedIssuesByTitleAux(title, currentPage, "updateDate", "desc");
+	}
 
-		List<Issue> issuesListEntity = searchRepository
-				.findOrderedIssuesByTitle(title, currentPage);
+	public List<IssuePojo> findOrderedIssuesByTitle(String title, int currentPage, String orderField) {
+		return findOrderedIssuesByTitleAux(title, currentPage, orderField, "desc");
+	}
+
+	public List<IssuePojo> findOrderedIssuesByTitle(String title, int currentPage, String orderField, String orderType) {
+		return findOrderedIssuesByTitleAux(title, currentPage, orderField, orderType);
+	}
+
+	public List<IssuePojo> findOrderedIssuesByTitleAux(String title, int currentPage, String orderField, String orderType) {
+
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssuesByTitle(title, currentPage, orderField, orderType);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
-					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), issueEntity.getContent(),
-					issueEntity.getUpdateDate(), issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
+					.getUpdateDate(), issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}
@@ -47,16 +55,25 @@ public class SearchService {
 	}
 
 	public List<IssuePojo> findOrderedIssuesByState(State state, int currentPage) {
-		List<Issue> issuesListEntity = searchRepository
-				.findOrderedIssuesByState(state, currentPage);
+		return findOrderedIssuesByStateAux(state, currentPage, "updateDate", "desc");
+	}
+
+	public List<IssuePojo> findOrderedIssuesByState(State state, int currentPage, String orderField) {
+		return findOrderedIssuesByStateAux(state, currentPage, orderField, "desc");
+	}
+
+	public List<IssuePojo> findOrderedIssuesByState(State state, int currentPage, String orderField, String orderType) {
+		return findOrderedIssuesByStateAux(state, currentPage, orderField, orderType);
+	}
+
+	public List<IssuePojo> findOrderedIssuesByStateAux(State state, int currentPage, String orderField, String orderType) {
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssuesByState(state, currentPage, orderField, orderType);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
-					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), issueEntity.getContent(),
-					issueEntity.getUpdateDate(), issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
+					.getUpdateDate(), issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}
@@ -68,9 +85,19 @@ public class SearchService {
 		return searchRepository.numberOfIssuesByContent(content);
 	}
 
-	public List<IssuePojo> findOrderedIssuesByContent(String content,
-			int currentPage) {
-		return searchRepository
-				.findOrderedIssuesByContent(content, currentPage);
+	public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage) {
+		return findOrderedIssuesByContentAux(content, currentPage, "updateDate", "desc");
+	}
+
+	public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage, String orderField) {
+		return findOrderedIssuesByContentAux(content, currentPage, orderField, "desc");
+	}
+
+	public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage, String orderField, String orderType) {
+		return findOrderedIssuesByContentAux(content, currentPage, orderField, orderType);
+	}
+
+	public List<IssuePojo> findOrderedIssuesByContentAux(String content, int currentPage, String orderField, String orderType) {
+		return searchRepository.findOrderedIssuesByContent(content, currentPage, orderField, orderType);
 	}
 }
