@@ -18,7 +18,7 @@
 
 		<div class="viewIssueFooter">
 			<div class="viewIssueFooterDetails">
-				<div class="viewIssueOwner"><c:out value="${viewIssue.owner.userName}"/></div>
+				<div class="viewIssueOwner"><c:out value="${viewIssue.owner}"/></div>
 				<div class="viewIssueDate">
 					<small><c:out value="${viewIssue.updateDate}"/></small>
 				</div>

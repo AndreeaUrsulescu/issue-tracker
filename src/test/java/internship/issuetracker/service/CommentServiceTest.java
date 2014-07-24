@@ -45,7 +45,7 @@ public class CommentServiceTest {
 		comment.setOwner(user);
 		comment.setCreationDate(new Date());
 				
-		commentService.addComment(comment);
+		//commentService.addComment(comment);
 		Mockito.verify(commentRepository).create(comment);
 	}
 

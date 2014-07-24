@@ -42,8 +42,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
-function sortIssues(){
-	
+function sortIssues(issuesListSize,issuesPerPage,sortCriteria){
      countOnSort = 1 ; 
      var sortCriteria ;// get this from UI
      
@@ -85,7 +84,6 @@ function sortIssues(){
       $("#previousButton").css("visibility", "hidden");	
       
       
-      */
 }
 
 function ajaxForPagination(page){

@@ -1,18 +1,7 @@
 package internship.issuetracker.utils;
 
-import internship.issuetracker.entities.Issue;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class EncryptData {
 	public static String sha256(String password) {

@@ -1,10 +1,10 @@
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
-import internship.issuetracker.service.SearchService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +28,6 @@ public class RestIssueController {
 	@Autowired
 	private IssueService issueService;
 	
-	@Autowired
-	private SearchService searchService;
-	
 	@RequestMapping(value = "/page/{pageNumber}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
@@ -39,7 +36,7 @@ public class RestIssueController {
 		return issuesListPojo;
 	}
 	
-	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
+	@RequestMapping(value = "/sortBy", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> search(@ModelAttribute SearchParameter sortParameters) {
 		
