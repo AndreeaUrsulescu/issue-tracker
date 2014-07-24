@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			<a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
-					<span class="glyphicon glyphicon-search"></span> Search
+					<span class="glyphicon glyphicon-search">&nbsp;Search</span>
 				</a>
 		</div>
 	</div>

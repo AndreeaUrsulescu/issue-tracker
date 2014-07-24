@@ -42,9 +42,10 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
+
 function searchIssues(){
      countOnSort = 1 ; 
-     
+
      var searchCriteria = $("#selectS").val(); 
      var input ; 
      var state ; 
@@ -59,7 +60,7 @@ function searchIssues(){
     		 pageNumber : 1,
     		 sortCriteria : $("#criteria").text(),
     		 sortType : $("#order").text()
-      	}
+      	};
      }
      else {
     	 input = $("#searchField").val();
@@ -69,7 +70,7 @@ function searchIssues(){
         		 pageNumber : 1,
         		 sortCriteria : $("#criteria").text(),
         		 sortType : $("#order").text()
-          	}
+          	};
      }
      
      $.ajax({
@@ -136,7 +137,7 @@ function ajaxForSearchPagination(page){
       		 pageNumber : page,
       		 sortCriteria : $("#criteria").text(),
       		 sortType : $("#order").text()
-        	}
+        	};
        }
        else {
       	 input = $("#searchField").val();
@@ -146,7 +147,7 @@ function ajaxForSearchPagination(page){
           		 pageNumber : page,
           		 sortCriteria : $("#criteria").text(),
           		 sortType : $("#order").text()
-            	}
+            	};
        }
      
 	$.ajax({
