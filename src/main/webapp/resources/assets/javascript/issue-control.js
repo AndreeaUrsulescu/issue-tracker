@@ -68,16 +68,20 @@ $(document).ready(function(){
     $('#issue-states > .viewIssueState').on('click',function(){
        $('div').removeClass('current');
        $(this).addClass('current');
-       
-   	if (($("#issueTitle").val().length < 5)) {
-   		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
-   		$("#send").prop('disabled',true);
-		return false;
-	}
-      
+    
+
+     //set current active state
        $("#send").prop('disabled',false);
        
-       //set current active state
+       //issue title is valid?
+      	if (($("#issueTitle").val().length < 5)) {
+      		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
+      		$("#send").prop('disabled',true);
+   		return false;
+      	}
+      	
+
+       
     });
     
 });
