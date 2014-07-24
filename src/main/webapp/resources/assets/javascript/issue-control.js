@@ -27,8 +27,10 @@ $(document).ready(function(){
     				// se completeaza inputurile cu valorile din rsp (rsp.issue.{nume-camp})
 					$('#issueTitle').val(rsp.issue.title);
 					var id ='#'+rsp.issue.state;
+					
 					$('div').removeClass('current');
 					$(id).addClass('current');
+    				
 					$('#issueContent').val(rsp.issue.content);
     			}
     		}
@@ -45,6 +47,7 @@ $(document).ready(function(){
     			$("#issueTitle").val(rsp.issue.title);
     			$("#issueContent").val(rsp.issue.content);
 				var id ='#'+rsp.issue.state; 
+				
 				$(id).addClass('current');
 //    			$("#issue-states:nth-child("+rsp.issue.state+")").addClass('current');
     		}
@@ -65,19 +68,23 @@ $(document).ready(function(){
     });
 
     //for each subdiv
-    $('#issue-states > .viewIssueState').on('click',function(){
-       $('div').removeClass('current');
-       $(this).addClass('current');
-       
-   	if (($("#issueTitle").val().length < 5)) {
-   		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
-   		$("#send").prop('disabled',true);
-		return false;
-	}
-      
+    $('#issue-states > .viewIssueState').on('click',function(){   	
+    		$('div').removeClass('current');
+    	       $(this).addClass('current');
+    	
+
+     //set current active state
        $("#send").prop('disabled',false);
        
-       //set current active state
+       //issue title is valid?
+      	if (($("#issueTitle").val().length < 5)) {
+      		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
+      		$("#send").prop('disabled',true);
+   		return false;
+      	}
+      	
+
+       
     });
     
 });

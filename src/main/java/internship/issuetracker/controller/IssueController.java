@@ -5,6 +5,7 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.UserService;
@@ -34,9 +35,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IssueController {
 	@Autowired
 	private IssueService issueService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private CommentService commentService;
@@ -158,7 +156,7 @@ public class IssueController {
 		
 		model.addAttribute("issuesList", issuesListPojo);
 		model.addAttribute("listLength",issueService.numberOfIssues());
-		model.addAttribute("itemsPerPage", issueService.itemsPerPage() );
+		model.addAttribute("itemsPerPage", IssueRepository.itemsPerPage );
 		
 		return "issues";
 	}
