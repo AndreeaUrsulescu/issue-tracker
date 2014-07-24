@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
   	if($("#current-state").hasClass("closed")){
   		$("#comments").prop('hidden',"display: none;");
-  		console.error("sdasdasdas");
+
   	}
   	
 	function clearContent(){
