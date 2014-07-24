@@ -51,12 +51,13 @@ function sortIssues(){
      var issuesPerPage;
      var dataToSend = [] ;
      
-     dataToSend.push(sortCriteria);
+    // dataToSend.push(sortCriteria);
+     dataToSend.push("title");
      dataToSend.push(CountOnSort);
      
      
      $.ajax({
- 		url : "" , // put some URL
+ 		url : "issues/searchBy" , // put some URL
  		type : "GET",
         data : json.stringify(dataToSend), 
  		beforeSend : function(xhr) {
@@ -64,14 +65,14 @@ function sortIssues(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			parsingAjaxResponse(response);
+ 			//parsingAjaxResponse(response);
  			
  			}
  	});
      
      // get issuesList Size from controller
      
-     
+     /*
      $("#nextButton").on( "click",sortIssuesPagination('+',issuesListSize,issuesPerPage));
  	 $("#previousButton").on( "click",sortIssuesPagination('-',issuesListSize,issuesPerPage));
  	 
@@ -80,7 +81,7 @@ function sortIssues(){
  	    
       $("#previousButton").css("visibility", "hidden");	
       
-      
+      */
       
 }
 
