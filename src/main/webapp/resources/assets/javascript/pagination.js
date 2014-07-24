@@ -43,18 +43,16 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 var countOnSort = 1 ;
 
 function searchIssues(){
-	
      countOnSort = 1 ; 
      
-     var searchCriteria ; // get it from UI
-     var input ;  // get it from UI
+     var searchCriteria = $("#selectS").val(); 
+     var input ; 
      var state ; 
-     
      var filterData ;
      
      if (searchCriteria == "state") {
     	 
-     //get state from UI 
+      state = $("#selectT").val();
       filterData = {
     		 searchCriteria : searchCriteria ,
     		 state : state,
@@ -62,7 +60,7 @@ function searchIssues(){
       	}
      }
      else {
-    	 // get input from UI;
+    	 input = $("#searchField").val();
     	 filterData = {
         		 searchCriteria : searchCriteria ,
         		 input : input,
@@ -81,13 +79,15 @@ function searchIssues(){
  		},
  		success : function(response) {
  			
- 			$("#nextButton").on( "click",sortIssuesPagination('+',response.listLength,response.issuesPerPage));
- 		 	$("#previousButton").on( "click",sortIssuesPagination('-',response.listLength,response.issuesPerPage));
+ 			document.getElementById("nextButton").setAttribute("onclick","sortIssuesPagination('+',"+response.listLength+","+response.issuesPerPage+");");
+ 			document.getElementById("previousButton").setAttribute("onclick","sortIssuesPagination('-',"+response.listLength+","+response.issuesPerPage+");");
  			
+ 			$("#nextButton").css("visibility", "visible");
  			if ((response.listLength - response.issuesPerPage) <= 0 )
  			   	$("#nextButton").css("visibility", "hidden");
  			    
  		     $("#previousButton").css("visibility", "hidden");	
+ 		     parsingAjaxResponse(response.issuesList);
  			}
  	});
 }
@@ -119,32 +119,31 @@ function sortIssuesPagination(type,issuesListSize,issuesPerPage){
 
 function ajaxForSearchPagination(page){
 	
-	 var searchCriteria ; // get it from UI
-     var input ;  // get it from UI
-     var state ; 
-     
-     var filterData ;
-     
-     if (searchCriteria == "state") {
-    	 
-     //get state from UI 
-      filterData = {
-    		 searchCriteria : searchCriteria ,
-    		 state : state,
-    		 pageNumber : page
-      	}
-     }
-     else {
-    	 // get input from UI;
-    	 filterData = {
-        		 searchCriteria : searchCriteria ,
-        		 input : input,
-        		 pageNumber : page
-          	}
-     }
+	var searchCriteria = $("#selectS").val(); 
+    var input ;  
+    var state ; 
+    var filterData ;
+    
+    if (searchCriteria == "state") {
+   	 
+     state = $("#selectT").val();
+     filterData = {
+   		 searchCriteria : searchCriteria ,
+   		 state : state,
+   		 pageNumber : page
+     	}
+    }
+    else {
+   	 input = $("#searchField").val();
+   	 filterData = {
+       		 searchCriteria : searchCriteria ,
+       		 input : input,
+       		 pageNumber : page
+         	}
+    }
      
 	$.ajax({
- 		url : "issues/searchBy" , // put some URL
+ 		url : "issues/searchBy" , 
  		type : "GET",
         data : filterData, 
  		beforeSend : function(xhr) {
@@ -153,7 +152,7 @@ function ajaxForSearchPagination(page){
  		},
  		success : function(response) {
  			 
- 			parsingAjaxResponse(response);
+ 			parsingAjaxResponse(response.issuesList);
  			}
  	});
 }

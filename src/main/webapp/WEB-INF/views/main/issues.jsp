@@ -51,12 +51,12 @@
 				 </select>
 				<input type="text" id="searchField" class="searchSelect"/>
 				<select class="searchSelect" id="selectT">
-					<option value="new" selected="true">new</option>
-					<option value="opened" >opened</option>
-					<option value="testing">testing</option>
-					<option value="closed">closed</option>
+					<option value="New" selected="true">New</option>
+					<option value="Opened" >Opened</option>
+					<option value="Testing">Testing</option>
+					<option value="Closed">Closed</option>
 				 </select>
-				 <a class="btn searchBtn" id="searchBtn" onclick=""> <span class="glyphicon glyphicon-search"></span> Search</a>
+				 <a class="btn searchBtn" id="searchBtn" onclick="searchIssues();"> <span class="glyphicon glyphicon-search" ></span> Search</a>
 			</div>
 		</div>
 		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
@@ -111,5 +111,4 @@
 		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
 			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow.png"/></a>
 	</div>
-		<button onclick="searchIssues()">click me</button>
 </div>
