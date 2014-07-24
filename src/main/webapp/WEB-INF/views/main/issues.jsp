@@ -5,8 +5,6 @@
 
 
 <div id="all" >
-	</div>
-	<br>
 	<div class="container">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
@@ -22,13 +20,13 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="#criteria"> Criteria <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="criteria"> Criteria <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 					            <li><a href="#">Date</a></li>
 					    	</ul>
 				    	</li>
 				    	<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="#order"> Order <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="order"> Order <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 					            <li><a href="#">Ascending</a></li>
 					            <li><a href="#">Descending</a></li>
@@ -41,6 +39,27 @@
 		         </div>
 			</div>
 		</nav>
+	</div>
+	<div id="meniu">
+		<div id="searchBar">
+			<div id="inSearchBar">
+				<label class="searchBy">Search by </label>
+				<select class="searchSelect" id="selectS">
+					<option value="title" selected="true">title</option>
+					<option value="content" >content</option>
+					<option value="state">state</option>
+				 </select>
+				<input type="text" id="searchField" class="searchSelect"/>
+				<select class="searchSelect" id="selectT">
+					<option value="new" selected="true">new</option>
+					<option value="opened" >opened</option>
+					<option value="testing">testing</option>
+					<option value="closed">closed</option>
+				 </select>
+				 <a class="btn searchBtn" id="searchBtn" onclick=""> <span class="glyphicon glyphicon-search"></span> Search</a>
+			</div>
+		</div>
+		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
@@ -91,5 +110,5 @@
 			<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
 		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
 			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow.png"/></a>
-		
+	</div>
 </div>
