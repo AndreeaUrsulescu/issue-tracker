@@ -44,7 +44,6 @@ public class IssueRepositoryTest {
 	user.setPassword("parola");
 	userRepository.create(user);
 	ucount++;
-
     }
     
     @Test
