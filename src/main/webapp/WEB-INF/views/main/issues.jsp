@@ -3,43 +3,22 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+		<c:set var="plus" value="+" />
+		<c:set var="minus" value="-" />
+		<label id="numberOfIssues" style="display: none">
+			<c:out value="${listLength}" />
+		</label>
+		<label id="issuesPerPage" style="display: none">
+			<c:out value="${itemsPerPage}" />
+		</label>
+						
+		<a id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">
+			<img id="left" src="${pageContext.request.contextPath}/resources/assets/images/left.png"/></a>
+		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
+			<img id="right" src="${pageContext.request.contextPath}/resources/assets/images/right.png"/></a>
 
 <div id="all" >
-	<div class="container">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				        <span class="sr-only">Toggle navigation</span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				      </button>
-				      <a class="navbar-brand" href="#">Sort by</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="criteria"> Criteria <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-					            <li><a href="#">Date</a></li>
-					    	</ul>
-				    	</li>
-				    	<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="order"> Order <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-					            <li><a href="#">Ascending</a></li>
-					            <li><a href="#">Descending</a></li>
-					    	</ul>
-				    	</li>
-				    </ul>
-				    <form class="navbar-form navbar-right" role="search">
-				        <button class="btn btn-info">Order</button>
-				    </form>
-		         </div>
-			</div>
-		</nav>
-	</div>
+		
 	<div id="meniu">
 		<div id="searchBar">
 			<div id="inSearchBar">
@@ -61,6 +40,7 @@
 		</div>
 		 <a href="${pageContext.request.contextPath}/issues/createIssue" class="meniuBtn btn btn-primary">Add issue</a>
 	</div>
+	
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
 			<a href="issues/issue/${issue.id}">
@@ -93,22 +73,9 @@
 			</a>
 		</c:forEach>
 	</div>
-
 	<br>
+	
 	<div id="pages">
-		<c:set var="plus" value="+" />
-		<c:set var="minus" value="-" />
-		<p id="numberOfIssues" style="display: none">
-			<c:out value="${listLength}" />
-		</p>
-		<p id="issuesPerPage" style="display: none">
-			<c:out value="${itemsPerPage}" />
-		</p>
-	<!-- -->	
-		<a id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">
-			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow2.png"/></a>
-			<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
-		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
-			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow.png"/></a>
+		<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
 	</div>
 </div>

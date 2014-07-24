@@ -745,4 +745,15 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-left: 5px;
 }
 
+#left{
+	position: absolute;
+	margin-top: 340px;
+}
 
+#right{
+	position: absolute;
+	margin-top: 340px;
+	//margin-left: 1848px;
+	float:right;
+	right:0px;
+}

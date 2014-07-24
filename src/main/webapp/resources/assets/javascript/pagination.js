@@ -11,13 +11,27 @@ window.onload = function () {
 	   	$("#nextButton").css("visibility", "hidden");
 	    
      $("#previousButton").css("visibility", "hidden");	
+	 
 };
 
 var count  = 1;
 
 function issuePagination(type,issuesListSize,issuesPerPage) {
-
+		
 	if (type == "+" && (issuesListSize - ( count*issuesPerPage )) > 0 ) {
+		
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	 $("#issues").animate({  marginLeft: '-1800px' },0,function(){
+		   $("#issues").fadeOut(1);
+		   $("#issues").animate({  marginLeft: '1800px' },0,function(){
+		   $("#issues").fadeIn(1);
+		   $("#issues").animate({  marginLeft: '0px' },1000);
+	   });
+	 });
+
+	///////////////////////////////////////////////////////////////////////////////////
+	
 		count = count + 1 ;
 		if ( (issuesListSize - ( count*issuesPerPage )) <= 0 ){
 			$("#nextButton").css("visibility", "hidden");	
@@ -29,6 +43,20 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			
 		}
 	} else if (type == "-"  && count > 1 ) {
+
+	///////////////////////////////////////////////////////////////////////////////////
+		
+	
+	 $("#issues").animate({  marginLeft: '1800px' },0,function(){
+		   $("#issues").fadeOut(1);
+		   $("#issues").animate({  marginLeft: '-1800px' },0,function(){
+		   $("#issues").fadeIn(1);
+		   $("#issues").animate({  marginLeft: '0px' },1000);
+	   });
+	 });
+
+	
+	///////////////////////////////////////////////////////////////////////////////////
 		count = count -1 ;
 		$("#nextButton").css("visibility", "visible");	
 		
@@ -38,6 +66,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 	}
 	 document.getElementById("pageNumber").innerHTML = count;
 	ajaxForPagination(count);
+	
 }
 
 var countOnSort = 1 ;
