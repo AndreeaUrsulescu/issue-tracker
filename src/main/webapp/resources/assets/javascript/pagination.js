@@ -56,7 +56,9 @@ function searchIssues(){
       filterData = {
     		 searchCriteria : searchCriteria ,
     		 state : state,
-    		 pageNumber : 1
+    		 pageNumber : 1,
+    		 sortCriteria : $("#criteria").text(),
+    		 sortType : $("#order").text()
       	}
      }
      else {
@@ -64,10 +66,11 @@ function searchIssues(){
     	 filterData = {
         		 searchCriteria : searchCriteria ,
         		 input : input,
-        		 pageNumber : 1
+        		 pageNumber : 1,
+        		 sortCriteria : $("#criteria").text(),
+        		 sortType : $("#order").text()
           	}
      }
-    	 
      
      $.ajax({
  		url : "issues/searchBy" , // put some URL
@@ -126,21 +129,25 @@ function ajaxForSearchPagination(page){
     
     if (searchCriteria == "state") {
    	 
-     state = $("#selectT").val();
-     filterData = {
-   		 searchCriteria : searchCriteria ,
-   		 state : state,
-   		 pageNumber : page
-     	}
-    }
-    else {
-   	 input = $("#searchField").val();
-   	 filterData = {
-       		 searchCriteria : searchCriteria ,
-       		 input : input,
-       		 pageNumber : page
-         	}
-    }
+        state = $("#selectT").val();
+        filterData = {
+      		 searchCriteria : searchCriteria ,
+      		 state : state,
+      		 pageNumber : page,
+      		 sortCriteria : $("#criteria").text(),
+      		 sortType : $("#order").text()
+        	}
+       }
+       else {
+      	 input = $("#searchField").val();
+      	 filterData = {
+          		 searchCriteria : searchCriteria ,
+          		 input : input,
+          		 pageNumber : page,
+          		 sortCriteria : $("#criteria").text(),
+          		 sortType : $("#order").text()
+            	}
+       }
      
 	$.ajax({
  		url : "issues/searchBy" , 
