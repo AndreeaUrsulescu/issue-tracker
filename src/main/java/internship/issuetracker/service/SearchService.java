@@ -18,7 +18,10 @@ public class SearchService {
 
 	public int numberOfIssues(String title) {
 		return searchRepository.numberOfIssues(title);
-
+	}
+	
+	public int numberOfIssuesByContent(String content) {
+		return searchRepository.numberOfIssuesByContent(content);
 	}
 
 	public List<IssuePojo> findOrderedIssues(String title, int currentPage) {
@@ -38,8 +41,8 @@ public class SearchService {
 		return issuesListPojo;
 	}
 	
-	public List<IssuePojo> findIssuesByContent(String content, int currentPage) {
-    	return searchRepository.findIssuesByContent(content, currentPage);
+	public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage) {
+    	return searchRepository.findOrderedIssuesByContent(content, currentPage);
     }
 
 }

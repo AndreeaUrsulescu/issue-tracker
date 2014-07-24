@@ -34,6 +34,16 @@ public class SearchRepository {
 	TypedQuery<Issue> query = em.createQuery(criteriaQuery);
 	return query.getResultList().size();
     }
+    
+    public int numberOfIssuesByContent(String content) {
+    	CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    	CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
+    	Root<Issue> root = criteriaQuery.from(Issue.class);
+    	ContentFilter contentFilter = new ContentFilter(content);
+    	criteriaQuery.where(contentFilter.buildPredicate(criteriaQuery,criteriaBuilder, root));
+    	TypedQuery<Issue> query = em.createQuery(criteriaQuery);
+    	return query.getResultList().size();
+    }
 
     public List<Issue> findOrderedIssues(String title, int currentPage) {
 	CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -47,7 +57,7 @@ public class SearchRepository {
 	return query.getResultList();
     }
     
-    public List<IssuePojo> findIssuesByContent(String content, int currentPage) {
+    public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage) {
     	CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
     	CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
     	Root<Issue> root = criteriaQuery.from(Issue.class);
