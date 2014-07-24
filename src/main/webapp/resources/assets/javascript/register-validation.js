@@ -109,7 +109,7 @@ $(document)
 					// Pentru validarea titlului la createIssue
 					function validateTitle() {
 						$("#createTitle").parent().find("span").text("");
-						var value = $("#createTitle").val();
+						var value = $("#createTitle").val().trim();
 						if ((value.length == 0) || (value.length < 5)
 								|| (value.length > 50)) {
 							$("#createTitle")
