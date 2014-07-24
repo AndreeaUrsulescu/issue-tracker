@@ -1,12 +1,11 @@
 package internship.issuetracker.controller;
 
-import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
+import internship.issuetracker.service.SearchService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +26,9 @@ public class RestIssueController {
 	@Autowired
 	private IssueService issueService;
 	
+	@Autowired 
+	private SearchService searchService;
+	
 	@RequestMapping(value = "/page/{pageNumber}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
@@ -36,18 +37,29 @@ public class RestIssueController {
 		return issuesListPojo;
 	}
 	
-	@RequestMapping(value = "/sortBy", method = RequestMethod.GET)
+	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> search(@ModelAttribute SearchParameter sortParameters) {
+	public Map<String,Object> search(@ModelAttribute SearchParameter searchParameters) {
 		
-		String searchCriteria = sortParameters.getSearchCriteria();
-		int pageNumber = sortParameters.getPageNumber();
+		String searchCriteria = searchParameters.getSearchCriteria();
+		int pageNumber = searchParameters.getPageNumber();
+		
+		List<IssuePojo> resultList = null;
 		Map<String, Object> map = new HashMap<String,Object>();
 		
-		List<IssuePojo> resultList = searchService.findOrderedIssues(searchCriteria, pageNumber);
-		System.out.println(resultList);
+		if(searchCriteria.equals("title")){
+			resultList = searchService.findOrderedIssuesByTitle(searchParameters.getInput(), pageNumber);
+			map.put("listLength",searchService.numberOfIssuesByTitle(searchParameters.getInput()));
+			}
+		else if (searchCriteria.equals("content")){
+			resultList = searchService.findOrderedIssuesByContent(searchParameters.getInput(), pageNumber);
+			map.put("listLength",searchService.numberOfIssuesByContent(searchParameters.getInput()));
+			}
+		else if (searchCriteria.equals("state")){
+			resultList = searchService.findOrderedIssuesByState(searchParameters.getState(), pageNumber);
+			map.put("listLength",searchService.numberOfIssuesByState(searchParameters.getState()));
+			}
 		map.put("issuesList", resultList);
-		map.put("listLength",searchService.numberOfIssues(searchCriteria));
 		map.put("issuesPerPage",SearchRepository.itemsPerPage );
 		
 		return map;

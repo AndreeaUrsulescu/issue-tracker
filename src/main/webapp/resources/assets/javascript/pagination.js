@@ -42,20 +42,34 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
-function sortIssues(issuesListSize,issuesPerPage,sortCriteria){
+function searchIssues(){
+	
      countOnSort = 1 ; 
-     var sortCriteria ;// get this from UI
      
-     var issuesListSize ;
-     var issuesPerPage;
+     var searchCriteria ; // get it from UI
+     var input ;  // get it from UI
+     var state ; 
      
-     searchCriteria = "nr"; // get it from UI
-    
-     var filterData = {
+     var filterData ;
+     
+     if (searchCriteria == "state") {
+    	 
+     //get state from UI 
+      filterData = {
     		 searchCriteria : searchCriteria ,
+    		 state : state,
     		 pageNumber : 1
+      	}
      }
-     
+     else {
+    	 // get input from UI;
+    	 filterData = {
+        		 searchCriteria : searchCriteria ,
+        		 input : input,
+        		 pageNumber : 1
+          	}
+     }
+    	 
      
      $.ajax({
  		url : "issues/searchBy" , // put some URL
@@ -67,23 +81,81 @@ function sortIssues(issuesListSize,issuesPerPage,sortCriteria){
  		},
  		success : function(response) {
  			
- 			console.log(response.listLength);
+ 			$("#nextButton").on( "click",sortIssuesPagination('+',response.listLength,response.issuesPerPage));
+ 		 	$("#previousButton").on( "click",sortIssuesPagination('-',response.listLength,response.issuesPerPage));
  			
+ 			if ((response.listLength - response.issuesPerPage) <= 0 )
+ 			   	$("#nextButton").css("visibility", "hidden");
+ 			    
+ 		     $("#previousButton").css("visibility", "hidden");	
  			}
  	});
+}
+
+function sortIssuesPagination(type,issuesListSize,issuesPerPage){
+	if (type == "+" && (issuesListSize - ( countOnSort*issuesPerPage )) > 0 ) {
+		countOnSort = countOnSort + 1 ;
+		if ( (issuesListSize - ( countOnSort*issuesPerPage )) <= 0 ){
+			$("#nextButton").css("visibility", "hidden");	
+			$("#previousButton").css("visibility", "visible");
+		}
+		else {
+			$("#nextButton").css("visibility", "visible");	
+			$("#previousButton").css("visibility", "visible");
+			
+		}
+	} else if (type == "-"  && countOnSort > 1 ) {
+		countOnSort = countOnSort -1 ;
+		$("#nextButton").css("visibility", "visible");	
+		
+		if(countOnSort == 1){
+			$("#previousButton").css("visibility", "hidden");	
+		}
+	}
+	 document.getElementById("pageNumber").innerHTML = countOnSort;
+	 ajaxForSearchPagination(countOnSort);
+	 
+}
+
+function ajaxForSearchPagination(page){
+	
+	 var searchCriteria ; // get it from UI
+     var input ;  // get it from UI
+     var state ; 
      
-     // get issuesList Size from controller
-    /* 
+     var filterData ;
      
-     $("#nextButton").on( "click",sortIssuesPagination('+',issuesListSize,issuesPerPage));
- 	 $("#previousButton").on( "click",sortIssuesPagination('-',issuesListSize,issuesPerPage));
- 	 
-     if ((issuesListSize - issuesPerPage) <= 0 )
- 	   	$("#nextButton").css("visibility", "hidden");
- 	    
-      $("#previousButton").css("visibility", "hidden");	
-      
-      
+     if (searchCriteria == "state") {
+    	 
+     //get state from UI 
+      filterData = {
+    		 searchCriteria : searchCriteria ,
+    		 state : state,
+    		 pageNumber : page
+      	}
+     }
+     else {
+    	 // get input from UI;
+    	 filterData = {
+        		 searchCriteria : searchCriteria ,
+        		 input : input,
+        		 pageNumber : page
+          	}
+     }
+     
+	$.ajax({
+ 		url : "issues/searchBy" , // put some URL
+ 		type : "GET",
+        data : filterData, 
+ 		beforeSend : function(xhr) {
+ 			xhr.setRequestHeader("Accept", "application/json");
+ 			xhr.setRequestHeader("Content-Type", "application/json");
+ 		},
+ 		success : function(response) {
+ 			 
+ 			parsingAjaxResponse(response);
+ 			}
+ 	});
 }
 
 function ajaxForPagination(page){
