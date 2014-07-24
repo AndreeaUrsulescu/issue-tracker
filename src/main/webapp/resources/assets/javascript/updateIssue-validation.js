@@ -42,11 +42,11 @@ function ValidateContent() {
 	//var validcontent = content.val().match(contentRegex);
 	save.prop('disabled',false);
 	
-	if ((content.val().length == 0)) {
-		span.text("Your content cannot be empty");
-		save.prop('disabled',true);
-		return false;
-	}
+//	if ((content.val().length == 0)) {
+//		span.text("Your content cannot be empty");
+//		save.prop('disabled',true);
+//		return false;
+//	}
 
 /*	if (validcontent == null) {
 		span.text("Only alpha-numeric characters please...");

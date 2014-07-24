@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
+
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
