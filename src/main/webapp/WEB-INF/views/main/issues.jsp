@@ -51,9 +51,11 @@
 		<p id="issuesPerPage" style="display: none">
 			<c:out value="${itemsPerPage}" />
 		</p>
-
-		<button id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">Previous</button>
-		<p id="pageNumber">1</p>
-		<button id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">Next</button>
-	</div>
+	<!-- -->	
+		<a id="previousButton" onclick="issuePagination('${minus}','${listLength}','${itemsPerPage}')">
+			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow2.png"/></a>
+			<label id="pageNumber">1 </label><label style="	color: rgb(47,95,150); font-size: 17px;">/ ${pages}</label>
+		<a id="nextButton" onclick="issuePagination('${plus}','${listLength}','${itemsPerPage}')">
+			<img class="arrow" src="${pageContext.request.contextPath}/resources/assets/images/arrow.png"/></a>
+		
 </div>

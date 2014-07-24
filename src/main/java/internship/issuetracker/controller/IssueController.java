@@ -162,7 +162,7 @@ public class IssueController {
 		model.addAttribute("issuesList", issuesListPojo);
 		model.addAttribute("listLength",issueService.numberOfIssues());
 		model.addAttribute("itemsPerPage", issueService.itemsPerPage() );
-		
+		model.addAttribute("pages", (int)(issueService.numberOfIssues()/10+1));
 		return "issues";
 	}
 }
