@@ -284,7 +284,13 @@ footer a {
 }
 
 .current{
-	box-shadow: 10px 10px 5px black;
+	-webkit-transition: text-shadow 0.2s linear;
+    -moz-transition: text-shadow 0.2s linear;
+    -ms-transition: text-shadow 0.2s linear;
+    -o-transition: text-shadow 0.2s linear;
+    transition: text-shadow 0.2s linear;
+   -webkit-box-shadow: 0px 0px 15px 1px #24F273;
+	box-shadow: 0px 0px 15px 1px #24F273;
 }
 
 .new {
@@ -357,6 +363,22 @@ footer a {
 }
 
 /* View/Update Issue end */
+
+/* Menu on view all issues start */
+
+.issuesMenu{
+	border-bottom:1px solid rgb(231,231,231);
+	padding-bottom:15px;
+}
+
+.issuesMenuButtons{
+	text-decoration: none;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+
+/* Menu on view all issues start */
 
 .loginForm {
 	margin: 0 auto;
@@ -543,19 +565,6 @@ footer a {
 	min-height: 700px;
 }
 
-#meniu{
-	width: 100%;
-	height: 60px;
-	border-bottom: 1px solid rgb(231,231,231);
-}
-
-.meniuBtn{
-	float:right;
-	text-decoration: none;
-	margin-right: 10px;
-	margin-top: 10px;
-}
-
 #pages{
 	margin-left: 920px;
 	//position: absolute;
@@ -644,7 +653,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	font-size: 16px;
 	margin-right: 15px;
 	margin-top: 15px;
-	font-size: 16px;
+	font-size: 14px;
 	margin-right: 10px;
 	border-top: 1px solid rgba(0,0,0, 0.05);
 /*	color: rgb(47,95,150);*/
@@ -694,3 +703,46 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 .arrow{
 	width: 40px;
 }
+
+#searchBar{
+	height: 100%;
+	width: 33%;
+	border-left: 1px solid rgb(231,231,231);
+	border-right: 1px solid rgb(231,231,231);
+	float:left;
+	margin-left: 33%;
+}
+
+#inSearchBar{
+	height:70%;
+	width:90%;
+	margin-left: 10%;
+	position: relative;
+	margin-top: 15px;;
+}
+
+.searchBy{
+	color: rgb(47,95,150);
+	font-weight: bold;
+	font-size: 18px;
+	float: left;
+	//text-shadow: -1px 1px 5px rgba(150, 150, 150, 1);
+}
+
+.searchSelect{
+	padding: 5px 10px;
+	margin-left: 7px;
+	border: 1px solid rgb(231,231,231);
+	border-radius: 5px;
+	color: rgb(100,100,100);
+}
+
+.searchBtn{
+	color: rgb(54,100,160);
+	border: 1px solid rgb(231,231,231);
+	height: 33px;
+	margin-top: -2px;
+	margin-left: 5px;
+}
+
+
