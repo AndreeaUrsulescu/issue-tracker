@@ -77,7 +77,7 @@ $(document).ready(function(){
        $("#send").prop('disabled',false);
        
        //issue title is valid?
-      	if (($("#issueTitle").val().length < 5)) {
+      	if (($("#issueTitle").val().trim().length < 5)) {
       		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
       		$("#send").prop('disabled',true);
    		return false;
