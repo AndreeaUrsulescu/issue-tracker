@@ -2,13 +2,13 @@
 
 
 
-<div class="container">
+<div  class="container">
 
 	<h1 class="commentSectionTitle">Comment section</h1>
 
 	<div class="commentSection">
 
-		<form role="form">
+		<form  id="comments" role="form">
 
 			<div class="form-group">
 

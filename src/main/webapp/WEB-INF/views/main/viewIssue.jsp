@@ -1,6 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
@@ -21,8 +24,10 @@
 				</div>
 			</div>
 			<div class="viewIssueFooterButtons">
-				<div class="new viewIssueState"></div>
-				<button id="edit" type="button" class="btn btn-primary" onclick="editIssue()">Update
+				<div id="current-state" class="<c:out value="${fn:toLowerCase(viewIssue.state)}"/> viewIssueState">
+					
+				</div>
+				<button id="edit" type="button" class="btn btn-primary">Update
 					Issue</button>
 			</div>
 		</div>
@@ -31,25 +36,32 @@
 	<div class="editIssueContent">
 		<div>
 			<label for="issueTitle">Title</label> <input id="issueTitle"
-				type="text" class="form-control viewIssueTitleEdit"
+				type="text" class="form-control viewIssueTitleEdit" 
+				onkeyup="ValidateTitle()"
 				placeholder="Title">
+				<span class="error"></span>
 		</div>
 
 		<div>
 			<label for="issueContent">Content</label>
-			<textarea id="issueContent" class="form-control viewIssueContentEdit" rows="10"></textarea>
+			<textarea 
+			id="issueContent" 
+			class="form-control viewIssueContentEdit" 
+			rows="10"
+			onkeyup="ValidateContent()" 
+			></textarea>
+			<span class="error"></span>
 		</div>
 
 		<div class="editIssueFooterButtons">
 			<button id="reset" type="button" class="btn btn-default">Cancel</button>
-			<button id="send" type="button" class="btn btn-primary" onclick="updateIssue()">Save</button>
+			<button id="send" type="button" class="btn btn-primary" disabled >Save</button>
 		</div>
 
 		<div id="issue-states">
 			<span class="issue-label">Change state:</span>
-			<div class="new viewIssueState" id="New"></div>
 			<div class="opened viewIssueState" id="Opened"></div>
-			<div class="testing viewIssueState" id="InQA"></div>
+			<div class="testing viewIssueState" id="Testing"></div>
 			<div class="closed viewIssueState" id="Closed"></div>
 		</div>
 	</div>

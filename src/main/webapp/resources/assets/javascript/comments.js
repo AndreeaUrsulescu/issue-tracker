@@ -3,6 +3,11 @@ $(document).ready(function(){
 	//clear content on page "re-load" (after closing and reopening tab)
 	$("#comment-area").val('');
 	
+  	if($("#current-state").hasClass("closed")){
+  		$("#comments").prop('hidden',"display: none;");
+
+  	}
+  	
 	function clearContent(){
 		$("#comment-area").val('');
 		$("#error-msg").text(" ");
