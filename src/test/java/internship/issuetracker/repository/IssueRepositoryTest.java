@@ -23,7 +23,7 @@ public class IssueRepositoryTest {
     public Issue createIssue() {
 	Issue issue = new Issue();
 	issue.setContent("contentx");
-	issue.setTitle("titlex" + (char)count);
+	issue.setTitle("fghgtitlux" + (char)count);
 	issue.setOwner(user);
 	issue.setUpdateDate(new Date());
 	count++;
@@ -59,7 +59,7 @@ public class IssueRepositoryTest {
     public void testUpdate() {
 	Issue issue = createIssue();
 	issueRepository.create(issue);
-	issue.setTitle("New dummy content");
+	issue.setTitle("New title content");
 	issueRepository.update(issue);
 	List<Issue> compare = issueRepository.findIssuesByTitle(issue.getTitle());
 	assert (issue.equals(compare));
@@ -93,4 +93,18 @@ public class IssueRepositoryTest {
 		}
     	assert(issueRepository.nrOfPages()==2);
     }
+    
+    @Test
+    public void testFindIssuesByTitle(){
+    	for (int i = 0; i < 10; i++) {
+    		Issue issue = createIssue();
+    		issueRepository.create(issue);
+		}
+    	List<Issue> list=issueRepository.findIssuesByTitle("titlu");
+    	for (Issue issue : list) {
+    		System.out.println(issue.getTitle()); 
+		}
+    	
+    }
+    
 }
