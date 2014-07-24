@@ -3,6 +3,7 @@ package internship.issuetracker.pojo;
 import internship.issuetracker.enums.State;
 
 import java.util.Date;
+import java.util.List;
 
 public class IssuePojo {
 	
@@ -18,6 +19,8 @@ public class IssuePojo {
 	
 	private State state;
 	
+	private List<CommentPojo> comments;
+
 	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, State state) {
 		this.id = id;
 		this.content = content;
@@ -25,6 +28,16 @@ public class IssuePojo {
 		this.state = state;
 		this.title = title;
 		this.updateDate = updateDate;
+	}
+	
+	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, State state, List<CommentPojo> comments) {
+		this.id = id;
+		this.content = content;
+		this.owner = owner;
+		this.state = state;
+		this.title = title;
+		this.updateDate = updateDate;
+		this.comments = comments;
 	}
 	
 	public String getOwner() {
@@ -73,5 +86,13 @@ public class IssuePojo {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public List<CommentPojo> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentPojo> comments) {
+		this.comments = comments;
 	}
 }

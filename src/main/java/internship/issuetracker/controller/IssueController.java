@@ -72,12 +72,9 @@ public class IssueController {
 	public Map<String, Object> editIssue(@PathVariable Long id) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		Issue issue = issueService.getIssue(id);
-		IssuePojo pojoIssue = new IssuePojo(id, issue.getOwner().getUserName(),
-				issue.getTitle(), issue.getContent(), issue.getUpdateDate(),
-				issue.getState());
+		IssuePojo issue = issueService.getIssue(id);
 
-		map.put("issue", pojoIssue);
+		map.put("issue", issue);
 		return map;
 	}
 
@@ -92,17 +89,14 @@ public class IssueController {
 		issue.setUpdateDate(currentDate);
 
 		if (bindingResult.hasErrors()) {
-			Issue oldIssue = issueService.getIssue(id);
-			IssuePojo pojoIssue = new IssuePojo(id, oldIssue.getOwner()
-					.getUserName(), oldIssue.getTitle(), oldIssue.getContent(),
-					oldIssue.getUpdateDate(), oldIssue.getState());
-			map.put("issue", pojoIssue);
+			IssuePojo oldIssue = issueService.getIssue(id);
+			map.put("issue", oldIssue);
 			return map;
 		}
 
 		map.put("issue", "success");
 
-		Issue updatedIssue = issueService.getIssue(id);
+		IssuePojo updatedIssue = issueService.getIssue(id);
 		updatedIssue.setContent(issue.getContent());
 		updatedIssue.setState(issue.getState());
 		updatedIssue.setTitle(issue.getTitle());
@@ -119,32 +113,20 @@ public class IssueController {
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 		List<CommentPojo> pojoComments = new LinkedList<CommentPojo>();
-		List<Comment> comments;
-		Issue issue = issueService.getIssue(id);
+		IssuePojo issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
-
-		comment.setCreationDate(currentDate);
-		comment.setOwner(user);
-		comment.setIssue(issue);
+		CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
 
 		if (!bindingResult.hasErrors()) {
-		    commentService.addComment(comment);
+		    commentService.addComment(commentPojo);
 		    map.put("code", "success");
 		} else {
 		    map.put("code", "error");
 		}
-		comments = commentService.getCommentsForIssue(issue);
-
-		for (Comment com : comments) {
-			CommentPojo pojoComment = new CommentPojo(user.getUserName(),
-					com.getContent(), com.getCreationDate(), com.getIssue()
-							.getId());
-			pojoComments.add(pojoComment);
-			
-		}
-		map.put("comments", pojoComments);
-				
+		
+		pojoComments = commentService.getCommentsForIssue(issue);
+		map.put("comments", pojoComments);				
 		
 		return map;
 	}

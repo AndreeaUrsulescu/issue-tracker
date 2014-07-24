@@ -42,37 +42,9 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 
 var countOnSort = 1 ;
 
-function sortIssues(){
-	
+function sortIssues(issuesListSize,issuesPerPage,sortCriteria){
      countOnSort = 1 ; 
-     var sortCriteria ;// get this from UI
      
-     var issuesListSize ;
-     var issuesPerPage;
-     var dataToSend = [] ;
-     
-    // dataToSend.push(sortCriteria);
-     dataToSend.push("title");
-     dataToSend.push(CountOnSort);
-     
-     
-     $.ajax({
- 		url : "issues/searchBy" , // put some URL
- 		type : "GET",
-        data : json.stringify(dataToSend), 
- 		beforeSend : function(xhr) {
- 			xhr.setRequestHeader("Accept", "application/json");
- 			xhr.setRequestHeader("Content-Type", "application/json");
- 		},
- 		success : function(response) {
- 			//parsingAjaxResponse(response);
- 			
- 			}
- 	});
-     
-     // get issuesList Size from controller
-     
-     /*
      $("#nextButton").on( "click",sortIssuesPagination('+',issuesListSize,issuesPerPage));
  	 $("#previousButton").on( "click",sortIssuesPagination('-',issuesListSize,issuesPerPage));
  	 
@@ -81,7 +53,6 @@ function sortIssues(){
  	    
       $("#previousButton").css("visibility", "hidden");	
       
-      */
       
 }
 

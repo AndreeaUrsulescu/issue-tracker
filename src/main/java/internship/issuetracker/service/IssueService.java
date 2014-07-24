@@ -1,9 +1,13 @@
 package internship.issuetracker.service;
 
 import internship.issuetracker.comparators.UpdateDateComparator;
+import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.User;
+import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,12 +22,22 @@ import org.springframework.stereotype.Service;
 public class IssueService {
 	@Autowired
 	private IssueRepository issueRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 	}
 
-	public void updateIssue(Issue issue) {
+	public void updateIssue(IssuePojo issuePojo) {
+		User owner = userRepository.findUserByUserName(issuePojo.getOwner());
+		Issue issue = issueRepository.findIssue(issuePojo.getId());
+		issue.setOwner(owner);
+		issue.setContent(issuePojo.getContent());
+		issue.setTitle(issuePojo.getTitle());
+		issue.setUpdateDate(issuePojo.getUpdateDate());
+		issue.setState(issuePojo.getState());
 		this.issueRepository.update(issue);
 	}
 
@@ -40,8 +54,17 @@ public class IssueService {
 	    return this.issueRepository.findIssues();
 	}
 	
-	public Issue getIssue(Long id){
-		return this.issueRepository.findIssue(id);
+	public IssuePojo getIssue(Long id){
+		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+		Issue issue = this.issueRepository.findIssue(id);
+		
+		for (Comment com : issue.getComments()) {
+			CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(), com.getContent(), com.getCreationDate(), com.getIssue().getId());
+			pojoComments.add(pojoComment);
+		}
+		
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments);
+		return issuePojo;
 
 	}	
 	
