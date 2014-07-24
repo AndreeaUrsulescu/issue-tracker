@@ -32,7 +32,7 @@ public class IssueRepository {
 	public List<Issue> findIssuesByTitle(String title) {
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_TITLE,
 				Issue.class);
-		return query.setParameter("title", title.toLowerCase()).getResultList();
+		return query.setParameter("title","%"+ title + "%").getResultList();
 	}
 
 	public List<Issue> findIssuesByDate(Date date) {
