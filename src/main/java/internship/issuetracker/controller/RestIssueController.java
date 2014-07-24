@@ -33,9 +33,12 @@ public class RestIssueController {
 		return issuesListPojo;
 	}
 	
-	@RequestMapping(value = "/sortBy", method = RequestMethod.GET)
+	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Issue> search(@RequestBody ArrayList<Object> sortParameters) {
+		
+		String searchCriteria = (String) sortParameters.get(0);
+		Integer pageNumber = (Integer) sortParameters.get(1);
 		
 		List<Issue> resultList = null; //reminder -  you have to change it to IssuePojo
 		return resultList;
