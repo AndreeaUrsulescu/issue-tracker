@@ -68,11 +68,10 @@ $(document).ready(function(){
     });
 
     //for each subdiv
-    $('#issue-states > .viewIssueState').on('click',function(){
-    	if(!(this.id=='New')){
+    $('#issue-states > .viewIssueState').on('click',function(){   	
     		$('div').removeClass('current');
     	       $(this).addClass('current');
-    	}
+    	
 
      //set current active state
        $("#send").prop('disabled',false);
