@@ -1,13 +1,18 @@
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.service.IssueService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +31,14 @@ public class RestIssueController {
 		
 		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(pageNumber);
 		return issuesListPojo;
+	}
+	
+	@RequestMapping(value = "/sortBy", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Issue> search(@RequestBody ArrayList<Object> sortParameters) {
+		
+		List<Issue> resultList = null; //reminder -  you have to change it to IssuePojo
+		return resultList;
 	}
 	
 }
