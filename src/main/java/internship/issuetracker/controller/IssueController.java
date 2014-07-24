@@ -142,4 +142,6 @@ public class IssueController {
 		model.addAttribute("pages", (int)(issueService.numberOfIssues()/10+1));
 		return "issues";
 	}
+	
+	
 }
