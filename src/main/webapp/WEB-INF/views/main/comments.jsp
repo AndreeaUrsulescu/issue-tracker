@@ -43,7 +43,7 @@
 					<div class="commentBox">
 
 						<strong class="commentUser text-left"> <c:out
-								value="${comment.getOwner().getUserName()}" />
+								value="${comment.getOwner()}" />
 						</strong>
 
 						<div class="clear"></div>
