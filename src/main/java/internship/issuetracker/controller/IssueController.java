@@ -84,9 +84,6 @@ public class IssueController {
 			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		Date currentDate = new Date();
-
-		issue.setUpdateDate(currentDate);
 
 		if (bindingResult.hasErrors()) {
 			IssuePojo oldIssue = issueService.getIssue(id);
@@ -94,14 +91,9 @@ public class IssueController {
 			return map;
 		}
 
+		issue.setId(id);
 		map.put("issue", "success");
-
-		IssuePojo updatedIssue = issueService.getIssue(id);
-		updatedIssue.setContent(issue.getContent());
-		updatedIssue.setState(issue.getState());
-		updatedIssue.setTitle(issue.getTitle());
-		updatedIssue.setUpdateDate(currentDate);
-		issueService.updateIssue(updatedIssue);
+		issueService.updateIssue(issue);
 		return map;
 	}
 
