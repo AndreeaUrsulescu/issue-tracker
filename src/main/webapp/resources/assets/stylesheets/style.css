@@ -366,6 +366,12 @@ footer a {
 
 /* Menu on view all issues start */
 
+.navbar-center{
+	margin-top: 20px;
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
 .issuesMenu{
 	border-bottom:1px solid rgb(231,231,231);
 	padding-bottom:15px;
@@ -706,9 +712,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 
 #searchBar{
 	height: 100%;
-	width: 33%;
-	border-left: 1px solid rgb(231,231,231);
-	border-right: 1px solid rgb(231,231,231);
+	width: 50%;
 	float:left;
 	margin-left: 33%;
 }
