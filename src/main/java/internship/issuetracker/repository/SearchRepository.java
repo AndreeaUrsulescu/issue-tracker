@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SearchRepository {
 
-	public static int itemsPerPage = 10;
+	public static int itemsPerPage = 2;
 
 	@PersistenceContext
 	private EntityManager em;

@@ -5,46 +5,33 @@
 
 
 <div id="all">
-	<div class="container">
-		<div class="container">
-			<a href="${pageContext.request.contextPath}/issues/createIssue"
-				class="meniuBtn btn btn-primary issuesMenuButtons"><span
-				class="glyphicon glyphicon-plus"></span> Add issue </a>
-			<div class="btn btn-info issuesMenuButtons" id="enable-sort">
-				<span class="glyphicon glyphicon-sort"></span> Sort
-			</div>
-			<div id="search-bar">
-				<div id="searchBar">
-					<div id="inSearchBar">
-						<label class="searchBy">Search by </label> <select
-							class="searchSelect" id="selectS">
-							<option value="title" selected="true">title</option>
-							<option value="content">content</option>
-							<option value="state">state</option>
-						</select> <input type="text" id="searchField" class="searchSelect" /> <select
-							class="searchSelect" id="selectT">
-							<option value="New" selected="true">New</option>
-							<option value="Opened">Opened</option>
-							<option value="Testing">Testing</option>
-							<option value="Closed">Closed</option>
-						</select> <a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
-							<span class="glyphicon glyphicon-search"></span> Search
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<nav id="sort-navbar" class="navbar-center navbar navbar-default"
-			role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
+	<div id="meniu">
+		<a href="${pageContext.request.contextPath}/issues/createIssue"
+			class="meniuBtn btn btn-primary issuesMenuButtons"><span
+			class="glyphicon glyphicon-plus"></span> Add issue </a>
+
+		<div id="searchBar">
+			<div id="inSearchBar">
+				<label class="searchBy">Search by </label> <select
+					class="searchSelect" id="selectS">
+					<option value="title" selected="selected">title</option>
+					<option value="content">content</option>
+					<option value="state">state</option>
+				</select> <input type="text" id="searchField" class="searchSelect" /> <select
+					class="searchSelect" id="selectT">
+					<option value="New" selected="selected">New</option>
+					<option value="Opened">Opened</option>
+					<option value="Testing">Testing</option>
+					<option value="Closed">Closed</option>
+				</select>
+				<div>
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
 						data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Sort by</a>
+					<a class="navbar-brand" href="#">Sorted by</a>
 				</div>
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
@@ -63,14 +50,14 @@
 								<li><a class="orderElement" href="#">Descending</a></li>
 							</ul></li>
 					</ul>
-					<form class="navbar-form navbar-right" role="search">
-						<button id="search-btn" class="btn btn-info">Sort</button>
-					</form>
 				</div>
 			</div>
-		</nav>
+			<a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
+					<span class="glyphicon glyphicon-search"></span> Search
+				</a>
+		</div>
 	</div>
-	<div style="clear: both"></div>
+
 	<div id="issues">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
 			<a href="issues/issue/${issue.id}"> <span class="issue"

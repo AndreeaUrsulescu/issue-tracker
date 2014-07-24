@@ -12,11 +12,4 @@ $(document).ready(function(){
 		value += '<span class="caret"></span>';
 		$("#order").html(value);
 	});
-		
-	$("#enable-sort").on("click", function(){
-		$(this).hide();
-		$("#sort-navbar").show();
-	});
-	
-	
 });
