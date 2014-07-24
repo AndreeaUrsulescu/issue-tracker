@@ -37,7 +37,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" id="criteria"> Date <span
+							data-toggle="dropdown" id="criteria">Date<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a class="criteriaElement" href="#">Date</a></li>

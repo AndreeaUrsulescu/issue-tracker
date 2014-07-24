@@ -9,6 +9,8 @@ public class SearchParameter {
 	private String input;
 	private int pageNumber;
 	private State state;
+	private String sortCriteria ;
+	private String sortType ;
 	
 	public String getSearchCriteria() {
 		return searchCriteria;
@@ -35,6 +37,18 @@ public class SearchParameter {
 	}
 	public void setState(State state) {
 		this.state = state;
+	}
+	public String getSortCriteria() {
+		return sortCriteria;
+	}
+	public void setSortCriteria(String sortCriteria) {
+		this.sortCriteria = sortCriteria;
+	}
+	public String getSortType() {
+		return sortType;
+	}
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
 	}
 	
 	
