@@ -14,7 +14,7 @@ public class TitleFilter implements SearchFilterInt<Issue> {
 
 
 	public TitleFilter(String title) {
-		this.title = title;
+		this.title = title.toUpperCase();
 	}
 
 
@@ -23,7 +23,7 @@ public class TitleFilter implements SearchFilterInt<Issue> {
 			CriteriaBuilder cb, Root<Issue> root) {
 		String pattern = "%" + title + "%";
 		Path<String> path = root.get("title");
-		Predicate builtPredicate = cb.like(path, pattern);
+		Predicate builtPredicate = cb.like(cb.upper(path), pattern);
 		return builtPredicate;
 	}
 

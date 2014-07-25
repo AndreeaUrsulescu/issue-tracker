@@ -10,19 +10,19 @@ import internship.issuetracker.entities.Issue;
 
 public class ContentFilter implements SearchFilterInt<Issue> {
 
-	private String content;
+    private String content;
 
-	public ContentFilter(String content) {
-		this.content = content;
-	}
+    public ContentFilter(String content) {
+	this.content = content.toUpperCase();
+    }
 
-	@Override
-	public Predicate buildPredicate(CriteriaQuery<Issue> cq,
-			CriteriaBuilder cb, Root<Issue> root) {
-		
-		String pattern = "%" + content + "%";
-		Path<String> path = root.get("content");
-		Predicate predicate = cb.like(path, pattern);
-		return predicate;
-	}
+    @Override
+    public Predicate buildPredicate(CriteriaQuery<Issue> cq,
+	    CriteriaBuilder cb, Root<Issue> root) {
+
+	String pattern = "%" + content + "%";
+	Path<String> path = root.get("content");
+	Predicate predicate = cb.like(cb.upper(path), pattern);
+	return predicate;
+    }
 }
