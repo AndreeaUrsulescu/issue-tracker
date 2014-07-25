@@ -11,13 +11,27 @@ window.onload = function () {
 	   	$("#nextButton").css("visibility", "hidden");
 	    
      $("#previousButton").css("visibility", "hidden");	
+	 
 };
 
 var count  = 1;
 
 function issuePagination(type,issuesListSize,issuesPerPage) {
-
+		
 	if (type == "+" && (issuesListSize - ( count*issuesPerPage )) > 0 ) {
+		
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	 $("#issues").animate({  marginLeft: '-1800px' },0,function(){
+		   $("#issues").fadeOut(1);
+		   $("#issues").animate({  marginLeft: '1800px' },0,function(){
+		   $("#issues").fadeIn(1);
+		   $("#issues").animate({  marginLeft: '80px' },1000);
+	   });
+	 });
+
+	///////////////////////////////////////////////////////////////////////////////////
+	
 		count = count + 1 ;
 		if ( (issuesListSize - ( count*issuesPerPage )) <= 0 ){
 			$("#nextButton").css("visibility", "hidden");	
@@ -29,6 +43,20 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			
 		}
 	} else if (type == "-"  && count > 1 ) {
+
+	///////////////////////////////////////////////////////////////////////////////////
+		
+	
+	 $("#issues").animate({  marginLeft: '1800px' },0,function(){
+		   $("#issues").fadeOut(1);
+		   $("#issues").animate({  marginLeft: '-1800px' },0,function(){
+		   $("#issues").fadeIn(1);
+		   $("#issues").animate({  marginLeft: '80px' },1000);
+	   });
+	 });
+
+	
+	///////////////////////////////////////////////////////////////////////////////////
 		count = count -1 ;
 		$("#nextButton").css("visibility", "visible");	
 		
@@ -38,14 +66,16 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 	}
 	 document.getElementById("pageNumber").innerHTML = count;
 	ajaxForPagination(count);
+	
 }
 
 var countOnSort = 1 ;
 
+// TODO: if needed change val() with text()
 function searchIssues(){
      countOnSort = 1 ; 
-     
-     var searchCriteria = $("#selectS").val(); 
+
+     var searchCriteria = $("#selectS").val().trim(); 
      var input ; 
      var state ; 
      var filterData ;
@@ -57,9 +87,9 @@ function searchIssues(){
     		 searchCriteria : searchCriteria ,
     		 state : state,
     		 pageNumber : 1,
-    		 sortCriteria : $("#criteria").text(),
-    		 sortType : $("#order").text()
-      	}
+    		 sortCriteria : $("#criteria").val().trim(),
+    		 sortType : $("#order").val().trim()
+      	};
      }
      else {
     	 input = $("#searchField").val();
@@ -67,9 +97,31 @@ function searchIssues(){
         		 searchCriteria : searchCriteria ,
         		 input : input,
         		 pageNumber : 1,
-        		 sortCriteria : $("#criteria").text(),
-        		 sortType : $("#order").text()
-          	}
+        		 sortCriteria : $("#criteria").val().trim(),
+        		 sortType : $("#order").val().trim()
+          	};
+     }
+     
+     if (searchCriteria == "state") {
+    	 
+      state = $("#selectT").val().trim();
+      filterData = {
+    		 searchCriteria : searchCriteria ,
+    		 state : state,
+    		 pageNumber : 1,
+    		 sortCriteria : $("#criteria").val().trim(),
+    		 sortType : $("#order").val().trim()
+      	};
+     }
+     else {
+    	 input = $("#searchField").val().trim();
+    	 filterData = {
+        		 searchCriteria : searchCriteria ,
+        		 input : input,
+        		 pageNumber : 1,
+        		 sortCriteria : $("#criteria").val().trim(),
+        		 sortType : $("#order").val().trim()
+          	};
      }
      
      $.ajax({
@@ -136,7 +188,7 @@ function ajaxForSearchPagination(page){
       		 pageNumber : page,
       		 sortCriteria : $("#criteria").text(),
       		 sortType : $("#order").text()
-        	}
+        	};
        }
        else {
       	 input = $("#searchField").val();
@@ -146,7 +198,7 @@ function ajaxForSearchPagination(page){
           		 pageNumber : page,
           		 sortCriteria : $("#criteria").text(),
           		 sortType : $("#order").text()
-            	}
+            	};
        }
      
 	$.ajax({

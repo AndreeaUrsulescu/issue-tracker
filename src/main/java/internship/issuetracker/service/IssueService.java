@@ -3,7 +3,6 @@ package internship.issuetracker.service;
 import internship.issuetracker.comparators.UpdateDateComparator;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.repository.IssueRepository;

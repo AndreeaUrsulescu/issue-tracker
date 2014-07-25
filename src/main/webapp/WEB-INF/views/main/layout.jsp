@@ -4,6 +4,8 @@
 	<head>	
 		<!-- Loading JQuery latest build -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		
+		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -34,8 +36,6 @@
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 		
 		 <script src="${pageContext.request.contextPath}/resources/assets/javascript/search.js"></script>
-		 
-		 <script src="${pageContext.request.contextPath}/resources/assets/javascript/issueSort.js"></script>
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />

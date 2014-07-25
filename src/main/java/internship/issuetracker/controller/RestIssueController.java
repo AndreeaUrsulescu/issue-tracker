@@ -48,7 +48,6 @@ public class RestIssueController {
 		
 		List<IssuePojo> resultList = null;
 		Map<String, Object> map = new HashMap<String,Object>();
-		System.out.println(sortCriteria+" "+sortType);
 		if(searchCriteria.equals("title")){
 			resultList = searchService.findOrderedIssuesByTitle(searchParameters.getInput(), pageNumber,sortCriteria,sortType);
 			map.put("listLength",searchService.numberOfIssuesByTitle(searchParameters.getInput()));

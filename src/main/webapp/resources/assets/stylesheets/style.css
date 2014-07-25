@@ -4,6 +4,11 @@
 	margin: 0 auto;
 }
 
+textarea{
+	// obviously
+	resize:none;
+}
+
 .headerTitle span {
 	font-size: 44px;
 }
@@ -377,10 +382,11 @@ footer a {
 	padding-bottom:15px;
 }
 
-.issuesMenuButtons{
+	.issuesMenuButtons{
 	text-decoration: none;
 	margin-right: 10px;
 	margin-top: 10px;
+	margin-left:90px;
 }
 
 
@@ -712,9 +718,9 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 
 #searchBar{
 	height: 100%;
-	width: 50%;
+	width: 80%;
 	float:left;
-	margin-left: 33%;
+	margin-left: 10%;
 }
 
 #inSearchBar{
@@ -722,14 +728,13 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	width:90%;
 	margin-left: 10%;
 	position: relative;
-	margin-top: 15px;;
+	margin-top: 15px;
 }
 
 .searchBy{
 	color: rgb(47,95,150);
 	font-weight: bold;
 	font-size: 18px;
-	float: left;
 	//text-shadow: -1px 1px 5px rgba(150, 150, 150, 1);
 }
 
@@ -748,5 +753,23 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-top: -2px;
 	margin-left: 5px;
 }
+#left{
+	position: absolute;
+	margin-top: 340px;
+}
 
-
+#right{
+	position: absolute;
+	margin-top: 340px;
+	//margin-left: 1848px;
+	float:right;
+	right:0px;
+}
+.ordering{
+	float: left;
+}
+#meniu{
+	width: 90%;
+	margin-left:auto;
+	margin-right:auto;
+}
