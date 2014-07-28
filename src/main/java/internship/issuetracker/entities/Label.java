@@ -15,14 +15,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
+@SuppressWarnings("serial")
+@NamedQueries({
+		@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
+		@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a")
+		})
 @Entity
 @Table(name = "Labels")
 public class Label implements Serializable{
+	
+	public static final String FIND_BY_NAME = "Label.findByName";
+	public static final String FIND_ALL = "Label.findAll";
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
