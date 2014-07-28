@@ -50,7 +50,7 @@ public class LabelServiceTest {
 		user.setEmail("user@user.com"+(char)count);
 		user.setPassword("password");
 		user.setUserName("User"+(char)+count);
-
+		
 	}
 	
 	@Test
