@@ -598,6 +598,7 @@ footer a {
 	font-family:  "Comic Sans MS", cursive, sans-serif;
 	color: rgb(90,90,90);
 	word-wrap: break-word;
+
 }
 
 .issue{
@@ -608,11 +609,9 @@ footer a {
 	margin-top: 40px;
 	color: rgb(90,90,90);
 
--webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+/*-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 -moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
-box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
-
-
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 
 }
 
@@ -671,38 +670,58 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 /*	color: rgb(47,95,150);*/
 }
 
-#iss0{
-	background-color: rgb(239,171,60);
+.iss0{
+	//background-color: rgb(239,171,60);
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(239,171,60) inset;
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(239,171,60) inset;
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(239,171,60) inset;
 }
-#iss1{
+.iss1{
 	background-color: rgb(198,167,209);
 }
-#iss2{
-	background-color: rgb(205,222,82);
+.iss2{
+	//background-color: rgb(205,222,82);
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(56,159,233) inset ;
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(56,159,233) inset ;
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(56,159,233) inset ;
+
 }
-#iss3{
+.iss3{
 	background-color: rgb(231,118,169);//rgb(227,99,156);
 
 }
-#iss4{
+.iss4{
 	background-color: rgb(189,218,226);
 }
-#iss5{
-	background-color: rgb(230,230,230);
+.iss5{
+	//background-color: rgb(230,230,230);
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(230,230,230) inset;
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(230,230,230) inset;
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(230,230,230) inset;
 	
 }
-#iss6{
-	background-color: rgb(231,118,169);
+.iss6{
+	//background-color: rgb(231,118,169);
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(205,222,82) inset;
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(205,222,82) inset;
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62), 0px -1px 167px 80px rgb(205,222,82) inset;	
 }
-#iss7{
+.iss7{
 	background-color: rgb(181,211,219);
 	
 }
-#iss8{
+.iss8{
 	background-color: rgb(198,167,209);
 }
-#iss9{
+.iss9{
 	background-color: rgb(231,233,88);
+}
+
+.shadow{
+	
+-webkit-box-shadow: -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+-moz-box-shadow:    -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
+box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 }
 
 .pinB3{
