@@ -53,18 +53,19 @@ public class RestIssueController {
 		
 		List<IssuePojo> resultList = null;
 		Map<String, Object> map = new HashMap<String,Object>();
-		if(searchCriteria.equals("title")){
-			resultList = searchService.findOrderedIssuesByTitle(searchParameters.getInput(), pageNumber,sortCriteria,sortType);
-			map.put("listLength",searchService.numberOfIssuesByTitle(searchParameters.getInput()));
+		
+		
+		
+		if (searchCriteria.equals("state")){
+			resultList = searchService.findOrderedIssues(searchCriteria,searchParameters.getState(), pageNumber,sortCriteria,sortType);
+			map.put("listLength",searchService.numberOfIssues(searchCriteria,searchParameters.getState()));
 			}
-		else if (searchCriteria.equals("content")){
-			resultList = searchService.findOrderedIssuesByContent(searchParameters.getInput(), pageNumber,sortCriteria,sortType);
-			map.put("listLength",searchService.numberOfIssuesByContent(searchParameters.getInput()));
+
+		else{
+			resultList = searchService.findOrderedIssues(searchCriteria,searchParameters.getInput(), pageNumber,sortCriteria,sortType);
+			map.put("listLength",searchService.numberOfIssues(searchCriteria,searchParameters.getInput()));
 			}
-		else if (searchCriteria.equals("state")){
-			resultList = searchService.findOrderedIssuesByState(searchParameters.getState(), pageNumber,sortCriteria,sortType);
-			map.put("listLength",searchService.numberOfIssuesByState(searchParameters.getState()));
-			}
+		
 		map.put("issuesList", resultList);
 		map.put("issuesPerPage",SearchRepository.itemsPerPage );
 		

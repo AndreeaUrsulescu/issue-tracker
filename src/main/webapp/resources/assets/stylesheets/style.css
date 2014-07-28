@@ -4,11 +4,6 @@
 	margin: 0 auto;
 }
 
-textarea{
-	// obviously
-	resize:none;
-}
-
 .headerTitle span {
 	font-size: 44px;
 }
@@ -121,7 +116,7 @@ footer a {
 	font-weight: bold;
 }
 
-.commentSection {
+.commentSection, .labelSection {
 	margin: 0 auto;
 	width: 700px;
 }
@@ -791,4 +786,25 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	width: 90%;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+/* label section css */
+
+.selected-labels{
+	margin-top: 10px;
+}
+
+.labels{
+	z-index:999;
+    position:absolute;
+    background:#fff;
+    width: 700px;
+    height:100px;
+	overflow-y:scroll;
+}
+
+.commentSectionTitle{
+	text-align:center;
+	color:#428bca;
+	padding-bottom:5px;
 }

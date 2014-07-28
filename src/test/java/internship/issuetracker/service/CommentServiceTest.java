@@ -37,6 +37,7 @@ public class CommentServiceTest {
 		
 		Issue issue = new Issue();
 		issue.setTitle("Issue nr 1");
+		issue.setOwner(user);
 		issue.setContent("Content for issue nr 1");
 
 		Comment comment = new Comment();
