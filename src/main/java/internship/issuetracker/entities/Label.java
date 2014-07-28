@@ -1,6 +1,7 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class Label implements Serializable{
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable (name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns  = @JoinColumn (name = "id_issue"))
-	private Set<Issue> issues = new HashSet <Issue>();
+	private List<Issue> issues = new ArrayList <Issue>();
 
 	public Long getId() {
 		return id;
@@ -53,11 +54,11 @@ public class Label implements Serializable{
 		this.labelName = labelName;
 	}
 
-	public Set<Issue> getIssues() {
+	public List<Issue> getIssues() {
 		return issues;
 	}
 
-	public void setIssues(Set<Issue> issues) {
+	public void setIssues(List<Issue> issues) {
 		this.issues = issues;
 	}
 

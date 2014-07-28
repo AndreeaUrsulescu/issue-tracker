@@ -1,6 +1,7 @@
 package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.repository.IssueRepository;
 
@@ -32,9 +33,9 @@ public class LabelService {
 	{
 		List<Label> Labels= finaAllLabels();
 		List<LabelPojo> PojoLabels=new ArrayList<LabelPojo>();
-		for(Label l:Labels)
+		for(Label label:Labels)
 		{
-			PojoLabels.add(convertLabelEntityToPojoLabel(l));
+			PojoLabels.add(convertLabelEntityToPojoLabel(label));
 		}
 		return PojoLabels;
 	}
