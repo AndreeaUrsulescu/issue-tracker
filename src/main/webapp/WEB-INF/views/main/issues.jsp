@@ -97,7 +97,7 @@
 	<br>
 
 	<div id="pages">
-		<label id="pageNumber">1 </label><label
+		<label id="pageNumber">1 </label><label id="total"
 			style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/ ${pages}</label>
 	</div>
 </div>
