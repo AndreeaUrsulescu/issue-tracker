@@ -65,8 +65,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 		}
 	}
 	 document.getElementById("pageNumber").innerHTML = count;
-	 document.getElementById("total").innerHTML ="/" + numberOfIssues/issuesPerPage;
-	 
+
 	ajaxForPagination(count);
 	
 }
