@@ -16,6 +16,12 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		
+		<!-- 		jquery UI stylesheet -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+		
+		<!-- 		jquery UI JavaScript -->
+		<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
+		
 		<!-- Loading custom style -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/style.css" type="text/css">
 		
