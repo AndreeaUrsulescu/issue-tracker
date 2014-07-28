@@ -1,6 +1,6 @@
 package internship.issuetracker.repository;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
@@ -23,10 +23,10 @@ public class LabelRepositoryTest {
 
 	@Autowired
 	private LabelRepository labelRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private IssueRepository issueRepository;
 
@@ -45,12 +45,10 @@ public class LabelRepositoryTest {
 		issues.add(issue);
 		label.setIssues(issues);
 		labelRepository.update(label);
-		System.out.println("dupa create label");
 		count++;
 		return label;
-		
 	}
-	
+
 	@Before
 	@Transactional
 	public void setUp() {
@@ -67,11 +65,36 @@ public class LabelRepositoryTest {
 		issueRepository.create(issue);
 		icount++;
 	}
-	
+
 	@Test
-	public void testCreate() {
+	public void findLabelsTest() {
+		System.out.println((char) count);
+		createLabel();
+
+		assert (labelRepository.findLabels().size() == 1);
+	}
+
+	@Test
+	public void findLabelByNameTest() {
 		Label label = createLabel();
-		System.out.println("dupa apel");
-		assertEquals(labelRepository.findLabelByName(label.getLabelName()).getLabelName(), label.getLabelName());
+		assertEquals(labelRepository.findLabelByName(label.getLabelName())
+				.getLabelName(), label.getLabelName());
+	}
+
+	@Test
+	public void createTest() {
+		Label label = createLabel();
+		assertEquals(labelRepository.findLabelByName(label.getLabelName())
+				.getLabelName(), label.getLabelName());
+	}
+
+	@Test
+	@Transactional
+	public void updateTest() {
+		Label label = createLabel();
+		label.setLabelName("AnotherName");
+		labelRepository.update(label);
+		assertEquals(labelRepository.findLabelByName(label.getLabelName())
+				.getLabelName(), "AnotherName");
 	}
 }

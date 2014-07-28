@@ -1,9 +1,11 @@
 package internship.issuetracker.controller;
 
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
+import internship.issuetracker.service.LabelService;
 import internship.issuetracker.service.SearchService;
 
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +31,9 @@ public class RestIssueController {
 	
 	@Autowired 
 	private SearchService searchService;
+	
+	@Autowired
+	private LabelService labelService;
 	
 	@RequestMapping(value = "/page/{pageNumber}", method = RequestMethod.GET)
 	@ResponseBody
@@ -64,4 +70,18 @@ public class RestIssueController {
 		return map;
 	}
 	
+	@RequestMapping(value = "/labels", method = RequestMethod.GET)
+	@ResponseBody
+	public List<LabelPojo> getLabels(){
+		
+		List<LabelPojo> issuesListPojo =  labelService.getAllLabels();
+		return issuesListPojo;
+	}
+	
+
+	@RequestMapping(value = "/issue/{issueId}/addLabel", method = RequestMethod.POST)
+	@ResponseBody
+	public void addLabel(@PathVariable("issueId") Long issueId,@RequestBody LabelPojo addLabel) {
+			labelService.assignLabelToIssue(issueId,addLabel);
+	}
 }
