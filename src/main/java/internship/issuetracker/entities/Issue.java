@@ -4,7 +4,9 @@ import internship.issuetracker.enums.State;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -72,6 +76,10 @@ public class Issue implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
+	
+	@ManyToMany(mappedBy="issues")
+	private Set<Label> labels = new HashSet<Label>(); 
+	
 
 	public Issue() {
 		state = State.New;
