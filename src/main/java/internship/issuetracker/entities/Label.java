@@ -1,14 +1,13 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,15 +36,23 @@ public class Label implements Serializable{
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	
+	public Set<Issue> getIssues() {
+	    return issues;
+	}
+
+	public void setIssues(Set<Issue> issues) {
+	    this.issues = issues;
+	}
+
 	@Column(name = "label_name", nullable = false, unique = true)
 	@Size(min = 3, max = 20)
 	@Pattern(regexp= "^[a-zA-Z]{3,20}$")
 	private String labelName;
 	
 	
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable (name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns  = @JoinColumn (name = "id_issue"))
-	private List<Issue> issues = new ArrayList <Issue>();
+	private Set<Issue> issues = new HashSet <Issue>();
 
 	public Long getId() {
 		return id;
@@ -62,17 +69,5 @@ public class Label implements Serializable{
 	public void setLabelName(String labelName) {
 		this.labelName = labelName;
 	}
-
-	public List<Issue> getIssues() {
-		return issues;
-	}
-
-	public void setIssues(List<Issue> issues) {
-		this.issues = issues;
-	}
-
-
-	
-	
 }
 

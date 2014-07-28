@@ -38,6 +38,19 @@ $(document).ready(function(){
     }
 
     function editIssue() {
+    	
+    	var labelUrl = "../labels";
+    	$.ajax({
+    		dataType: "json",
+    		type: "GET",
+    		url: labelUrl,
+    		success: function(rsp) {
+    			for(var index = 0; index < rsp.length; index++){
+    				availableTags.push(rsp[index].labelName);
+    			}
+    		}
+    	});
+    	
     	var url = window.location.origin + window.location.pathname + "/api";
     	$.ajax({
     		dataType: "json",
@@ -58,11 +71,36 @@ $(document).ready(function(){
     	$("#label-editor").show();
     	
     }
+    
+    function addLabel(){
+    	if (validateLabel() == true){
+	    	//preia url-ul curent
+	    	var url = window.location.origin + window.location.pathname + "/addLabel";
+	    	var labelData = {
+	    			'labelName' : $("#tags").val().trim()
+	         	};	
+	    	$.ajax({
+	    		data: JSON.stringify(labelData),
+	    		dataType: "json",
+	    		contentType: "application/json;charset=UTF-8",
+	    		type: "POST",
+	    		url: url,
+	    		success: function(rsp) {
+	    			alert("succes");
+	    			$("active-labels").html('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+	    					+'<span class="glyphicon glyphicon-remove"></span>');
+	    			if(availableTags.indexOf($("#tags").val().trim()) !== -1){
+	    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
+	    			}
+	    		}
+	    	});
+    	}
+    }
     $("#label-editor").hide();
     $(".viewIssueTitleEdit").focus();
     $("#edit").click(editIssue);
     $("#send").click(updateIssue);
-
+    $("#label-btn").click(addLabel);
 	$(".editIssueContent").hide();
 	
     $("#reset").click(function(){
@@ -91,28 +129,21 @@ $(document).ready(function(){
 		var input=$("#tags");
 		var value=input.val().trim();
 		var label_regex=/^[a-zA-Z0-9]+$/;
-		var btn=$("#label-btn");
 		input.parent().parent().find(".error").text(" ");
 		if(value.length<=3||value.length>20)
-			{
+		{
 			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
-			btn.prop("disabled",true);
 			return false;
-			}
+		}
 		if(!value.match(label_regex))
-			{
+		{
 			input.parent().parent().find(".error").text("Alpha-numeric characters only");
-			btn.prop("disabled",true);
 			return false;
-			}
-		btn.prop("disabled",false);
+		}
 		return true;
 	}
-	$("#tags").keyup(validateLabel);
-	var availableTags = [ "ActionScript", "AppleScript", "Asp", "BASIC",
-				"C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang",
-				"Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp",
-				"Perl", "PHP", "Python", "Ruby", "Scala", "Scheme" ];
+    $("#tags").keyup(validateLabel);
+	var availableTags = [];
 	$("#tags").autocomplete({
 		source : availableTags
 	});

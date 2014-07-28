@@ -16,10 +16,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="labelSection selected-labels">
+	<div id="active-labels" class="labelSection selected-labels">
 		<!--TEMPLATE HERE -->
-		<span class="issueLabel label label-primary"> java <span
-			class="glyphicon glyphicon-remove"></span>
+<!-- 		<span class="issueLabel label label-primary"> java <span -->
+<!-- 			class="glyphicon glyphicon-remove"></span> -->
 		</span>
 	</div>
 	<br>
