@@ -57,8 +57,23 @@
 	<div style="clear: both"></div>
 	<div id="issues" class="row">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
-			<div class="col-md-4"><a href="issues/issue/${issue.id}"> <span class="issue"
-				id="iss${i.index}"> <span class="border"> <!--					<img class="pinB3" src="${pageContext.request.contextPath}/resources/assets/images/pin2.png"/>-->
+			<div class="col-md-4"><a href="issues/issue/${issue.id}"> 
+<!--			<span class="issue"> -->
+					<c:choose>
+								<c:when test="${issue.state == 'New'}">
+									<span class="issue iss6">
+								</c:when>
+								<c:when test="${issue.state == 'Opened'}">
+									<span class="issue iss2">
+								</c:when>
+								<c:when test="${issue.state == 'Testing'}">
+									<span class="issue iss0">
+								</c:when>
+								<c:otherwise>
+									<span class="issue iss5">				
+								</c:otherwise>
+					</c:choose>		
+						<span class="border"> 
 						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
 				</span> <span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />

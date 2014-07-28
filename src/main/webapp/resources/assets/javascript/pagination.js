@@ -280,9 +280,17 @@ function parsingAjaxResponse(response){
 		 stickyNote.setAttribute("href",stickyNoteHref);
 		  
 		 var stickyNoteContent = document.createElement("DIV");
-		 stickyNoteContent.setAttribute("class", "issue");
-		 stickyNoteContent.setAttribute("id","iss"+index);
 		 
+		 if(response[index].state == "New") 
+			 stickyNoteContent.setAttribute("class","issue iss"+6); 
+		 if(response[index].state == "Opened") 
+			 stickyNoteContent.setAttribute("class","issue iss"+2); 
+		 if(response[index].state == "Testing") 
+			 stickyNoteContent.setAttribute("class","issue iss"+0); 
+		 if(response[index].state == "Closed") 
+			 stickyNoteContent.setAttribute("class","issue iss"+5);
+		 
+
 		 var title = document.createElement("DIV");
 		 title.setAttribute("class", "border");
 		 
