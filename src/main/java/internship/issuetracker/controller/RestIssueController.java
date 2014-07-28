@@ -5,6 +5,7 @@ import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
+import internship.issuetracker.service.LabelService;
 import internship.issuetracker.service.SearchService;
 
 import java.util.HashMap;
@@ -74,9 +75,9 @@ public class RestIssueController {
 	
 	@RequestMapping(value = "/labels", method = RequestMethod.GET)
 	@ResponseBody
-	public List<LabelPojo> getLabels() {
+	public List<LabelPojo> getLabels(){
 		
-		List<LabelPojo> issuesListPojo =  labelService.getLabels();
+		List<LabelPojo> issuesListPojo =  labelService.getAllLabels();
 		return issuesListPojo;
 	}
 	

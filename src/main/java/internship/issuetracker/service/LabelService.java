@@ -30,7 +30,7 @@ public class LabelService {
 		entity.setLabelName(pojo.getLabelName());
 	}
 	
-	List<LabelPojo> getAllLabels()
+	public List<LabelPojo> getAllLabels()
 	{
 		List<Label> Labels= labelRepository.findLabels();
 		List<LabelPojo> PojoLabels=new ArrayList<LabelPojo>();
