@@ -15,7 +15,7 @@
 
 </div>
 
-<footer class="footer nav navbar-default navbar-fixed-bottom">
+<footer class="footer nav navbar-default ">
 	<div class="container">
 		<small>
 			<a href="#" target="blank">&copy; Issue Tracker </a>
@@ -23,7 +23,7 @@
 	
 		<nav>
 			<ul>
-				<li><a href="https://github.com/demnok">Git Hub</a></li>
+				<li><a href="https://github.com/">Git Hub</a></li>
 			</ul>
 		</nav>
 	</div>

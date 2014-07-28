@@ -23,9 +23,9 @@
 
 				<div id="counter" class="label label-default">500</div>
 
-				<div id="send-btn" class="btn btn-primary">Save</div>
-
 				<div id="clear-btn" class="btn btn-default">Clear</div>
+
+				<div id="send-btn" class="btn btn-primary">Save</div>
 
 			</div>
 
