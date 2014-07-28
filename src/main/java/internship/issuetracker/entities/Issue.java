@@ -3,6 +3,7 @@ package internship.issuetracker.entities;
 import internship.issuetracker.enums.State;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -78,7 +79,7 @@ public class Issue implements Serializable {
 	private List<Comment> comments;
 	
 	@ManyToMany(mappedBy="issues")
-	private Set<Label> labels = new HashSet<Label>(); 
+	private List<Label> labels = new ArrayList<Label>(); 
 	
 
 	public Issue() {
@@ -146,6 +147,14 @@ public class Issue implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder().append(title).append(owner)
 				.append(updateDate).toHashCode();
+	}
+	
+	public List<Label> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<Label> labels) {
+		this.labels = labels;
 	}
 
 	@Override
