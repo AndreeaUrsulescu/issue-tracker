@@ -48,17 +48,16 @@
 				</select> <select class="searchSelect" id="order">
 					<option value="Descending" selected="selected">Descending</option>
 					<option value="Ascending">Ascending</option>
-				</select>
-				<a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
+				</select> <a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
 					<span class="glyphicon glyphicon-search">&nbsp;Search</span>
 				</a>
 			</div>
 		</div>
 	</div>
-	<div style="clear:both"></div>
-	<div id="issues">
+	<div style="clear: both"></div>
+	<div id="issues" class="row">
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
-			<a href="issues/issue/${issue.id}"> <span class="issue"
+			<div class="col-md-4"><a href="issues/issue/${issue.id}"> <span class="issue"
 				id="iss${i.index}"> <span class="border"> <!--					<img class="pinB3" src="${pageContext.request.contextPath}/resources/assets/images/pin2.png"/>-->
 						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
 				</span> <span class="content"> <span class="title"> <c:out
@@ -77,12 +76,13 @@
 				</span> <label class="owner">Updated by ${issue.owner}</label>
 			</span>
 			</a>
+			</div>
 		</c:forEach>
 	</div>
 	<br>
 
 	<div id="pages">
 		<label id="pageNumber">1 </label><label
-			style="color: rgb(47, 95, 150); font-size: 17px;">/ ${pages}</label>
+			style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/ ${pages}</label>
 	</div>
 </div>

@@ -5,7 +5,7 @@
 <script src="resources/assets/javascript/register-validation.js"></script>
 <div class="container registerContainer">
 	
-	<div class="registerForm" style="margin-top: 200px;">
+	<div class="registerForm" >
 
 		<sf:form id="registerForm" method="POST" role="form"
 			modelAttribute="user">
