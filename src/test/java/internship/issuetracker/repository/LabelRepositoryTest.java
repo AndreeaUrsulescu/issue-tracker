@@ -68,7 +68,6 @@ public class LabelRepositoryTest {
 
 	@Test
 	public void findLabelsTest() {
-		System.out.println((char) count);
 		createLabel();
 
 		assert (labelRepository.findLabels().size() == 1);
