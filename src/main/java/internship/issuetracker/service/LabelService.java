@@ -4,6 +4,7 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.repository.LabelRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class LabelService {
 	
 	List<LabelPojo> getAllLabels()
 	{
-		List<Label> Labels= finaAllLabels();
+		List<Label> Labels= labelRepository.findLabels();
 		List<LabelPojo> PojoLabels=new ArrayList<LabelPojo>();
 		for(Label label:Labels)
 		{
@@ -44,7 +45,7 @@ public class LabelService {
 	public void assignLabelToIssue(Long id,LabelPojo labelPojo)
 	{
 		Issue issue=issueRepository.findIssue(id);
-		Label label=findLabelByName(labelPojo.getLabelName());
+		Label label=labelRepository.findLabelByName(labelPojo.getLabelName());
 		if(null!=label)
 		{
 			label.getIssues().add(issue);
