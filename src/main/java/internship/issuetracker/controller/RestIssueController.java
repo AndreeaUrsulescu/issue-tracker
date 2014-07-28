@@ -48,9 +48,6 @@ public class RestIssueController {
 	public Map<String,Object> search(@ModelAttribute SearchParameter searchParameters) {
 		
 		String searchCriteria = searchParameters.getSearchCriteria();
-		int pageNumber = searchParameters.getPageNumber();
-		String sortCriteria = searchParameters.getSortCriteria();
-		String sortType = searchParameters.getSortType();
 		
 		List<IssuePojo> resultList = null;
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -58,13 +55,13 @@ public class RestIssueController {
 		
 		
 		if (searchCriteria.equals("state")){
-			resultList = searchService.findOrderedIssues(searchCriteria,searchParameters.getState(), pageNumber,sortCriteria,sortType);
-			map.put("listLength",searchService.numberOfIssues(searchCriteria,searchParameters.getState()));
+			resultList = searchService.findOrderedIssues(searchParameters);
+			map.put("listLength",searchService.numberOfIssues(searchParameters));
 			}
 
 		else{
-			resultList = searchService.findOrderedIssues(searchCriteria,searchParameters.getInput(), pageNumber,sortCriteria,sortType);
-			map.put("listLength",searchService.numberOfIssues(searchCriteria,searchParameters.getInput()));
+			resultList = searchService.findOrderedIssues(searchParameters);
+			map.put("listLength",searchService.numberOfIssues(searchParameters));
 			}
 		
 		map.put("issuesList", resultList);
