@@ -1,13 +1,12 @@
 package internship.issuetracker.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.repository.TitleFilter;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +39,14 @@ public class SearchServiceTest {
 
 		TitleFilter filter = new TitleFilter("titlu");
 		Mockito.when(searchRepository.numberOfIssues(filter)).thenReturn(0);
+		SearchParameter searchParameter=new SearchParameter();
+		searchParameter.setPageNumber(0);
+		searchParameter.setInput("titlu");
+		searchParameter.setSearchCriteria("title");
+		searchParameter.setSortCriteria("Date");
+		searchParameter.setSortType("Descending");
 		
-		int actualResult=searchService.numberOfIssues("title", "titlu");
+		int actualResult=searchService.numberOfIssues(searchParameter);
 		assertEquals(0, actualResult);
 	}
 
@@ -50,9 +55,14 @@ public class SearchServiceTest {
 
 		TitleFilter filter = new TitleFilter("titlu");
 		Mockito.when(searchRepository.findOrderedIssues(filter, 0, "Date", "Descending")).thenReturn(new ArrayList<Issue>());
+		SearchParameter searchParameter=new SearchParameter();
+		searchParameter.setPageNumber(0);
+		searchParameter.setInput("titlu");
+		searchParameter.setSearchCriteria("title");
+		searchParameter.setSortCriteria("Date");
+		searchParameter.setSortType("Descending");
 		
-		int actualResult= searchService.findOrderedIssues("title", "title", 0, "Date", "Descending").size();
-		System.out.println(actualResult);
+		int actualResult= searchService.findOrderedIssues(searchParameter).size();
 		assertEquals(0, actualResult);
 	}
 

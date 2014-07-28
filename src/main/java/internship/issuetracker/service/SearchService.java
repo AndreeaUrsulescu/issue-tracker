@@ -3,6 +3,7 @@ package internship.issuetracker.service;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.enums.State;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.ContentFilter;
 import internship.issuetracker.repository.SearchFilterInt;
 import internship.issuetracker.repository.SearchRepository;
@@ -34,34 +35,36 @@ public class SearchService {
 		return issuesListPojo;
 	}
 
-	public int numberOfIssues(String searchCriteria,Object obj) {
+	public int numberOfIssues(SearchParameter searchParameters) {
 		SearchFilterInt<Issue> filter = null;
+		String searchCriteria = searchParameters.getSearchCriteria();
 		if(searchCriteria.equals("title")){
-			filter = new TitleFilter((String)obj);
+			filter = new TitleFilter(searchParameters.getInput());
 			}
 		else if (searchCriteria.equals("content")){
-			filter = new ContentFilter((String)obj);
+			filter = new ContentFilter(searchParameters.getInput());
 			}
 		else if (searchCriteria.equals("state")){
-			filter = new StateFilter((State)obj);
+			filter = new StateFilter(searchParameters.getState());
 			}	
 		return searchRepository.numberOfIssues(filter);
 	}
 
-	public List<IssuePojo> findOrderedIssues(String searchCriteria, Object obj, int currentPage, String orderField, String orderType) {
-		
+	public List<IssuePojo> findOrderedIssues(SearchParameter searchParameters) {
+			
+		String searchCriteria = searchParameters.getSearchCriteria();
 		SearchFilterInt<Issue> filter = null;
 		if(searchCriteria.equals("title")){
-			filter = new TitleFilter((String)obj);
+			filter = new TitleFilter(searchParameters.getInput());
 			}
 		else if (searchCriteria.equals("content")){
-			filter = new ContentFilter((String)obj);
+			filter = new ContentFilter(searchParameters.getInput());
 			}
 		else if (searchCriteria.equals("state")){
-			filter = new StateFilter((State)obj);
+			filter = new StateFilter(searchParameters.getState());
 			}		
 		
-		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(filter, currentPage, orderField, orderType);
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(filter, searchParameters.getPageNumber(), searchParameters.getSortCriteria(), searchParameters.getSortType());
 
 		return entityToPojo(issuesListEntity);
 	}
