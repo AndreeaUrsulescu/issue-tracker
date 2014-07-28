@@ -97,4 +97,11 @@ public class LabelRepositoryTest {
 		assertEquals(labelRepository.findLabelByName(label.getLabelName())
 				.getLabelName(), "AnotherName");
 	}
+	
+	@Test
+	public void deleteTest() {
+		Label label = createLabel();
+		labelRepository.delete(label);
+		assert(labelRepository.findLabelByName(label.getLabelName()) == null);
+	}
 }

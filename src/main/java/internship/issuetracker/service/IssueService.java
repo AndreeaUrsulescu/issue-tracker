@@ -8,8 +8,6 @@ import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
