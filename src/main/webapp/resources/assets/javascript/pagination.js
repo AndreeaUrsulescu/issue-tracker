@@ -65,6 +65,8 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 		}
 	}
 	 document.getElementById("pageNumber").innerHTML = count;
+	 document.getElementById("total").innerHTML ="/" + numberOfIssues/issuesPerPage;
+	 
 	ajaxForPagination(count);
 	
 }
@@ -200,7 +202,7 @@ function sortIssuesPagination(type,issuesListSize,issuesPerPage){
 		}
 	}
 	 document.getElementById("pageNumber").innerHTML = countOnSort;
-     document.getElementById("total").innerHTML = Math.ceil((issuesListSize/issuesPerPage));
+     document.getElementById("total").innerHTML ="/"+ Math.ceil((issuesListSize/issuesPerPage));
 	 ajaxForSearchPagination(countOnSort);
 	 
 }

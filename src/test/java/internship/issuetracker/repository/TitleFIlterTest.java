@@ -47,7 +47,7 @@ public class TitleFIlterTest {
 	@Before
 	public void setUp() {
 		user = new User();
-		user.setUserName("userx" + (char) ucount);
+		user.setUserName("userz" + (char) ucount);
 		user.setEmail("email@end.com");
 		user.setPassword("parola");
 		userRepository.create(user);
