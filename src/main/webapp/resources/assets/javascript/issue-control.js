@@ -54,8 +54,11 @@ $(document).ready(function(){
     	});
     	$(".editIssueContent").show();
     	$(".viewIssue").hide();
+    	$("#newComment").hide();
+    	$("#label-editor").show();
+    	
     }
-    
+    $("#label-editor").hide();
     $(".viewIssueTitleEdit").focus();
     $("#edit").click(editIssue);
     $("#send").click(updateIssue);
@@ -82,9 +85,36 @@ $(document).ready(function(){
       		$("#send").prop('disabled',true);
    		return false;
       	}
-      	
-
-       
     });
+    /** Label validation and insert **/
+    function validateLabel(){
+		var input=$("#tags");
+		var value=input.val().trim();
+		var label_regex=/^[a-zA-Z0-9]+$/;
+		var btn=$("#label-btn");
+		input.parent().parent().find(".error").text(" ");
+		if(value.length<=3||value.length>20)
+			{
+			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
+			btn.prop("disabled",true);
+			return false;
+			}
+		if(!value.match(label_regex))
+			{
+			input.parent().parent().find(".error").text("Alpha-numeric characters only");
+			btn.prop("disabled",true);
+			return false;
+			}
+		btn.prop("disabled",false);
+		return true;
+	}
+	$("#tags").keyup(validateLabel);
+	var availableTags = [ "ActionScript", "AppleScript", "Asp", "BASIC",
+				"C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang",
+				"Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp",
+				"Perl", "PHP", "Python", "Ruby", "Scala", "Scheme" ];
+	$("#tags").autocomplete({
+		source : availableTags
+	});
     
 });
