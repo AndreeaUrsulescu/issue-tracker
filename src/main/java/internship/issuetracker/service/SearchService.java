@@ -1,12 +1,15 @@
 package internship.issuetracker.service;
 
+import internship.issuetracker.entities.Issue;
+import internship.issuetracker.enums.State;
+import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.repository.ContentFilter;
+import internship.issuetracker.repository.SearchRepository;
+import internship.issuetracker.repository.StateFilter;
+import internship.issuetracker.repository.TitleFilter;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import internship.issuetracker.entities.Issue;
-import internship.issuetracker.pojo.IssuePojo;
-import internship.issuetracker.enums.State;
-import internship.issuetracker.repository.SearchRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,8 @@ public class SearchService {
 	private SearchRepository searchRepository;
 
 	public int numberOfIssuesByTitle(String title) {
-		return searchRepository.numberOfIssuesByTitle(title);
+		TitleFilter titleFilter = new TitleFilter(title);
+		return searchRepository.numberOfIssues(titleFilter);
 
 	}
 
@@ -35,8 +39,8 @@ public class SearchService {
 	}
 
 	public List<IssuePojo> findOrderedIssuesByTitleAux(String title, int currentPage, String orderField, String orderType) {
-
-		List<Issue> issuesListEntity = searchRepository.findOrderedIssuesByTitle(title, currentPage, orderField, orderType);
+		TitleFilter titleFilter = new TitleFilter(title);
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(titleFilter, currentPage, orderField, orderType);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
@@ -50,7 +54,8 @@ public class SearchService {
 	}
 
 	public int numberOfIssuesByState(State state) {
-		return searchRepository.numberOfIssuesByState(state);
+		StateFilter stateFilter = new StateFilter(state);
+		return searchRepository.numberOfIssues(stateFilter);
 
 	}
 
@@ -67,7 +72,8 @@ public class SearchService {
 	}
 
 	public List<IssuePojo> findOrderedIssuesByStateAux(State state, int currentPage, String orderField, String orderType) {
-		List<Issue> issuesListEntity = searchRepository.findOrderedIssuesByState(state, currentPage, orderField, orderType);
+		StateFilter stateFilter = new StateFilter(state);
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(stateFilter, currentPage, orderField, orderType);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
@@ -81,8 +87,10 @@ public class SearchService {
 
 	}
 
+	
 	public int numberOfIssuesByContent(String content) {
-		return searchRepository.numberOfIssuesByContent(content);
+		ContentFilter contentFilter = new ContentFilter(content);
+		return searchRepository.numberOfIssues(contentFilter);
 	}
 
 	public List<IssuePojo> findOrderedIssuesByContent(String content, int currentPage) {
@@ -98,6 +106,19 @@ public class SearchService {
 	}
 
 	public List<IssuePojo> findOrderedIssuesByContentAux(String content, int currentPage, String orderField, String orderType) {
-		return searchRepository.findOrderedIssuesByContent(content, currentPage, orderField, orderType);
+		ContentFilter contentFilter = new ContentFilter(content);
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(contentFilter, currentPage, orderField, orderType);
+		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
+
+		for (int index = 0; index < issuesListEntity.size(); index++) {
+			Issue issueEntity = issuesListEntity.get(index);
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
+					.getUpdateDate(), issueEntity.getState());
+			issuesListPojo.add(index, issuePojo);
+
+		}
+		return issuesListPojo;
 	}
+
+
 }
