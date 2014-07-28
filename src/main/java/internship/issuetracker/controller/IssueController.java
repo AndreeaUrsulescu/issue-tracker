@@ -130,10 +130,10 @@ public class IssueController {
 		model.addAttribute("issuesList", issuesListPojo);
 		model.addAttribute("listLength",issueService.numberOfIssues());
 		model.addAttribute("itemsPerPage", IssueRepository.itemsPerPage );
-		if(issueService.numberOfIssues()%10==0)
-		model.addAttribute("pages", (int)(issueService.numberOfIssues()/10));
+		if(issueService.numberOfIssues()%IssueRepository.itemsPerPage==0)
+		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage));
 		else
-		model.addAttribute("pages", (int)(issueService.numberOfIssues()/10+1));
+		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage+1));
 		return "issues";
 	}
 	

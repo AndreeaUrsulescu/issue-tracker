@@ -142,6 +142,10 @@ function searchIssues(){
  			   	$("#nextButton").css("visibility", "hidden");
  			    
  		     $("#previousButton").css("visibility", "hidden");	
+ 		     
+ 		    document.getElementById("pageNumber").innerHTML = 1;
+ 	        document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
+ 		     
  		     parsingAjaxResponse(response.issuesList);
  			}
  	});
@@ -196,6 +200,7 @@ function sortIssuesPagination(type,issuesListSize,issuesPerPage){
 		}
 	}
 	 document.getElementById("pageNumber").innerHTML = countOnSort;
+     document.getElementById("total").innerHTML = Math.ceil((response.listLength/response.issuesPerPage));
 	 ajaxForSearchPagination(countOnSort);
 	 
 }
