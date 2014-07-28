@@ -66,4 +66,12 @@ public class RestIssueController {
 		return map;
 	}
 	
+	@RequestMapping(value = "/issue/{issueId}/labels", method = RequestMethod.GET)
+	@ResponseBody
+	public List<IssuePojo> getLabels(@PathVariable("id") Long issueId) {
+		
+		List<IssuePojo> issuesListPojo =  null;
+		return issuesListPojo;
+	}
+	
 }
