@@ -1,10 +1,7 @@
 package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.enums.State;
-import internship.issuetracker.pojo.IssuePojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,32 +23,23 @@ public class SearchRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public String convert(String x){
-		if("Date".equals(x)){
+	public String convert(String x) {
+		if ("Date".equals(x)) {
 			return "updateDate";
 		}
-		
+
 		return "updateDate";
 	}
-	public int numberOfIssuesByTitle(String title) {
+
+	public List<Issue> findOrderedIssues(SearchFilterInt<Issue> filter, int currentPage, String orderField, String orderType) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
 		Root<Issue> root = criteriaQuery.from(Issue.class);
-		TitleFilter titleFilter = new TitleFilter(title);
-		criteriaQuery.where(titleFilter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
-		return query.getResultList().size();
-	}
-	
-	public List<Issue> findOrderedIssues(SearchFilterInt<Issue> filter, int currentPage, String orderField, String orderType){
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
-		Root<Issue> root = criteriaQuery.from(Issue.class);
-		////		
-		orderField=convert(orderField);
+		// //
+		orderField = convert(orderField);
 		criteriaQuery.where(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		
-		////
+
+		// //
 		if ("Descending".equals(orderType))
 			criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)), criteriaBuilder.desc(root.get("id")));
 		else
@@ -66,9 +54,9 @@ public class SearchRepository {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
 		Root<Issue> root = criteriaQuery.from(Issue.class);
-		////		
-		criteriaQuery.where(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));		
-		////		
+		// //
+		criteriaQuery.where(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		// //
 		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
 		return query.getResultList().size();
 	}
