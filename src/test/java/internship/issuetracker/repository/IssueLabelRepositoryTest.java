@@ -74,4 +74,11 @@ public class IssueLabelRepositoryTest {
 		IssueLabel issueLabel = createIssueLabel();
 		assertEquals(issueLabelRepository.findIssueLabel(issue, label).getId(), issueLabel.getId());
 	}
+	
+	@Test
+	public void removeLabelForIssueTest() {
+		createIssueLabel();
+		issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
+		assert(issueLabelRepository.findIssueLabel(issue, label) == null);
+	}
 }
