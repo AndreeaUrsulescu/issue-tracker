@@ -1,0 +1,90 @@
+package internship.issuetracker.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+@Entity
+@Table(name = "Emails")
+public class Email {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+	@Column(name = "to", nullable = false)
+	private String to;
+
+	@Column(name = "from", nullable = false)
+	private String from;
+
+	@Column(name = "content", nullable = false)
+	private byte[] content;
+
+	@Column(name = "subject", nullable = false)
+	private String subject;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public byte[] getContent() {
+		return content;
+	}
+
+	public void setContent(byte[] content) {
+		this.content = content;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(to).append(from)
+				.append(content).append(subject).toHashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Email) {
+			Email email = (Email) obj;
+			return new EqualsBuilder().append(this.to, email.to)
+						.append(this.from, email.from)
+						.append(this.content, email.content)
+						.append(this.subject, email.subject).isEquals();
+		}
+		return false;
+	}
+}
