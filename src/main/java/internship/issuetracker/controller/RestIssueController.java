@@ -21,68 +21,77 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
 @RequestMapping("/issues")
 public class RestIssueController {
 
 	@Autowired
 	private IssueService issueService;
-	
-	@Autowired 
+
+	@Autowired
 	private SearchService searchService;
-	
+
 	@Autowired
 	private LabelService labelService;
-	
+
 	@RequestMapping(value = "/page/{pageNumber}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
-		
-		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(pageNumber);
+	public List<IssuePojo> viewIssuesPage(
+			@PathVariable("pageNumber") Integer pageNumber) {
+
+		List<IssuePojo> issuesListPojo = issueService
+				.getOrderedIssues(pageNumber);
 		return issuesListPojo;
 	}
-	
+
 	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> search(@ModelAttribute SearchParameter searchParameters) {
-		
-		String searchCriteria = searchParameters.getSearchCriteria();
-		
-		List<IssuePojo> resultList = null;
-		Map<String, Object> map = new HashMap<String,Object>();
-		
-		
-		
-		if (searchCriteria.equals("state")){
-			resultList = searchService.findOrderedIssues(searchParameters);
-			map.put("listLength",searchService.numberOfIssues(searchParameters));
-			}
+	public Map<String, Object> search(
+			@ModelAttribute SearchParameter searchParameters) {
 
-		else{
+		String searchCriteria = searchParameters.getSearchCriteria();
+
+		List<IssuePojo> resultList = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		if (searchCriteria.equals("state")) {
 			resultList = searchService.findOrderedIssues(searchParameters);
-			map.put("listLength",searchService.numberOfIssues(searchParameters));
-			}
-		
+			map.put("listLength",
+					searchService.numberOfIssues(searchParameters));
+		}
+
+		else {
+			resultList = searchService.findOrderedIssues(searchParameters);
+			map.put("listLength",
+					searchService.numberOfIssues(searchParameters));
+		}
+
 		map.put("issuesList", resultList);
-		map.put("issuesPerPage",SearchRepository.itemsPerPage );
-		
+		map.put("issuesPerPage", SearchRepository.itemsPerPage);
+
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/labels", method = RequestMethod.GET)
 	@ResponseBody
-	public List<LabelPojo> getLabels(){
-		
-		List<LabelPojo> issuesListPojo =  labelService.getAllLabels();
+	public List<LabelPojo> getLabels() {
+
+		List<LabelPojo> issuesListPojo = labelService.getAllLabels();
 		return issuesListPojo;
 	}
-	
 
 	@RequestMapping(value = "/issue/{issueId}/addLabel", method = RequestMethod.POST)
 	@ResponseBody
-	public void addLabel(@PathVariable("issueId") Long issueId,@RequestBody LabelPojo addLabel) {
-			labelService.assignLabelToIssue(issueId,addLabel);
+	public Map<String, Object> addLabel(@PathVariable("issueId") Long issueId,
+			@RequestBody LabelPojo addLabel) {
+		boolean exists = labelService.assignLabelToIssue(issueId, addLabel);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (exists){
+		    map.put("response", "success");
+		} else {
+		    map.put("response", "duplicate");
+		}
+		return map;
 	}
 	
 	@RequestMapping(value = "/issue/{id}/removeLabel", method = RequestMethod.DELETE)

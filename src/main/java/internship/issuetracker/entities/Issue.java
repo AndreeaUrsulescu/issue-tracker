@@ -108,6 +108,10 @@ public class Issue implements Serializable {
 		this.content = content;
 	}
 
+	public void setState(State state) {
+		this.state = state;
+	}
+
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -118,10 +122,6 @@ public class Issue implements Serializable {
 
 	public State getState() {
 		return state;
-	}
-
-	public void setState(State state) {
-		this.state = state;
 	}
 
 	public List<Comment> getComments() {

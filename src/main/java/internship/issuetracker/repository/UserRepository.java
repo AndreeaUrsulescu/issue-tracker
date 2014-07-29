@@ -25,32 +25,23 @@ public class UserRepository {
 	}
 
 	public boolean exists(String userName) {
-		TypedQuery<User> query = em
-				.createNamedQuery(User.FIND_NAME, User.class);
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
 		query.setParameter("user_name", userName.toCharArray());
-		// crw: you may consider replacing the code below with
-		// crw return !query.getResultList().isEmpty()
-		if (query.getResultList().size() > 0)
-			return true;
-		return false;
+		return (query.getResultList().size() > 0);
 	}
 
 	public boolean matchPassword(String userName, String password) {
-		TypedQuery<User> query = em
-				.createNamedQuery(User.FIND_PASS, User.class);
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
 		query.setParameter("user_name", userName);
 		query.setParameter("user_password", password);
-		if (query.getResultList().size() > 0)
-			return true;
-		return false;
+		return (query.getResultList().size() > 0);
 	}
 
 	public User findUserByUserName(String userName) {
 
-		User user = null;
+		User user = new User();
 
-		TypedQuery<User> query = em
-				.createNamedQuery(User.FIND_NAME, User.class);
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
 		query.setParameter("user_name", userName);
 
 		try {

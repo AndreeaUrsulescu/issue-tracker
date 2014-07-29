@@ -38,6 +38,19 @@ $(document).ready(function(){
     }
 
     function editIssue() {
+    	
+    	var labelUrl = "../labels";
+    	$.ajax({
+    		dataType: "json",
+    		type: "GET",
+    		url: labelUrl,
+    		success: function(rsp) {
+    			for(var index = 0; index < rsp.length; index++){
+    				availableTags.push(rsp[index].labelName);
+    			}
+    		}
+    	});
+    	
     	var url = window.location.origin + window.location.pathname + "/api";
     	$.ajax({
     		dataType: "json",
@@ -54,12 +67,45 @@ $(document).ready(function(){
     	});
     	$(".editIssueContent").show();
     	$(".viewIssue").hide();
+    	$("#newComment").hide();
+    	$("#label-editor").show();
+    	
     }
     
+    function addLabel(){
+    	//TODO: can still type the name over and over again...
+    	if (validateLabel() == true){
+	    	//preia url-ul curent
+	    	var url = window.location.origin + window.location.pathname + "/addLabel";
+	    	var labelData = {
+	    			'labelName' : $("#tags").val().trim()
+	         	};	
+	    	$.ajax({
+	    		data: JSON.stringify(labelData),
+	    		dataType: "json",
+	    		contentType: "application/json;charset=UTF-8",
+	    		type: "POST",
+	    		url: url,
+	    		success: function(rsp) {
+	    			if(rsp.response === "success"){
+		    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+		    					+'<span class="glyphicon glyphicon-remove"></span>');
+		    			if(availableTags.indexOf($("#tags").val().trim()) != -1){
+		    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
+		    			}
+	    			} else if(rsp.response === "duplicate"){
+	    				$("#tags").parent().parent().find(".error").text("Already exists");
+	    			}
+	    			$("#tags").val('');
+	    		}
+	    	});
+    	}
+    }
+    $("#label-editor").hide();
     $(".viewIssueTitleEdit").focus();
     $("#edit").click(editIssue);
     $("#send").click(updateIssue);
-
+    $("#label-add-btn").unbind().click(addLabel);
 	$(".editIssueContent").hide();
 	
     $("#reset").click(function(){
@@ -82,9 +128,29 @@ $(document).ready(function(){
       		$("#send").prop('disabled',true);
    		return false;
       	}
-      	
-
-       
     });
+    /** Label validation and insert **/
+    function validateLabel(){
+		var input=$("#tags");
+		var value=input.val().trim();
+		var label_regex=/^[a-zA-Z0-9]+$/;
+		input.parent().parent().find(".error").text(" ");
+		if(value.length<=3||value.length>20)
+		{
+			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
+			return false;
+		}
+		if(!value.match(label_regex))
+		{
+			input.parent().parent().find(".error").text("Alpha-numeric characters only");
+			return false;
+		}
+		return true;
+	}
+    $("#tags").keyup(validateLabel);
+	var availableTags = [];
+	$("#tags").autocomplete({
+		source : availableTags
+	});
     
 });

@@ -13,6 +13,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 @SuppressWarnings("serial")
 @NamedQueries({
 		@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
@@ -49,4 +52,19 @@ public class Label implements Serializable {
 		this.labelName = labelName;
 	}
 
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(labelName).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Label) {
+			if (this == obj) {
+				Label label = (Label) obj;
+				return new EqualsBuilder().append(this.labelName, label.labelName).isEquals();
+			}
+		}
+		return false;
+	}
 }
