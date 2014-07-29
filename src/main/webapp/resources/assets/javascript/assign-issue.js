@@ -7,6 +7,8 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".viewIssueAssign").popover({ title:'Hey', content: 'hey hey'});
+	
 	var test = ["puppy", "another puppy", "puppy three"];
 	
 	$("#assigneeInput").autocomplete({
