@@ -1,12 +1,12 @@
 package internship.issuetracker.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class LabelRepositoryTest {
 		Label label = new Label();
 		label.setLabelName("title" + (char) count);
 		labelRepository.create(label);
-		List<Issue> issues = new ArrayList<Issue>();
+		Set<Issue> issues = new HashSet<Issue>();
 		issues.add(issue);
 		label.setIssues(issues);
 		labelRepository.update(label);
@@ -68,7 +68,6 @@ public class LabelRepositoryTest {
 
 	@Test
 	public void findLabelsTest() {
-		System.out.println((char) count);
 		createLabel();
 
 		assert (labelRepository.findLabels().size() == 1);
@@ -96,5 +95,12 @@ public class LabelRepositoryTest {
 		labelRepository.update(label);
 		assertEquals(labelRepository.findLabelByName(label.getLabelName())
 				.getLabelName(), "AnotherName");
+	}
+	
+	@Test
+	public void deleteTest() {
+		Label label = createLabel();
+		labelRepository.delete(label);
+		assert(labelRepository.findLabelByName(label.getLabelName()) == null);
 	}
 }

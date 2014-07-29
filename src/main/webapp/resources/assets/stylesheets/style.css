@@ -808,3 +808,11 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	color:#428bca;
 	padding-bottom:5px;
 }
+.selected-labels{
+	font-size:16px;
+}
+.issueLabel{
+	margin: 0 5px 5px 0;
+	float: left;
+}
+/* label section end*/

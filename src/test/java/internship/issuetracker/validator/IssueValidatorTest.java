@@ -1,8 +1,6 @@
 package internship.issuetracker.validator;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.enums.State;
@@ -16,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -36,7 +33,7 @@ public class IssueValidatorTest {
     
 	private Issue issue;
 	
-    @SuppressWarnings("deprecation")
+ /*   @SuppressWarnings("deprecation")*/
 	@Before
     public void setUp() {
 	MockitoAnnotations.initMocks(this);

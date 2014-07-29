@@ -2,34 +2,38 @@
 
 
 
-<div  class="container">
+<div class="container">
 
 	<h1 class="commentSectionTitle">Comment section</h1>
 
 	<div class="commentSection">
 
-		<form  id="comments" role="form">
+		<div id="newComment">
+		
+			<form id="comments" role="form">
 
-			<div class="form-group">
+				<div class="form-group">
 
-				<textarea id="comment-area" class="form-control textArea" rows="7"
-					maxlength="500"></textarea>
+					<textarea id="comment-area" class="form-control textArea" rows="7"
+						maxlength="500"></textarea>
 
-			</div>
+				</div>
 
-			<div class="commentFormButtons">
+				<div class="commentFormButtons">
 
-				<span id="error-msg" class="error"></span>
+					<span id="error-msg" class="error"></span>
 
-				<div id="counter" class="label label-default">500</div>
+					<div id="counter" class="label label-default">500</div>
 
-				<div id="clear-btn" class="btn btn-default">Clear</div>
+					<div id="clear-btn" class="btn btn-default">Clear</div>
 
-				<div id="send-btn" class="btn btn-primary">Save</div>
+					<div id="send-btn" class="btn btn-primary">Save</div>
 
-			</div>
+				</div>
 
-		</form>
+			</form>
+			
+		</div>
 
 		<br>
 

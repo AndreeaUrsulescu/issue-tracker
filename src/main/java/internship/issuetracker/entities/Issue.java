@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,7 +19,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -78,7 +78,7 @@ public class Issue implements Serializable {
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
 	
-	@ManyToMany(mappedBy="issues")
+	@ManyToMany(mappedBy="issues", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Label> labels = new ArrayList<Label>(); 
 	
 
