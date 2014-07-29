@@ -111,7 +111,7 @@ public class SearchRepository {
 		List<IssuePojo> pojoIssues = new ArrayList<IssuePojo>();
 
 		for (Issue issue : issues) {
-			IssuePojo pojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState());
+			IssuePojo pojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue.getState());
 			pojoIssues.add(pojo);
 		}
 

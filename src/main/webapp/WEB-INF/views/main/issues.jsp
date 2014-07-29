@@ -88,7 +88,7 @@
 								</c:otherwise>
 							</c:choose>
 						</p>
-				</span> <label class="owner">Updated by ${issue.owner}</label>
+				</span> <label class="owner">Updated ${issue.update} ago by ${issue.owner}</label>
 			</span>
 			</a>
 			</div>

@@ -42,7 +42,7 @@ public class SearchService {
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
-					.getUpdateDate(), issueEntity.getState());
+					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}
@@ -73,7 +73,7 @@ public class SearchService {
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
-					.getUpdateDate(), issueEntity.getState());
+					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}

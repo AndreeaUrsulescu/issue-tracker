@@ -45,8 +45,7 @@ public class IssueController {
 		Issue issue = new Issue();
 		model.addAttribute("user", user.getUserName());
 		model.addAttribute("issue", issue);
-		model.addAttribute("date",
-				issue.getUpdateDate().toString().substring(0, 11));
+		model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
 		return "createIssue";
 	}
 
@@ -125,6 +124,7 @@ public class IssueController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
 		
+		
 		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
 		
 		model.addAttribute("issuesList", issuesListPojo);
@@ -136,6 +136,5 @@ public class IssueController {
 		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage+1));
 		return "issues";
 	}
-	
-	
+		
 }

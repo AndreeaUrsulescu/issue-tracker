@@ -24,9 +24,11 @@ footer {
 	bottom:0;
 }
 .control-menu{
-	width:10%;
+	//width:10%;
 	float:right;
 	margin-right: 100px;
+	margin-top: 10px;
+	font-family: "Arial Black", Gadget, sans-serif;
 }
 
 footer small {
@@ -637,7 +639,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 
 .title{
 	font-weight: bold;
-	//color:rgb(47,95,150);
+	color:rgba(0,0,0, 0.6);
 	//border-bottom: 1px solid rgba(0,0,0, 0.05);
 }
 
@@ -650,7 +652,8 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 .state{
 	margin-top:10px;
 	margin-left: 10px;
-	color: rgb(47,95,150);//rgb(66,139,202);
+	//color: rgb(47,95,150);
+	color: rgba(0,0,0, 0.5);
 }
 
 .addedBy2 {
@@ -792,3 +795,22 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-left:auto;
 	margin-right:auto;
 }
+
+#niceAdd{
+	margin: 0 auto;
+	width: 450px;
+	min-height: 200px;
+	margin-top: 50px;
+	text-align: center;
+}
+.promo{
+	visibility: hidden;
+	position: absolute;
+	color: rgb(84,90,40);
+	margin-top: 100px;
+	font-weight: bold;
+	font-size: 18px;
+	margin-left: 90px;
+}
+
+

@@ -33,7 +33,7 @@ public class IssueService {
 		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
 		issueToUpdate.setContent(issuePojo.getContent());
 		issueToUpdate.setTitle(issuePojo.getTitle());
-		issueToUpdate.setUpdateDate(new Date());
+		issueToUpdate.setLastDate(new Date());
 		issueToUpdate.setState(issuePojo.getState());
 		this.issueRepository.update(issueToUpdate);
 	}
@@ -60,7 +60,7 @@ public class IssueService {
 			pojoComments.add(pojoComment);
 		}
 		
-		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments);
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue.getState(), pojoComments);
 		return issuePojo;
 
 	}	
@@ -80,7 +80,7 @@ public class IssueService {
 		
 		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
 			Issue issueEntity  = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(),issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 		    issuesListPojo.add(index,issuePojo);
 			
 		}

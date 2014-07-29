@@ -1,13 +1,13 @@
 package internship.issuetracker.entities;
 
 import internship.issuetracker.enums.State;
-
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +28,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -69,6 +68,10 @@ public class Issue implements Serializable {
 	@Column(name = "update_date", nullable = false)
 	private Date updateDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_date", nullable = false)
+	private Date lastDate;
+	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
@@ -84,6 +87,8 @@ public class Issue implements Serializable {
 	public Issue() {
 		state = State.New;
 		updateDate=new Date();
+		lastDate=new Date();
+	
 	}
 
 	public Long getId() {
@@ -121,9 +126,17 @@ public class Issue implements Serializable {
 	public Date getUpdateDate() {
 		return updateDate;
 	}
+	
+	public Date getLastDate(){
+		return lastDate;
+	}
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+	
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
 	}
 
 	public State getState() {
