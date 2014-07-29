@@ -6,50 +6,52 @@
 <script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 
 <div class="container viewIssueContainer">
-	<div class="viewIssue">
-		<div class="viewIssueTitle">
-			<h1><c:out value = "${viewIssue.title}" /></h1>
+
+	<div class="editIssueView">
+		<div>
+			<label for="issueTitle">Title</label> 
+				<div class="viewIssueTitl"><c:out value = "${viewIssue.title}" /></div>
+		</div>
+
+		<div>
+			<label for="issueContent">Content</label>
+			<div class="viewIssueConten"><c:out value="${viewIssue.content}"/></div>
+			<span class="error"></span>
+		</div>
+
+		<div class="viewIssueStates">
+			<div id="current-state" class="<c:out value="${fn:toLowerCase(viewIssue.state)}"/> viewIssueState"></div>
+		</div>
+
+		<div class="clear"></div>
+		<br>
+		<div class="viewIssueOwner"><c:out value="${viewIssue.owner}"/></div>
+		
+		<div class="clear"></div>
+		
+		<div class="viewIssueDate">
+			<small><c:out value="${viewIssue.updateDate}"/></small>
 		</div>
 		
-
-		<div class="viewIssueContent">
-			<p><c:out value="${viewIssue.content}"/></p>
-		</div>
-
-		<div class="viewIssueFooter">
-			<div class="viewIssueFooterDetails">
-				<div class="viewIssueOwner"><c:out value="${viewIssue.owner}"/></div>
-				<div class="viewIssueDate">
-					<small><c:out value="${viewIssue.updateDate}"/></small>
-				</div>
-			</div>
-			<div class="viewIssueFooterButtons">
+		<button id="edit" type="button" class="btn btn-primary">Update Issue</button>
 				
+<!-- 				<div class="clear"></div> -->
 				
-				<div id="current-state" class="<c:out value="${fn:toLowerCase(viewIssue.state)}"/> viewIssueState">
-					
-				</div>
-				<button id="edit" type="button" class="btn btn-primary">Update Issue</button>
-				
-				<div class="clear"></div>
-				
-				<div class="viewIssueAssignee">
-					<h1>
-						<small>
-							<span>Assigned to: </span>
-						</small>
-					</h1>
-<!-- 					<span class="viewIssueAssigneeName">Georgel</span> -->
+<!-- 				<div class="viewIssueAssignee"> -->
+<!-- 					<h1> -->
+<!-- 						<small> -->
+<!-- 							<span>Assigned to: </span> -->
+<!-- 						</small> -->
+<!-- 					</h1> -->
+<!-- <!-- 					<span class="viewIssueAssigneeName">Georgel</span> --> 
 
 					<a class="viewIssueAssign"><span class="glyphicon glyphicon-plus"></span></a>
 					
-					<form role="form">
 						<div class="form-group">
 							<label for="assigneeInput">Assignee:</label>
 							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
 						</div>
-						<button class="btn btn-warning">Assign</button>
-					</form>
+						<button class="btn btn-warning" onclick="assignUser();">Assign</button>
 				</div>
 				
 			</div>

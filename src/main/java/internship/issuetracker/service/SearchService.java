@@ -27,7 +27,7 @@ public class SearchService {
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
-					.getUpdateDate(), issueEntity.getState());
+					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}
@@ -39,30 +39,30 @@ public class SearchService {
 		String searchCriteria = searchParameters.getSearchCriteria();
 		if(searchCriteria.equals("title")){
 			filter = new TitleFilter(searchParameters.getInput());
-			}
+	}
 		else if (searchCriteria.equals("content")){
 			filter = new ContentFilter(searchParameters.getInput());
-			}
+	}
 		else if (searchCriteria.equals("state")){
 			filter = new StateFilter(searchParameters.getState());
-			}	
+	}
 		return searchRepository.numberOfIssues(filter);
 	}
 
 	public List<IssuePojo> findOrderedIssues(SearchParameter searchParameters) {
-			
+
 		String searchCriteria = searchParameters.getSearchCriteria();
 		SearchFilterInt<Issue> filter = null;
 		if(searchCriteria.equals("title")){
 			filter = new TitleFilter(searchParameters.getInput());
-			}
+		}
 		else if (searchCriteria.equals("content")){
 			filter = new ContentFilter(searchParameters.getInput());
-			}
+	}
 		else if (searchCriteria.equals("state")){
 			filter = new StateFilter(searchParameters.getState());
-			}		
-		
+	}
+
 		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(filter, searchParameters.getPageNumber(), searchParameters.getSortCriteria(), searchParameters.getSortType());
 
 		return entityToPojo(issuesListEntity);
