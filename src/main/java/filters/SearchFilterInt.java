@@ -1,4 +1,4 @@
-package internship.issuetracker.repository;
+package filters;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

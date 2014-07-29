@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+
 <c:set var="plus" value="+" />
 <c:set var="minus" value="-" />
 <label id="numberOfIssues" style="display: none"> <c:out
@@ -48,8 +50,8 @@
 				</select> <select class="searchSelect" id="order">
 					<option value="Descending" selected="selected">Descending</option>
 					<option value="Ascending">Ascending</option>
-				</select> <a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
-					<span class="glyphicon glyphicon-search">&nbsp;Search</span>
+				</select> <a class="btn searchBtn btn-default" id="searchBtn" onclick="searchIssues();">
+					<span class="glyphicon glyphicon-search"></span> Search
 				</a>
 			</div>
 		</div>
@@ -61,24 +63,26 @@
 <!--			<span class="issue"> -->
 					<c:choose>
 								<c:when test="${issue.state == 'New'}">
-									<span class="issue iss6">
+									<span class="issue iss6"></span>
 								</c:when>
 								<c:when test="${issue.state == 'Opened'}">
-									<span class="issue iss2">
+									<span class="issue iss2"></span>
 								</c:when>
 								<c:when test="${issue.state == 'Testing'}">
-									<span class="issue iss0">
+									<span class="issue iss0"></span>
 								</c:when>
 								<c:otherwise>
-									<span class="issue iss5">				
+									<span class="issue iss5"></span>				
 								</c:otherwise>
 					</c:choose>		
 						<span class="border"> 
 						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
-				</span> <span class="content"> <span class="title"> <c:out
+						</span> 
+						<span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />
 					</span>
-						<p>
+						</span>
+						
 							<c:choose>
 								<c:when test="${fn:length(issue.content)>150}">
 									<c:out value="${fn:substring(issue.content, 0, 150)} ..." />
@@ -97,7 +101,7 @@
 	<br>
 
 	<div id="pages">
-		<label id="pageNumber">1 </label><label
+		<label id="pageNumber">1 </label><label id="total"
 			style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/ ${pages}</label>
 	</div>
 </div>

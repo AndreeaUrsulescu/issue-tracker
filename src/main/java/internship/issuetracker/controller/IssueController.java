@@ -136,5 +136,4 @@ public class IssueController {
 		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage+1));
 		return "issues";
 	}
-		
 }

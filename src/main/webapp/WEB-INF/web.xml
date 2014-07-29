@@ -13,6 +13,7 @@
             classpath:config/application-context.xml
             classpath:config/web-context.xml
             classpath:config/security-config.xml
+            classpath:config/Spring-Mail.xml
         </param-value>
     </context-param>
 	<!--XSS -->

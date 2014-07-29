@@ -2,12 +2,9 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.User;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,11 +15,32 @@ public class UserRepositoryTest {
 	@Autowired
 	UserRepository userRepository;
 	
+	User user;
+	User user2;
+	@Test
+	public void testCreate() {
+		if(!userRepository.exists("boobar")){
+			user2=new User();
+			user2.setUserName("boobar");
+			user2.setEmail("notjust@mail.a");
+			user2.setPassword("parolascr");
+			userRepository.create(user2);
+		}
+		assert(userRepository.exists("boobar") && user.equals(userRepository.findUserByUserName("boobar")));
+	}
+	
+	public void testUpdate() {
+		user2.setUserName("notboobar");
+		assert(userRepository.exists("notboobar") && 
+				!userRepository.exists("boobar") &&
+				user.equals(userRepository.findUserByUserName("notboobar")) );
+	}
+	
 	@Test
 	public void testExists() {
 		
 		if(!userRepository.exists("foobar")){
-			User user=new User();
+			user=new User();
 			user.setUserName("foobar");
 			user.setEmail("just@mail.a");
 			user.setPassword("parola");
@@ -35,5 +53,12 @@ public class UserRepositoryTest {
 	public void testMatchPassword() {
 		assert(userRepository.matchPassword("foobar","parola") && !userRepository.matchPassword("foobarx","parolax") );
 	}
+	
+	@Test
+	public void testFindUserByUserName() {
+		assert(user.equals(userRepository.findUserByUserName("foobar")));
+	}
+	
+
 	
 }

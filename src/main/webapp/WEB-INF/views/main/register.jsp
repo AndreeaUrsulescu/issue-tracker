@@ -40,7 +40,7 @@
 
 				<label for="passwordConfirm">Confirm Password</label> <input
 					type="password" class="form-control" id="passwordConfirm"
-					path="password"></input> <span class="error"></span>
+					></input> <span class="error"></span>
 
 			</div>
 

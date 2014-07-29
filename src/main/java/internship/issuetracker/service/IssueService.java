@@ -1,16 +1,18 @@
 package internship.issuetracker.service;
 
-import internship.issuetracker.comparators.UpdateDateComparator;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.Label;
+import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.LabelPojo;
+import internship.issuetracker.pojo.UserPojo;
+import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class IssueService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private IssueLabelRepository issueLabelRepository;
+
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 	}
@@ -38,36 +43,34 @@ public class IssueService {
 		this.issueRepository.update(issueToUpdate);
 	}
 
-	public List<Issue> getIssuesByTitle(String title) {
-		return this.issueRepository.findIssuesByTitle(title);
-
-	}
-
-	public List<Issue> getIssuesByDate(Date date) {
-		return this.issueRepository.findIssuesByDate(date);
-	}
-
-	public List<Issue> getIssues(){
-	    return this.issueRepository.findIssues();
-	}
-	
 	public IssuePojo getIssue(Long id){
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+		List<LabelPojo> labelPojoList = new ArrayList<LabelPojo>();
 		Issue issue = this.issueRepository.findIssue(id);
 		
 		for (Comment com : issue.getComments()) {
-			CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(), com.getContent(), com.getCreationDate(), com.getIssue().getId());
+			CommentPojo pojoComment = new CommentPojo(com.getOwner()
+					.getUserName(), com.getContent(), com.getCreationDate(),
+					com.getIssue().getId());
 			pojoComments.add(pojoComment);
 		}
 		
-		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue.getState(), pojoComments);
+		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
+
+		for (Label label : labels) {
+			LabelPojo pojoLabel = new LabelPojo(label.getLabelName());
+			labelPojoList.add(pojoLabel);
+		}
+
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner()
+				.getUserName(), issue.getTitle(), issue.getContent(),
+				issue.getUpdateDate(), issue.getLastDate(),
+				issue.getState(), pojoComments,
+				labelPojoList);
 		return issuePojo;
 
 	}	
 	
-	public List<Issue> getIssuesForPagination(int page){
-		return this.issueRepository.findIssuesForPagination(page);
-	}
 
 	public int getNrOfPages(){
 		return this.issueRepository.nrOfPages();
@@ -75,12 +78,16 @@ public class IssueService {
 	
 	public List<IssuePojo> getOrderedIssues(int currentPage) {
 		
-		List<Issue> issuesListEntity =  issueRepository.findOrderedIssues(currentPage);
+		List<Issue> issuesListEntity = issueRepository
+				.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 		
 		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
 			Issue issueEntity  = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),issueEntity.getOwner().getUserName(),issueEntity.getTitle(),issueEntity.getContent(),issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
+					issueEntity.getOwner().getUserName(),
+					issueEntity.getTitle(), issueEntity.getContent(),
+					issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 		    issuesListPojo.add(index,issuePojo);
 			
 		}
@@ -97,18 +104,13 @@ public class IssueService {
 		return this.issueRepository.itemsPerPage();
 	}
     
+	public void assignUserToIssue(Long issueId, UserPojo assignedUser) {
     
-    public List<Issue> SortByUpdateDate(List<Issue> issues,String order)
-    {
-    	
-    	if(order.equals("descending"))           // you have to specify that the order is descending, otherwise it will be ascending
-    	{
-    		Comparator<Issue> reverse=Collections.reverseOrder(new UpdateDateComparator());
-    		Collections.sort(issues, reverse);
-    		return issues;
+		User assignee = userRepository.findUserByUserName(assignedUser
+				.getUserName());
+		Issue issue = issueRepository.findIssue(issueId);
+		issue.setAssignee(assignee);
+		issueRepository.update(issue);
     	}
     	
-    	Collections.sort(issues,new UpdateDateComparator());
-       	return issues;
-    }
 }

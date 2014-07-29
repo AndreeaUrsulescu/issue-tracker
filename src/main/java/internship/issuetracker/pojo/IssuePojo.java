@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class IssuePojo {
 	
@@ -27,6 +28,8 @@ public class IssuePojo {
 	
 	private List<CommentPojo> comments;
 
+	private List<LabelPojo> labels;
+
 	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state) {
 		this.id = id;
 		this.content = content;
@@ -38,7 +41,7 @@ public class IssuePojo {
 		this.update=getUpdate();
 	}
 	
-	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state, List<CommentPojo> comments) {
+	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state, List<CommentPojo> comments, List<LabelPojo> labels) {
 		this.id = id;
 		this.content = content;
 		this.owner = owner;
@@ -46,8 +49,17 @@ public class IssuePojo {
 		this.title = title;
 		this.updateDate = updateDate;
 		this.comments = comments;
+		this.labels = labels;
 		this.lastDate=lastDate;
 		this.update=getUpdate();
+	}
+	
+	public List<LabelPojo> getLabels() {
+	    return labels;
+	}
+
+	public void setLabels(List<LabelPojo> labels) {
+	    this.labels = labels;
 	}
 	
 	public String getOwner() {
@@ -109,7 +121,7 @@ public class IssuePojo {
 	public List<CommentPojo> getComments() {
 		return comments;
 	}
-	
+
 	public void setComments(List<CommentPojo> comments) {
 		this.comments = comments;
 	}

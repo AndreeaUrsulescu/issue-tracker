@@ -48,3 +48,25 @@ function ValidateContent() {
 	
 	return true;
 };
+
+
+function assignUser(){
+	var filterData;
+	
+	filterData = {
+			userName : "corbulet" // change it with input value
+     	};
+	
+	$.ajax({
+ 		url : "assignUser" , // put some URL
+ 		type : "POST",
+        data : JSON.stringify(filterData), 
+ 		beforeSend : function(xhr) {
+ 			xhr.setRequestHeader("Accept", "application/json");
+ 			xhr.setRequestHeader("Content-Type", "application/json");
+ 		},
+ 		success : function(response) {
+ 			
+ 		}
+ 	});
+}

@@ -3,7 +3,6 @@ package internship.issuetracker.service;
 import static org.junit.Assert.assertEquals;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.repository.IssueRepository;
-import internship.issuetracker.utils.EncryptData;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,6 @@ public class IssueServiceTest {
 
 		issueService.addIssue(issue);
 		Mockito.verify(issueRepository).create(issue);
-
 	}
 	
 	@Test

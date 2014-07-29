@@ -19,81 +19,82 @@ import org.hibernate.validator.constraints.Email;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"),
-		@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password") })
+	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"),
+	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password"),
+	@NamedQuery(name = User.FIND_ALL, query = "select a from User a ")
+	})
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
-	public static final String FIND_NAME = "User.findName";
-	public static final String FIND_PASS = "User.findPass";
+    public static final String FIND_NAME = "User.findName";
+    public static final String FIND_PASS = "User.findPass";
+    public static final String FIND_ALL = "User.findAll";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true)
     @Size(min = 5, max = 12)
     @Pattern(regexp = "^[a-zA-Z]{5,12}$")
     private String userName;
 
-	@Column(name = "user_email", nullable = false)
-	@Email
-	private String email;
+    @Column(name = "user_email", nullable = false)
+    @Email
+    private String email;
 
-	@Column(name = "user_password", nullable = false)
-	@Size(min = 5)
-	private String password;
+    @Column(name = "user_password", nullable = false)
+    @Size(min = 5)
+    private String password;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public String getUserName() {
+	return userName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public void setUserName(String userName) {
+	this.userName = userName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+	return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
+    public void setPassword(String password) {
+	this.password = password;
+    }
+    
 	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(userName).append(email)
-				.append(password).toHashCode();
-	}
+    public int hashCode() {
+	return new HashCodeBuilder().append(userName).append(email)
+		.append(password).toHashCode();
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof User) {
-			if (this == obj) {
-				User user = (User) obj;
-				return new EqualsBuilder().append(this.email, user.email)
-						.append(this.userName, user.userName)
-						.append(this.password, user.password).isEquals();
-			}
-		}
-		return false;
+    @Override
+    public boolean equals(Object obj) {
+	if (obj instanceof User) {
+	    User user = (User) obj;
+	    return new EqualsBuilder().append(this.email, user.email)
+		    .append(this.userName, user.userName)
+		    .append(this.password, user.password).isEquals();
 	}
+	return false;
+    }
 
-}	
+}
