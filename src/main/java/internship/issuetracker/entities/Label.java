@@ -37,13 +37,7 @@ public class Label implements Serializable {
 	@Pattern(regexp = "^[a-zA-Z]{3,20}$")
 	private String labelName;
 
-	public Set<Issue> getIssues() {
-	    return issues;
-	}
 
-	public void setIssues(Set<Issue> issues) {
-	    this.issues = issues;
-	}
 	
 	public Long getId() {
 		return id;

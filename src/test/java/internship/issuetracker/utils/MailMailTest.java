@@ -12,7 +12,7 @@ public class MailMailTest {
 	             new ClassPathXmlApplicationContext("classpath:config/Spring-Mail.xml");
 	 
 	    	MailMail mm = (MailMail) context.getBean("mailMail");
-	        mm.sendMail("Graduates@endava.com",
+	        mm.sendMail("Alin.Stirbat@endava.com",
 	    		   "Internship2014@endava.com",
 	    		   "Testing123", 
 	    		   "Testing only \n\n Hello Spring Email Sender");

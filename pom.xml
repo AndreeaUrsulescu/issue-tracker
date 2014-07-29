@@ -114,11 +114,17 @@
 		</dependency>
 
 		<!-- Spring framework for mail -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring</artifactId> -->
+<!-- 			<version>2.5.6</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.5.6</version>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.2.0.RELEASE</version>
 		</dependency>
+
 		<!-- /Spring framework for mail -->
 
 		<!-- AOP dependency -->
