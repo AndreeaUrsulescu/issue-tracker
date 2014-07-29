@@ -3,6 +3,7 @@ package internship.issuetracker.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,54 +20,73 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
-		@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a")
-		})
+	@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
+	@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
 @Entity
 @Table(name = "Labels")
-public class Label implements Serializable{
-	
-	public static final String FIND_BY_NAME = "Label.findByName";
-	public static final String FIND_ALL = "Label.findAll";
-	
-	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private Long id;
-	
-	public Set<Issue> getIssues() {
-	    return issues;
-	}
+public class Label implements Serializable {
 
-	public void setIssues(Set<Issue> issues) {
-	    this.issues = issues;
-	}
+    public static final String FIND_BY_NAME = "Label.findByName";
+    public static final String FIND_ALL = "Label.findAll";
 
-	@Column(name = "label_name", nullable = false, unique = true)
-	@Size(min = 3, max = 20)
-	@Pattern(regexp= "^[a-zA-Z]{3,20}$")
-	private String labelName;
-	
-	
-	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable (name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns  = @JoinColumn (name = "id_issue"))
-	private Set<Issue> issues = new HashSet <Issue>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "label_name", nullable = false, unique = true)
+    @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[a-zA-Z]{3,20}$")
+    private String labelName;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns = @JoinColumn(name = "id_issue"))
+    private Set<Issue> issues = new HashSet<Issue>();
 
-	public String getLabelName() {
-		return labelName;
-	}
+    public Set<Issue> getIssues() {
+	return issues;
+    }
 
-	public void setLabelName(String labelName) {
-		this.labelName = labelName;
+    public void setIssues(Set<Issue> issues) {
+	this.issues = issues;
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(Long id) {
+	this.id = id;
+    }
+
+    public String getLabelName() {
+	return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+	this.labelName = labelName;
+    }
+
+    @Override
+    public int hashCode() {
+	return new HashCodeBuilder().append(labelName).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj instanceof Label) {
+	    if (this == obj) {
+		Label label = (Label) obj;
+		return new EqualsBuilder()
+			.append(this.labelName, label.labelName)
+			.append(this.issues, label.issues).isEquals();
+	    }
 	}
+	return false;
+    }
+
 }
-
