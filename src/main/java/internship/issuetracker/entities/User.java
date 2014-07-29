@@ -1,17 +1,14 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -50,9 +47,6 @@ public class User implements Serializable {
     @Column(name = "user_password", nullable = false)
     @Size(min = 5)
     private String password;
-    
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="assignee")
-	private List<Issue> assignedIssues;
 
     public Long getId() {
 	return id;
@@ -86,14 +80,6 @@ public class User implements Serializable {
 	this.password = password;
     }
     
-    public List<Issue> getAssignedIssues() {
-		return assignedIssues;
-	}
-
-	public void setAssignedIssues(List<Issue> assignedIssues) {
-		this.assignedIssues = assignedIssues;
-	}
-
 	@Override
     public int hashCode() {
 	return new HashCodeBuilder().append(userName).append(email)

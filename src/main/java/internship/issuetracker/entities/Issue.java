@@ -73,7 +73,7 @@ public class Issue implements Serializable {
 	private List<Comment> comments;
 
 	@ManyToOne
-	@JoinColumn(name = "id_assignee", nullable = false)
+	@JoinColumn(name = "id_assignee")
 	private User assignee;
 	
 	public Issue() {
