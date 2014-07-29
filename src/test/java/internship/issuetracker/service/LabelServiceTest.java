@@ -55,7 +55,7 @@ public class LabelServiceTest {
 		count++;
 		return label;
 	}
-
+	
 	
 	@Test
 	public void testAssignLabelToIssue()
