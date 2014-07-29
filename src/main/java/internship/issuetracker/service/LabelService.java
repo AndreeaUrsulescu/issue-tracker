@@ -43,7 +43,6 @@ public class LabelService {
 	Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
 	if (null != label) {
 	    boolean exists = issue.getLabels().contains(label);
-	    System.out.println(exists);
 	    if (!exists) {
 		label.getIssues().add(issue);
 		labelRepository.update(label);

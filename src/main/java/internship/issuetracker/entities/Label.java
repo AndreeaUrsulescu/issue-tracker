@@ -18,8 +18,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
-		@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
+	@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
+	@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
 @Entity
 @Table(name = "Labels")
 public class Label implements Serializable {
@@ -40,31 +40,31 @@ public class Label implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public String getLabelName() {
-		return labelName;
-	}
+    public String getLabelName() {
+	return labelName;
+    }
 
-	public void setLabelName(String labelName) {
-		this.labelName = labelName;
-	}
+    public void setLabelName(String labelName) {
+	this.labelName = labelName;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(labelName).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+	return new HashCodeBuilder().append(labelName).toHashCode();
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Label) {
-			if (this == obj) {
-				Label label = (Label) obj;
-				return new EqualsBuilder().append(this.labelName, label.labelName).isEquals();
-			}
-		}
-		return false;
+    @Override
+    public boolean equals(Object obj) {
+	if (obj instanceof Label) {
+	    Label label = (Label) obj;
+	    return new EqualsBuilder()
+			.append(this.labelName, label.labelName)
+			.isEquals();
 	}
+	return false;
+    }
 }
