@@ -325,12 +325,28 @@ function parsingAjaxResponse(response){
 		 content.appendChild(contentTitle);
 		 content.appendChild(paragraf);
 		 
+		 var assignee = document.createElement("DIV");
+		 assignee.setAttribute("class","assigneeInfoPostIt");
+		 var assigneeSpan = document.createElement("SPAN");
+		 assigneeSpan.appendChild(document.createTextNode("Assignee:"));
+		 
+		 
+		 var newSpan = document.createElement("SPAN");
+		 newSpan.appendChild(document.createTextNode("Georgel"));
+		 
+		 var brbr = document.createElement("BR");
+		 
+		 assignee.appendChild(assigneeSpan);
+		 assignee.appendChild(brbr);
+		 assignee.appendChild(newSpan);
+		 
 		 var owner = document.createElement("LABEL");
 		 owner.setAttribute("class", "owner");
 		 owner.appendChild(document.createTextNode("Updated by "+ response[index].owner));
 		 
 		 stickyNoteContent.appendChild(title);
 		 stickyNoteContent.appendChild(content);
+		 stickyNoteContent.appendChild(assignee);
 		 stickyNoteContent.appendChild(owner);
 		 
 		 stickyNote.appendChild(stickyNoteContent);

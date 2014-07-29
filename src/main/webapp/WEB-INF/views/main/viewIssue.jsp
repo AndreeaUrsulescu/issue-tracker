@@ -25,12 +25,40 @@
 				</div>
 			</div>
 			<div class="viewIssueFooterButtons">
+				
+				
 				<div id="current-state" class="<c:out value="${fn:toLowerCase(viewIssue.state)}"/> viewIssueState">
 					
 				</div>
-				<button id="edit" type="button" class="btn btn-primary">Update
-					Issue</button>
+				<button id="edit" type="button" class="btn btn-primary">Update Issue</button>
+				
+				<div class="clear"></div>
+				
+				<div class="viewIssueAssignee">
+					<h1>
+						<small>
+							<span>Assigned to: </span>
+						</small>
+					</h1>
+<!-- 					<span class="viewIssueAssigneeName">Georgel</span> -->
+
+					<a class="viewIssueAssign"><span class="glyphicon glyphicon-plus"></span></a>
+					
+					<form role="form">
+						<div class="form-group">
+							<label for="assigneeInput">Assignee:</label>
+							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
+						</div>
+						<button class="btn btn-warning">Assign</button>
+					</form>
+				</div>
+				
 			</div>
+			<br>
+			
+			
+			
+			
 		</div>
 	</div>
 

@@ -49,7 +49,7 @@ public class LabelServiceTest {
 		System.out.println("Before create");
 		issueRepository.create(issue);
 		System.out.println("After create");		
-		System.out.println(issueRepository.findIssues().size());
+		System.out.println(issueRepository.numberOfIssues());
 		System.out.println("After find");
 		count++;
 		return issue;
@@ -78,8 +78,8 @@ public class LabelServiceTest {
 		labelService.assignLabelToIssue(issue.getId(),label);
 		Issue issue2=createIssue();
 		labelService.assignLabelToIssue(issue2.getId(), label);
-		issue=issueRepository.findIssuesByTitle(issue.getTitle()).get(0);
-		issue2=issueRepository.findIssuesByTitle(issue2.getTitle()).get(0);
+		issue=issueRepository.findIssue(issue.getId());
+		issue2=issueRepository.findIssue(issue.getId());
 		assert(issueLabelRepository.getLabelsForIssue(issue.getId()).get(0).getId() == issueLabelRepository.getLabelsForIssue(issue2.getId()).get(0).getId());
 		//assert(issue.getLabels().get(0).getId()==issue2.getLabels().get(0).getId());
 		
