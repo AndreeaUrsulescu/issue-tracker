@@ -50,16 +50,21 @@ public class LabelService {
 		Label label=labelRepository.findLabelByName(labelPojo.getLabelName());
 		if(null!=label)
 		{
-			label.getIssues().add(issue);
+			//label.getIssues().add(issue);
 			labelRepository.update(label);
 		}
 		else
 		{
 			label=new Label();
 			convertPojoLabelToLabelEntity(labelPojo,label);
-			label.getIssues().add(issue);
+			//label.getIssues().add(issue);
 			labelRepository.create(label);
 			
 		}
+	}
+	
+	public void removeLabel(LabelPojo labelPojo) {
+		Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
+		labelRepository.delete(label);
 	}
 }

@@ -43,7 +43,7 @@ public class LabelRepositoryTest {
 		labelRepository.create(label);
 		List<Issue> issues = new ArrayList<Issue>();
 		issues.add(issue);
-		label.setIssues(issues);
+		//label.setIssues(issues);
 		labelRepository.update(label);
 		count++;
 		return label;
@@ -99,8 +99,22 @@ public class LabelRepositoryTest {
 	
 	@Test
 	public void deleteTest() {
+		//int da = 0;
 		Label label = createLabel();
+		//System.out.println("Size: " + issue.getLabels().size());
 		labelRepository.delete(label);
 		assert(labelRepository.findLabelByName(label.getLabelName()) == null);
+	/*	System.out.println(label.getLabelName());
+		
+		for (Label lab : issue.getLabels()) {
+			System.out.println(lab.getLabelName());
+			if (lab.getLabelName().equals(label.getLabelName()))
+			{
+				System.out.println("aiurea");
+			}
+			else
+				da++;
+		}
+		System.out.println(da);*/
 	}
 }

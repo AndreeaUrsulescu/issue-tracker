@@ -4,9 +4,7 @@ import internship.issuetracker.enums.State;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,9 +32,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @NamedQueries({
 		@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) LIKE lower(:title) order by updateDate DESC,a.id DESC"),
 		@NamedQuery(name = Issue.FIND_BY_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
-		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
-		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC")
-		})
+		@NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
+		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
@@ -46,8 +42,7 @@ public class Issue implements Serializable {
 	public static final String FIND_BY_DATE = "Issue.findByDate";
 	public static final String FIND_BY_ID = "Issue.findByID";
 	public static final String FIND_ALL = "Issue.findAll";
-	
-    
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -71,18 +66,14 @@ public class Issue implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "issue")
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
-	
-	@ManyToMany(mappedBy="issues")
-	private Set<Label> labels = new HashSet<Label>(); 
-	
 
 	public Issue() {
 		state = State.New;
-		updateDate=new Date();
+		updateDate = new Date();
 	}
 
 	public Long getId() {
@@ -132,7 +123,7 @@ public class Issue implements Serializable {
 	public void setState(State state) {
 		this.state = state;
 	}
-	
+
 	public List<Comment> getComments() {
 		return comments;
 	}
