@@ -42,7 +42,14 @@ public class LabelService {
 	Issue issue = issueRepository.findIssue(id);
 	Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
 	if (null != label) {
-	    boolean exists = issue.getLabels().contains(label);
+	    //there seems to be a problem with contains
+	    //boolean exists = issue.getLabels().contains(label);
+	    boolean exists = false;
+	    for (Label lbl : issue.getLabels()) {
+		if(lbl.getLabelName().equals(label.getLabelName())){
+		    exists = true;
+		}
+	    }
 	    System.out.println(exists);
 	    if (!exists) {
 		label.getIssues().add(issue);

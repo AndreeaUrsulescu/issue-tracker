@@ -1,6 +1,7 @@
 package internship.issuetracker.entities;
 
 import internship.issuetracker.enums.State;
+import internship.issuetracker.entities.Label;
 
 import java.io.Serializable;
 import java.util.Date;
