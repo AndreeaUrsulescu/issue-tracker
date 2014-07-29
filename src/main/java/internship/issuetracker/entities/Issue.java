@@ -4,9 +4,10 @@ import internship.issuetracker.enums.State;
 import internship.issuetracker.entities.Label;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,21 +26,20 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
+		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
 	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
-    public static final String FIND_BY_ID = "Issue.findByID";
-    public static final String FIND_ALL = "Issue.findAll";
-
+	public static final String FIND_BY_ID = "Issue.findByID";
+	public static final String FIND_ALL = "Issue.findAll";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -57,24 +57,30 @@ public class Issue implements Serializable {
 	private String content;
 
     @Temporal(TemporalType.TIME)
-    @Column(name = "update_date", nullable = false)
-    private Date updateDate;
+	@Column(name = "update_date", nullable = false)
+	private Date updateDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_date", nullable = false)
+	private Date lastDate;
+	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "issue")
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "id_assignee")
 	private User assignee;
 	
 	public Issue() {
 		state = State.New;
-		updateDate = new Date();
+		updateDate=new Date();
+		lastDate=new Date();
+	
 	}
 
 	public Long getId() {
@@ -117,8 +123,16 @@ public class Issue implements Serializable {
 		return updateDate;
 	}
 
+	public Date getLastDate(){
+		return lastDate;
+	}
+
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
 	}
 
 	public State getState() {
@@ -132,7 +146,7 @@ public class Issue implements Serializable {
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
+
 	public User getAssignee() {
 		return assignee;
 	}
@@ -150,12 +164,12 @@ public class Issue implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Issue) {
-			Issue issue = (Issue) obj;
-			return new EqualsBuilder().append(this.title, issue.title)
+				Issue issue = (Issue) obj;
+				return new EqualsBuilder().append(this.title, issue.title)
 						.append(this.updateDate, issue.updateDate)
 						.append(this.owner, issue.owner)
 						.append(this.state, issue.state).isEquals();
-		}
+			}
 		return false;
 	}
 }
