@@ -34,7 +34,7 @@ public class Label implements Serializable {
 
 	@Column(name = "label_name", nullable = false, unique = true)
 	@Size(min = 3, max = 20)
-	@Pattern(regexp = "^[a-zA-Z]{3,20}$")
+	@Pattern(regexp = "^[a-zA-Z0-9]{3,20}$")
 	private String labelName;
 
 
