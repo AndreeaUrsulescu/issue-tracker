@@ -74,7 +74,9 @@ public class IssueLabelRepository {
 		Issue issue = issueRepository.findIssue(issueId);
 		Label label = labelRepository.findLabelByName(labelName);
 		IssueLabel issueLabel = this.findIssueLabel(issue, label);
-		this.delete(issueLabel.getId());
+		if (issueLabel != null) {
+			this.delete(issueLabel.getId());
+		}
 	}
 
 	public void addLabelForIssue(Long idIssue, String labelName) {
