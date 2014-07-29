@@ -1,14 +1,17 @@
 package internship.issuetracker.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -20,13 +23,16 @@ import org.hibernate.validator.constraints.Email;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"),
-	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password") })
+	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password"),
+	@NamedQuery(name = User.FIND_ALL, query = "select a from User a ")
+	})
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
     public static final String FIND_NAME = "User.findName";
     public static final String FIND_PASS = "User.findPass";
+    public static final String FIND_ALL = "User.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,6 +50,9 @@ public class User implements Serializable {
     @Column(name = "user_password", nullable = false)
     @Size(min = 5)
     private String password;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="assignee")
+	private List<Issue> assignedIssues;
 
     public Long getId() {
 	return id;
@@ -76,8 +85,16 @@ public class User implements Serializable {
     public void setPassword(String password) {
 	this.password = password;
     }
+    
+    public List<Issue> getAssignedIssues() {
+		return assignedIssues;
+	}
 
-    @Override
+	public void setAssignedIssues(List<Issue> assignedIssues) {
+		this.assignedIssues = assignedIssues;
+	}
+
+	@Override
     public int hashCode() {
 	return new HashCodeBuilder().append(userName).append(email)
 		.append(password).toHashCode();
