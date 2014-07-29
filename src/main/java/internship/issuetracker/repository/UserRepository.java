@@ -1,5 +1,7 @@
 package internship.issuetracker.repository;
 
+import java.util.List;
+
 import internship.issuetracker.entities.User;
 
 import java.util.logging.Level;
@@ -23,6 +25,11 @@ public class UserRepository {
 	@PersistenceContext
 	private EntityManager em;
 
+	public List<User> findAll() {
+		TypedQuery<User> query = em.createNamedQuery(User.FIND_ALL, User.class);
+		return query.getResultList();
+	}
+	
 	public void create(User user) {
 		em.persist(user);
 	}

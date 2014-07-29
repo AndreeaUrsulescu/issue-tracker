@@ -1,8 +1,8 @@
 package internship.issuetracker.service;
 
-import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.LabelPojo;
+import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.LabelRepository;
 
@@ -15,10 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class LabelService {
     @Autowired
-    LabelRepository labelRepository;
+    private LabelRepository labelRepository;
 
     @Autowired
-    IssueRepository issueRepository;
+    private IssueRepository issueRepository;
+
+    @Autowired
+    private IssueLabelRepository issueLabelRepository;
 
     LabelPojo convertLabelEntityToPojoLabel(Label label) {
 	LabelPojo pojo = new LabelPojo(label.getLabelName());
@@ -39,14 +42,11 @@ public class LabelService {
     }
 
     public boolean assignLabelToIssue(Long id, LabelPojo labelPojo) {
-	Issue issue = issueRepository.findIssue(id);
 	Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
 	if (null != label) {
-	    boolean exists = issue.getLabels().contains(label);
-	    System.out.println(exists);
+	    boolean exists = issueLabelRepository.getLabelsForIssue(id).contains(label);
 	    if (!exists) {
-		label.getIssues().add(issue);
-		labelRepository.update(label);
+		issueLabelRepository.addLabelForIssue(id, label.getLabelName());
 		return true;
 	    } else {
 		return false;
@@ -55,8 +55,7 @@ public class LabelService {
 	    label = new Label();
 	    convertPojoLabelToLabelEntity(labelPojo, label);
 	    labelRepository.create(label);
-	    label.getIssues().add(issue);
-	    labelRepository.update(label);
+	    issueLabelRepository.addLabelForIssue(id, label.getLabelName());
 	}
 	return true;
     }
