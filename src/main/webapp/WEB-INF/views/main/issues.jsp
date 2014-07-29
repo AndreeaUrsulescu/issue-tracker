@@ -76,7 +76,8 @@
 								</c:otherwise>
 					</c:choose>		
 						<span class="border"> 
-						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
+						<label class="state">${issue.state}</label> 
+						<label class="assignee"></label>
 						</span> 
 						<span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />

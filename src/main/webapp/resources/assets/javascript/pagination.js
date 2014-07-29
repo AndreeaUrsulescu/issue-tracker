@@ -309,13 +309,23 @@ function parsingAjaxResponse(response){
 		 state.setAttribute("class", "state");
 		 state.appendChild(document.createTextNode(response[index].state));
 		 
-		 var date =  document.createElement("LABEL");
-		 date.setAttribute("class", "date");
-		 date.appendChild(document.createTextNode(response[index].updateDate));
+//		 var date =  document.createElement("LABEL");
+//		 date.setAttribute("class", "date");
+//		 date.appendChild(document.createTextNode(response[index].updateDate));
 		 
+		 var assignee = document.createElement("LABEL");
+		 assignee.setAttribute("class","assignee");
+		 var assigneeSpan = document.createElement("SPAN");
+		 assigneeSpan.setAttribute("class","glyphicon glyphicon-check");
+			//assigneeSpan.appendChild(document.createTextNode("Assignee: ")); 
+		 var newSpan = document.createElement("SPAN");
+		 newSpan.appendChild(document.createTextNode("Georgel "));
+		 assignee.appendChild(newSpan);	 
+		 assignee.appendChild(assigneeSpan);
+	
 		 title.appendChild(state);
-		 title.appendChild(date);
-		 
+		 title.appendChild(assignee);
+
 		 
 		 var content = document.createElement("DIV");
 		 content.setAttribute("class", "content");
@@ -356,7 +366,7 @@ function parsingAjaxResponse(response){
 		 
 		 stickyNoteContent.appendChild(title);
 		 stickyNoteContent.appendChild(content);
-		 stickyNoteContent.appendChild(assignee);
+		 //stickyNoteContent.appendChild(assignee);
 		 stickyNoteContent.appendChild(owner);
 		 
 		 stickyNote.appendChild(stickyNoteContent);
