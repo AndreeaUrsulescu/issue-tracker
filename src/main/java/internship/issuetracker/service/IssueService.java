@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class IssueService {
 	@Autowired
 	private IssueRepository issueRepository;
-
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -38,23 +38,23 @@ public class IssueService {
 		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
 		issueToUpdate.setContent(issuePojo.getContent());
 		issueToUpdate.setTitle(issuePojo.getTitle());
-		issueToUpdate.setUpdateDate(new Date());
+		issueToUpdate.setLastDate(new Date());
 		issueToUpdate.setState(issuePojo.getState());
 		this.issueRepository.update(issueToUpdate);
 	}
 
-	public IssuePojo getIssue(Long id) {
+	public IssuePojo getIssue(Long id){
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<LabelPojo> labelPojoList = new ArrayList<LabelPojo>();
 		Issue issue = this.issueRepository.findIssue(id);
-
+		
 		for (Comment com : issue.getComments()) {
 			CommentPojo pojoComment = new CommentPojo(com.getOwner()
 					.getUserName(), com.getContent(), com.getCreationDate(),
 					com.getIssue().getId());
 			pojoComments.add(pojoComment);
 		}
-
+		
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
 		for (Label label : labels) {
@@ -64,53 +64,55 @@ public class IssueService {
 
 		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner()
 				.getUserName(), issue.getTitle(), issue.getContent(),
-				issue.getUpdateDate(), issue.getState(), pojoComments,
+				issue.getUpdateDate(), issue.getLastDate(),
+				issue.getState(), pojoComments,
 				labelPojoList);
 		return issuePojo;
 
 	}	
+	
 
-
-	public int getNrOfPages() {
+	public int getNrOfPages(){
 		return this.issueRepository.nrOfPages();
 	}
-
+	
 	public List<IssuePojo> getOrderedIssues(int currentPage) {
-
+		
 		List<Issue> issuesListEntity = issueRepository
 				.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-
-		for (int index = 0; index < issuesListEntity.size(); index++) {
-			Issue issueEntity = issuesListEntity.get(index);
+		
+		for(int index = 0 ;index < issuesListEntity.size() ; index++ ){
+			Issue issueEntity  = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
 					issueEntity.getOwner().getUserName(),
 					issueEntity.getTitle(), issueEntity.getContent(),
-					issueEntity.getUpdateDate(), issueEntity.getState());
+					issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+			
 			issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
 			issuesListPojo.add(index, issuePojo);
 
 		}
-
+		
 		return issuesListPojo;
 	}
-
-	public int numberOfIssues() {
-
+	
+    public int numberOfIssues(){
+		
 		return this.issueRepository.numberOfIssues();
 	}
-
-	public int itemsPerPage() {
+    
+    public int itemsPerPage(){
 		return this.issueRepository.itemsPerPage();
 	}
-
+    
 	public void assignUserToIssue(Long issueId, UserPojo assignedUser) {
-
+    
 		User assignee = userRepository.findUserByUserName(assignedUser
 				.getUserName());
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
 		issueRepository.update(issue);
-	}
-
+    	}
+    	
 }

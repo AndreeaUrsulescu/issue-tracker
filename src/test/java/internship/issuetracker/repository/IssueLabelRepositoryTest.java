@@ -18,28 +18,28 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
 		"classpath:config/application-context.xml" })
 public class IssueLabelRepositoryTest {
-	
+
 	@Autowired
 	private IssueLabelRepository issueLabelRepository;
-	
+
 	@Autowired
 	private LabelRepository labelRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private IssueRepository issueRepository;
-	
+
 	private Label label;
 	private Issue issue;
 	private User user;
-	
+
 	static int count = 65;
 	static int icount = 65;
 	static int ucount = 65;
 	static int lcount = 65;
-	
+
 	public IssueLabel createIssueLabel() {
 		IssueLabel issueLabel = new IssueLabel();
 		issueLabel.setIssue(issue);
@@ -47,7 +47,7 @@ public class IssueLabelRepositoryTest {
 		issueLabelRepository.create(issueLabel);
 		return issueLabel;
 	}
-	
+
 	@Before
 	@Transactional
 	public void setUp() {
@@ -68,10 +68,45 @@ public class IssueLabelRepositoryTest {
 		labelRepository.create(label);
 		lcount++;
 	}
-	
+
+	@Test
+	public void removeLabelForIssueTest() {
+		createIssueLabel();
+		issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
+		assert (issueLabelRepository.findIssueLabel(issue, label) == null);
+	}
+
 	@Test
 	public void createTest() {
 		IssueLabel issueLabel = createIssueLabel();
-		assertEquals(issueLabelRepository.findIssueLabel(issue, label).getId(), issueLabel.getId());
+		assertEquals(issueLabelRepository.findIssueLabel(issue, label).getId(),
+				issueLabel.getId());
+	}
+
+	@Test
+	public void deleteTest() {
+		IssueLabel issueLabel = createIssueLabel();
+		issueLabelRepository.delete(issueLabel.getId());
+		assert (issueLabelRepository.findIssueLabel(issue, label) == null);
+	}
+
+	@Test
+	public void getLabelsForIssueTest() {
+		for (int i = 0; i < 10; i++) {
+			createIssueLabel();
+		}
+		assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 11);
+	}
+	
+	@Test
+	public void addLabelForIssueTest() {
+		issueLabelRepository.addLabelForIssue(issue.getId(), label.getLabelName());
+		assert(issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 1);
+	}
+	
+	@Test
+	public void findIssueLabelTest() {
+		IssueLabel issueLabel = createIssueLabel();
+		assert(issueLabelRepository.findIssueLabel(issue, label).getId() == issueLabel.getId());
 	}
 }

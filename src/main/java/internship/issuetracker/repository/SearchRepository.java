@@ -24,11 +24,11 @@ public class SearchRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public String convert(String x) {
-		if ("Date".equals(x)) {
+	public String convert(String x){
+		if("Date".equals(x)){
 			return "updateDate";
 		}
-
+		
 		return "updateDate";
 	}
 

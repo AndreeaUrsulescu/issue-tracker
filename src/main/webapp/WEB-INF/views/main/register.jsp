@@ -5,7 +5,7 @@
 <script src="resources/assets/javascript/register-validation.js"></script>
 <div class="container registerContainer">
 	
-	<div class="registerForm" >
+	<div class="registerForm" style="margin-top: 150px;">
 
 		<sf:form id="registerForm" method="POST" role="form"
 			modelAttribute="user">
@@ -55,7 +55,11 @@
 			</div>
 
 		</sf:form>
-	
-
+	</div>
+	<div id="niceAdd">
+		<p id="promo1" class="promo" style="">1. Create an account</p>
+		<p id="promo2" class="promo">2. Sign in to your page</p>
+		<p id="promo3" class="promo">3. Share and fulfill your issues</p>
+<!--		<p id="promo4">That simple :)</p>-->
 	</div>
 </div>
