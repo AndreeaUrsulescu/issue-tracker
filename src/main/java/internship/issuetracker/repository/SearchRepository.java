@@ -1,5 +1,6 @@
 package internship.issuetracker.repository;
 
+import filters.SearchFilterInt;
 import internship.issuetracker.entities.Issue;
 
 import java.util.List;

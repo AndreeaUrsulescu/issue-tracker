@@ -1,10 +1,10 @@
 package internship.issuetracker.service;
 
 import static org.junit.Assert.assertEquals;
+import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
-import internship.issuetracker.repository.TitleFilter;
 
 import java.util.ArrayList;
 
