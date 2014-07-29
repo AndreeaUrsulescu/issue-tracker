@@ -1,5 +1,6 @@
 package internship.issuetracker.repository;
 
+import filters.StateFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.enums.State;
