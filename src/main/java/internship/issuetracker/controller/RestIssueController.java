@@ -93,9 +93,4 @@ public class RestIssueController {
 		}
 		return map;
 	}
-	
-	@RequestMapping(value = "/issue/{id}/removeLabel", method = RequestMethod.DELETE)
-	public void removeLabel(@PathVariable Long id, @RequestBody LabelPojo labelPojo) {
-		labelService.removeLabel(labelPojo);
-	}
 }

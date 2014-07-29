@@ -6,6 +6,7 @@ import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
+import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 
@@ -24,6 +25,9 @@ public class IssueService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private IssueLabelRepository issueLabelRepository;
 
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
@@ -53,7 +57,7 @@ public class IssueService {
 	
 	public IssuePojo getIssue(Long id){
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
-		List<LabelPojo> labelPojo = new ArrayList<LabelPojo>();
+		List<LabelPojo> labelPojoList = new ArrayList<LabelPojo>();
 		Issue issue = this.issueRepository.findIssue(id);
 		
 		for (Comment com : issue.getComments()) {
@@ -61,12 +65,14 @@ public class IssueService {
 			pojoComments.add(pojoComment);
 		}
 		
-		for(Label label: issue.getLabels()){
+		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
+		
+		for(Label label: labels){
 		    LabelPojo pojoLabel = new LabelPojo(label.getLabelName());
-		    labelPojo.add(pojoLabel);
+		    labelPojoList.add(pojoLabel);
 		}
 		
-		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments, labelPojo);
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments, labelPojoList);
 		return issuePojo;
 
 	}	
