@@ -10,9 +10,12 @@
 	<c:choose>
 		<c:when test="${loggedIn}">
 			<div class="dropdown control-menu">
-				<button class="btn btn-default dropdown-toggle" type="button"
+			
+				<button class="btn btn-primary dropdown-toggle" type="button"
 					id="dropdownMenu1" data-toggle="dropdown">
-					Hi <%=request.getUserPrincipal().getName()%>
+					<span class=" glyphicon glyphicon-user">
+				<!--	Hi <%=request.getUserPrincipal().getName()%>  -->
+					<span style="font-family: 'Arial Black', Gadget, sans-serif;">My profile</span>
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
@@ -27,9 +30,11 @@
 		</c:when>
 		<c:otherwise>
 			<div class="dropdown control-menu">
+				
 				<button class="btn btn-default dropdown-toggle" type="button"
 					id="dropdownMenu1" data-toggle="dropdown">
 					Control Panel
+					 <span class="glyphicon glyphicon-cog">
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">

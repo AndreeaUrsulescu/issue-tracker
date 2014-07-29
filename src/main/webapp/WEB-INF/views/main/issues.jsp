@@ -76,11 +76,11 @@
 								</c:otherwise>
 					</c:choose>		
 						<span class="border"> 
-							<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
+						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
 						</span> 
 						<span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />
-						</span>
+					</span>
 						</span>
 						
 							<c:choose>
@@ -96,10 +96,10 @@
 				 
 				<div class="asigneeInfoPostIt">
 					<span>Assignee:</span>
-					<span>Georgel</span>
+					<span>${issue.assignee}</span>
 				</div>
 				
-				<label class="owner">Updated by ${issue.owner}</label>
+				<label class="owner">Updated ${issue.update} ago by ${issue.owner}</label>
 				<!-- </span>  -->
 			</a>
 			</div>

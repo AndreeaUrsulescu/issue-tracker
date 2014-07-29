@@ -49,16 +49,14 @@ function ValidateContent() {
 	return true;
 };
 
-
 function assignUser(){
 	var filterData;
 	
 	filterData = {
-			userName : "corbulet" // change it with input value
+			userName : $("#assigneeInput").val().trim() // change it with input value
      	};
-	
 	$.ajax({
- 		url : "assignUser" , // put some URL
+ 		url : window.location.origin + window.location.pathname + "/assignUser" , // put some URL
  		type : "POST",
         data : JSON.stringify(filterData), 
  		beforeSend : function(xhr) {
@@ -66,7 +64,7 @@ function assignUser(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			
+ 			$("#assigneeInput").val('');
  		}
  	});
 }

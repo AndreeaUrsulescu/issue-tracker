@@ -6,9 +6,6 @@ import internship.issuetracker.entities.IssueLabel;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

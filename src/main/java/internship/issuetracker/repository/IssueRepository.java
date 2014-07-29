@@ -25,7 +25,6 @@ public class IssueRepository {
 	private EntityManager em;
 
 	public void create(Issue issue) {
-		System.out.println(issue.getId());
 		em.persist(issue);
 	}
 

@@ -95,6 +95,15 @@ public class RestIssueController {
 		return map;
 	}
 	
+	@RequestMapping(value="/issue/{id}/removeLabel", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Map<String, Object> removeLabel(@PathVariable Long id, @RequestBody LabelPojo labelToRemove) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		labelService.removeLabelFromIssue(id, labelToRemove);
+		map.put("response", "success");
+		return map;
+	}
+	
 	@RequestMapping(value = "/issue/{issueId}/assignUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> addLabel(@PathVariable("issueId") Long issueId,@RequestBody UserPojo assignedUser) {

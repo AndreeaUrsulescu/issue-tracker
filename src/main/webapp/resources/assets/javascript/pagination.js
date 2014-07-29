@@ -320,7 +320,7 @@ function parsingAjaxResponse(response){
 			 }
 		 else paragrafContent = response[index].content;
 		 
-		 paragraf.appendChild(document.createTextNode(paragrafContent));
+		 paragraf.appendChild(document.createTextNode(paragrafContent))
 		 
 		 content.appendChild(contentTitle);
 		 content.appendChild(paragraf);
@@ -332,7 +332,7 @@ function parsingAjaxResponse(response){
 		 
 		 
 		 var newSpan = document.createElement("SPAN");
-		 newSpan.appendChild(document.createTextNode("Georgel"));
+		 newSpan.appendChild(document.createTextNode(response[index].assignee));
 		 
 		 var brbr = document.createElement("BR");
 		 
@@ -342,7 +342,7 @@ function parsingAjaxResponse(response){
 		 
 		 var owner = document.createElement("LABEL");
 		 owner.setAttribute("class", "owner");
-		 owner.appendChild(document.createTextNode("Updated by "+ response[index].owner));
+		 owner.appendChild(document.createTextNode("Updated "+response[index].update+" ago by "+ response[index].owner));
 		 
 		 stickyNoteContent.appendChild(title);
 		 stickyNoteContent.appendChild(content);

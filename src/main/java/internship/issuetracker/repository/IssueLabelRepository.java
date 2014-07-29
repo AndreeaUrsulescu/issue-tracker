@@ -18,58 +18,67 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class IssueLabelRepository {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Autowired
 	private IssueRepository issueRepository;
-	
+
 	@Autowired
 	private LabelRepository labelRepository;
-	
+
 	public void create(IssueLabel issueLabel) {
 		em.persist(issueLabel);
 	}
-	
+
 	public void delete(Long id) {
 		IssueLabel issueLabel = em.find(IssueLabel.class, id);
 		em.remove(issueLabel);
 	}
-	
+
 	public List<Label> getLabelsForIssue(Long id) {
 		Issue issue = issueRepository.findIssue(id);
-		TypedQuery<IssueLabel> query = em.createNamedQuery(IssueLabel.FIND_LABELS_FOR_ISSUE,
-				IssueLabel.class);
+		TypedQuery<IssueLabel> query = em.createNamedQuery(
+				IssueLabel.FIND_LABELS_FOR_ISSUE, IssueLabel.class);
 
-		List<IssueLabel> result = query.setParameter("issue", issue).getResultList();
+		List<IssueLabel> result = query.setParameter("issue", issue)
+				.getResultList();
 		List<Label> labels = new ArrayList<Label>();
-		
+
 		for (IssueLabel issueLabel : result) {
 			labels.add(issueLabel.getLabel());
 		}
-		
+
 		return labels;
 	}
-	
+
 	public IssueLabel findIssueLabel(Issue issue, Label label) {
-		TypedQuery<IssueLabel> query = em.createNamedQuery(IssueLabel.FIND_ISSUE_LABEL, IssueLabel.class);
+		TypedQuery<IssueLabel> query = em.createNamedQuery(
+				IssueLabel.FIND_ISSUE_LABEL, IssueLabel.class);
 		issue = issueRepository.findIssue(issue.getId());
 		label = labelRepository.findLabelByName(label.getLabelName());
-		
+
 		query.setParameter("issue", issue);
 		query.setParameter("label", label);
-		
-		return query.getResultList().get(0);
+
+		List<IssueLabel> result = query.getResultList();
+
+		if (result.size() > 0) {
+			return result.get(0);
+		}
+		return null;
 	}
-	
+
 	public void removeLabelFromIssue(Long issueId, String labelName) {
 		Issue issue = issueRepository.findIssue(issueId);
 		Label label = labelRepository.findLabelByName(labelName);
 		IssueLabel issueLabel = this.findIssueLabel(issue, label);
-		this.delete(issueLabel.getId());
+		if (issueLabel != null) {
+			this.delete(issueLabel.getId());
+		}
 	}
-	
+
 	public void addLabelForIssue(Long idIssue, String labelName) {
 		Issue issue = issueRepository.findIssue(idIssue);
 		Label label = labelRepository.findLabelByName(labelName);
@@ -77,6 +86,6 @@ public class IssueLabelRepository {
 		issueLabel.setIssue(issue);
 		issueLabel.setLabel(label);
 		this.create(issueLabel);
-		
+
 	}
 }
