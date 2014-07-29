@@ -3,6 +3,7 @@ package internship.issuetracker.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
@@ -69,5 +73,24 @@ public class Label implements Serializable{
 	public void setLabelName(String labelName) {
 		this.labelName = labelName;
 	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(labelName).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Label) {
+			if (this == obj) {
+				Label label = (Label) obj;
+				return new EqualsBuilder().append(this.labelName, label.labelName)
+						.append(this.issues, label.issues).isEquals();
+			}
+		}
+		return false;
+	}
+	
+	
 }
 
