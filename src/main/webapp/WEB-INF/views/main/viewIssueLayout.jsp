@@ -31,6 +31,10 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/bootstrap-tooltip.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/assign-issue.js"></script>
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />

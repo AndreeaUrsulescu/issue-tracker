@@ -92,8 +92,15 @@
 								</c:otherwise>
 							</c:choose>
 						
-				<span> <label class="owner">Updated by ${issue.owner}</label>
-				</span>
+				<!--<span class="assignee_owner"> -->
+				 
+				<div class="asigneeInfoPostIt">
+					<span>Assignee:</span>
+					<span>Georgel</span>
+				</div>
+				
+				<label class="owner">Updated by ${issue.owner}</label>
+				<!-- </span>  -->
 			</a>
 			</div>
 		</c:forEach>

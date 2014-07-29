@@ -30,12 +30,15 @@ public class Label implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 
 	@Column(name = "label_name", nullable = false, unique = true)
 	@Size(min = 3, max = 20)
 	@Pattern(regexp = "^[a-zA-Z]{3,20}$")
 	private String labelName;
 
+
+	
 	public Long getId() {
 		return id;
 	}

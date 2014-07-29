@@ -14,7 +14,6 @@ import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +43,6 @@ public class IssueService {
 		this.issueRepository.update(issueToUpdate);
 	}
 
-	public List<Issue> getIssuesByTitle(String title) {
-		return this.issueRepository.findIssuesByTitle(title);
-
-	}
-
-	public List<Issue> getIssuesByDate(Date date) {
-		return this.issueRepository.findIssuesByDate(date);
-	}
-
-	public List<Issue> getIssues() {
-		return this.issueRepository.findIssues();
-	}
-
 	public IssuePojo getIssue(Long id) {
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<LabelPojo> labelPojoList = new ArrayList<LabelPojo>();
@@ -82,11 +68,8 @@ public class IssueService {
 				labelPojoList);
 		return issuePojo;
 
-	}
+	}	
 
-	public List<Issue> getIssuesForPagination(int page) {
-		return this.issueRepository.findIssuesForPagination(page);
-	}
 
 	public int getNrOfPages() {
 		return this.issueRepository.nrOfPages();
