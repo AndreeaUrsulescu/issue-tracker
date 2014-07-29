@@ -72,6 +72,10 @@ public class Issue implements Serializable {
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
 
+	@ManyToOne
+	@JoinColumn(name = "id_assignee", nullable = false)
+	private User assignee;
+	
 	public Issue() {
 		state = State.New;
 		updateDate = new Date();
@@ -131,6 +135,14 @@ public class Issue implements Serializable {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public User getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
 	}
 
 	@Override
