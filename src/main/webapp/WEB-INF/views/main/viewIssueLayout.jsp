@@ -26,13 +26,15 @@
 
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/comments.js"></script>
 
-		<script src="${pageContext.request.contextPath}/resources/assets/javascript/scripts.js"></script>
-
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
 
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/bootstrap-tooltip.js"></script>
+	    
+	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/assign-issue.js"></script>
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />

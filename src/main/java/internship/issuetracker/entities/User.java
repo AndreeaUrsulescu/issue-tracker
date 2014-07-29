@@ -20,13 +20,16 @@ import org.hibernate.validator.constraints.Email;
 @SuppressWarnings("serial")
 @NamedQueries({
 	@NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"),
-	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password") })
+	@NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password"),
+	@NamedQuery(name = User.FIND_ALL, query = "select a from User a ")
+	})
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
     public static final String FIND_NAME = "User.findName";
     public static final String FIND_PASS = "User.findPass";
+    public static final String FIND_ALL = "User.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,8 +79,8 @@ public class User implements Serializable {
     public void setPassword(String password) {
 	this.password = password;
     }
-
-    @Override
+    
+	@Override
     public int hashCode() {
 	return new HashCodeBuilder().append(userName).append(email)
 		.append(password).toHashCode();

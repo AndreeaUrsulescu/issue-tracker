@@ -27,6 +27,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Entity
 @Table(name = "Comments")
 public class Comment implements Serializable {
+	
+		
 
     public static final String FIND_COMMENTS_BY_ISSUE = "Comment.findCommentsByIssue";
     public static final String FIND_COMMENTS_BY_OWNER = "Comment.findCommentsByOwner";
@@ -46,14 +48,13 @@ public class Comment implements Serializable {
     @JoinColumn(name = "id_issue", nullable = false)
     private Issue issue;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     @Column(name = "creation_date", nullable = false)
     private Date creationDate;
 
     public Issue getIssue() {
 	return issue;
     }
-
     public void setIssue(Issue issue) {
 	this.issue = issue;
     }

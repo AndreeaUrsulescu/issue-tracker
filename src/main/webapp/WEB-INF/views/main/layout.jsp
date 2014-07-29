@@ -22,14 +22,13 @@
 		<!-- 		jquery UI JavaScript -->
 		<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 		
+		
 		<!-- Loading custom style -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/style.css" type="text/css">
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/comments.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
-		
-		<script src="${pageContext.request.contextPath}/resources/assets/javascript/scripts.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
 		
