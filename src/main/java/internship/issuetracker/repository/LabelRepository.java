@@ -34,7 +34,9 @@ public class LabelRepository {
 	public Label findLabelByName(String title) {
 		TypedQuery<Label> query = em.createNamedQuery(Label.FIND_BY_NAME, Label.class);
 		List<Label> labels = query.setParameter("labelName", title).getResultList();
-		
+		if(labels.size() == 0){
+		    return null;
+		}
 		return labels.get(0);
 	}
 	

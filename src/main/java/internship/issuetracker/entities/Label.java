@@ -50,6 +50,7 @@ public class Label implements Serializable{
 	
 	
 	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JoinTable(name = "issue_labels", joinColumns = { @JoinColumn(name = "id_label", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "id_issue", referencedColumnName = "id") })
 	@JoinTable (name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns  = @JoinColumn (name = "id_issue"))
 	private Set<Issue> issues = new HashSet <Issue>();
 
