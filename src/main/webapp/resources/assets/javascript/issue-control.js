@@ -88,8 +88,8 @@ $(document).ready(function(){
 	    		url: url,
 	    		success: function(rsp) {
 	    			if(rsp.response === "success"){
-		    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
-		    					+'<span class="glyphicon glyphicon-remove"></span>');
+			    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+			    					+'<span class="glyphicon glyphicon-remove"></span>');
 		    			if(availableTags.indexOf($("#tags").val().trim()) != -1){
 		    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
 		    			}

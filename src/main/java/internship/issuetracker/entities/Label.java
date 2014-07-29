@@ -79,12 +79,10 @@ public class Label implements Serializable {
     @Override
     public boolean equals(Object obj) {
 	if (obj instanceof Label) {
-	    if (this == obj) {
-		Label label = (Label) obj;
-		return new EqualsBuilder()
+	    Label label = (Label) obj;
+	    return new EqualsBuilder()
 			.append(this.labelName, label.labelName)
-			.append(this.issues, label.issues).isEquals();
-	    }
+			.isEquals();
 	}
 	return false;
     }
