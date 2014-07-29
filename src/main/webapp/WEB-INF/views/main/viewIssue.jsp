@@ -5,6 +5,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 
+<button onclick="assignUser()">click me</button>
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">

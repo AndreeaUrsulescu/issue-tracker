@@ -52,13 +52,12 @@ function ValidateContent() {
 
 function assignUser(){
 	var filterData;
-	
 	filterData = {
-			userName : "corbulet" // change it with input value
+			userName : "pispirel" // change it with input value
      	};
 	
 	$.ajax({
- 		url : "assignUser" , // put some URL
+ 		url : window.location.origin + window.location.pathname + "/assignUser" , // put some URL
  		type : "POST",
         data : JSON.stringify(filterData), 
  		beforeSend : function(xhr) {
@@ -66,7 +65,7 @@ function assignUser(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			
+ 			alert(response.response);
  		}
  	});
 }
