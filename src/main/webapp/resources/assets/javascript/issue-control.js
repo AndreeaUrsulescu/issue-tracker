@@ -88,14 +88,21 @@ $(document).ready(function(){
 	    		url: url,
 	    		success: function(rsp) {
 	    			if(rsp.response === "success"){
-			    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+			    		
+	    				//show label in UI
+	    				$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
 			    					+'<span class="glyphicon glyphicon-remove"></span>');
-		    			if(availableTags.indexOf($("#tags").val().trim()) != -1){
+		    			
+	    				//remove label from autocomplete
+	    				if(availableTags.indexOf($("#tags").val().trim()) != -1){
 		    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
 		    			}
+	    				
 	    			} else if(rsp.response === "duplicate"){
+	    				//show error message if label already exists
 	    				$("#tags").parent().parent().find(".error").text("Already exists");
 	    			}
+	    			//clear input box
 	    			$("#tags").val('');
 	    		}
 	    	});
