@@ -32,10 +32,14 @@ public class LabelRepository {
 		em.merge(label);
 	}
 
-	public Label findLabelByName(String title) {
+	public Label findLabelByName(String labelName) {
 		TypedQuery<Label> query = em.createNamedQuery(Label.FIND_BY_NAME,
 				Label.class);
-
-		return query.setParameter("labelName", title).getResultList().get(0);
+		List<Label>labels = query.setParameter("labelName", labelName).getResultList();
+		//we need this check in case this is a new label
+		if(labels.size() > 0){
+		    return labels.get(0);
+		}
+		return null;
 	}
 }
