@@ -11,6 +11,15 @@
 	<name>Issue Tracker</name>
 	<description>Issue Tracker POM</description>
 
+	<!-- Email config -->
+	<repositories>
+		<repository>
+			<id>Java.Net</id>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+	</repositories>
+	<!-- /Email config -->
+
 	<properties>
 		<springframework.version>3.2.6.RELEASE</springframework.version>
 		<hibernate.version>3.6.8.Final</hibernate.version>
@@ -22,6 +31,13 @@
 
 	<dependencies>
 
+		<!-- Java Mail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+		<!-- /Java Mail API -->
 
 		<!-- Spring Security -->
 		<dependency>
@@ -96,6 +112,14 @@
 			<artifactId>spring-test</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
+
+		<!-- Spring framework for mail -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<!-- /Spring framework for mail -->
 
 		<!-- AOP dependency -->
 		<dependency>

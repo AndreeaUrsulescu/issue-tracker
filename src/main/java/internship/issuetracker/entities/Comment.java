@@ -47,12 +47,10 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "id_issue", nullable = false)
 	private Issue issue;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIME)
 	@Column(name = "creation_date", nullable = false)
 	private Date creationDate;
-
-	
-	
+		
 	public Issue getIssue() {
 		return issue;
 	}

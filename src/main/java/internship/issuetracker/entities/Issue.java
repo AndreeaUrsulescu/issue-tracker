@@ -34,16 +34,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-	@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) LIKE lower(:title) order by updateDate DESC,a.id DESC"),
-	@NamedQuery(name = Issue.FIND_BY_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
 	@NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
 	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
-    public static final String FIND_BY_TITLE = "Issue.findByTitle";
-    public static final String FIND_BY_DATE = "Issue.findByDate";
     public static final String FIND_BY_ID = "Issue.findByID";
     public static final String FIND_ALL = "Issue.findAll";
 
@@ -63,7 +59,7 @@ public class Issue implements Serializable {
     @Size(max = 1000)
     private String content;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     @Column(name = "update_date", nullable = false)
     private Date updateDate;
 

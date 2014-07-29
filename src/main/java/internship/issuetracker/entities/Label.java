@@ -39,13 +39,6 @@ public class Label implements Serializable{
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long id;
 	
-	public Set<Issue> getIssues() {
-	    return issues;
-	}
-
-	public void setIssues(Set<Issue> issues) {
-	    this.issues = issues;
-	}
 
 	@Column(name = "label_name", nullable = false, unique = true)
 	@Size(min = 3, max = 20)
@@ -58,6 +51,14 @@ public class Label implements Serializable{
 	@JoinTable (name = "issue_labels", joinColumns = @JoinColumn(name = "id_label"), inverseJoinColumns  = @JoinColumn (name = "id_issue"))
 	private Set<Issue> issues = new HashSet <Issue>();
 
+	public Set<Issue> getIssues() {
+	    return issues;
+	}
+
+	public void setIssues(Set<Issue> issues) {
+	    this.issues = issues;
+	}
+	
 	public Long getId() {
 		return id;
 	}

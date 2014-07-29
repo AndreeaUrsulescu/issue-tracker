@@ -2,6 +2,11 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.User;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javassist.bytecode.stackmap.TypeData.ClassName;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -13,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserRepository {
+	private static final Logger log = Logger.getLogger( UserRepository.class.getName() );
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -47,6 +54,7 @@ public class UserRepository {
 		try {
 			user = query.getSingleResult();
 		} catch (NoResultException ex) {
+			log.log( Level.FINE, "NoResultException in userRepository.findUserByUserName("+ userName +")" );
 		}
 
 		return user;
