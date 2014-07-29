@@ -2,13 +2,16 @@ package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,7 @@ public class IssueService {
 	
 	public IssuePojo getIssue(Long id){
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+		List<LabelPojo> labelPojo = new ArrayList<LabelPojo>();
 		Issue issue = this.issueRepository.findIssue(id);
 		
 		for (Comment com : issue.getComments()) {
@@ -57,7 +61,12 @@ public class IssueService {
 			pojoComments.add(pojoComment);
 		}
 		
-		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments);
+		for(Label label: issue.getLabels()){
+		    LabelPojo pojoLabel = new LabelPojo(label.getLabelName());
+		    labelPojo.add(pojoLabel);
+		}
+		
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getState(), pojoComments, labelPojo);
 		return issuePojo;
 
 	}	

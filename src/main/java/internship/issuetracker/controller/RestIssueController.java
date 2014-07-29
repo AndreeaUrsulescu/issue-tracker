@@ -84,9 +84,13 @@ public class RestIssueController {
 	@ResponseBody
 	public Map<String, Object> addLabel(@PathVariable("issueId") Long issueId,
 			@RequestBody LabelPojo addLabel) {
-		labelService.assignLabelToIssue(issueId, addLabel);
+		boolean exists = labelService.assignLabelToIssue(issueId, addLabel);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("response", "success");
+		if (exists){
+		    map.put("response", "success");
+		} else {
+		    map.put("response", "duplicate");
+		}
 		return map;
 	}
 }

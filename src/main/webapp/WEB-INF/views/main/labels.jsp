@@ -16,12 +16,16 @@
 			</div>
 		</div>
 	</div>
-	<div id="active-labels" class="labelSection selected-labels">
-		<!--TEMPLATE HERE -->
-<!-- 		<span class="issueLabel label label-primary"> java <span -->
-<!-- 			class="glyphicon glyphicon-remove"></span> -->
-<!-- 		</span> -->
-	</div>
+
+	<c:forEach var="label" items="${viewIssue.getLabels()}">
+		<div id="active-labels" class="labelSection selected-labels">
+			<span class="issueLabel label label-primary"> <c:out
+					value="${label.getLabelName()}" /> <span
+				class="glyphicon glyphicon-remove"></span>
+			</span>
+		</div>
+	</c:forEach>
+
 	<br>
 	<div class="viewIssueContainer"></div>
 </div>
