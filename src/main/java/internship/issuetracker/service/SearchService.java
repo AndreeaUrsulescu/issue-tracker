@@ -1,14 +1,14 @@
 package internship.issuetracker.service;
 
+import filters.ContentFilter;
+import filters.SearchFilterInt;
+import filters.StateFilter;
+import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.enums.State;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.SearchParameter;
-import internship.issuetracker.repository.ContentFilter;
-import internship.issuetracker.repository.SearchFilterInt;
 import internship.issuetracker.repository.SearchRepository;
-import internship.issuetracker.repository.StateFilter;
-import internship.issuetracker.repository.TitleFilter;
 
 import java.util.ArrayList;
 import java.util.List;
