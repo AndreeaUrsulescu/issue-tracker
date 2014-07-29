@@ -1,5 +1,7 @@
 package internship.issuetracker.entities;
 
+import internship.issuetracker.utils.EncryptData;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -7,22 +9,57 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 
 @SuppressWarnings("serial")
+@NamedQueries({
+@NamedQuery(name = Activation.FIND_KEYHASH, query = "select a from Activation a where keyHash = :keyHash")})
 @Entity
 @Table(name = "Activations")
-public class Activation implements Serializable{
+public class Activation implements Serializable {
+	
+	public static final String FIND_KEYHASH="Activation.findKeyHash";
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="user")
-	private User user;
-	
-	@Column(name="keyHash")
+
+	@Column(name = "keyHash", nullable = false, unique = true)
 	private String keyHash;
 
+	@Column(name = "user_name", nullable = false, unique = true)
+	@Size(min = 5, max = 12)
+	@Pattern(regexp = "^[a-zA-Z]{5,12}$")
+	private String userName;
+
+	@Column(name = "user_email", nullable = false)
+	@Email
+	private String email;
+
+	@Column(name = "user_password", nullable = false)
+	@Size(min = 5)
+	private String password;
+	
+	public Activation()
+	{
+	}
+	
+	public Activation(User user)
+	{
+		this.email=user.getEmail();
+		this.userName=user.getUserName();
+		this.password=user.getPassword();
+		this.EncryptPasswordAndKeyHash();
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,50 +68,58 @@ public class Activation implements Serializable{
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public String getKeyHash() {
 		return keyHash;
 	}
-
+	
 	public void setKeyHash(String keyHash) {
 		this.keyHash = keyHash;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((keyHash == null) ? 0 : keyHash.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
+	public String getUserName() {
+		return userName;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Activation other = (Activation) obj;
-		if (keyHash == null) {
-			if (other.keyHash != null)
-				return false;
-		} else if (!keyHash.equals(other.keyHash))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(userName).append(email)
+				.append(password).toHashCode();
+	}
+		
+	public void EncryptPasswordAndKeyHash()
+	{
+		this.setKeyHash(EncryptData.sha256(this.getEmail()+this.getUserName()));
+		this.setPassword(EncryptData.sha256(password));
+	}
+	
+	User getUserFromActivation() {
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setUserName(userName);
+		return user;
+	}
+	
+	
 }

@@ -1,7 +1,9 @@
 
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.Activation;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
 import internship.issuetracker.validator.UserValidator;
 
@@ -24,6 +26,9 @@ public class RegisterController {
 	@Autowired
 	private UserValidator userValidator;
 
+	@Autowired
+	private ActivationService activationService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute(new User());
@@ -40,8 +45,16 @@ public class RegisterController {
 			mv.addObject("errors", bindingResult.getAllErrors());
 			return mv;
 		}
-		userService.addUser(user);
-		mv.setViewName("redirect:/login");
+		Activation activation=new Activation(user);
+		
+		activationService.addActivation(activation);
+		mv.setViewName("checkEmailPage");
 		return mv;
+	}
+	
+	@RequestMapping(value = { "/checkEmailPage"}, method = RequestMethod.GET)
+	public String checkEmailPage() {
+		System.out.println("Adsgffds");
+		return "checkEmailPage";
 	}
 }

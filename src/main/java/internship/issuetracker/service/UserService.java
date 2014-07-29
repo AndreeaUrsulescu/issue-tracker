@@ -14,11 +14,9 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public void addUser(User user) {
-		String hashPassword = EncryptData.sha256(user.getPassword());
-		user.setPassword(hashPassword);
 		this.userRepository.create(user);
 	}
-
+	
 	public void updateUser(User user) {
 		this.userRepository.update(user);
 	}
@@ -35,4 +33,6 @@ public class UserService {
 	public User findUserByUserName(String userName) {
 		return userRepository.findUserByUserName(userName);
 	}
+	
+	
 }
