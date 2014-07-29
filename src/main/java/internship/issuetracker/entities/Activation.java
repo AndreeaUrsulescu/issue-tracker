@@ -109,11 +109,11 @@ public class Activation implements Serializable {
 		
 	public void EncryptPasswordAndKeyHash()
 	{
-		this.setKeyHash(EncryptData.sha256(this.getEmail()+this.getUserName()));
+		this.setKeyHash(EncryptData.sha256(this.getUserName()));
 		this.setPassword(EncryptData.sha256(password));
 	}
 	
-	User getUserFromActivation() {
+	public User getUserFromActivation() {
 		User user = new User();
 		user.setEmail(email);
 		user.setPassword(password);

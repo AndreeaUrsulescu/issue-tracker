@@ -24,6 +24,16 @@
 		<put-attribute name="body"   value="/WEB-INF/views/main/checkEmailPage.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
+	<definition name="activationFailure" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body"   value="/WEB-INF/views/main/activationFailure.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="activationSuccess" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body"   value="/WEB-INF/views/main/activationSuccess.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
 
 	<definition name="createIssue" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>

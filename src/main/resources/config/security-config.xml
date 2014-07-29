@@ -24,6 +24,7 @@
 		<security:intercept-url pattern="/login" access="isAnonymous()" />
 		<security:intercept-url pattern="/register" access="isAnonymous()" />
 		<security:intercept-url pattern="/checkEmailPage" access="isAnonymous()" />
+		<security:intercept-url pattern="/activation/**" access="isAnonymous()" />
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 		<security:logout logout-url="/logout" />
 	</security:http>

@@ -29,7 +29,7 @@ public class ActivationRepository {
 		Activation activation=new Activation();
 		
 		TypedQuery<Activation> query = em.createNamedQuery(Activation.FIND_KEYHASH,Activation.class);
-		query.setParameter("keyHash", EncryptData.sha256(keyHash));
+		query.setParameter("keyHash",keyHash);
 		try
 		{
 			activation=query.getSingleResult();
@@ -43,6 +43,7 @@ public class ActivationRepository {
 	
 	public void remove(Activation activation)
 	{
-		em.remove(activation);
+		
+		em.remove(this.findActivationByKeyHash(activation.getKeyHash()));
 	}
 }
