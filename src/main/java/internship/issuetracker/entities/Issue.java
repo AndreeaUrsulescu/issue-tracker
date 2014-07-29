@@ -1,14 +1,12 @@
 package internship.issuetracker.entities;
 
 import internship.issuetracker.enums.State;
+import internship.issuetracker.entities.Label;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,21 +31,15 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
 @NamedQueries({
-		@NamedQuery(name = Issue.FIND_BY_TITLE, query = "select a from Issue a where lower(title) LIKE lower(:title) order by updateDate DESC,a.id DESC"),
-		@NamedQuery(name = Issue.FIND_BY_DATE, query = "select a from Issue a where a.updateDate= :updateDate"),
-		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
-		@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC")
-		})
+	@NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
+	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
-	public static final String FIND_BY_TITLE = "Issue.findByTitle";
-	public static final String FIND_BY_DATE = "Issue.findByDate";
-	public static final String FIND_BY_ID = "Issue.findByID";
-	public static final String FIND_ALL = "Issue.findAll";
-	
-    
+    public static final String FIND_BY_ID = "Issue.findByID";
+    public static final String FIND_ALL = "Issue.findAll";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -65,25 +56,25 @@ public class Issue implements Serializable {
 	@Size(max = 1000)
 	private String content;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "update_date", nullable = false)
-	private Date updateDate;
+    @Temporal(TemporalType.TIME)
+    @Column(name = "update_date", nullable = false)
+    private Date updateDate;
 
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "state", nullable = false)
 	private State state;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "issue")
 	@OrderBy("creationDate DESC, id DESC")
 	private List<Comment> comments;
-	
-	@ManyToMany(mappedBy="issues", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Label> labels = new HashSet<Label>(); 
-	
 
+	@ManyToOne
+	@JoinColumn(name = "id_assignee")
+	private User assignee;
+	
 	public Issue() {
 		state = State.New;
-		updateDate=new Date();
+		updateDate = new Date();
 	}
 
 	public Long getId() {
@@ -118,6 +109,10 @@ public class Issue implements Serializable {
 		this.content = content;
 	}
 
+	public void setState(State state) {
+		this.state = state;
+	}
+
 	public Date getUpdateDate() {
 		return updateDate;
 	}
@@ -130,16 +125,20 @@ public class Issue implements Serializable {
 		return state;
 	}
 
-	public void setState(State state) {
-		this.state = state;
-	}
-	
 	public List<Comment> getComments() {
 		return comments;
 	}
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public User getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
 	}
 
 	@Override
@@ -151,13 +150,11 @@ public class Issue implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Issue) {
-			if (this == obj) {
-				Issue issue = (Issue) obj;
-				return new EqualsBuilder().append(this.title, issue.title)
+			Issue issue = (Issue) obj;
+			return new EqualsBuilder().append(this.title, issue.title)
 						.append(this.updateDate, issue.updateDate)
 						.append(this.owner, issue.owner)
 						.append(this.state, issue.state).isEquals();
-			}
 		}
 		return false;
 	}

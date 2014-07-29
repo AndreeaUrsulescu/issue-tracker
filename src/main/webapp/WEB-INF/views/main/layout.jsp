@@ -30,8 +30,6 @@
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 		
-		<script src="${pageContext.request.contextPath}/resources/assets/javascript/scripts.js"></script>
-		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>

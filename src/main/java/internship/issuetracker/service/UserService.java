@@ -1,6 +1,10 @@
 package internship.issuetracker.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import internship.issuetracker.entities.User;
+import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.EncryptData;
 
@@ -34,5 +38,18 @@ public class UserService {
 
 	public User findUserByUserName(String userName) {
 		return userRepository.findUserByUserName(userName);
+	}
+	
+	public List<UserPojo> findAllUsers() {
+		List<User> allUsers = userRepository.findAll();
+		List<UserPojo> allUsersPojo = new ArrayList<>();
+
+		for (int index = 0; index < allUsers.size(); index++) {
+			User userEntity = allUsers.get(index);
+			UserPojo userPojo = new UserPojo();
+			userPojo.setUserName(userEntity.getUserName());
+			allUsersPojo.add(index, userPojo);
+		}
+		return allUsersPojo;
 	}
 }

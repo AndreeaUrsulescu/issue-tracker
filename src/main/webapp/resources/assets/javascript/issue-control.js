@@ -87,11 +87,22 @@ $(document).ready(function(){
 	    		type: "POST",
 	    		url: url,
 	    		success: function(rsp) {
-	    			$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
-	    					+'<span class="glyphicon glyphicon-remove"></span>');
-	    			if(availableTags.indexOf($("#tags").val().trim()) != -1){
-	    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
+	    			if(rsp.response === "success"){
+			    		
+	    				//show label in UI
+	    				$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+			    					+'<span class="glyphicon glyphicon-remove"></span>');
+		    			
+	    				//remove label from autocomplete
+	    				if(availableTags.indexOf($("#tags").val().trim()) != -1){
+		    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
+		    			}
+	    				
+	    			} else if(rsp.response === "duplicate"){
+	    				//show error message if label already exists
+	    				$("#tags").parent().parent().find(".error").text("Already exists");
 	    			}
+	    			//clear input box
 	    			$("#tags").val('');
 	    		}
 	    	});

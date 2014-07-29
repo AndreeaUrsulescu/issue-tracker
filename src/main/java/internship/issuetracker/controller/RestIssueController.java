@@ -3,6 +3,7 @@ package internship.issuetracker.controller;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.SearchParameter;
+import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.LabelService;
@@ -84,9 +85,22 @@ public class RestIssueController {
 	@ResponseBody
 	public Map<String, Object> addLabel(@PathVariable("issueId") Long issueId,
 			@RequestBody LabelPojo addLabel) {
-		labelService.assignLabelToIssue(issueId, addLabel);
+		boolean exists = labelService.assignLabelToIssue(issueId, addLabel);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("response", "success");
+		if (exists){
+		    map.put("response", "success");
+		} else {
+		    map.put("response", "duplicate");
+		}
 		return map;
+	}
+	
+	@RequestMapping(value = "/issue/{issueId}/assignUser", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> addLabel(@PathVariable("issueId") Long issueId,@RequestBody UserPojo assignedUser) {
+		Map<String,Object> response = new HashMap<>();
+		issueService.assignUserToIssue(issueId,assignedUser);
+		response.put("response", "success");
+		return response;
 	}
 }

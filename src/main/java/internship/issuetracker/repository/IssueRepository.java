@@ -2,10 +2,12 @@ package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
 
-import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -15,13 +17,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class IssueRepository {
-
-	public static int itemsPerPage = 10;
+	private static final Logger log = Logger.getLogger( UserRepository.class.getName() );
 	
+	public static int itemsPerPage = 10;
+
 	@PersistenceContext
 	private EntityManager em;
 
 	public void create(Issue issue) {
+		System.out.println(issue.getId());
 		em.persist(issue);
 	}
 
@@ -29,72 +33,42 @@ public class IssueRepository {
 		em.merge(issue);
 	}
 
-	public List<Issue> findIssuesByTitle(String title) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_TITLE,
-				Issue.class);
-		return query.setParameter("title","%"+ title + "%").getResultList();
+
+	public int numberOfIssues() {
+
+		return Integer.parseInt( em.createQuery("select count(a) as count from Issue a ").getSingleResult().toString());
+		 
 	}
 
-	public List<Issue> findIssuesByDate(Date date) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_DATE,
-				Issue.class);
-		return query.setParameter("updateDate", date)
-			.getResultList();
-	}
-	
-	public List<Issue> findIssues() {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL,
-				Issue.class);
-		return query.getResultList();
-	}
-	
-	public int numberOfIssues(){
-		
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL,
-				Issue.class);
-		return query.getResultList().size();
-	}
-	
 	public List<Issue> findOrderedIssues(int currentPage) {
-		
+
 		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
 		query.setMaxResults(itemsPerPage);
-        query.setFirstResult((currentPage-1) * itemsPerPage);
+		query.setFirstResult((currentPage - 1) * itemsPerPage);
 		return query.getResultList();
 	}
-	
-	public Issue findIssue(Long id){
-		
-		List<Issue> issues;
 
-		TypedQuery<Issue> query = em
-				.createNamedQuery(Issue.FIND_BY_ID, Issue.class);
+	public Issue findIssue(Long id) {
+		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_BY_ID, Issue.class);
 		query.setParameter("id", id);
-		
-		issues = query.getResultList();
-		if (issues.size() == 0){
-			return null;
+		try{
+		return query.getSingleResult();
+		}catch(NoResultException ex){			
+			log.log( Level.FINE, "NoResultException in issueRepository.findIssue("+ id +")" );			
+			return new Issue();
 		}
-		return issues.get(0);
 	}
 
-	public List<Issue> findIssuesForPagination(int page) {
-		TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
-        query.setMaxResults(itemsPerPage);
-        query.setFirstResult(page * itemsPerPage);
-        return query.getResultList();
 
-	}
-	
-	public int nrOfPages(){
-		int x=findIssues().size();
-		if(x%itemsPerPage>0)
-			return x/itemsPerPage+1;
+	public int nrOfPages() {
+		int x = numberOfIssues();
+		if (x % itemsPerPage > 0)
+			return x / itemsPerPage + 1;
 		else
-			return x/itemsPerPage;
+			return x / itemsPerPage;
 	}
 
-	public int itemsPerPage(){
+	public int itemsPerPage() {
 		return itemsPerPage;
 	}
 }
