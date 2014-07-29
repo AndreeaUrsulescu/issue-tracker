@@ -45,16 +45,22 @@
 <!-- 					</h1> -->
 <!-- <!-- 					<span class="viewIssueAssigneeName">Georgel</span> --> 
 
-<!-- 					<a class="viewIssueAssign" data-container="body" rel="popover"><span class="glyphicon glyphicon-plus"></span></a> -->
-<!-- 					<form role="form"> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<label for="assigneeInput">Assignee:</label> -->
-<!-- 							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user"> -->
-<!-- 						</div> -->
-<!-- 						<button class="btn btn-warning">Assign</button> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
-			<br>		
+					<a class="viewIssueAssign"><span class="glyphicon glyphicon-plus"></span></a>
+					
+						<div class="form-group">
+							<label for="assigneeInput">Assignee:</label>
+							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
+						</div>
+						<button class="btn btn-warning" onclick="assignUser();">Assign</button>
+				</div>
+				
+			</div>
+			<br>
+			
+			
+			
+			
+		</div>
 	</div>
 
 	<div class="editIssueContent">

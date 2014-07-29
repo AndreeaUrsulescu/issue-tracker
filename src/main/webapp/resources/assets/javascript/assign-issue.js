@@ -7,11 +7,21 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(".viewIssueAssign").popover({ title:'Hey', content: 'hey hey'});
-	
-	var test = ["puppy", "another puppy", "puppy three"];
-	
+    var userList = [];
+    $.ajax({
+    	dataType: "json",
+    	contentType: "application/json;charset=UTF-8",
+    	type: "GET",
+    	url: window.location.origin + "/issue-tracker/users",
+    	success: function(rsp) {
+    		for (var index = 0 ; index < rsp.usersList.length ; index++ )
+    			userList.push(rsp.usersList[index].userName);
+    	}
+    });
+         
+    	
 	$("#assigneeInput").autocomplete({
-		source: test
+		source: userList
 	});
+	
 });
