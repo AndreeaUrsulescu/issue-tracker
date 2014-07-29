@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+
 <c:set var="plus" value="+" />
 <c:set var="minus" value="-" />
 <label id="numberOfIssues" style="display: none"> <c:out
@@ -48,8 +50,8 @@
 				</select> <select class="searchSelect" id="order">
 					<option value="Descending" selected="selected">Descending</option>
 					<option value="Ascending">Ascending</option>
-				</select> <a class="btn searchBtn" id="searchBtn" onclick="searchIssues();">
-					<span class="glyphicon glyphicon-search">&nbsp;Search</span>
+				</select> <a class="btn searchBtn btn-default" id="searchBtn" onclick="searchIssues();">
+					<span class="glyphicon glyphicon-search"></span> Search
 				</a>
 			</div>
 		</div>

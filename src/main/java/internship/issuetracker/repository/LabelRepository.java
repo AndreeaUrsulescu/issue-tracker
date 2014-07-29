@@ -37,4 +37,9 @@ public class LabelRepository {
 		
 		return labels.get(0);
 	}
+	
+	public void delete(Label label) {
+		label = em.find(Label.class, label.getId());
+		em.remove(label);
+	}
 }

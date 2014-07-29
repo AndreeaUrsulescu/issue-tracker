@@ -5,7 +5,6 @@ import filters.SearchFilterInt;
 import filters.StateFilter;
 import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.enums.State;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
