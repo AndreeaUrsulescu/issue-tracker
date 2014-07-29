@@ -157,13 +157,11 @@ public class Issue implements Serializable {
     @Override
     public boolean equals(Object obj) {
 	if (obj instanceof Issue) {
-	    if (this == obj) {
-		Issue issue = (Issue) obj;
-		return new EqualsBuilder().append(this.title, issue.title)
-			.append(this.updateDate, issue.updateDate)
-			.append(this.owner, issue.owner)
-			.append(this.state, issue.state).isEquals();
-	    }
+	    Issue issue = (Issue) obj;
+	    return new EqualsBuilder().append(this.title, issue.title)
+		    .append(this.updateDate, issue.updateDate)
+		    .append(this.owner, issue.owner)
+		    .append(this.state, issue.state).isEquals();
 	}
 	return false;
     }
