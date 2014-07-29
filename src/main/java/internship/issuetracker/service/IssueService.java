@@ -87,6 +87,7 @@ public class IssueService {
 					issueEntity.getOwner().getUserName(),
 					issueEntity.getTitle(), issueEntity.getContent(),
 					issueEntity.getUpdateDate(), issueEntity.getState());
+			issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
 			issuesListPojo.add(index, issuePojo);
 
 		}

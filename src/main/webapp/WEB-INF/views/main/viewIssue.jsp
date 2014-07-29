@@ -5,7 +5,6 @@
 
 <script src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 
-<button onclick="assignUser()">click me</button>
 <div class="container viewIssueContainer">
 	<div class="viewIssue">
 		<div class="viewIssueTitle">
@@ -44,13 +43,11 @@
 
 					<a class="viewIssueAssign"><span class="glyphicon glyphicon-plus"></span></a>
 					
-					<form role="form">
 						<div class="form-group">
 							<label for="assigneeInput">Assignee:</label>
 							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
 						</div>
-						<button class="btn btn-warning">Assign</button>
-					</form>
+						<button class="btn btn-warning" onclick="assignUser();">Assign</button>
 				</div>
 				
 			</div>

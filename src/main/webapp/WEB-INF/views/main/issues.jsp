@@ -96,7 +96,7 @@
 				 
 				<div class="asigneeInfoPostIt">
 					<span>Assignee:</span>
-					<span>Georgel</span>
+					<span>${issue.assignee}</span>
 				</div>
 				
 				<label class="owner">Updated by ${issue.owner}</label>

@@ -20,6 +20,8 @@ public class IssuePojo {
 	
 	private State state;
 	
+	private String assignee;
+	
 	private List<CommentPojo> comments;
 	
 	private List<LabelPojo> labels;
@@ -107,4 +109,13 @@ public class IssuePojo {
 	public void setComments(List<CommentPojo> comments) {
 		this.comments = comments;
 	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
+	}
+	
 }

@@ -332,7 +332,7 @@ function parsingAjaxResponse(response){
 		 
 		 
 		 var newSpan = document.createElement("SPAN");
-		 newSpan.appendChild(document.createTextNode("Georgel"));
+		 newSpan.appendChild(document.createTextNode(response[index].assignee));
 		 
 		 var brbr = document.createElement("BR");
 		 

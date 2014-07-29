@@ -49,13 +49,12 @@ function ValidateContent() {
 	return true;
 };
 
-
 function assignUser(){
 	var filterData;
-	filterData = {
-			userName : "pispirel" // change it with input value
-     	};
 	
+	filterData = {
+			userName : $("#assigneeInput").val().trim() // change it with input value
+     	};
 	$.ajax({
  		url : window.location.origin + window.location.pathname + "/assignUser" , // put some URL
  		type : "POST",
@@ -65,7 +64,7 @@ function assignUser(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			alert(response.response);
+ 			$("#assigneeInput").val('');
  		}
  	});
 }
