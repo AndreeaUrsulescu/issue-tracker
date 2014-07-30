@@ -11,14 +11,18 @@
 	<name>Issue Tracker</name>
 	<description>Issue Tracker POM</description>
 
-	<!-- Email config -->
 	<repositories>
+		<!-- Email config -->
 		<repository>
 			<id>Java.Net</id>
 			<url>http://download.java.net/maven/2/</url>
 		</repository>
+
+		<repository>
+			<id>diff_match_patch</id>
+			<url>http://google-diff-match-patch.googlecode.com/svn/trunk/maven</url>
+		</repository>
 	</repositories>
-	<!-- /Email config -->
 
 	<properties>
 		<springframework.version>3.2.6.RELEASE</springframework.version>
@@ -114,11 +118,11 @@
 		</dependency>
 
 		<!-- Spring framework for mail -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring</artifactId> -->
-<!-- 			<version>2.5.6</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring</artifactId> -->
+		<!-- <version>2.5.6</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -247,6 +251,14 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>1.1.4.RELEASE</version>
 		</dependency>
+
+	<!-- dependency for computing text difference -->
+		<dependency>
+			<groupId>diff_match_patch</groupId>
+			<artifactId>diff_match_patch</artifactId>
+			<version>current</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

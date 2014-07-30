@@ -28,8 +28,6 @@ public class UserRepository {
 	}
 	
 	public void create(User user) {
-		System.out.println("in create user");
-		System.out.println(user.getUserName());
 		em.persist(user);
 	}
 

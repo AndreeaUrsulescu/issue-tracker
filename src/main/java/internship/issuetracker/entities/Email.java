@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,18 +19,19 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name = "Emails")
 public class Email implements Serializable{
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "to", nullable = false)
+	@Column(name = "mailTo", nullable = false)
 	private String to;
 
-	@Column(name = "from", nullable = false)
+	@Column(name = "mailFrom", nullable = false)
 	private String from;
 
 	@Column(name = "content", nullable = false)
-	private byte[] content;
+	private String content;
 
 	@Column(name = "subject", nullable = false)
 	private String subject;
@@ -57,11 +60,11 @@ public class Email implements Serializable{
 		this.from = from;
 	}
 
-	public byte[] getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(byte[] content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
