@@ -12,6 +12,12 @@ window.onload = function () {
 	    
      $("#previousButton").css("visibility", "hidden");	
 	 
+     if (numberOfIssues > 0){ 
+ 	    document.getElementById("pageNumber").innerHTML = 1;
+     }
+ 	 else if( numberOfIssues == 0 ){
+ 	    document.getElementById("pageNumber").innerHTML = 0;
+ 	 }
 };
 
 var count  = 1;
@@ -64,13 +70,7 @@ function issuePagination(type,issuesListSize,issuesPerPage) {
 			$("#previousButton").css("visibility", "hidden");	
 		}
 	}
-	
-	if (issuesListSize > 0){ 
-	    document.getElementById("pageNumber").innerHTML = count;
-    }
-	else if(response.length == 0 ){
-	    document.getElementById("pageNumber").innerHTML = 0;
-	}
+	 document.getElementById("pageNumber").innerHTML = count;
 
 	ajaxForPagination(count);
 	
@@ -151,11 +151,12 @@ function searchIssues(){
  		     $("#previousButton").css("visibility", "hidden");	
  		     
  		    if (response.listLength > 0){ 
- 		    	document.getElementById("pageNumber").innerHTML = 1;
- 		    }
- 		    else if(response.listLength == 0 ){
- 		    	document.getElementById("pageNumber").innerHTML = 0;
- 		    }
+ 		 	    document.getElementById("pageNumber").innerHTML = 1;
+ 		     }
+ 		 	 else if( response.listLength == 0 ){
+ 		 	    document.getElementById("pageNumber").innerHTML = 0;
+ 		 	 }
+ 		    
  	        document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
  		     
  		     parsingAjaxResponse(response.issuesList);

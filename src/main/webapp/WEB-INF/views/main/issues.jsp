@@ -108,17 +108,7 @@
 	<br>
 
 	<div id="pages">
-	     <label id="pageNumber">
-	     <c:choose>
-		      <c:when test="${listLength > '0'}">1
-		      <br />
-		      </c:when>
-		
-		      <c:otherwise>0
-		      <br />
-		      </c:otherwise>
-	  	</c:choose>
-	  	</label>
+	     <label id="pageNumber"></label>
 		<label id="total" style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/ ${pages}</label>
 	</div>
 </div>
