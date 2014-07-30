@@ -1,6 +1,7 @@
 package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Comment;
+import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
@@ -11,6 +12,8 @@ import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
+import internship.issuetracker.utils.IssueDifference;
+import internship.issuetracker.utils.MailMail;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,16 +33,27 @@ public class IssueService {
 	@Autowired
 	private IssueLabelRepository issueLabelRepository;
 
+	@Autowired
+	private MailMail mail;
+	
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 	}
 
 	public void updateIssue(Issue issuePojo) {
-		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());	
+		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());				
 		issueToUpdate.setContent(issuePojo.getContent());
 		issueToUpdate.setTitle(issuePojo.getTitle());
 		issueToUpdate.setLastDate(new Date());
 		issueToUpdate.setState(issuePojo.getState());
+			
+		String x=IssueDifference.generateDifference(issueToUpdate, issueRepository.findIssue(issuePojo.getId()));		
+		Email email=new Email();
+		email.setTo(issueToUpdate.getAssignee().getEmail());
+		email.setSubject("IssueTracker - UpdateIssue");
+		email.setContent(x);
+		mail.sendMail(email);
+		
 		this.issueRepository.update(issueToUpdate);
 	}
 

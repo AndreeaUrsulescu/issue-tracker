@@ -1,5 +1,7 @@
 $(document).ready(function(){
     function updateIssue() {
+    	$("#send").prop('disabled',true);
+    	
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
     		'content' : $("#issueContent").val(),
@@ -133,7 +135,7 @@ $(document).ready(function(){
     $(".viewIssueTitleEdit").focus();
     
     $("#edit").click(editIssue);
-    $("#send").click(updateIssue);
+    $("#send").unbind().click(updateIssue);
     $("#label-add-btn").unbind().click(addLabel);
     $(".label-remove").unbind().on("click", removeLabel);
 	

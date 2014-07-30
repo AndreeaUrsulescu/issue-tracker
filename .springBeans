@@ -9,8 +9,11 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/config/datasource/jndi.xml</config>
+		<config>src/main/resources/config/Spring-Mail.xml</config>
 		<config>src/main/resources/config/security-config.xml</config>
 		<config>src/main/resources/config/web-context.xml</config>
+		<config>src/main/resources/config/application-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
