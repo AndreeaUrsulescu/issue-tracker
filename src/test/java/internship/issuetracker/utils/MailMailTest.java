@@ -13,7 +13,7 @@ public class MailMailTest {
 	 
 	    	MailMail mm = (MailMail) context.getBean("mailMail");
 	        mm.sendMail("Alin.Stirbat@endava.com",
-	    		   "Internship2014@endava.com",
+	    		   "Alin.Stirbat@endava.com",
 	    		   "Testing123", 
 	    		   "Testing only \n\n Hello Spring Email Sender");
 	        

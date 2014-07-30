@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -24,6 +25,8 @@ public class RegisterController {
 	@Autowired
 	private UserValidator userValidator;
 
+
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute(new User());
@@ -40,6 +43,7 @@ public class RegisterController {
 			mv.addObject("errors", bindingResult.getAllErrors());
 			return mv;
 		}
+		System.out.println("**************" );
 		userService.addUser(user);
 		mv.setViewName("redirect:/login");
 		return mv;
