@@ -19,9 +19,11 @@ footer {
 	bottom:0;
 }
 .control-menu{
-	width:10%;
+	//width:10%;
 	float:right;
 	margin-right: 100px;
+	margin-top: 10px;
+	font-family: "Arial Black", Gadget, sans-serif;
 }
 
 footer small {
@@ -178,6 +180,29 @@ footer a {
 /* Comment section end */
 
 /* View/Update Issue start */
+
+.viewIssueAssignee{
+	margin:5px 0 0 5px;
+}
+
+.viewIssueAssignee a{
+	margin-left:5px;
+}
+
+.viewIssueAssignee h1{
+	font-size:27px;
+	float:left;
+	line-height:0;
+	margin:0;	
+}
+
+.viewIssueAssigneeName{
+	margin-left:5px;
+	line-height:1;
+	font-weight:900;
+	color:#02A4FC;
+	font-size:16px;
+}
 
 .viewIssueContainer{
 	border-bottom: 1px solid #DFDFDF;
@@ -632,7 +657,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 
 .title{
 	font-weight: bold;
-	//color:rgb(47,95,150);
+	color:rgba(0,0,0, 0.6);
 	//border-bottom: 1px solid rgba(0,0,0, 0.05);
 }
 
@@ -645,7 +670,8 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 .state{
 	margin-top:10px;
 	margin-left: 10px;
-	color: rgb(47,95,150);//rgb(66,139,202);
+	//color: rgb(47,95,150);
+	color: rgba(0,0,0, 0.5);
 }
 
 .addedBy2 {
@@ -664,6 +690,23 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);*/
 	border-top: 1px solid rgba(0,0,0, 0.05);
 /*	color: rgb(47,95,150);*/
 }
+
+.assigneeInfoPostIt{
+	margin-top:10px;
+	margin-left:8px;
+	float:left;
+	line-height:1.3;
+}
+
+.assigneeInfoPostIt span:first-child{
+	
+}
+
+.assigneeInfoPostIt span:last-child{
+	font-weight:bold;
+	color:#2989D8;
+}
+
 
 .iss0{
 	//background-color: rgb(239,171,60);
@@ -816,3 +859,21 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	float: left;
 }
 /* label section end*/
+#niceAdd{
+	margin: 0 auto;
+	width: 450px;
+	min-height: 200px;
+	margin-top: 50px;
+	text-align: center;
+}
+.promo{
+	visibility: hidden;
+	position: absolute;
+	color: rgb(84,90,40);
+	margin-top: 100px;
+	font-weight: bold;
+	font-size: 18px;
+	margin-left: 90px;
+}
+
+

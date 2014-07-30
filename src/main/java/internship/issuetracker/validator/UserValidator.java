@@ -18,7 +18,7 @@ public class UserValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return User.class.equals(clazz);
 	}
-
+	
 	@Override
 	public void validate(Object object, Errors error) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userName",

@@ -20,7 +20,7 @@
 		<c:forEach var="label" items="${viewIssue.getLabels()}">
 			<span class="issueLabel label label-primary"> <c:out
 					value="${label.getLabelName()}" /> <span
-				class="glyphicon glyphicon-remove"></span>
+				class="label-remove glyphicon glyphicon-remove"></span>
 			</span>
 		</c:forEach>
 	</div>
