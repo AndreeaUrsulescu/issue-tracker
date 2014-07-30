@@ -1,12 +1,18 @@
 package internship.issuetracker.utils;
 
 import internship.issuetracker.entities.Email;
+import internship.issuetracker.service.EmailService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
  
 public class MailMail
 {
+	@Autowired
+	EmailService emailService;
+	
+	
 	private MailSender mailSender;
  
 	public void setMailSender(MailSender mailSender) {
@@ -22,7 +28,7 @@ public class MailMail
 		message.setTo(email.getTo());
 		message.setSubject(email.getSubject());
 		message.setText(email.getContent());
-	
+		emailService.saveEmail(email);
 		mailSender.send(message);	
 	}
 }
