@@ -4,7 +4,6 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
