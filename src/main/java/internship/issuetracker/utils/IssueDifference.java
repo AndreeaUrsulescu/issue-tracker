@@ -11,11 +11,11 @@ public class IssueDifference {
 	StringBuilder result = new StringBuilder();
 	String title = getStringDifferences(issue1.getTitle(), issue2.getTitle());
 	if (title != null){
-	    result.append("Title" + title +   "\n");
+	    result.append("Title" + title + " from "+ issue1.getTitle()+ " to " + issue2.getTitle() + " .\n");
 	}
 	String content = getStringDifferences(issue1.getContent(), issue2.getContent());
 	if (content != null){
-	    result.append("Content" + content + "\n");
+	    result.append("Content" + content + ".\n");
 	}
 	if (issue1.getState() != issue2.getState()){
 	    result.append("State has been changed from " + issue1.getState() + " to " +  issue2.getState() + "\n");
