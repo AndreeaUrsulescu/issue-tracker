@@ -9,6 +9,7 @@ $(document)
 						$("#promo2").animate({ marginTop: '40px' },1000,function(){
 						$("#promo3").css("visibility", "visible");
 						$("#promo3").animate({  marginTop: '70px' },1000, function(){
+							$("#promo4").fadeIn(2000);
 						
 						});
 					});

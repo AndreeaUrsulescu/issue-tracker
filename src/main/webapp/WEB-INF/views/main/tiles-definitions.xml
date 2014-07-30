@@ -7,10 +7,8 @@
 	<definition name="homeLayout" template="/WEB-INF/views/main/homeLayout.jsp" />
 	<definition name="viewIssueLayout" template="/WEB-INF/views/main/viewIssueLayout.jsp" />
 
-	<definition name="home" extends="mainLayout">
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/home.jsp" ></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	<definition name="home" extends="homeLayout">
+		<put-attribute name="logo" value="/WEB-INF/views/main/home.jsp"></put-attribute>
 	</definition>
 
 	<definition name="register" extends="mainLayout">
@@ -56,13 +54,11 @@
 	</definition>
 
 	<definition name="viewIssue" extends="viewIssueLayout">
-
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/viewIssue.jsp"></put-attribute>
 		<put-attribute name="labels" value="/WEB-INF/views/main/labels.jsp"></put-attribute>
 		<put-attribute name="comments" value="/WEB-INF/views/main/comments.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
-
 	</definition>
 
 
