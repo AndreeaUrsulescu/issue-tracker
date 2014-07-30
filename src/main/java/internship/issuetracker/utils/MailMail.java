@@ -1,5 +1,7 @@
 package internship.issuetracker.utils;
 
+import internship.issuetracker.entities.Email;
+
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
  
@@ -11,14 +13,16 @@ public class MailMail
 		this.mailSender = mailSender;
 	}
  
-	public void sendMail(String to, String subject, String msg) {
+	public void sendMail(Email email) {
  
 		SimpleMailMessage message = new SimpleMailMessage();
- 
-		message.setFrom("Graduates@endava.com");
-		message.setTo(to);
-		message.setSubject(subject);
-		message.setText(msg);
+		email.setFrom("Graduates@endava.com");
+		
+		message.setFrom(email.getFrom());
+		message.setTo(email.getTo());
+		message.setSubject(email.getSubject());
+		message.setText(email.getContent());
+	
 		mailSender.send(message);	
 	}
 }

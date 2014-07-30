@@ -28,7 +28,7 @@ public class Email implements Serializable{
 	private String from;
 
 	@Column(name = "content", nullable = false)
-	private byte[] content;
+	private String content;
 
 	@Column(name = "subject", nullable = false)
 	private String subject;
@@ -57,11 +57,11 @@ public class Email implements Serializable{
 		this.from = from;
 	}
 
-	public byte[] getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(byte[] content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
