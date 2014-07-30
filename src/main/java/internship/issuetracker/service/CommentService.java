@@ -11,12 +11,17 @@ import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CommentService {
+	
+	private static final Logger log = Logger.getLogger(CommentService.class
+			.getName());
 
 	@Autowired
 	private CommentRepository commentRepository;
@@ -36,10 +41,14 @@ public class CommentService {
 		com.setOwner(owner);
 		com.setIssue(issue);
 		this.commentRepository.create(com);
+		log.log(Level.INFO,
+				"An comment was created for issue " + comment.getIssueId());
 	}
 
 	public void updateComment(Comment comment) {
 		this.commentRepository.update(comment);
+		log.log(Level.INFO, "A comment was updated for issue "
+				+ comment.getIssue().getId());
 	}
 
 
@@ -47,6 +56,10 @@ public class CommentService {
 		Issue issue = issueRepository.findIssue(issuePojo.getId());
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<Comment> comments = commentRepository.findCommentsByIssue(issue);
+		
+		if (comments.size() == 0)
+			log.log(Level.INFO,
+					"There are no comments for issue " + issuePojo.getId());
 		
 		for (Comment com : comments) {
 			CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(),
@@ -59,6 +72,12 @@ public class CommentService {
 	}
 
 	public List<Comment> getCommentForOwner(User user) {
-		return this.commentRepository.findCommentByOwner(user);
+		List<Comment> comments = this.commentRepository
+				.findCommentByOwner(user);
+
+		if (comments.size() == 0)
+			log.log(Level.INFO, "There are no comments posted by " + user.getUserName());
+
+		return comments;
 	}
 }
