@@ -67,6 +67,7 @@ function assignUser(){
  			$("#assigneeInput").val('');
  			document.getElementById("assignButton").disabled=true;
  			document.getElementById("unassignButton").style.visibility = "visible";
+ 			document.getElementById("assign").innerHTML = filterData.userName;
  		}
  	});
 }
@@ -83,6 +84,7 @@ function unassignUser(){
  		success : function(response) {
  			document.getElementById("assignButton").disabled=true;
  			document.getElementById("unassignButton").style.visibility = "hidden";
+ 			document.getElementById("assign").innerHTML = "Unassigned";
  		}
  	});
 }
