@@ -12,6 +12,12 @@ window.onload = function () {
 	    
      $("#previousButton").css("visibility", "hidden");	
 	 
+     if (numberOfIssues > 0){ 
+ 	    document.getElementById("pageNumber").innerHTML = 1;
+     }
+ 	 else if( numberOfIssues == 0 ){
+ 	    document.getElementById("pageNumber").innerHTML = 0;
+ 	 }
 };
 
 var count  = 1;
@@ -144,7 +150,13 @@ function searchIssues(){
  			    
  		     $("#previousButton").css("visibility", "hidden");	
  		     
- 		    document.getElementById("pageNumber").innerHTML = 1;
+ 		    if (response.listLength > 0){ 
+ 		 	    document.getElementById("pageNumber").innerHTML = 1;
+ 		     }
+ 		 	 else if( response.listLength == 0 ){
+ 		 	    document.getElementById("pageNumber").innerHTML = 0;
+ 		 	 }
+ 		    
  	        document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
  		     
  		     parsingAjaxResponse(response.issuesList);

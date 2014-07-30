@@ -48,6 +48,7 @@
 					<a class="viewIssueAssign"><span class="glyphicon glyphicon-plus"></span></a>
 					
 						<div class="form-group">
+						    <span class="error"></span><br>
 							<label for="assigneeInput">Assignee:</label>
 							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
 						</div>

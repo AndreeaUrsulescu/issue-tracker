@@ -35,7 +35,7 @@ public class IssueService {
 	}
 
 	public void updateIssue(Issue issuePojo) {
-		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
+		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());	
 		issueToUpdate.setContent(issuePojo.getContent());
 		issueToUpdate.setTitle(issuePojo.getTitle());
 		issueToUpdate.setLastDate(new Date());

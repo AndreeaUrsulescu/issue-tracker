@@ -12,8 +12,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import javax.persistence.CascadeType;
-
 @NamedQueries({ 
 	@NamedQuery(name = IssueLabel.FIND_LABELS_FOR_ISSUE, query = "select a from IssueLabel a where a.issue = :issue"),
 	@NamedQuery(name = IssueLabel.FIND_ISSUE_LABEL, query = "select a from IssueLabel a where a.issue = :issue and a.label = :label")
