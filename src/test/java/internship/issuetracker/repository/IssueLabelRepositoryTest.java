@@ -73,13 +73,13 @@ public class IssueLabelRepositoryTest {
 	public void removeLabelForIssueTest() {
 		createIssueLabel();
 		issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
-		assert (issueLabelRepository.findIssueLabel(issue, label) == null);
+		assert (issueLabelRepository.findIssueLabel(issue.getId(), "labelA") == null);
 	}
 
 	@Test
 	public void createTest() {
 		IssueLabel issueLabel = createIssueLabel();
-		assertEquals(issueLabelRepository.findIssueLabel(issue, label).getId(),
+		assertEquals(issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId(),
 				issueLabel.getId());
 	}
 
@@ -87,7 +87,7 @@ public class IssueLabelRepositoryTest {
 	public void deleteTest() {
 		IssueLabel issueLabel = createIssueLabel();
 		issueLabelRepository.delete(issueLabel.getId());
-		assert (issueLabelRepository.findIssueLabel(issue, label) == null);
+		assert (issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()) == null);
 	}
 
 	@Test
@@ -107,6 +107,6 @@ public class IssueLabelRepositoryTest {
 	@Test
 	public void findIssueLabelTest() {
 		IssueLabel issueLabel = createIssueLabel();
-		assert(issueLabelRepository.findIssueLabel(issue, label).getId() == issueLabel.getId());
+		assert(issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId() == issueLabel.getId());
 	}
 }

@@ -1,11 +1,11 @@
 package internship.issuetracker.repository;
 
-import filters.ContentFilter;
-import filters.StateFilter;
-import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.enums.State;
+import internship.issuetracker.filters.ContentFilter;
+import internship.issuetracker.filters.StateFilter;
+import internship.issuetracker.filters.TitleFilter;
 
 import java.util.Date;
 

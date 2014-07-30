@@ -1,8 +1,8 @@
 package internship.issuetracker.repository;
 
-import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.filters.TitleFilter;
 
 import java.util.Date;
 import java.util.List;

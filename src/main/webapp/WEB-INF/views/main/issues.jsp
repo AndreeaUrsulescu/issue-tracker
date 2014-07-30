@@ -47,6 +47,7 @@
 				</select> <label class="searchBy">Ordered by </label> <select
 					class="searchSelect" id="criteria">
 					<option value="Date" selected="selected">Date</option>
+					<option value="Title">Title</option>
 				</select> <select class="searchSelect" id="order">
 					<option value="Descending" selected="selected">Descending</option>
 					<option value="Ascending">Ascending</option>

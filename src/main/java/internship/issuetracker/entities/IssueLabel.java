@@ -13,8 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @NamedQueries({ 
-	@NamedQuery(name = IssueLabel.FIND_LABELS_FOR_ISSUE, query = "select a from IssueLabel a where a.issue = :issue"),
-	@NamedQuery(name = IssueLabel.FIND_ISSUE_LABEL, query = "select a from IssueLabel a where a.issue = :issue and a.label = :label")
+	@NamedQuery(name = IssueLabel.FIND_LABELS_FOR_ISSUE, query = "select a from IssueLabel a inner join a.issue b where b.id = :issueId"),
+	@NamedQuery(name = IssueLabel.FIND_ISSUE_LABEL, query = "select a from IssueLabel a inner join a.issue b inner join a.label l where b.id = :issueId and l.labelName = :labelName")
 })
 @SuppressWarnings("serial")
 @Entity

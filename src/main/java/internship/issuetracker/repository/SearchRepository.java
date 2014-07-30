@@ -1,7 +1,7 @@
 package internship.issuetracker.repository;
 
-import filters.SearchFilterInt;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.filters.SearchFilterInt;
 
 import java.util.List;
 
@@ -28,6 +28,10 @@ public class SearchRepository {
 		if("Date".equals(x)){
 			return "updateDate";
 		}
+		else
+			if ("Title".equals(x)) {
+				return "title";
+			}
 		
 		return "updateDate";
 	}
