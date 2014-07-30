@@ -60,8 +60,8 @@ public class IssueService {
 			
 	
 		if (null == issueToUpdate.getAssignee()) {
-			//log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " doesn't have an assignee , no email send.");
-			System.out.println("as");
+			log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " doesn't have an assignee , no email send.");
+			
 		} else {
 			
 			String x = IssueDifference.generateDifference(issueToUpdate, issueRepository.findIssue(issuePojo.getId()));

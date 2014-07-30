@@ -92,7 +92,6 @@ public class IssueController {
 
 		issue.setId(id);
 		map.put("issue", "success");
-		System.out.println("#######"+issue.getAssignee());
 		issueService.updateIssue(issue);
 		return map;
 	}
