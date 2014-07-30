@@ -11,12 +11,17 @@ import internship.issuetracker.repository.SearchRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SearchService {
+	
+	private static final Logger log = Logger.getLogger(SearchService.class
+			.getName());
 
 	@Autowired
 	private SearchRepository searchRepository;
@@ -65,6 +70,9 @@ public class SearchService {
 
 		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(filter, searchParameters.getPageNumber(), searchParameters.getSortCriteria(), searchParameters.getSortType());
 
+		if (issuesListEntity.size() == 0)
+			log.log(Level.INFO, "There are no issues for the given search criteria");
+		
 		return entityToPojo(issuesListEntity);
 	}
 

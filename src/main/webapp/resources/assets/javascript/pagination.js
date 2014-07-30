@@ -323,7 +323,7 @@ function parsingAjaxResponse(response){
 			
 		 
 		 if(response[index].assignee==null)
-			 newSpan.appendChild(document.createTextNode("Unasigned"));
+			 newSpan.appendChild(document.createTextNode("Unassigned"));
 		 else{
 			 newSpan.appendChild(document.createTextNode(response[index].assignee+" "));
 			 assignee.appendChild(assigneeSpan);

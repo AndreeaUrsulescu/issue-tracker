@@ -39,7 +39,15 @@
 						<br>
 				<span class="viewIssueOwnerSeparator">
 					<span>Assignee: </span> 
-					<span>Assignee</span> 
+					<c:choose>
+						<c:when test="${empty viewIssue.assignee}">
+					        <span id="assign">Unassigned</span> 
+					    </c:when>
+					    <c:otherwise>
+								<span id="assign">${viewIssue.assignee}</span> 
+						</c:otherwise>
+					</c:choose>
+					        
 				</span>	
 				<br> 
 				<span class="viewIssueOwnerSeparator">
