@@ -1,5 +1,7 @@
 package internship.issuetracker.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +12,10 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Emails")
-public class Email {
+public class Email implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
