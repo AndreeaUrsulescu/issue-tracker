@@ -1,12 +1,10 @@
 package internship.issuetracker.pojo;
 
 import internship.issuetracker.enums.State;
+
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 public class IssuePojo {
 	

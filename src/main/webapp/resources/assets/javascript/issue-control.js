@@ -92,11 +92,8 @@ $(document).ready(function(){
 	    				//show label in UI
 	    				$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
 			    					+'<span class="glyphicon glyphicon-remove"></span>');
-		    			
-	    				//remove label from autocomplete
-	    				if(availableTags.indexOf($("#tags").val().trim()) != -1){
-		    				availableTags.splice(availableTags.indexOf($("#tags").val().trim()), 1);
-		    			}
+	    				//add label to autocomplete
+	    				availableTags.push($("#tags").val().trim());
 	    				
 	    			} else if(rsp.response === "duplicate"){
 	    				//show error message if label already exists
@@ -108,12 +105,37 @@ $(document).ready(function(){
 	    	});
     	}
     }
+    
+    function removeLabel(){
+    	var url = window.location.origin + window.location.pathname + "/removeLabel";
+    	var labelData = {
+    			'labelName' : $(this).parent().text().trim()
+         	};
+    	var element = $(this).parent();
+    	$.ajax({
+    		data: JSON.stringify(labelData),
+    		dataType: "json",
+    		contentType: "application/json;charset=UTF-8",
+    		type: "DELETE",
+    		url: url,
+    		success: function(rsp) {
+    			if(rsp.response === "success"){
+    				element.remove();
+    				
+    			};
+    		}
+    	});
+    }
+    
     $("#label-editor").hide();
+    $(".editIssueContent").hide();
+    
     $(".viewIssueTitleEdit").focus();
+    
     $("#edit").click(editIssue);
     $("#send").click(updateIssue);
     $("#label-add-btn").unbind().click(addLabel);
-	$(".editIssueContent").hide();
+    $(".label-remove").unbind().on("click", removeLabel);
 	
     $("#reset").click(function(){
         location.reload();
@@ -142,7 +164,7 @@ $(document).ready(function(){
 		var value=input.val().trim();
 		var label_regex=/^[a-zA-Z0-9]+$/;
 		input.parent().parent().find(".error").text(" ");
-		if(value.length<=3||value.length>20)
+		if(value.length < 3|| value.length > 20)
 		{
 			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
 			return false;

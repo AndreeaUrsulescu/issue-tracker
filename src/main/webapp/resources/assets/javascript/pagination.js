@@ -334,10 +334,8 @@ function parsingAjaxResponse(response){
 		 var newSpan = document.createElement("SPAN");
 		 newSpan.appendChild(document.createTextNode(response[index].assignee));
 		 
-		 var brbr = document.createElement("BR");
 		 
 		 assignee.appendChild(assigneeSpan);
-		 assignee.appendChild(brbr);
 		 assignee.appendChild(newSpan);
 		 
 		 var owner = document.createElement("LABEL");
