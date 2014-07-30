@@ -14,70 +14,75 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml" })
+@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
+	"classpath:config/application-context.xml",
+	"classpath:config/Spring-Mail.xml" })
 public class CommentRepositoryTest {
-	@Autowired
-	private CommentRepository commentRepository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private IssueRepository issueRepository;
-	static int count = 65;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private IssueRepository issueRepository;
+    static int count = 65;
 
-	public Comment createComment() {
-		User user = new User();
-		user.setUserName("foobarxs" + (char) count);
-		user.setEmail("just@mail.ro");
-		user.setPassword("parola");
-		userRepository.create(user);
+    public Comment createComment() {
+	User user = new User();
+	user.setUserName("foobarxs" + (char) count);
+	user.setEmail("just@mail.ro");
+	user.setPassword("parola");
+	userRepository.create(user);
 
-		Issue issue = new Issue();
-		issue.setContent("content");
-		issue.setTitle("title" + (char) count);
-		issue.setOwner(user);
-		issue.setUpdateDate(new Date());
-		issueRepository.create(issue);
-		count++;
+	Issue issue = new Issue();
+	issue.setContent("content");
+	issue.setTitle("title" + (char) count);
+	issue.setOwner(user);
+	issue.setUpdateDate(new Date());
+	issueRepository.create(issue);
+	count++;
 
-		Comment comment = new Comment();
-		comment.setContent("abracadabra");
-		comment.setOwner(user);
-		comment.setIssue(issue);
-		comment.setCreationDate(new Date());
-		return comment;
-	}
+	Comment comment = new Comment();
+	comment.setContent("abracadabra");
+	comment.setOwner(user);
+	comment.setIssue(issue);
+	comment.setCreationDate(new Date());
+	return comment;
+    }
 
-	@Test
-	public void testCreate() {
-		Comment comment = createComment();
-		commentRepository.create(comment);
-		assert (commentRepository.findCommentByOwner(comment.getOwner()).size() > 0);
-	}
+    @Test
+    public void testCreate() {
+	Comment comment = createComment();
+	commentRepository.create(comment);
+	assert (commentRepository.findCommentByOwner(comment.getOwner()).size() > 0);
+    }
 
-	@Test
-	public void testUpdate() {
-		Comment comment = createComment();
-		commentRepository.create(comment);
-		comment.setContent("New content");
-		commentRepository.update(comment);
-		List<Comment> compare = commentRepository.findCommentByOwner(comment.getOwner());
-		assert (comment.equals(compare));
-	}
+    @Test
+    public void testUpdate() {
+	Comment comment = createComment();
+	commentRepository.create(comment);
+	comment.setContent("New content");
+	commentRepository.update(comment);
+	List<Comment> compare = commentRepository.findCommentByOwner(comment
+		.getOwner());
+	assert (comment.equals(compare));
+    }
 
-	@Test
-	public void testFindByUser() {
-		Comment comment = createComment();
-		User creator = comment.getOwner();
-		commentRepository.create(comment);
-		assert (commentRepository.findCommentByOwner(creator).get(0).equals(creator));
-	}
+    @Test
+    public void testFindByUser() {
+	Comment comment = createComment();
+	User creator = comment.getOwner();
+	commentRepository.create(comment);
+	assert (commentRepository.findCommentByOwner(creator).get(0)
+		.equals(creator));
+    }
 
-	@Test
-	public void testFindByIssue() {
-		Comment comment = createComment();
-		Issue issue = comment.getIssue();
-		commentRepository.create(comment);
-		assert (commentRepository.findCommentsByIssue(issue).get(0).equals(issue));
-	}
+    @Test
+    public void testFindByIssue() {
+	Comment comment = createComment();
+	Issue issue = comment.getIssue();
+	commentRepository.create(comment);
+	assert (commentRepository.findCommentsByIssue(issue).get(0)
+		.equals(issue));
+    }
 
 }
