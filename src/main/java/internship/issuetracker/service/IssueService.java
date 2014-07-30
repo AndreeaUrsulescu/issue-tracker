@@ -66,6 +66,9 @@ public class IssueService {
 				.getUserName(), issue.getTitle(), issue.getContent(),
 				issue.getUpdateDate(), issue.getLastDate(), issue.getState(),
 				pojoComments, labelPojoList);
+		if (issue.getAssignee() != null) {
+			issuePojo.setAssignee(issue.getAssignee().getUserName());
+		}
 		return issuePojo;
 
 	}
