@@ -11,7 +11,6 @@ import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
-import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.IssueDifference;
 import internship.issuetracker.utils.MailMail;
@@ -19,12 +18,18 @@ import internship.issuetracker.utils.MailMail;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class IssueService {
+	
+	private static final Logger log = Logger.getLogger(IssueService.class
+			.getName());
+	
 	@Autowired
 	private IssueRepository issueRepository;
 
@@ -42,6 +47,7 @@ public class IssueService {
 	
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
+		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
 	}
 
 	public void updateIssue(Issue issuePojo) {
@@ -59,6 +65,7 @@ public class IssueService {
 		mail.sendMail(email);
 		
 		this.issueRepository.update(issueToUpdate);
+		log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " was updated");
 	}
 
 	public IssuePojo getIssue(Long id) {
@@ -74,6 +81,9 @@ public class IssueService {
 		}
 
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
+		
+		if (labels.size() == 0)
+			log.log(Level.INFO, "There are no labels for issue " + id);
 
 		for (Label label : labels) {
 			LabelPojo pojoLabel = labelService.convertLabelEntityToPojoLabel(label);
@@ -101,6 +111,9 @@ public class IssueService {
 				.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
+		if (issuesListEntity.size() == 0)
+			log.log(Level.INFO, "There are no issues for current page");
+		
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
@@ -135,6 +148,7 @@ public class IssueService {
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
 		issueRepository.update(issue);
+		log.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
 	}
 	
 	public void unassignUserToIssue(Long issueId) {
@@ -143,7 +157,10 @@ public class IssueService {
 		if (issue.getAssignee() != null){
 			issue.setAssignee(null);
 			issueRepository.update(issue);
+			log.log(Level.INFO, "Issue " + issueId + " is not assigned to anybody");
 		}
+		else
+			log.log(Level.INFO, "Issue " + issueId + " does not have an assignee");
 	}
 
 }
