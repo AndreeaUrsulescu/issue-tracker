@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script src="resources/assets/javascript/login-validator.js"></script>
-<div class="container" >
-	<div class="loginForm" >
+<div class="container" style="height: 780px;">
+	<img class="loginImg" src="${pageContext.request.contextPath}/resources/assets/images/4login.png"/>
+	<div class="loginForm" style="">
 		<form id="login-form" class="form-horizontal" method="POST"
 			action='j_spring_security_check'>
 
