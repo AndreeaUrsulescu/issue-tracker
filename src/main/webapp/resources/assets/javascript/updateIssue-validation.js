@@ -65,7 +65,8 @@ function assignUser(){
  		},
  		success : function(response) {
  			$("#assigneeInput").val('');
- 			document.getElementById("unassignButton").disabled = false;
+ 			document.getElementById("assignButton").disabled=true;
+ 			document.getElementById("unassignButton").style.visibility = "visible";
  		}
  	});
 }
@@ -80,7 +81,8 @@ function unassignUser(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			document.getElementById("unassignButton").disabled = true;
+ 			document.getElementById("assignButton").disabled=true;
+ 			document.getElementById("unassignButton").style.visibility = "hidden";
  		}
  	});
 }

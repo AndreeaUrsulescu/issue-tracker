@@ -54,14 +54,13 @@
 						</div>
 						<button class="btn btn-warning" onclick="assignUser();" id="assignButton">Assign</button>
 						    <c:choose>
-								<c:when test="${viewIssue.assignee.equals(null)}">
-									<button id="unassignButton" onclick="unassignUser();" style="background-color:red;" disabled>X</button>
+								<c:when test="${empty viewIssue.assignee}">
+									<button id="unassignButton" onclick="unassignUser();" style="background-color:red;visibility:hidden">X</button>
 								</c:when>
 								<c:otherwise>
 									<button id="unassignButton" onclick="unassignUser();" style="background-color:red;">X</button>
 								</c:otherwise>
 							</c:choose>
-							<c:out value="${viewIssue.assignee}" />
 				</div>
 				
 			</div>
