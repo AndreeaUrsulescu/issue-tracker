@@ -115,5 +115,14 @@ public class IssueService {
 		issue.setAssignee(assignee);
 		issueRepository.update(issue);
 	}
+	
+	public void unassignUserToIssue(Long issueId) {
+
+		Issue issue = issueRepository.findIssue(issueId);
+		if (issue.getAssignee() != null){
+			issue.setAssignee(null);
+			issueRepository.update(issue);
+		}
+	}
 
 }

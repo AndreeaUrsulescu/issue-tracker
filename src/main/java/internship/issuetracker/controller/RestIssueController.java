@@ -106,9 +106,18 @@ public class RestIssueController {
 	
 	@RequestMapping(value = "/issue/{issueId}/assignUser", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> addLabel(@PathVariable("issueId") Long issueId,@RequestBody UserPojo assignedUser) {
+	public Map<String,Object> assignUser(@PathVariable("issueId") Long issueId,@RequestBody UserPojo assignedUser) {
 		Map<String,Object> response = new HashMap<>();
 		issueService.assignUserToIssue(issueId,assignedUser);
+		response.put("response", "success");
+		return response;
+	}
+	
+	@RequestMapping(value = "/issue/{issueId}/unassignUser", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Map<String,Object> unassignUser(@PathVariable("issueId") Long issueId) {
+		Map<String,Object> response = new HashMap<>();
+		issueService.unassignUserToIssue(issueId);
 		response.put("response", "success");
 		return response;
 	}
