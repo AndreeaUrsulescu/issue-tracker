@@ -26,4 +26,5 @@
 	<body>
 			<tiles:insertAttribute name="logo" />			
 	</body>
+	
 </html>

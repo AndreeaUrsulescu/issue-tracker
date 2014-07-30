@@ -60,6 +60,6 @@
 		<p id="promo1" class="promo" style="">1. Create an account</p>
 		<p id="promo2" class="promo">2. Sign in to your page</p>
 		<p id="promo3" class="promo">3. Share and fulfill your issues</p>
-<!--		<p id="promo4">That simple :)</p>-->
+		<p id="promo4" class="promo">That simple :)</p>
 	</div>
 </div>
