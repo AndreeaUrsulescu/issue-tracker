@@ -7,6 +7,8 @@ $(document).ready(function(){
 		});
 	});
 	
+	document.getElementById("assignButton").disabled=true;
+	
     var userList = [];
     $.ajax({
     	dataType: "json",
@@ -35,7 +37,11 @@ $(document).ready(function(){
 		if(findUser === false)
 		{
 			input.parent().find(".error").text("The user doesn`t exist in the database");
+			document.getElementById("assignButton").disabled=true;
 			return false;
+		}
+		else {
+			document.getElementById("assignButton").disabled=false;
 		}
 		return true;
 	}

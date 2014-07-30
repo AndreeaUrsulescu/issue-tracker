@@ -65,6 +65,24 @@ function assignUser(){
  		},
  		success : function(response) {
  			$("#assigneeInput").val('');
+ 			document.getElementById("assignButton").disabled=true;
+ 			document.getElementById("unassignButton").style.visibility = "visible";
+ 		}
+ 	});
+}
+
+function unassignUser(){
+	
+	$.ajax({
+ 		url : window.location.origin + window.location.pathname + "/unassignUser" , // put some URL
+ 		type : "DELETE",
+ 		beforeSend : function(xhr) {
+ 			xhr.setRequestHeader("Accept", "application/json");
+ 			xhr.setRequestHeader("Content-Type", "application/json");
+ 		},
+ 		success : function(response) {
+ 			document.getElementById("assignButton").disabled=true;
+ 			document.getElementById("unassignButton").style.visibility = "hidden";
  		}
  	});
 }

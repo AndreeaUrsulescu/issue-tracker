@@ -38,11 +38,10 @@ public class IssueLabelRepository {
 	}
 
 	public List<Label> getLabelsForIssue(Long id) {
-		Issue issue = issueRepository.findIssue(id);
 		TypedQuery<IssueLabel> query = em.createNamedQuery(
 				IssueLabel.FIND_LABELS_FOR_ISSUE, IssueLabel.class);
 
-		List<IssueLabel> result = query.setParameter("issue", issue)
+		List<IssueLabel> result = query.setParameter("issueId", id)
 				.getResultList();
 		List<Label> labels = new ArrayList<Label>();
 
@@ -53,14 +52,12 @@ public class IssueLabelRepository {
 		return labels;
 	}
 
-	public IssueLabel findIssueLabel(Issue issue, Label label) {
+	public IssueLabel findIssueLabel(Long issueId, String labelName) {
 		TypedQuery<IssueLabel> query = em.createNamedQuery(
 				IssueLabel.FIND_ISSUE_LABEL, IssueLabel.class);
-		issue = issueRepository.findIssue(issue.getId());
-		label = labelRepository.findLabelByName(label.getLabelName());
 
-		query.setParameter("issue", issue);
-		query.setParameter("label", label);
+		query.setParameter("issueId", issueId);
+		query.setParameter("labelName", labelName);
 
 		List<IssueLabel> result = query.getResultList();
 
@@ -71,9 +68,7 @@ public class IssueLabelRepository {
 	}
 
 	public void removeLabelFromIssue(Long issueId, String labelName) {
-		Issue issue = issueRepository.findIssue(issueId);
-		Label label = labelRepository.findLabelByName(labelName);
-		IssueLabel issueLabel = this.findIssueLabel(issue, label);
+		IssueLabel issueLabel = this.findIssueLabel(issueId, labelName);
 		if (issueLabel != null) {
 			this.delete(issueLabel.getId());
 		}

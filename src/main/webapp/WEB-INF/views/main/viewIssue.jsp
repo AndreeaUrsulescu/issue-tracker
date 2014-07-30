@@ -52,7 +52,15 @@
 							<label for="assigneeInput">Assignee:</label>
 							<input type="text" class="form-control" id="assigneeInput" placeholder="Choose an user">
 						</div>
-						<button class="btn btn-warning" onclick="assignUser();">Assign</button>
+						<button class="btn btn-warning" onclick="assignUser();" id="assignButton">Assign</button>
+						    <c:choose>
+								<c:when test="${empty viewIssue.assignee}">
+									<button id="unassignButton" onclick="unassignUser();" style="background-color:red;visibility:hidden">X</button>
+								</c:when>
+								<c:otherwise>
+									<button id="unassignButton" onclick="unassignUser();" style="background-color:red;">X</button>
+								</c:otherwise>
+							</c:choose>
 				</div>
 				
 			</div>
