@@ -18,8 +18,9 @@
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 	</bean>
 
-	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
-	
+	<bean
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
@@ -28,7 +29,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="messageSecuritySource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
@@ -38,6 +39,17 @@
 		</property>
 	</bean>
 
+	<!--Bean to load properties file -->
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:application.properties" />
+	</bean>
+	
+	<bean id="forTest"
+		class="internship.issuetracker.validator.ActivationValidator">
+			<property name="forTest" value="${admin.email}" />
+	</bean>
+	
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
