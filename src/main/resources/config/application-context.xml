@@ -19,7 +19,7 @@
 	</bean>
 
 	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
-
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
@@ -28,7 +28,7 @@
 			</list>
 		</property>
 	</bean>
-
+	
 	<bean id="messageSecuritySource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
@@ -45,5 +45,5 @@
 	<tx:annotation-driven transaction-manager="txManager" />
 
 	<bean id="userValidator" class="internship.issuetracker.validator.UserValidator" />
-
+	<bean id="activationValidator" class="internship.issuetracker.validator.ActivationValidator" />
 </beans>

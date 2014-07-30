@@ -7,6 +7,8 @@ $(document).ready(function(){
 		});
 	});
 	
+	document.getElementById("assignButton").disabled=true;
+	
     var userList = [];
     $.ajax({
     	dataType: "json",
@@ -18,8 +20,33 @@ $(document).ready(function(){
     			userList.push(rsp.usersList[index].userName);
     	}
     });
-         
+    
+    function validateInput(){
     	
+		var input=$("#assigneeInput");
+		var value=input.val();
+		var findUser = false;
+		
+		input.parent().find(".error").text(" ");
+		for(var index = 0; index < userList.length; index++){
+			if(userList[index] == value){
+				findUser = true;
+			}
+		}
+		
+		if(findUser === false)
+		{
+			input.parent().find(".error").text("The user doesn`t exist in the database");
+			document.getElementById("assignButton").disabled=true;
+			return false;
+		}
+		else {
+			document.getElementById("assignButton").disabled=false;
+		}
+		return true;
+	}
+    
+    $("#assigneeInput").keyup(validateInput);
 	$("#assigneeInput").autocomplete({
 		source: userList
 	});

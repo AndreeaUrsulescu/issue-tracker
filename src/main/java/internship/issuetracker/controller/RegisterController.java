@@ -2,6 +2,7 @@
 package internship.issuetracker.controller;
 
 import internship.issuetracker.entities.Activation;
+import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
@@ -9,7 +10,6 @@ import internship.issuetracker.utils.MailMail;
 import internship.issuetracker.validator.ActivationValidator;
 import internship.issuetracker.validator.UserValidator;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -27,19 +27,18 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegisterController {
 	
 	@Autowired
-	private ServletContext servletContext;
-	
-	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private UserValidator userValidator;
+
 	
 	@Autowired
 	private ActivationValidator activationValidator;
 	
 	@Autowired
 	private MailMail mail;
+	
 	@Autowired
 	private ActivationService activationService;
 	
@@ -75,8 +74,13 @@ public class RegisterController {
 			return mv;
 		}
 		
+		
 		String msg=msg1+"http://localhost:8080"+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
-		mail.sendMail(activation.getEmail(), "Activation-issueTracker", msg);
+		Email email=new Email();
+		email.setTo(activation.getEmail());
+		email.setSubject("Activation-issueTracker");	
+		email.setContent(msg);
+		mail.sendMail(email);
 		activationService.addActivation(activation);
 		mv.setViewName("checkEmailPage");
 		return mv;

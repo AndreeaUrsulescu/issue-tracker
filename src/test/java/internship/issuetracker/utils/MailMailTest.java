@@ -1,22 +1,35 @@
 package internship.issuetracker.utils;
 
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import internship.issuetracker.entities.Email;
 
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
+	"classpath:config/application-context.xml",
+	"classpath:config/Spring-Mail.xml" })
+
+
+//TODO: Needs to be rewritten(change the email adress from endava internship 2014)
+@Ignore
 public class MailMailTest {
 
-	@Test
-	public void test() {
-		ApplicationContext context = 
-	             new ClassPathXmlApplicationContext("classpath:config/Spring-Mail.xml");
-	 
-	    	MailMail mm = (MailMail) context.getBean("mailMail");
-	        mm.sendMail("Alin.Stirbat@endava.com",
-	    		   "Internship2014@endava.com",
-	    		   "Testing123", 
-	    		   "Testing only \n\n Hello Spring Email Sender");
-	        
-	}
+    @Autowired
+    private MailMail mail;
+
+    @Test
+    public void test() {
+	Email email = new Email();
+	email.setTo("dummy@mailinator.com");
+	email.setSubject("Testing123");
+	email.setContent("Content test");
+	mail.sendMail(email);
+
+    }
 
 }

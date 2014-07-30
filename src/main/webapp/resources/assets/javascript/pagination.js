@@ -12,6 +12,12 @@ window.onload = function () {
 	    
      $("#previousButton").css("visibility", "hidden");	
 	 
+     if (numberOfIssues > 0){ 
+ 	    document.getElementById("pageNumber").innerHTML = 1;
+     }
+ 	 else if( numberOfIssues == 0 ){
+ 	    document.getElementById("pageNumber").innerHTML = 0;
+ 	 }
 };
 
 var count  = 1;
@@ -144,7 +150,13 @@ function searchIssues(){
  			    
  		     $("#previousButton").css("visibility", "hidden");	
  		     
- 		    document.getElementById("pageNumber").innerHTML = 1;
+ 		    if (response.listLength > 0){ 
+ 		 	    document.getElementById("pageNumber").innerHTML = 1;
+ 		     }
+ 		 	 else if( response.listLength == 0 ){
+ 		 	    document.getElementById("pageNumber").innerHTML = 0;
+ 		 	 }
+ 		    
  	        document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
  		     
  		     parsingAjaxResponse(response.issuesList);
@@ -297,13 +309,23 @@ function parsingAjaxResponse(response){
 		 state.setAttribute("class", "state");
 		 state.appendChild(document.createTextNode(response[index].state));
 		 
-		 var date =  document.createElement("LABEL");
-		 date.setAttribute("class", "date");
-		 date.appendChild(document.createTextNode(response[index].updateDate));
+//		 var date =  document.createElement("LABEL");
+//		 date.setAttribute("class", "date");
+//		 date.appendChild(document.createTextNode(response[index].updateDate));
 		 
+		 var assignee = document.createElement("LABEL");
+		 assignee.setAttribute("class","assignee");
+		 var assigneeSpan = document.createElement("SPAN");
+		 assigneeSpan.setAttribute("class","glyphicon glyphicon-check");
+			//assigneeSpan.appendChild(document.createTextNode("Assignee: ")); 
+		 var newSpan = document.createElement("SPAN");
+		 newSpan.appendChild(document.createTextNode("Georgel "));
+		 assignee.appendChild(newSpan);	 
+		 assignee.appendChild(assigneeSpan);
+	
 		 title.appendChild(state);
-		 title.appendChild(date);
-		 
+		 title.appendChild(assignee);
+
 		 
 		 var content = document.createElement("DIV");
 		 content.setAttribute("class", "content");
@@ -344,7 +366,7 @@ function parsingAjaxResponse(response){
 		 
 		 stickyNoteContent.appendChild(title);
 		 stickyNoteContent.appendChild(content);
-		 stickyNoteContent.appendChild(assignee);
+		 //stickyNoteContent.appendChild(assignee);
 		 stickyNoteContent.appendChild(owner);
 		 
 		 stickyNote.appendChild(stickyNoteContent);

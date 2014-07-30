@@ -1,8 +1,8 @@
 package internship.issuetracker.repository;
 
-import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.filters.TitleFilter;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +22,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml" })
+@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
+	"classpath:config/application-context.xml",
+	"classpath:config/Spring-Mail.xml" })
 public class TitleFIlterTest {
 
 	@PersistenceContext
@@ -74,11 +76,6 @@ public class TitleFIlterTest {
 		cq.orderBy(cb.desc(root.get("updateDate")), cb.desc(root.get("id")));
 		TypedQuery<Issue> tq = em.createQuery(cq);
 		List<Issue> list = tq.getResultList();
-
-		for (Issue issue2 : list) {
-
-			System.out.println(issue2.getUpdateDate() + " " + issue2.getId());
-		}
 		assert (list.size() == 1);
 	}
 
