@@ -1,5 +1,8 @@
 package internship.issuetracker.repository;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import internship.issuetracker.entities.Activation;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.utils.EncryptData;
@@ -16,6 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class ActivationRepository {
+	
+	private static final Logger log = Logger.getLogger(ActivationRepository.class
+			.getName());
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -33,17 +40,18 @@ public class ActivationRepository {
 		try
 		{
 			activation=query.getSingleResult();
+			log.log(Level.INFO, "An activation was found for " + activation.getUserName());
 		}
 		catch(NoResultException ex)
 		{
 			activation=null;
+			log.log(Level.INFO, "No activation was found for given key!");
 		}
 		return activation;
 	}
 	
 	public void remove(Activation activation)
 	{
-		
 		em.remove(this.findActivationByKeyHash(activation.getKeyHash()));
 	}
 }
