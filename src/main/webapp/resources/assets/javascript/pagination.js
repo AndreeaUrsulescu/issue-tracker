@@ -316,12 +316,20 @@ function parsingAjaxResponse(response){
 		 var assignee = document.createElement("LABEL");
 		 assignee.setAttribute("class","assignee");
 		 var assigneeSpan = document.createElement("SPAN");
-		 assigneeSpan.setAttribute("class","glyphicon glyphicon-check");
-			//assigneeSpan.appendChild(document.createTextNode("Assignee: ")); 
+		 assigneeSpan.setAttribute("class","glyphicon glyphicon-tag");
 		 var newSpan = document.createElement("SPAN");
-		 newSpan.appendChild(document.createTextNode("Georgel "));
+		 
 		 assignee.appendChild(newSpan);	 
-		 assignee.appendChild(assigneeSpan);
+			
+		 
+		 if(response[index].assignee==null)
+			 newSpan.appendChild(document.createTextNode("Unasigned"));
+		 else{
+			 newSpan.appendChild(document.createTextNode(response[index].assignee+" "));
+			 assignee.appendChild(assigneeSpan);
+		 }
+		 
+
 	
 		 title.appendChild(state);
 		 title.appendChild(assignee);
