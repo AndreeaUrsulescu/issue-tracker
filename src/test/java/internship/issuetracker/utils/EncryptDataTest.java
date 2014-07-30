@@ -1,8 +1,5 @@
 package internship.issuetracker.utils;
 
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.junit.Test;
 
 public class EncryptDataTest {

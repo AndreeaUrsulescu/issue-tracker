@@ -66,7 +66,7 @@ $(document).ready(function(){
     		}
     	});
     	$(".editIssueContent").show();
-    	$(".viewIssue").hide();
+    	$(".editIssueView").hide();
     	$("#newComment").hide();
     	$("#label-editor").show();
     	
@@ -90,7 +90,7 @@ $(document).ready(function(){
 	    			if(rsp.response === "success"){
 			    		
 	    				//show label in UI
-	    				$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+	    				$(".selected-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
 			    					+'<span class="glyphicon glyphicon-remove"></span>');
 	    				//add label to autocomplete
 	    				availableTags.push($("#tags").val().trim());
