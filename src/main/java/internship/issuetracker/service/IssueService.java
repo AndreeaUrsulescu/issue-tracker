@@ -10,6 +10,7 @@ import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class IssueService {
 
 	@Autowired
 	private IssueLabelRepository issueLabelRepository;
+	
+	@Autowired
+	private LabelService labelService;
 
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
@@ -58,7 +62,7 @@ public class IssueService {
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
 		for (Label label : labels) {
-			LabelPojo pojoLabel = new LabelPojo(label.getLabelName());
+			LabelPojo pojoLabel = labelService.convertLabelEntityToPojoLabel(label);
 			labelPojoList.add(pojoLabel);
 		}
 

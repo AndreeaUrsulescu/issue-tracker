@@ -47,6 +47,7 @@
 				</select> <label class="searchBy">Ordered by </label> <select
 					class="searchSelect" id="criteria">
 					<option value="Date" selected="selected">Date</option>
+					<option value="Title">Title</option>
 				</select> <select class="searchSelect" id="order">
 					<option value="Descending" selected="selected">Descending</option>
 					<option value="Ascending">Ascending</option>
@@ -76,7 +77,8 @@
 								</c:otherwise>
 					</c:choose>		
 						<span class="border"> 
-						<label class="state">${issue.state}</label> <label class="date">${issue.updateDate}</label>
+						<label class="state">${issue.state}</label> 
+						<label class="assignee"></label>
 						</span> 
 						<span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />

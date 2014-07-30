@@ -5,13 +5,12 @@ import internship.issuetracker.entities.User;
 
 import java.util.Date;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
@@ -28,7 +27,7 @@ public class IssueRepositoryTest {
     private Issue issue;
 
     public Issue createIssue() {
-	userRepository.create(user);
+	
 	
 	Issue issue = new Issue();
 	issue.setContent("contentx");
@@ -38,12 +37,18 @@ public class IssueRepositoryTest {
 	return issue;
     }
 
-    @BeforeClass
-    public static void oneTimeSetUp() {
+    @Before
+    public void setUp() {
 	user = new User();
 	user.setUserName("username");
 	user.setEmail("email@end.com");
 	user.setPassword("parola");
+	userRepository.create(user);
+    }
+    
+    @After
+    public void tearDown() {
+	userRepository.
     }
 
     @Test
