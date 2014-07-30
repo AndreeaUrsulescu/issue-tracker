@@ -1,13 +1,10 @@
 package internship.issuetracker.repository;
 
-import java.util.List;
-
 import internship.issuetracker.entities.User;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javassist.bytecode.stackmap.TypeData.ClassName;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -31,6 +28,8 @@ public class UserRepository {
 	}
 	
 	public void create(User user) {
+		System.out.println("in create user");
+		System.out.println(user.getUserName());
 		em.persist(user);
 	}
 
