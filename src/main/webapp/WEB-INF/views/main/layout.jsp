@@ -36,8 +36,6 @@
 	
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
 	    
-	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/sort.js"></script>
-	    
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 		
 		 <script src="${pageContext.request.contextPath}/resources/assets/javascript/search.js"></script>

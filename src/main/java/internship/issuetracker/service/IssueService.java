@@ -66,6 +66,9 @@ public class IssueService {
 				.getUserName(), issue.getTitle(), issue.getContent(),
 				issue.getUpdateDate(), issue.getLastDate(), issue.getState(),
 				pojoComments, labelPojoList);
+		if (issue.getAssignee() != null) {
+			issuePojo.setAssignee(issue.getAssignee().getUserName());
+		}
 		return issuePojo;
 
 	}
@@ -114,6 +117,15 @@ public class IssueService {
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
 		issueRepository.update(issue);
+	}
+	
+	public void unassignUserToIssue(Long issueId) {
+
+		Issue issue = issueRepository.findIssue(issueId);
+		if (issue.getAssignee() != null){
+			issue.setAssignee(null);
+			issueRepository.update(issue);
+		}
 	}
 
 }
