@@ -1,11 +1,11 @@
 package internship.issuetracker.repository;
 
-import filters.ContentFilter;
-import filters.StateFilter;
-import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.enums.State;
+import internship.issuetracker.filters.ContentFilter;
+import internship.issuetracker.filters.StateFilter;
+import internship.issuetracker.filters.TitleFilter;
 
 import java.util.Date;
 
@@ -18,7 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml" })
+@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
+	"classpath:config/application-context.xml",
+	"classpath:config/Spring-Mail.xml" })
 public class SearchRepositoryTest {
 
 	@Autowired

@@ -11,6 +11,7 @@ import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.IssueDifference;
 import internship.issuetracker.utils.MailMail;
@@ -32,6 +33,9 @@ public class IssueService {
 
 	@Autowired
 	private IssueLabelRepository issueLabelRepository;
+	
+	@Autowired
+	private LabelService labelService;
 
 	@Autowired
 	private MailMail mail;
@@ -72,7 +76,7 @@ public class IssueService {
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
 		for (Label label : labels) {
-			LabelPojo pojoLabel = new LabelPojo(label.getLabelName());
+			LabelPojo pojoLabel = labelService.convertLabelEntityToPojoLabel(label);
 			labelPojoList.add(pojoLabel);
 		}
 

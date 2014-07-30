@@ -10,7 +10,6 @@ import internship.issuetracker.utils.MailMail;
 import internship.issuetracker.validator.ActivationValidator;
 import internship.issuetracker.validator.UserValidator;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -28,9 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class RegisterController {
 	
 	@Autowired
-	private ServletContext servletContext;
-	
-	@Autowired
 	private UserService userService;
 	
 	@Autowired
@@ -39,11 +35,10 @@ public class RegisterController {
 	
 	@Autowired
 	private ActivationValidator activationValidator;
-
-
 	
 	@Autowired
 	private MailMail mail;
+	
 	@Autowired
 	private ActivationService activationService;
 	

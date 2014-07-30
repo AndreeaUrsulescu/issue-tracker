@@ -1,10 +1,10 @@
 package internship.issuetracker.service;
 
-import filters.ContentFilter;
-import filters.SearchFilterInt;
-import filters.StateFilter;
-import filters.TitleFilter;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.filters.ContentFilter;
+import internship.issuetracker.filters.SearchFilterInt;
+import internship.issuetracker.filters.StateFilter;
+import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
