@@ -8,6 +8,7 @@ import internship.issuetracker.filters.SearchFilterInt;
 import internship.issuetracker.filters.StateFilter;
 import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.MultipleSearchParameter;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
 import java.util.ArrayList;
@@ -81,6 +82,23 @@ public class SearchService {
 		}
 		
 		return entityToPojo(issuesListEntity);
+	}
+	
+	public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
+
+		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
+
+		if (issuesListEntity.size() == 0)
+			log.log(Level.INFO,
+					"There are no issues for the given search criteria");
+
+		return entityToPojo(issuesListEntity);
+	}
+	
+	public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
+
+		int listSize = searchRepository.numberOfIssuesMultipleSearch(searchParameters);
+		return listSize;
 	}
 
 }
