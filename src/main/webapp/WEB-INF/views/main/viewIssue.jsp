@@ -52,7 +52,7 @@
 				<br> 
 				<span class="viewIssueOwnerSeparator">
 					<span>Update Date:</span> 
-					<small><c:out value="${viewIssue.updateDate}" /></small>
+					<small><c:out value="${viewIssue.lastDate}" /></small>
 				</span>
 			</div>
 			
