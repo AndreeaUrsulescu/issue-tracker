@@ -40,6 +40,7 @@
 					<option value="state">state</option>
 					<option value="creator">creator</option>
 					<option value="assignee">assignee</option>
+					<option value="label">label</option>
 				</select> 
 				<input type="text" id="searchField" class="searchSelect" /> 
 				<select	class="searchSelect" id="selectT">

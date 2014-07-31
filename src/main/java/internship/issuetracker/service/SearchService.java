@@ -41,6 +41,9 @@ public class SearchService {
 		} else if (searchCriteria.equals("asignee")){
 			filter = new AssigneeFilter(searchParameters.getInput());
 		}
+		 else if (searchCriteria.equals("label")){
+			filter = new AssigneeFilter(searchParameters.getInput());
+		}
 		return filter;
 	}
 
