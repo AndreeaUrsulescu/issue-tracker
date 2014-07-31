@@ -350,12 +350,31 @@ footer a {
 	
 }
 
+.editIssueAssignee input{
+	width:50%;
+	float:left;
+}
+
+#assignButton{
+	margin-left:1%;
+}
+
+#unassignButton{
+	color:#d30000;
+}
+
 .issue-label{
 	float:left;
-	padding: 7px;
-	font-weight: bold;
-	font-size: 16px;
-	color: #02A4FC;
+	padding: 7px 0;
+	font-weight: 700;
+}
+
+#assigneeLabel{
+	font-weight:900;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height:1;
+	color:#777;
+	font-size:17px;
 }
 
 .editIssueContent {
