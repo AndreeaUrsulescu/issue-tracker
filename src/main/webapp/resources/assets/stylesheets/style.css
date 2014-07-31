@@ -580,8 +580,8 @@ footer a {
 .comic {
 	color: rgb(66, 139, 202); // rgb (255,127,29);
 	font-size: 18px;
-	font-weight: bold; //
-	margin-left: 200px;
+	font-weight: bold; 
+	//margin-left: 200px;
 }
 
 #backBtn{
@@ -597,12 +597,7 @@ footer a {
 	margin-left: 3px;
 }
 
-.comic{
-	color:rgb(66,139,202);//rgb(255,127,29);
-	font-size: 18px;
-	font-weight: bold; //
-	margin-left: 200px;
-}
+
 
 .pinB {
 	width: 40px;
@@ -922,17 +917,17 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 .promo{
 	visibility: hidden;
 	position: absolute;
-	color: rgb(84,90,40);
+	color: rgb(80,80,80);
 	margin-top: 100px;
 	font-weight: bold;
 	font-size: 18px;
-	margin-left: 90px;
+	margin-left: 110px;
 }
 
 #promo4{
 	visibility: visible;
 	display: none;
-	margin-left: 130px;
+	margin-left: 160px;
 	font-size: 20px;
 	color: #2359AF;
 	margin-top: 110px;

@@ -33,13 +33,16 @@
 
 		<div id="searchBar">
 			<div id="inSearchBar">
-				<label class="searchBy">Search by </label> <select
-					class="searchSelect" id="selectS">
+				<label class="searchBy">Search by </label> 
+				<select	class="searchSelect" id="selectS">
 					<option value="title" selected="selected">title</option>
 					<option value="content">content</option>
 					<option value="state">state</option>
-				</select> <input type="text" id="searchField" class="searchSelect" /> <select
-					class="searchSelect" id="selectT">
+					<option value="creator">creator</option>
+					<option value="assignee">assignee</option>
+				</select> 
+				<input type="text" id="searchField" class="searchSelect" /> 
+				<select	class="searchSelect" id="selectT">
 					<option value="New" selected="selected">New</option>
 					<option value="Opened">Opened</option>
 					<option value="Testing">Testing</option>
