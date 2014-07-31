@@ -94,7 +94,14 @@ public class SearchRepository {
 		Predicate[] predicates = new Predicate[predicateList.size()];
 		predicates = predicateList.toArray(predicates);
 		
+		String orderField = convert(parameters.getSortCriteria());
 		criteriaQuery.where(predicates);
+		
+		if ("Descending".equals(parameters.getSortType()))
+			criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
+		else
+			criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
+		
 		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
 		query.setMaxResults(itemsPerPage);
 		query.setFirstResult((parameters.getPageNumber() - 1) * itemsPerPage);
