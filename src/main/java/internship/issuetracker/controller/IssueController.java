@@ -5,9 +5,9 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
-import internship.issuetracker.utils.ApplicationParameters;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -33,13 +33,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/issues")
 public class IssueController {
 
-	
 	@Autowired
 	private IssueService issueService;
 
 	@Autowired
 	private CommentService commentService;
-	
+
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
@@ -60,7 +59,7 @@ public class IssueController {
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
-	
+
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
 	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("viewIssue", issueService.getIssue(id));
@@ -125,20 +124,17 @@ public class IssueController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
-				
+		
+		
 		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
 		
 		model.addAttribute("issuesList", issuesListPojo);
 		model.addAttribute("listLength",issueService.numberOfIssues());
-		model.addAttribute("itemsPerPage", ApplicationParameters.itemsPerPage );
-		if(issueService.numberOfIssues()%ApplicationParameters.itemsPerPage==0)
-		{
-		model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage));
-		}
+		model.addAttribute("itemsPerPage", IssueRepository.itemsPerPage );
+		if(issueService.numberOfIssues()%IssueRepository.itemsPerPage==0)
+		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage));
 		else
-		{
-			model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage+1));
-		}
-			return "issues";
+		model.addAttribute("pages", (int)(issueService.numberOfIssues()/IssueRepository.itemsPerPage+1));
+		return "issues";
 	}
 }

@@ -1,9 +1,11 @@
 package internship.issuetracker.repository;
 
-import internship.issuetracker.entities.Activation;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import internship.issuetracker.entities.Activation;
+import internship.issuetracker.entities.User;
+import internship.issuetracker.utils.EncryptData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

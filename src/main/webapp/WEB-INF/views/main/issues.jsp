@@ -31,7 +31,7 @@
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
 			class="glyphicon glyphicon-plus"></span> Add issue </a>
 
-		<div id="searchBar">
+		<!-- <div id="searchBar">
 			<div id="inSearchBar">
 				<label class="searchBy">Search by </label> 
 				<select	class="searchSelect" id="selectS">
@@ -57,6 +57,73 @@
 				</select> <a class="btn searchBtn btn-default" id="searchBtn" onclick="searchIssues();">
 					<span class="glyphicon glyphicon-search"></span> Search
 				</a>
+			</div>
+		</div> -->
+		<div id="filtering">
+			<button id="slideFilter" type="button" onclick="slideFilter()" value="Filter">Filter
+				<span class="caret"></span>
+			</button>
+			
+			<div id="filterBox" class="row" style="display:none;">
+				<div id="searchBox" class="col-xs-6">
+					<form>
+						<div class="form-group row">
+							<label for="searchByTitle" class="col-xs-2 searchBy">Title:</label>
+							<input id="searchByTitle" type="text" class="col-xs-8 textBox">
+						</div>
+						<div class="form-group row">
+							<label for="searchByContent" class="col-xs-2 searchBy">Content:</label>
+							<input id="searchByContent" class="col-xs-8 textBox" type="text">
+						</div>
+						<div class="form-group row">
+							<label for="searchByState" class="col-xs-2 searchBy">State:</label>
+							<select id="searchByState" class="col-xs-8 selectOption">
+								<option value=""></option>
+								<option value="New">New</option>
+								<option value="Opened">Opened</option>
+								<option value="Testing">Testing</option>
+								<option value="Closed">Closed</option>
+							</select>
+						</div>
+						<div class="form-group row">
+							<label for="searchByCreator" class="col-xs-2 searchBy">Creator:</label>
+							<input id="searchByCreator" class="col-xs-8 textBox" type="text">
+						</div>
+						<div class="form-group row">
+							<label for="searchByAssignee" class="col-xs-2 searchBy">Assignee:</label>
+							<input id="searchByAssignee" class="col-xs-8 textBox" type="text">
+						</div>
+						<div class="form-group row">
+							<label for="searchByLabel" class="col-xs-2 searchBy">Label:</label>
+							<input id="searchByLabel" class="col-xs-8 textBox" type="text">
+						</div>
+						<div class="row">
+							<a class="btn searchBtn btn-default col-xs-4" id="searchBtn" onclick="searchIssues();">
+								<span class="glyphicon glyphicon-search"></span> Search
+							</a>
+						</div>
+					</form>
+				</div>
+				
+				<div id="sortBox" class="col-xs-6">
+					<form>
+						<div class="form-group row">
+							<label for="orderBy" class="col-xs-4 searchBy">Order by:</label>
+							<select id="orderBy" class="col-xs-7 selectOption">
+								<option value="Date" selected="selected">Date</option>
+								<option value="Title">Title</option>
+							</select>
+						</div>
+						
+						<div class="form-group row">
+							<label for="orderType" class="col-xs-4 searchBy">Order type:</label>
+							<select id="orderType" class="col-xs-7 selectOption">
+								<option value="Descending" selected="selected">Descending</option>
+								<option value="Ascending">Ascending</option>
+							</select>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

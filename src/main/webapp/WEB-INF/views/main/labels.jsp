@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="editIssueContent">
+<div class="container">
 
 
 	<div id="label-editor">
-		<label>Labels:</label>
+		<h1 class="commentSectionTitle">Labels</h1>
 		<div class="labelSection">
 			<span class="error"></span>
 			<div class="input-group">
@@ -18,7 +18,6 @@
 		</div>
 	
 	<div id="active-labels" class="labelSection selected-labels">
-	<br/>
 		<c:forEach var="label" items="${viewIssue.getLabels()}">
 			<span class="issueLabel label label-primary"> <c:out
 					value="${label.getLabelName()}" /> <span
@@ -27,5 +26,6 @@
 		</c:forEach>
 	</div>
 	<br>
+	<div class="viewIssueContainer"></div>
 	</div>
 </div>

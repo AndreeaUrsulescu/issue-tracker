@@ -13,7 +13,7 @@ import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.IssueDifference;
-import internship.issuetracker.utils.MailHelper;
+import internship.issuetracker.utils.MailMail;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,42 +41,39 @@ public class IssueService {
 	@Autowired
 	private LabelService labelService;
 
-//	@Autowired
-//	private MailMail mail;
 	@Autowired
-	private MailHelper mh;
-	
+	private MailMail mail;
+
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
 	}
 
-	public void updateIssue(Issue issue) {
-		Issue newIssue = issueRepository.findIssue(issue.getId());
-		newIssue.setContent(issue.getContent());
-		newIssue.setTitle(issue.getTitle());
-		newIssue.setLastDate(new Date());
-		newIssue.setState(issue.getState());
+	public void updateIssue(Issue issuePojo) {
+		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
+		issueToUpdate.setContent(issuePojo.getContent());
+		issueToUpdate.setTitle(issuePojo.getTitle());
+		issueToUpdate.setLastDate(new Date());
+		issueToUpdate.setState(issuePojo.getState());
 
-		if (null == newIssue.getAssignee()) {
-			log.log(Level.INFO, "Issue " + newIssue.getId() + " doesn't have an assignee , no email send.");
-
+		
+			
+	
+		if (null == issueToUpdate.getAssignee()) {
+			log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " doesn't have an assignee , no email send.");
+			
 		} else {
-
-			String x = IssueDifference.generateDifference(newIssue, issueRepository.findIssue(issue.getId()));
+			
+			String x = IssueDifference.generateDifference(issueToUpdate, issueRepository.findIssue(issuePojo.getId()));
 			Email email = new Email();
-			email.setTo(newIssue.getAssignee().getEmail());
+			email.setTo(issueToUpdate.getAssignee().getEmail());
 			email.setSubject("IssueTracker - UpdateIssue");
 			email.setContent(x);
-			
-			mh.setUp(email);
-			new Thread(mh).start();
-			//mail.sendMail(email);
-			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
+			mail.sendMail(email);
+			log.log(Level.INFO, "Email send to assignee of " + "issue " + issueToUpdate.getId());
 		}
-
-		this.issueRepository.update(newIssue);
-		log.log(Level.INFO, "Issue " + newIssue.getId() + " was updated");
+		this.issueRepository.update(issueToUpdate);
+		log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " was updated");
 	}
 
 	public IssuePojo getIssue(Long id) {
@@ -149,18 +146,6 @@ public class IssueService {
 		User assignee = userRepository.findUserByUserName(assignedUser.getUserName());
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
-
-		String x = "\n\nYou became the assignee for the issue :\n\n" + "http://localhost:8080/issue-tracker/issues/issue/" + issue.getId();
-		Email email = new Email();
-		email.setTo(issue.getAssignee().getEmail());
-		email.setSubject("IssueTracker - AssigneIssue");
-		email.setContent(x);
-		
-		mh.setUp(email);
-		new Thread(mh).start();
-		//mail.sendMail(email);
-		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
-
 		issueRepository.update(issue);
 		log.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
 	}

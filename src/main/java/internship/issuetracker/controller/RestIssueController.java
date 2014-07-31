@@ -123,7 +123,8 @@ public class RestIssueController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/multipleSearchBy", method = RequestMethod.GET)
+
+@RequestMapping(value = "/multipleSearchBy", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> multipleSearch( @ModelAttribute MultipleSearchParameter searchParameters) {
 

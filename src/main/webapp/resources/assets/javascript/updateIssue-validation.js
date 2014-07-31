@@ -65,12 +65,9 @@ function assignUser(){
  		},
  		success : function(response) {
  			$("#assigneeInput").val('');
- 			document.getElementById("unassignButton").style.display = "initial";
- 			document.getElementById("assigneeInput").style.display = "none";
- 			document.getElementById("assignButton").style.display = "none";
- 			document.getElementById("assigneeLabel").style.display = "inline";
- 			document.getElementById("assigneeLabel").innerHTML = filterData.userName;
- 			document.getElementById("assigneeBr").style.display = "none";
+ 			document.getElementById("assignButton").disabled=true;
+ 			document.getElementById("unassignButton").style.visibility = "visible";
+ 			document.getElementById("assign").innerHTML = filterData.userName;
  		}
  	});
 }
@@ -86,12 +83,8 @@ function unassignUser(){
  		},
  		success : function(response) {
  			document.getElementById("assignButton").disabled=true;
- 			document.getElementById("unassignButton").style.display = "none";
- 			document.getElementById("assigneeInput").style.display = "initial";
- 			document.getElementById("assignButton").style.display = "initial";
- 			document.getElementById("assigneeLabel").style.display = "none";
+ 			document.getElementById("unassignButton").style.visibility = "hidden";
  			document.getElementById("assign").innerHTML = "Unassigned";
- 			document.getElementById("assigneeBr").style.display = "initial";
  		}
  	});
 }

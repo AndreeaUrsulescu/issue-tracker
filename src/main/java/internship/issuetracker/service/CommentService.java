@@ -19,19 +19,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CommentService {
-
+	
 	private static final Logger log = Logger.getLogger(CommentService.class
 			.getName());
 
 	@Autowired
 	private CommentRepository commentRepository;
-
+	
 	@Autowired
 	private UserRepository userRepository;
-
+	
 	@Autowired
 	private IssueRepository issueRepository;
-
+	
 	public void addComment(CommentPojo comment) {
 		Comment com = new Comment();
 		User owner = userRepository.findUserByUserName(comment.getOwner());
@@ -51,32 +51,32 @@ public class CommentService {
 				+ comment.getIssue().getId());
 	}
 
+
 	public List<CommentPojo> getCommentsForIssue(IssuePojo issuePojo) {
 		Issue issue = issueRepository.findIssue(issuePojo.getId());
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<Comment> comments = commentRepository.findCommentsByIssue(issue);
-
-		if (comments.size() == 0){
-			log.log(Level.INFO,	"There are no comments for issue " + issuePojo.getId());
-		}
-
+		
+		if (comments.size() == 0)
+			log.log(Level.INFO,
+					"There are no comments for issue " + issuePojo.getId());
+		
 		for (Comment com : comments) {
-			CommentPojo pojoComment = new CommentPojo(com.getOwner()
-					.getUserName(), com.getContent(), com.getCreationDate(),
-					com.getIssue().getId());
+			CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(),
+					com.getContent(), com.getCreationDate(), com.getIssue()
+							.getId());
 			pojoComments.add(pojoComment);
 		}
-
-		return pojoComments;
+		
+		return pojoComments; 
 	}
 
 	public List<Comment> getCommentForOwner(User user) {
 		List<Comment> comments = this.commentRepository
 				.findCommentByOwner(user);
 
-		if (comments.size() == 0) {
-			log.log(Level.INFO,	"There are no comments posted by " + user.getUserName());
-		}
+		if (comments.size() == 0)
+			log.log(Level.INFO, "There are no comments posted by " + user.getUserName());
 
 		return comments;
 	}
