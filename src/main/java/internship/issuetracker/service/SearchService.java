@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SearchService {
-
+	
 	private static final Logger log = Logger.getLogger(SearchService.class
 			.getName());
 
@@ -49,8 +49,11 @@ public class SearchService {
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
-					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
+					issueEntity.getOwner().getUserName(),
+					issueEntity.getTitle(), issueEntity.getContent(),
+					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
+					issueEntity.getState());
 			issuesListPojo.add(index, issuePojo);
 
 		}
@@ -58,17 +61,9 @@ public class SearchService {
 	}
 
 	public int numberOfIssues(SearchParameter searchParameters) {
-		SearchFilterInt<Issue> filter = null;
 		String searchCriteria = searchParameters.getSearchCriteria();
-		if(searchCriteria.equals("title")){
-			filter = new TitleFilter(searchParameters.getInput());
-	}
-		else if (searchCriteria.equals("content")){
-			filter = new ContentFilter(searchParameters.getInput());
-	}
-		else if (searchCriteria.equals("state")){
-			filter = new StateFilter(searchParameters.getState());
-	}
+		SearchFilterInt<Issue> filter = this.getFilter(searchCriteria,
+				searchParameters);
 		return searchRepository.numberOfIssues(filter);
 	}
 
@@ -76,14 +71,16 @@ public class SearchService {
 
 		String searchCriteria = searchParameters.getSearchCriteria();
 		SearchFilterInt<Issue> filter = this.getFilter(searchCriteria, searchParameters);
-		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(filter, searchParameters.getPageNumber(), searchParameters.getSortCriteria(), searchParameters.getSortType());
+		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(
+				filter, searchParameters.getPageNumber(),
+				searchParameters.getSortCriteria(),
+				searchParameters.getSortType());
 
 		if (issuesListEntity.isEmpty()){
 			log.log(Level.INFO, "There are no issues for the given search criteria");
 		}
-
+		
 		return entityToPojo(issuesListEntity);
 	}
-
 
 }

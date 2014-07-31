@@ -80,6 +80,7 @@ var countOnSort = 1 ;
 
 // TODO: if needed change val() with text()
 function searchIssues(){
+	
      countOnSort = 1 ; 
 
      var searchCriteria = $("#selectS").val().trim(); 

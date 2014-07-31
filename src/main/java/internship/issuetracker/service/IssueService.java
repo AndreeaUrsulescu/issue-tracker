@@ -49,31 +49,29 @@ public class IssueService {
 		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
 	}
 
-	public void updateIssue(Issue issuePojo) {
-		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
-		issueToUpdate.setContent(issuePojo.getContent());
-		issueToUpdate.setTitle(issuePojo.getTitle());
-		issueToUpdate.setLastDate(new Date());
-		issueToUpdate.setState(issuePojo.getState());
+	public void updateIssue(Issue issue) {
+		Issue newIssue = issueRepository.findIssue(issue.getId());
+		newIssue.setContent(issue.getContent());
+		newIssue.setTitle(issue.getTitle());
+		newIssue.setLastDate(new Date());
+		newIssue.setState(issue.getState());
 
-		
-			
-	
-		if (null == issueToUpdate.getAssignee()) {
-			log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " doesn't have an assignee , no email send.");
-			
+		if (null == newIssue.getAssignee()) {
+			log.log(Level.INFO, "Issue " + newIssue.getId() + " doesn't have an assignee , no email send.");
+
 		} else {
-			
-			String x = IssueDifference.generateDifference(issueToUpdate, issueRepository.findIssue(issuePojo.getId()));
+
+			String x = IssueDifference.generateDifference(newIssue, issueRepository.findIssue(issue.getId()));
 			Email email = new Email();
-			email.setTo(issueToUpdate.getAssignee().getEmail());
+			email.setTo(newIssue.getAssignee().getEmail());
 			email.setSubject("IssueTracker - UpdateIssue");
 			email.setContent(x);
 			mail.sendMail(email);
-			log.log(Level.INFO, "Email send to assignee of " + "issue " + issueToUpdate.getId());
+			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
 		}
-		this.issueRepository.update(issueToUpdate);
-		log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " was updated");
+
+		this.issueRepository.update(newIssue);
+		log.log(Level.INFO, "Issue " + newIssue.getId() + " was updated");
 	}
 
 	public IssuePojo getIssue(Long id) {
@@ -146,6 +144,15 @@ public class IssueService {
 		User assignee = userRepository.findUserByUserName(assignedUser.getUserName());
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
+
+		String x = "\n\nYou became the assignee for the issue :\n\n" + "http://localhost:8080/issue-tracker/issues/issue/" + issue.getId();
+		Email email = new Email();
+		email.setTo(issue.getAssignee().getEmail());
+		email.setSubject("IssueTracker - AssigneIssue");
+		email.setContent(x);
+		mail.sendMail(email);
+		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
+
 		issueRepository.update(issue);
 		log.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
 	}

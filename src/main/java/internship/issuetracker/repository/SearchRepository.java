@@ -25,15 +25,13 @@ public class SearchRepository {
 	private EntityManager em;
 
 	public String convert(String x){
-		if("Date".equals(x)){
-			return "updateDate";
+		if("latestUpdateDate".equals(x)){
+			return "lastDate";
 		}
-		else
-			if ("Title".equals(x)) {
-				return "title";
-			}
-		
-		return "updateDate";
+		else if ("Title".equals(x)) {
+			return "title";
+		}
+		return "lastDate";
 	}
 
 	public List<Issue> findOrderedIssues(SearchFilterInt<Issue> filter, int currentPage, String orderField, String orderType) {

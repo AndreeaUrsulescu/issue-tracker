@@ -3,25 +3,23 @@ package internship.issuetracker.utils;
 import internship.issuetracker.entities.Issue;
 
 
-import org.springframework.beans.factory.annotation.Value;
-
-import difflib.DiffUtils;
-import difflib.Patch;
 
 public class IssueDifference {
+	public static String generateDifference(Issue newIssue, Issue oldIssue) {
+		String title = getStringDifferences(newIssue.getTitle(), oldIssue.getTitle());
+		String content = getStringDifferences(newIssue.getContent(), oldIssue.getContent());
 
-    public static String generateDifference(Issue issue1, Issue issue2){
-    String msg=ApplicationParameters.changedIssueEmail+issue1.getId();
+    String msg = ApplicationParameters.changedIssueEmail + newIssue.getId();
 	StringBuilder result = new StringBuilder();
-	String title = getStringDifferences(issue1.getTitle(), issue2.getTitle());
+
 	if (title != null){
-	    result.append("Title" + title + " from \""+ issue1.getTitle()+ "\" to \"" + issue2.getTitle() + "\" .\n");
+			result.append("Title" + title + " from \"" + oldIssue.getTitle() + "\" to \"" + newIssue.getTitle() + "\" .\n");
 	}
-	String content = getStringDifferences(issue1.getContent(), issue2.getContent());
+
 	if (content != null){
 	    result.append("Content" + content + ".\n");
 	}
-	if (issue1.getState() != issue2.getState()){
+	if (newIssue.getState() != oldIssue.getState()){
 	    result.append(ApplicationParameters.stateHasBeenChangedMessage+ issue1.getState() + " to " +  issue2.getState() + ".\n");
 	}
 	
@@ -34,7 +32,5 @@ public class IssueDifference {
 	}
 	return null;
     }
-    
-   
     
 }

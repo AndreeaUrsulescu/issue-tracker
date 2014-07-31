@@ -31,7 +31,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @SuppressWarnings("serial")
 @NamedQueries({
 		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
-	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.updateDate DESC,a.id DESC") })
+	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.lastDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
@@ -55,8 +55,8 @@ public class Issue implements Serializable {
 	@Size(max = 1000)
 	private String content;
 
-    @Temporal(TemporalType.TIME)
-	@Column(name = "update_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "creation_date", nullable = false)
 	private Date updateDate;
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -15,7 +15,6 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/activation")
 public class ActivationController {
 	@Autowired
-	ActivationService activationService;
+	private ActivationService activationService;
 	
 	@Value("${itemsPerPage}")
 	String items;
@@ -33,8 +32,8 @@ public class ActivationController {
 	@Value("${StateHasBeenChangedMessage}")
 	String state;
 	@Autowired
-	UserService userService;
-
+	private UserService userService;
+	
 	@RequestMapping(value="/{hashKey}",method=RequestMethod.GET)
 	public String activate (@PathVariable String hashKey)
 	{
