@@ -2,6 +2,7 @@ package internship.issuetracker.controller;
 
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
+import internship.issuetracker.pojo.MultipleSearchParameter;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.SearchRepository;
@@ -120,5 +121,21 @@ public class RestIssueController {
 		issueService.unassignUserToIssue(issueId);
 		response.put("response", "success");
 		return response;
+	}
+	
+	@RequestMapping(value = "/multipleSearchBy", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> multipleSearch( @ModelAttribute MultipleSearchParameter searchParameters) {
+
+		List<IssuePojo> resultList = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		resultList = searchService.multiplePredicates(searchParameters);
+		System.out.println("salut");
+		map.put("issuesList", resultList);
+		map.put("listLength", searchService.numberOfIssuesMultipleSearch(searchParameters));
+		map.put("issuesPerPage", SearchRepository.itemsPerPage);
+
+		return map;
 	}
 }
