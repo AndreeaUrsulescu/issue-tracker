@@ -11,14 +11,14 @@ public class IssueDifference {
 		StringBuilder result = new StringBuilder();
 
 		if (null != title) {
-			result.append("Title").append(title).append(" from \"").append(oldIssue.getTitle()).append("\" to \"").append(newIssue.getTitle()).append("\" .\n");
+			result.append("Title").append(title).append(" from \"").append(oldIssue.getTitle()).append("\" to \"").append(newIssue.getTitle()).append("\" .\n\n");
 		}
 
 		if (null != content ) {
-			result.append("Content").append(content).append(" .\n");
+			result.append("Content").append(content).append(" .\n\n");
 		}
 		if (newIssue.getState() != oldIssue.getState()) {
-			result.append(ApplicationParameters.stateHasBeenChangedMessage).append(" from \"").append(oldIssue.getState()).append("\" to \"").append(newIssue.getState()).append("\" .\n");
+			result.append(ApplicationParameters.stateHasBeenChangedMessage).append(" from \"").append(oldIssue.getState()).append("\" to \"").append(newIssue.getState()).append("\" .\n\n");
 		}
 
 		return result.append(msg).toString();
