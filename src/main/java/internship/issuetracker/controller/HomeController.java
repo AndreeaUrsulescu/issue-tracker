@@ -15,4 +15,6 @@ public class HomeController {
 		model.addAttribute("user", new User());
 		return "home";
 	}
+	
+
 }

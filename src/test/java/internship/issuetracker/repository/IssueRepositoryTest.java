@@ -22,13 +22,13 @@ public class IssueRepositoryTest {
     private IssueRepository issueRepository;
     @Autowired
     private UserRepository userRepository;
-
-    private static User user;
+    
+    private User user;
     private Issue issue;
+    
+    static int ucount = 65;
 
     public Issue createIssue() {
-	
-	
 	Issue issue = new Issue();
 	issue.setContent("contentx");
 	issue.setTitle("titlu issue");
@@ -36,25 +36,20 @@ public class IssueRepositoryTest {
 	issue.setUpdateDate(new Date());
 	return issue;
     }
-
     @Before
     public void setUp() {
 	user = new User();
-	user.setUserName("username");
+	user.setUserName("usernam"+(char)ucount);
 	user.setEmail("email@end.com");
 	user.setPassword("parola");
 	userRepository.create(user);
-    }
-    
-    @After
-    public void tearDown() {
-	userRepository.
+	ucount++;
+	issue = createIssue();
+	issueRepository.create(issue);
     }
 
     @Test
     public void testCreate() {
-	issue = createIssue();
-	issueRepository.create(issue);
 	assert (issueRepository.findIssue(issue.getId()) == issue);
     }
     

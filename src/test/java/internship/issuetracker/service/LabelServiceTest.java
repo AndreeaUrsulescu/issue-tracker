@@ -48,11 +48,7 @@ public class LabelServiceTest {
 		issue.setContent("content" + (char) count);
 		issue.setTitle("title" + (char) count);
 		issue.setOwner(user);
-		System.out.println("Before create");
 		issueRepository.create(issue);
-		System.out.println("After create");
-		System.out.println(issueRepository.numberOfIssues());
-		System.out.println("After find");
 		count++;
 		return issue;
 	}

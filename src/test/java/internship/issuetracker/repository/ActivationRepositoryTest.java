@@ -38,8 +38,7 @@ public class ActivationRepositoryTest {
 
     @Test
     public void testFindAndRemove() {
-	activation = activationRepository.findActivationByKeyHash(activation
-		.getKeyHash());
+	activation = activationRepository.findActivationByKeyHash(activation.getKeyHash());
 	activationRepository.remove(activation);
 	assert (null == activationRepository.findActivationByKeyHash(activation
 		.getKeyHash()));

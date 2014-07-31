@@ -53,7 +53,7 @@ public class IssueLabelRepositoryTest {
     @Transactional
     public void setUp() {
 	user = new User();
-	user.setUserName("user" + (char) ucount);
+	user.setUserName("username" + (char) ucount);
 	user.setPassword("parola");
 	user.setEmail("user@gmail.com");
 	userRepository.create(user);
@@ -69,44 +69,49 @@ public class IssueLabelRepositoryTest {
 	labelRepository.create(label);
 	lcount++;
     }
-	@Test
-	public void removeLabelForIssueTest() {
-		createIssueLabel();
-		issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
-		assert (issueLabelRepository.findIssueLabel(issue.getId(), "labelA") == null);
-	}
 
-	@Test
-	public void createTest() {
-		IssueLabel issueLabel = createIssueLabel();
-		assertEquals(issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId(),
-				issueLabel.getId());
-	}
+    @Test
+    public void removeLabelForIssueTest() {
+	createIssueLabel();
+	issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
+	assert (issueLabelRepository.findIssueLabel(issue.getId(), "labelA") == null);
+    }
 
-	@Test
-	public void deleteTest() {
-		IssueLabel issueLabel = createIssueLabel();
-		issueLabelRepository.delete(issueLabel.getId());
-		assert (issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()) == null);
-	}
+    @Test
+    public void createTest() {
+	IssueLabel issueLabel = createIssueLabel();
+	assertEquals(
+		issueLabelRepository.findIssueLabel(issue.getId(),
+			label.getLabelName()).getId(), issueLabel.getId());
+    }
 
-	@Test
-	public void getLabelsForIssueTest() {
-		for (int i = 0; i < 10; i++) {
-			createIssueLabel();
-		}
-		assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 11);
+    @Test
+    public void deleteTest() {
+	IssueLabel issueLabel = createIssueLabel();
+	issueLabelRepository.delete(issueLabel.getId());
+	assert (issueLabelRepository.findIssueLabel(issue.getId(),
+		label.getLabelName()) == null);
+    }
+
+    @Test
+    public void getLabelsForIssueTest() {
+	for (int i = 0; i < 10; i++) {
+	    createIssueLabel();
 	}
-	
-	@Test
-	public void addLabelForIssueTest() {
-		issueLabelRepository.addLabelForIssue(issue.getId(), label.getLabelName());
-		assert(issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 1);
-	}
-	
-	@Test
-	public void findIssueLabelTest() {
-		IssueLabel issueLabel = createIssueLabel();
-		assert(issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId() == issueLabel.getId());
+	assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 11);
+    }
+
+    @Test
+    public void addLabelForIssueTest() {
+	issueLabelRepository.addLabelForIssue(issue.getId(),
+		label.getLabelName());
+	assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 1);
+    }
+
+    @Test
+    public void findIssueLabelTest() {
+	IssueLabel issueLabel = createIssueLabel();
+	assert (issueLabelRepository.findIssueLabel(issue.getId(),
+		label.getLabelName()).getId() == issueLabel.getId());
     }
 }

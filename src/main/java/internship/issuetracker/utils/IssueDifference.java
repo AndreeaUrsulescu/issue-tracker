@@ -2,13 +2,11 @@ package internship.issuetracker.utils;
 
 import internship.issuetracker.entities.Issue;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Value;
 
 import difflib.DiffUtils;
 import difflib.Patch;
-
 
 public class IssueDifference {
 	
@@ -16,19 +14,22 @@ public class IssueDifference {
 	static private String stateMessage;
 		
     public static String generateDifference(Issue issue1, Issue issue2){
+    String msg="\n\nFor the issue :\n\n" +"http://localhost:8080/issue-tracker/issues/issue/"+issue1.getId();
+    
 	StringBuilder result = new StringBuilder();
 	String title = getStringDifferences(issue1.getTitle(), issue2.getTitle());
 	if (title != null){
-	    result.append("Title" + title + "\n");
+	    result.append("Title" + title + " from \""+ issue1.getTitle()+ "\" to \"" + issue2.getTitle() + "\" .\n");
 	}
 	String content = getStringDifferences(issue1.getContent(), issue2.getContent());
 	if (content != null){
-	    result.append("Content" + content + "\n");
+	    result.append("Content" + content + ".\n");
 	}
 	if (issue1.getState() != issue2.getState()){
-	    result.append(stateMessage);
+	    result.append(stateMessage+ issue1.getState() + " to " +  issue2.getState() + ".\n"););
 	}
-	return result.toString();
+	
+	return result.append(msg).toString();
     }
     
     private static String getStringDifferences(String original, String modified){
@@ -37,4 +38,7 @@ public class IssueDifference {
 	}
 	return null;
     }
+    
+   
+    
 }

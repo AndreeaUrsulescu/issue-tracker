@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/issues")
 public class IssueController {
+
 	@Autowired
 	private IssueService issueService;
 

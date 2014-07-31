@@ -1,5 +1,7 @@
 $(document).ready(function(){
     function updateIssue() {
+    	$("#send").prop('disabled',true);
+    	
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
     		'content' : $("#issueContent").val(),
@@ -66,7 +68,7 @@ $(document).ready(function(){
     		}
     	});
     	$(".editIssueContent").show();
-    	$(".viewIssue").hide();
+    	$(".editIssueView").hide();
     	$("#newComment").hide();
     	$("#label-editor").show();
     	
@@ -90,7 +92,7 @@ $(document).ready(function(){
 	    			if(rsp.response === "success"){
 			    		
 	    				//show label in UI
-	    				$("#active-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
+	    				$(".selected-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
 			    					+'<span class="glyphicon glyphicon-remove"></span>');
 	    				//add label to autocomplete
 	    				availableTags.push($("#tags").val().trim());
@@ -133,7 +135,7 @@ $(document).ready(function(){
     $(".viewIssueTitleEdit").focus();
     
     $("#edit").click(editIssue);
-    $("#send").click(updateIssue);
+    $("#send").unbind().click(updateIssue);
     $("#label-add-btn").unbind().click(addLabel);
     $(".label-remove").unbind().on("click", removeLabel);
 	
