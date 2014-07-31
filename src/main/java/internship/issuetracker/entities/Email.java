@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -23,15 +24,19 @@ public class Email implements Serializable{
 	private Long id;
 
 	@Column(name = "mailTo", nullable = false)
+	@Size(min = 1, max = 150)
 	private String to;
 
 	@Column(name = "mailFrom", nullable = false)
+	@Size(min = 1, max = 50)
 	private String from;
 
 	@Column(name = "content", nullable = false)
+	@Size(min = 1, max = 500)
 	private String content;
 
 	@Column(name = "subject", nullable = false)
+	@Size(min = 1, max = 50)
 	private String subject;
 
 	public Long getId() {
