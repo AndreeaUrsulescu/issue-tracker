@@ -1,7 +1,5 @@
 package internship.issuetracker.utils;
 
-import java.util.logging.Level;
-
 import internship.issuetracker.entities.Email;
 import internship.issuetracker.service.EmailService;
 

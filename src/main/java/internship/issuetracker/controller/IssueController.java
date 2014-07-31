@@ -5,7 +5,6 @@ import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
-import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.utils.ApplicationParameters;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
