@@ -2,10 +2,10 @@ package internship.issuetracker.utils;
 
 import internship.issuetracker.entities.Issue;
 
-
-		if (null != title) {
-			result.append("Title").append(title).append(" from \"").append(oldIssue.getTitle()).append("\" to \"").append(newIssue.getTitle()).append("\" .\n\n");
-		}
+//
+//		if (null != title) {
+//			result.append("Title").append(title).append(" from \"").append(oldIssue.getTitle()).append("\" to \"").append(newIssue.getTitle()).append("\" .\n\n");
+//		}
 
 public class IssueDifference {
     public static String generateDifference(Issue issue1, Issue issue2){
