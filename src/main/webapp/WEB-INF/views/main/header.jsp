@@ -14,11 +14,16 @@
 				<button class="btn btn-primary dropdown-toggle" type="button"
 					id="dropdownMenu1" data-toggle="dropdown">
 					<span class=" glyphicon glyphicon-user">
-				<!--	Hi <%=request.getUserPrincipal().getName()%>  -->
+				
 					<span style="font-family: 'Arial Black', Gadget, sans-serif;">My profile</span>
 					<span class="caret"></span>
+					</span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
+					<li role="presentation" class="dropdown-header">
+						<span class="glyphicon glyphicon-user"></span>
+							Hello <%=request.getUserPrincipal().getName()%>
+					</li>
 					<li role="presentation">
 						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
 					</li>

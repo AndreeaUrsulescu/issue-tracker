@@ -75,6 +75,10 @@ public class IssueServiceTest {
 		Mockito.verify(issueRepository).create(issue);
 	}
 	
+	
+
+	
+	
 	@Test
 	public void tesGetNrOftPages() {
 		Mockito.when(issueRepository.nrOfPages()).thenReturn(2);

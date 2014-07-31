@@ -135,8 +135,8 @@ $(document)
 						return true;
 					}
 					;
-
-					$("#createTitle").keyup(validateTitle);
+					
+					$("#createTitle").focusout(validateTitle);
 					$("#createIssueForm").submit(function(event) {
 
 						var isValid = validateTitle();
@@ -145,10 +145,10 @@ $(document)
 							event.preventDefault();
 						}
 					});
-					$("#username").keyup(validateUserName);
-					$("#emailAdress").keyup(validateEmail);
-					$("#password").keyup(validatePassword);
-					$("#passwordConfirm").keyup(validateConfirm);
+					$("#username").focusout(validateUserName);
+					$("#emailAdress").focusout(validateEmail);
+					$("#password").focusout(validatePassword);
+					$("#passwordConfirm").focusout(validateConfirm);
 					$("#registerForm").submit(
 							function(event) {
 
