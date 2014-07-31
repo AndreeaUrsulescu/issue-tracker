@@ -18,8 +18,17 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	</property>
 </bean>
  
-<bean id="mailMail" class="internship.issuetracker.utils.MailMail">
+<bean id="mailMail" class="internship.issuetracker.utils.MailMail" >
 	<property name="mailSender" ref="mailSender" />
 </bean>
+
+<bean id="mailHelper" class="internship.issuetracker.utils.MailHelper">
+  
+</bean>
+
+<bean id="thingyThread" class="java.lang.Thread" >
+  <constructor-arg ref="mailHelper"/>
+</bean>
+
  
 </beans>

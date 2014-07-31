@@ -1,7 +1,5 @@
 package internship.issuetracker.utils;
 
-import java.util.logging.Level;
-
 import internship.issuetracker.entities.Email;
 import internship.issuetracker.service.EmailService;
 
@@ -23,7 +21,7 @@ public class MailMail {
 
 		
 			SimpleMailMessage message = new SimpleMailMessage();
-			email.setFrom("Graduates@endava.com");
+			email.setFrom(ApplicationParameters.emailAdress);
 
 			message.setFrom(email.getFrom());
 			message.setTo(email.getTo());

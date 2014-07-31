@@ -13,7 +13,7 @@ import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.IssueDifference;
-import internship.issuetracker.utils.MailMail;
+import internship.issuetracker.utils.MailHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,9 +41,11 @@ public class IssueService {
 	@Autowired
 	private LabelService labelService;
 
+//	@Autowired
+//	private MailMail mail;
 	@Autowired
-	private MailMail mail;
-
+	private MailHelper mh;
+	
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
@@ -66,7 +68,10 @@ public class IssueService {
 			email.setTo(newIssue.getAssignee().getEmail());
 			email.setSubject("IssueTracker - UpdateIssue");
 			email.setContent(x);
-			mail.sendMail(email);
+			
+			mh.setUp(email);
+			new Thread(mh).start();
+			//mail.sendMail(email);
 			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
 		}
 
@@ -150,7 +155,10 @@ public class IssueService {
 		email.setTo(issue.getAssignee().getEmail());
 		email.setSubject("IssueTracker - AssigneIssue");
 		email.setContent(x);
-		mail.sendMail(email);
+		
+		mh.setUp(email);
+		new Thread(mh).start();
+		//mail.sendMail(email);
 		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
 
 		issueRepository.update(issue);

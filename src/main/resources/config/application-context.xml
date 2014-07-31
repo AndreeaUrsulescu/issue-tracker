@@ -9,7 +9,8 @@
 
 	<context:component-scan base-package="internship.issuetracker" />
 	<context:annotation-config />
-
+				
+				
 	<!-- Defines the entity manager factory -->
 	<bean id='entityManagerFactory'
 		class='org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean'>
@@ -18,8 +19,9 @@
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 	</bean>
 
-	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
-	
+	<bean
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
@@ -28,7 +30,8 @@
 			</list>
 		</property>
 	</bean>
-	
+
+
 	<bean id="messageSecuritySource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
@@ -37,6 +40,9 @@
 			</list>
 		</property>
 	</bean>
+
+
+
 
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
