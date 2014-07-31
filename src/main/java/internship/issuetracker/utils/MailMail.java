@@ -23,7 +23,7 @@ public class MailMail {
 
 		
 			SimpleMailMessage message = new SimpleMailMessage();
-			email.setFrom("Graduates@endava.com");
+			email.setFrom(ApplicationParameters.emailAdress);
 
 			message.setFrom(email.getFrom());
 			message.setTo(email.getTo());

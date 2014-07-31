@@ -1,6 +1,7 @@
 package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.utils.ApplicationParameters;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,12 +26,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class IssueRepository {
 	private static final Logger log = Logger.getLogger(UserRepository.class
 			.getName());
-
-	public static int itemsPerPage = 10;
-
+	
 	@PersistenceContext
 	private EntityManager em;
-
+	
+	private static int itemsPerPage=ApplicationParameters.itemsPerPage;
+		
 	public void create(Issue issue) {
 		em.persist(issue);
 	}
@@ -38,32 +39,7 @@ public class IssueRepository {
 	public void update(Issue issue) {
 		em.merge(issue);
 	}
-
-	static {
-		Properties p = new Properties();
-		try {
-			FileInputStream fis = new FileInputStream(
-					"src/main/resources/config/properties");
-			p.load(fis);
-			itemsPerPage = Integer.parseInt(p.getProperty("itemsPerPage"));
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-			System.out.println(itemsPerPage);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	public int numberOfIssues() {
 
 		return Integer.parseInt(em

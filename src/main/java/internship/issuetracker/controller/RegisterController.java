@@ -6,6 +6,7 @@ import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
+import internship.issuetracker.utils.ApplicationParameters;
 import internship.issuetracker.utils.MailMail;
 import internship.issuetracker.validator.ActivationValidator;
 import internship.issuetracker.validator.UserValidator;
@@ -43,15 +44,6 @@ public class RegisterController {
 	@Autowired
 	private ActivationService activationService;
 	
-	@Value("${ActivationEmailContentPart1}")
-	 private String ActivationEmailContentPart1;
-	
-	@Value("${ActivationEmailContentPart2}")
-	 private String ActivationEmailContentPart2;
-	
-	@Value("${ApplicationRoot}")
-	 private String applicationRoot;
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute(new User());
@@ -82,10 +74,10 @@ public class RegisterController {
 		}
 		
 		
-		String msg=ActivationEmailContentPart1+applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+ActivationEmailContentPart2;
+		String msg=ApplicationParameters.activationEmailMessagePart1+ApplicationParameters.applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+ApplicationParameters.activationEmailMessagepart2;
 		Email email=new Email();
 		email.setTo(activation.getEmail());
-		email.setSubject("Activation-issueTracker");	
+		email.setSubject(ApplicationParameters.activationEmailSubject);	
 		email.setContent(msg);
 		mail.sendMail(email);
 		activationService.addActivation(activation);

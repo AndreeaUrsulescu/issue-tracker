@@ -9,13 +9,9 @@ import difflib.DiffUtils;
 import difflib.Patch;
 
 public class IssueDifference {
-	
-	@Value("${StateHasBeenChangedMessage")
-	static private String stateMessage;
-		
+
     public static String generateDifference(Issue issue1, Issue issue2){
-    String msg="\n\nFor the issue :\n\n" +"http://localhost:8080/issue-tracker/issues/issue/"+issue1.getId();
-    
+    String msg=ApplicationParameters.changedIssueEmail+issue1.getId();
 	StringBuilder result = new StringBuilder();
 	String title = getStringDifferences(issue1.getTitle(), issue2.getTitle());
 	if (title != null){
@@ -26,7 +22,7 @@ public class IssueDifference {
 	    result.append("Content" + content + ".\n");
 	}
 	if (issue1.getState() != issue2.getState()){
-	    result.append(stateMessage+ issue1.getState() + " to " +  issue2.getState() + ".\n"););
+	    result.append(ApplicationParameters.stateHasBeenChangedMessage+ issue1.getState() + " to " +  issue2.getState() + ".\n");
 	}
 	
 	return result.append(msg).toString();
