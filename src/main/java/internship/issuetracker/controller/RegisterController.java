@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,8 +43,14 @@ public class RegisterController {
 	@Autowired
 	private ActivationService activationService;
 	
-	static private String msg1="To activate your account please click the link below \n\n";
-	static private String msg2="\n\n Thank you for your interest.";
+	@Value("${ActivationEmailContentPart1}")
+	 private String ActivationEmailContentPart1;
+	
+	@Value("${ActivationEmailContentPart2}")
+	 private String ActivationEmailContentPart2;
+	
+	@Value("${ApplicationRoot}")
+	 private String applicationRoot;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String registerPage(Model model) {
@@ -75,7 +82,7 @@ public class RegisterController {
 		}
 		
 		
-		String msg=msg1+"http://localhost:8080"+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
+		String msg=ActivationEmailContentPart1+applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+ActivationEmailContentPart2;
 		Email email=new Email();
 		email.setTo(activation.getEmail());
 		email.setSubject("Activation-issueTracker");	

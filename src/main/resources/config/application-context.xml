@@ -10,6 +10,12 @@
 	<context:component-scan base-package="internship.issuetracker" />
 	<context:annotation-config />
 
+						<!-- FOR PROPERTIES FILES -->
+	<context:property-placeholder location="**/properties"	order="1" ignore-unresolvable="true" />
+	<context:property-placeholder	location="**/otherProperties" order="2"	ignore-unresolvable="true" />
+					<!-- Add more properties files here using the model above -->
+
+
 	<!-- Defines the entity manager factory -->
 	<bean id='entityManagerFactory'
 		class='org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean'>
@@ -30,6 +36,7 @@
 		</property>
 	</bean>
 
+
 	<bean id="messageSecuritySource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
@@ -39,17 +46,9 @@
 		</property>
 	</bean>
 
-	<!--Bean to load properties file -->
-	<bean id="placeholderConfig"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:application.properties" />
-	</bean>
-	
-	<bean id="forTest"
-		class="internship.issuetracker.validator.ActivationValidator">
-			<property name="forTest" value="${admin.email}" />
-	</bean>
-	
+
+
+
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

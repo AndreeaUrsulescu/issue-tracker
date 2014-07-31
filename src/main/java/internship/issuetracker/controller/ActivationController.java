@@ -7,9 +7,13 @@ import internship.issuetracker.service.UserService;
 import internship.issuetracker.validator.ActivationValidator;
 
 import java.util.Map;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ActivationController {
 	@Autowired
 	ActivationService activationService;
-
-	@Autowired
-	ActivationValidator forTest;
 	
+	@Value("${itemsPerPage}")
+	String items;
+
+	@Value("${StateHasBeenChangedMessage}")
+	String state;
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping(value="/{hashKey}",method=RequestMethod.GET)
 	public String activate (@PathVariable String hashKey)
 	{
@@ -46,7 +52,20 @@ public class ActivationController {
 	@RequestMapping(value="/activationSuccess",method=RequestMethod.GET)
 	public String activationSuccess ()
 	{
-		System.out.println(forTest.getForTest());
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(items);
+		System.out.println(state);
 		return "activationSuccess";
 	}
 	

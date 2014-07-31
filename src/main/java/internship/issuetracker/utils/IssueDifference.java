@@ -4,11 +4,17 @@ import internship.issuetracker.entities.Issue;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import difflib.DiffUtils;
 import difflib.Patch;
 
 
 public class IssueDifference {
+	
+	@Value("${StateHasBeenChangedMessage")
+	static private String stateMessage;
+		
     public static String generateDifference(Issue issue1, Issue issue2){
 	StringBuilder result = new StringBuilder();
 	String title = getStringDifferences(issue1.getTitle(), issue2.getTitle());
@@ -20,7 +26,7 @@ public class IssueDifference {
 	    result.append("Content" + content + "\n");
 	}
 	if (issue1.getState() != issue2.getState()){
-	    result.append("State has been changed\n");
+	    result.append(stateMessage);
 	}
 	return result.toString();
     }
