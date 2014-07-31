@@ -5,11 +5,8 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/activation")
 public class ActivationController {
 	@Autowired
-	ActivationService activationService;
+	private ActivationService activationService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@RequestMapping(value="/{hashKey}",method=RequestMethod.GET)
 	public String activate (@PathVariable String hashKey)
