@@ -33,6 +33,7 @@
 				</ul>
 			</div>
 		</c:when>
+
 		<c:otherwise>
 			<div class="dropdown control-menu">
 				
@@ -48,6 +49,6 @@
 					</li>
 				</ul>
 			</div>
-		</c:otherwise>
+		</c:otherwise> 
 	</c:choose>
 </div>

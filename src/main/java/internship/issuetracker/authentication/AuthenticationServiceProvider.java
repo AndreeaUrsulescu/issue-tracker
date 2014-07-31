@@ -7,6 +7,7 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,6 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class AuthenticationServiceProvider implements AuthenticationProvider {
 
+	
 	@Autowired
 	private UserService userService;
 

@@ -183,5 +183,10 @@ $(document).ready(function(){
 	$("#tags").autocomplete({
 		source : availableTags
 	});
-    
+	$("#tags").autocomplete({
+	    select: function (a, b) {
+	        $(this).val(b.item.value);
+	        validateLabel();
+	    }
+	});
 });

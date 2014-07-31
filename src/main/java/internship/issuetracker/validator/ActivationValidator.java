@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 public class ActivationValidator implements Validator{
+	String forTest;
 	
 	@Autowired
 	private ActivationService activationService;
@@ -25,5 +26,8 @@ public class ActivationValidator implements Validator{
 		if(null!=activationService.getActivation(activation.getKeyHash()))
 			error.rejectValue("userName","username.exists");
 	}
-
+	public String getForTest()
+	{
+		return forTest;
+	}
 }

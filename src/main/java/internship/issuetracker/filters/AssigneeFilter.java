@@ -1,27 +1,26 @@
 package internship.issuetracker.filters;
-
 import internship.issuetracker.entities.Issue;
-
+import internship.issuetracker.entities.User;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class TitleFilter implements SearchFilterInt<Issue> {
+public class AssigneeFilter implements SearchFilterInt<Issue>{
 
-	private String title;
+	private String creator;
 
-	public TitleFilter(String title) {
-		this.title = title.toUpperCase();
+	public AssigneeFilter(String creator){
+		this.creator=creator.toUpperCase();
 	}
-
+	
 	@Override
 	public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
-		String pattern = "%" + title + "%";
-		Path<String> path = root.get("title");
-		Predicate builtPredicate = cb.like(cb.upper(path), pattern);
-		return builtPredicate;
-	}
-
+		Path<User> userPath = root.get("owner");
+		Path<String> userNamePath = userPath.get("userName");
+		return cb.like(cb.upper(userNamePath), "%" + creator + "%");
+	}	
 }
+
+	
