@@ -27,8 +27,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IssueService {
 
-	private static final Logger log = Logger.getLogger(IssueService.class
-			.getName());
+	private static final Logger log = Logger.getLogger(IssueService.class.getName());
 
 	@Autowired
 	private IssueRepository issueRepository;
@@ -50,30 +49,29 @@ public class IssueService {
 		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
 	}
 
-	public void updateIssue(Issue issuePojo) {
-		Issue issueToUpdate = issueRepository.findIssue(issuePojo.getId());
-		issueToUpdate.setContent(issuePojo.getContent());
-		issueToUpdate.setTitle(issuePojo.getTitle());
-		issueToUpdate.setLastDate(new Date());
-		issueToUpdate.setState(issuePojo.getState());
+	public void updateIssue(Issue issue) {
+		Issue newIssue = issueRepository.findIssue(issue.getId());
+		newIssue.setContent(issue.getContent());
+		newIssue.setTitle(issue.getTitle());
+		newIssue.setLastDate(new Date());
+		newIssue.setState(issue.getState());
 
-		if (null == issueToUpdate.getAssignee()) {
-			log.log(Level.INFO, "Issue " + issueToUpdate.getId()
-					+ " doesn't have an assignee , no email send.");
+		if (null == newIssue.getAssignee()) {
+			log.log(Level.INFO, "Issue " + newIssue.getId() + " doesn't have an assignee , no email send.");
+
 		} else {
 
-			String issueDifferences = IssueDifference.generateDifference(issueToUpdate,
-					issueRepository.findIssue(issuePojo.getId()));
+			String x = IssueDifference.generateDifference(newIssue, issueRepository.findIssue(issue.getId()));
 			Email email = new Email();
-			email.setTo(issueToUpdate.getAssignee().getEmail());
+			email.setTo(newIssue.getAssignee().getEmail());
 			email.setSubject("IssueTracker - UpdateIssue");
-			email.setContent(issueDifferences);
+			email.setContent(x);
 			mail.sendMail(email);
-			log.log(Level.INFO, "Email send to assignee of " + "issue "
-					+ issueToUpdate.getId());
+			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
 		}
-		this.issueRepository.update(issueToUpdate);
-		log.log(Level.INFO, "Issue " + issueToUpdate.getId() + " was updated");
+
+		this.issueRepository.update(newIssue);
+		log.log(Level.INFO, "Issue " + newIssue.getId() + " was updated");
 	}
 
 	public IssuePojo getIssue(Long id) {
@@ -82,27 +80,22 @@ public class IssueService {
 		Issue issue = this.issueRepository.findIssue(id);
 
 		for (Comment com : issue.getComments()) {
-			CommentPojo pojoComment = new CommentPojo(com.getOwner()
-					.getUserName(), com.getContent(), com.getCreationDate(),
-					com.getIssue().getId());
+			CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(), com.getContent(), com.getCreationDate(), com.getIssue().getId());
 			pojoComments.add(pojoComment);
 		}
 
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
-		if (labels.size() == 0){
+		if (labels.size() == 0)
 			log.log(Level.INFO, "There are no labels for issue " + id);
-		}
+
 		for (Label label : labels) {
-			LabelPojo pojoLabel = labelService
-					.convertLabelEntityToPojoLabel(label);
+			LabelPojo pojoLabel = labelService.convertLabelEntityToPojoLabel(label);
 			labelPojoList.add(pojoLabel);
 		}
 
-		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner()
-				.getUserName(), issue.getTitle(), issue.getContent(),
-				issue.getUpdateDate(), issue.getLastDate(), issue.getState(),
-				pojoComments, labelPojoList);
+		IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue
+				.getState(), pojoComments, labelPojoList);
 		if (issue.getAssignee() != null) {
 			issuePojo.setAssignee(issue.getAssignee().getUserName());
 		}
@@ -116,20 +109,16 @@ public class IssueService {
 
 	public List<IssuePojo> getOrderedIssues(int currentPage) {
 
-		List<Issue> issuesListEntity = issueRepository
-				.findOrderedIssues(currentPage);
+		List<Issue> issuesListEntity = issueRepository.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
-		if (issuesListEntity.size() == 0){
+		if (issuesListEntity.size() == 0)
 			log.log(Level.INFO, "There are no issues for current page");
-		}
+
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
-					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), issueEntity.getContent(),
-					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
-					issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
+					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 
 			if (issueEntity.getAssignee() != null) {
 				issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
@@ -152,14 +141,20 @@ public class IssueService {
 
 	public void assignUserToIssue(Long issueId, UserPojo assignedUser) {
 
-		User assignee = userRepository.findUserByUserName(assignedUser
-				.getUserName());
+		User assignee = userRepository.findUserByUserName(assignedUser.getUserName());
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
+
+		String x = "\n\nYou became the assignee for the issue :\n\n" + "http://localhost:8080/issue-tracker/issues/issue/" + issue.getId();
+		Email email = new Email();
+		email.setTo(issue.getAssignee().getEmail());
+		email.setSubject("IssueTracker - AssigneIssue");
+		email.setContent(x);
+		mail.sendMail(email);
+		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
+
 		issueRepository.update(issue);
-		log.log(Level.INFO,
-				"Issue " + issueId + " was assigned to "
-						+ assignee.getUserName());
+		log.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
 	}
 
 	public void unassignUserToIssue(Long issueId) {
@@ -168,11 +163,9 @@ public class IssueService {
 		if (issue.getAssignee() != null) {
 			issue.setAssignee(null);
 			issueRepository.update(issue);
-			log.log(Level.INFO, "Issue " + issueId
-					+ " is not assigned to anybody");
+			log.log(Level.INFO, "Issue " + issueId + " is not assigned to anybody");
 		} else
-			log.log(Level.INFO, "Issue " + issueId
-					+ " does not have an assignee");
+			log.log(Level.INFO, "Issue " + issueId + " does not have an assignee");
 	}
 
 }
