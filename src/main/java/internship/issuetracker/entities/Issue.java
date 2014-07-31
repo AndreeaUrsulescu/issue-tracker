@@ -55,7 +55,7 @@ public class Issue implements Serializable {
 	@Size(max = 1000)
 	private String content;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
 	@Column(name = "update_date", nullable = false)
 	private Date updateDate;
 
