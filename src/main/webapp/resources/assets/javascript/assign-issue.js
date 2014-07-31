@@ -50,10 +50,5 @@ $(document).ready(function(){
 	$("#assigneeInput").autocomplete({
 		source: userList
 	});
-	$("#assigneeInput").autocomplete({
-	    select: function (a, b) {
-	        $(this).val(b.item.value);
-	        validateInput();
-	    }
-	});
+	
 });

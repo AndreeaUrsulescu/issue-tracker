@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import internship.issuetracker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 
 public class AuthenticationSuccessHandler extends
 		SavedRequestAwareAuthenticationSuccessHandler {
-	
+
 	@Autowired
 	private UserService userService;
 

@@ -1,4 +1,4 @@
-package internship.issuetracker.filters;
+package filters;
 
 import internship.issuetracker.entities.Issue;
 
