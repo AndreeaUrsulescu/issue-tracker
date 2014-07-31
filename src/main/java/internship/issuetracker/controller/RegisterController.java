@@ -6,7 +6,7 @@ import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
-import internship.issuetracker.utils.MailMail;
+import internship.issuetracker.utils.MailHelper;
 import internship.issuetracker.validator.ActivationValidator;
 import internship.issuetracker.validator.UserValidator;
 
@@ -36,9 +36,10 @@ public class RegisterController {
 	@Autowired
 	private ActivationValidator activationValidator;
 	
+//	@Autowired
+//	private MailMail mail;
 	@Autowired
-	private MailMail mail;
-	
+	private MailHelper mh;
 	@Autowired
 	private ActivationService activationService;
 	
@@ -80,7 +81,10 @@ public class RegisterController {
 		email.setTo(activation.getEmail());
 		email.setSubject("Activation-issueTracker");	
 		email.setContent(msg);
-		mail.sendMail(email);
+		
+		mh.setUp(email);
+		new Thread(mh).start();
+		//mail.sendMail(email);		
 		activationService.addActivation(activation);
 		mv.setViewName("checkEmailPage");
 		return mv;

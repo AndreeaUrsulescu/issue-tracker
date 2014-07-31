@@ -12,15 +12,12 @@ public class TitleFilter implements SearchFilterInt<Issue> {
 
 	private String title;
 
-
 	public TitleFilter(String title) {
 		this.title = title.toUpperCase();
 	}
 
-
 	@Override
-	public Predicate buildPredicate(CriteriaQuery<Issue> cq,
-			CriteriaBuilder cb, Root<Issue> root) {
+	public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
 		String pattern = "%" + title + "%";
 		Path<String> path = root.get("title");
 		Predicate builtPredicate = cb.like(cb.upper(path), pattern);
