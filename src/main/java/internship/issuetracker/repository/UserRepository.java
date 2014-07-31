@@ -58,7 +58,7 @@ public class UserRepository {
 		try {
 			user = query.getSingleResult();
 		} catch (NoResultException ex) {
-			log.log( Level.FINE, "NoResultException in userRepository.findUserByUserName("+ userName +")" );
+			log.log( Level.FINE, "NoResultException in userRepository.findUserByUserName({0})", userName);
 		}
 
 		return user;
