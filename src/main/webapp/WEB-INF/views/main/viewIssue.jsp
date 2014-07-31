@@ -123,6 +123,7 @@
 		<div class="testing viewIssueState" id="Testing"></div>
 		<div class="closed viewIssueState" id="Closed"></div>
 	</div>
+	
 </div>
 
 
