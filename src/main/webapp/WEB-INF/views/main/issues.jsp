@@ -46,11 +46,11 @@
 					<option value="Closed">Closed</option>
 				</select> <label class="searchBy">Ordered by </label> <select
 					class="searchSelect" id="criteria">
-					<option value="Date" selected="selected">Date</option>
+					<option value="latestUpdateDate" selected="selected">Latest Update Date</option>
 					<option value="Title">Title</option>
 				</select> <select class="searchSelect" id="order">
-					<option value="Descending" selected="selected">Descending</option>
-					<option value="Ascending">Ascending</option>
+					<option value="Ascending" selected="selected">Ascending</option>
+					<option value="Descending">Descending</option>
 				</select> <a class="btn searchBtn btn-default" id="searchBtn" onclick="searchIssues();">
 					<span class="glyphicon glyphicon-search"></span> Search
 				</a>
