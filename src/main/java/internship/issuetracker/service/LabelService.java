@@ -30,7 +30,7 @@ public class LabelService {
 	private IssueLabelRepository issueLabelRepository;
 
 	LabelPojo convertLabelEntityToPojoLabel(Label label) {
-		LabelPojo pojo = new LabelPojo(label.getLabelName());
+		LabelPojo pojo = new LabelPojo(label.getId(),label.getLabelName());
 		return pojo;
 	}
 

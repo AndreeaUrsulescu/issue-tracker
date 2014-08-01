@@ -1082,3 +1082,7 @@ commentSectionTitlecommentSectionTitle
 	float: left;
 }
 /* multiple search end*/
+
+#chatRooms{
+	margin-right: 1%;
+}
