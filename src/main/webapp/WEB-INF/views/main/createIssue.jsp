@@ -2,6 +2,28 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    height : "180" ,
+    resize: false ,
+    plugins: [
+        "advlist autolink lists link charmap print preview hr pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime  nonbreaking save contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | link | forecolor backcolor emoticons",
+    
+     image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+});
+</script>
+
 <div class="container" script="$('#createTitle').text(''); $('#createContent').text('');">
 	<sf:form id="createIssueForm" class="form-horizontal" method="POST" action='createIssue'
 	modelAttribute="issue">
@@ -13,12 +35,12 @@
 		</div>
 		<div id="inIssue">
 
-			   <label for="inputEmail" class="comic" require="required">Title</label> <span style="margin-left:90px;" class="error"></span>
+			   <label for="inputEmail" class="comic" require="required">Title</label> <span id="createTitleSpan" style="margin-left:90px;" class="error"></span>
 			   <sf:input type="text" class="form-control" id="createTitle" path="title"/>
 			
 
 			   <label for="inputPassword" class="comic">Content</label>
-			   <sf:textarea  maxlength="1000" id="createContent" cols="62" rows="14" placeholder="Your message here.." path="content"></sf:textarea>
+			   <sf:textarea   id="createContent" cols="62" rows="14" placeholder="Your message here.." path="content"></sf:textarea>
 			   <label class="addedBy">Added by ${user}</label>
 		</div>
 	</div>

@@ -6,6 +6,27 @@
 <script
 	src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
 
+
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    height : "250" ,
+    plugins: [
+        "advlist autolink lists link charmap print preview pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime  nonbreaking save contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | link print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+});
+</script>
+
 <div class="container viewIssueContainer">
 
 	<div class="editIssueView row">
@@ -17,7 +38,8 @@
 			</div>
 
 			<div class="viewIssueContent">
-				<c:out value="${viewIssue.content}" />
+			${viewIssue.content}
+				
 			</div>
 			<button id="edit" type="button" class="btn btn-primary pull-right">Edit
 				Issue</button>
@@ -75,7 +97,7 @@
 
 	<div>
 		<label for="issueContent">Content</label>
-		<textarea id="issueContent" class="form-control viewIssueContentEdit"
+		<textarea name="content" id="issueContent" class="form-control viewIssueContentEdit"
 			rows="10" onkeyup="ValidateContent()"></textarea>
 		<span class="error"></span>
 	</div>
@@ -114,7 +136,7 @@
 	</div>
 	<div class="editIssueFooterButtons">
 		<button id="reset" type="button" class="btn btn-default">Cancel</button>
-		<button id="send" type="button" class="btn btn-primary" disabled>Save</button>
+		<button id="send" type="button" class="btn btn-primary" >Save</button>
 	</div>
 
 	<div id="issue-states">

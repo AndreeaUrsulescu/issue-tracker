@@ -15,15 +15,13 @@
 				<div class="form-group">
 
 					<textarea id="comment-area" class="form-control textArea" rows="7"
-						maxlength="500"></textarea>
+						></textarea>
 
 				</div>
 
 				<div class="commentFormButtons">
 
 					<span id="error-msg" class="error"></span>
-
-					<div id="counter" class="label label-default">500</div>
 
 					<div id="clear-btn" class="btn btn-default">Clear</div>
 
@@ -53,7 +51,7 @@
 						<div class="clear"></div>
 
 						<div class="commentContent">
-							<c:out value="${comment.getContent()}" />
+							${comment.getContent()}
 						</div>
 
 						<p class="text-right commentDate">

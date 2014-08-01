@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,7 +100,7 @@ public class IssueController {
 
 	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody @Valid Comment comment,
+	public Map<String, Object> addComment(@RequestBody  @Valid Comment comment,
 			@PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
 
@@ -111,7 +112,7 @@ public class IssueController {
 		CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
 
 		if (!bindingResult.hasErrors()) {
-		    commentService.addComment(commentPojo);
+			commentService.addComment(commentPojo);
 		    map.put("code", "success");
 		} else {
 		    map.put("code", "error");
@@ -141,4 +142,7 @@ public class IssueController {
 		}
 			return "issues";
 	}
+	
+	
+
 }

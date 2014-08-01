@@ -22,6 +22,8 @@
 		
 		<script src='resources/assets/scripts/jquery.js'></script>
 
+
+
 	</head>
 	<body>
 			<tiles:insertAttribute name="logo" />			

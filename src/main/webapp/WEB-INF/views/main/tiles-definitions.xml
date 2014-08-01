@@ -60,6 +60,12 @@
 		<put-attribute name="comments" value="/WEB-INF/views/main/comments.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
+	<!-- test rte -->
+	<definition name="rteTest" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/rteTest.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
 
 
 </tiles-definitions>

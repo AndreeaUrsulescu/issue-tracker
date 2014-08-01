@@ -1,10 +1,14 @@
 $(document).ready(function(){
+
     function updateIssue() {
-    	$("#send").prop('disabled',true);
+    	var valid = ValidateTitle();
+    	
+    	if(valid){
+    	$("#send").prop('disabled',false);
     	
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
-    		'content' : $("#issueContent").val(),
+    		'content' : tinyMCE.get('issueContent').getContent(),
     		'title' : $("#issueTitle").val(),
     		'state' : $('.current').attr("id")
     	};
@@ -38,7 +42,7 @@ $(document).ready(function(){
     		}
     	});
     }
-
+    }
     function editIssue() {
     	
     	var labelUrl = "../labels";
@@ -60,7 +64,8 @@ $(document).ready(function(){
     		url: url,
     		success: function(rsp) {
     			$("#issueTitle").val(rsp.issue.title);
-    			$("#issueContent").val(rsp.issue.content);
+//    			$("#issueContent").val(rsp.issue.content);
+    			tinyMCE.get('issueContent').setContent(rsp.issue.content);
 				var id ='#'+rsp.issue.state; 
 				
 				$(id).addClass('current');
@@ -189,4 +194,6 @@ $(document).ready(function(){
 	        validateLabel();
 	    }
 	});
+	
+	
 });

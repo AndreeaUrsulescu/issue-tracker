@@ -118,18 +118,14 @@ $(document)
 						return true;
 					}
 					;
-
+					$("#createTitleSpan").focus();
 					// Pentru validarea titlului la createIssue
 					function validateTitle() {
-						$("#createTitle").parent().find("span").text("");
+						$("#createTitleSpan").text("");
 						var value = $("#createTitle").val().trim();
 						if ((value.length == 0) || (value.length < 5)
 								|| (value.length > 50)) {
-							$("#createTitle")
-									.parent()
-									.find("span")
-									.text(
-											"A title between 5 and 50 characters is required");
+							$("#createTitleSpan").text("A title between 5 and 50 characters is required");
 							return false;
 						}
 						return true;

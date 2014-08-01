@@ -35,6 +35,11 @@
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/bootstrap-tooltip.js"></script>
 	    
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/assign-issue.js"></script>
+	
+		<!-- rte -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/tinymce/tinymce.min.js"></script>
+	
+	
 	</head>
 	<body>
 			<tiles:insertAttribute name="header" />
