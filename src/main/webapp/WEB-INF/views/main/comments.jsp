@@ -3,69 +3,69 @@
 
 
 <div class="container commentsContainer">
-
-	<h1 class="commentSectionTitle">Comment section</h1>
-
-	<div class="commentSection">
-
-		<div id="newComment">
-		
-			<form id="comments" role="form">
-
-				<div class="form-group">
-
-					<textarea id="comment-area" class="form-control textArea" rows="7"
-						maxlength="500"></textarea>
-
-				</div>
-
-				<div class="commentFormButtons">
-
-					<span id="error-msg" class="error"></span>
-
-					<div id="counter" class="label label-default">500</div>
-
-					<div id="clear-btn" class="btn btn-default">Clear</div>
-
-					<div id="send-btn" class="btn btn-primary">Save</div>
-
-				</div>
-
-			</form>
+	<div class="col-xs-8 commentsContainerCol">
+		<h1 class="commentSectionTitle">Comment section</h1>
+	
+		<div class="commentSection">
+	
+			<div id="newComment">
 			
-		</div>
-
-		<br>
-
-		<div class="commentView">
-
-			<!-- Comment template should receive data from the DB. Pending, it seems. -->
-
-			<c:forEach var="comment" items="${viewIssue.getComments()}">
-				<div class="commentTemplate">
-
-					<div class="commentBox">
-
-						<strong class="commentUser text-left"> <c:out
-								value="${comment.getOwner()}" />
-						</strong>
-
-						<div class="clear"></div>
-
-						<div class="commentContent">
-							<c:out value="${comment.getContent()}" />
-						</div>
-
-						<p class="text-right commentDate">
-							<small> ${comment.getCreationDate()}</small>
-						</p>
-
+				<form id="comments" role="form">
+	
+					<div class="form-group">
+	
+						<textarea id="comment-area" class="form-control textArea" rows="7"
+							maxlength="500"></textarea>
+	
 					</div>
-
-				</div>
-			</c:forEach>
+	
+					<div class="commentFormButtons">
+	
+						<span id="error-msg" class="error"></span>
+	
+						<div id="counter" class="label label-default">500</div>
+	
+						<div id="clear-btn" class="btn btn-default">Clear</div>
+	
+						<div id="send-btn" class="btn btn-primary">Save</div>
+	
+					</div>
+	
+				</form>
+				
+			</div>
+	
+			<br>
+	
+			<div class="commentView">
+	
+				<!-- Comment template should receive data from the DB. Pending, it seems. -->
+	
+				<c:forEach var="comment" items="${viewIssue.getComments()}">
+					<div class="commentTemplate">
+	
+						<div class="commentBox">
+	
+							<strong class="commentUser text-left"> <c:out
+									value="${comment.getOwner()}" />
+							</strong>
+	
+							<div class="clear"></div>
+	
+							<div class="commentContent">
+								<c:out value="${comment.getContent()}" />
+							</div>
+	
+							<p class="text-right commentDate">
+								<small> ${comment.getCreationDate()}</small>
+							</p>
+	
+						</div>
+	
+					</div>
+				</c:forEach>
+			</div>
+	
 		</div>
-
 	</div>
-
 </div>

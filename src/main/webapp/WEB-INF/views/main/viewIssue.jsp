@@ -65,7 +65,8 @@
 	</div>
 </div>
 
-<div class="editIssueContent">
+<div class="editIssueContent container">
+	<div class="col-xs-8">
 	<div>
 		<label for="issueTitle">Title</label> <input id="issueTitle"
 			type="text" class="form-control viewIssueTitleEdit"
@@ -112,6 +113,7 @@
 			</c:choose>
 		</div>
 	</div>
+	
 	<div class="editIssueFooterButtons">
 		<button id="reset" type="button" class="btn btn-default">Cancel</button>
 		<button id="send" type="button" class="btn btn-primary" disabled>Save</button>
@@ -123,7 +125,7 @@
 		<div class="testing viewIssueState" id="Testing"></div>
 		<div class="closed viewIssueState" id="Closed"></div>
 	</div>
-	
+	</div>
 </div>
 
 
