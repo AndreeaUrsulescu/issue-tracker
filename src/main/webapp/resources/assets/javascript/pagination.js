@@ -20,6 +20,21 @@ window.onload = function () {
  	 }
 };
 
+	//TODO: work here
+	function log( message ) {
+	   console.log(message);
+	   }
+	$( "#searchByLabel" ).autocomplete({
+		source: window.location.origin + window.location.pathname + "/labels",
+		minLength: 2,
+		select: function( ui ) {
+		log( ui.item ?
+		"Selected: " + ui.item.value + " aka " + ui.item.id :
+		"Nothing selected, input was " + this.value );
+		}
+	});
+
+var availableTags = [];
 var count  = 1;
 
 function issuePagination(type,issuesListSize,issuesPerPage) {
@@ -89,6 +104,7 @@ function searchIssues(){
     		state : $("#searchByState").val().trim(),
     		creator : $("#searchByCreator").val().trim(),
     		assignee : $("#searchByAssignee").val().trim(),
+			//TODO: find the index of the label and send it
     		label : $("#searchByLabel").val().trim(),
     			
     		pageNumber : 1,

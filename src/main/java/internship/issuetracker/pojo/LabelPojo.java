@@ -2,14 +2,16 @@ package internship.issuetracker.pojo;
 
 public class LabelPojo {
 	
+	Long id;
 	String labelName;
 	
 	public LabelPojo(){
 	    
 	}
 	
-	public LabelPojo(String labelName) {
+	public LabelPojo(Long id, String labelName) {
 	    this.labelName = labelName;
+		this.id = id;
 	}
 
 	public String getLabelName() {
@@ -18,5 +20,13 @@ public class LabelPojo {
 	
 	public void setLabelName(String labelName) {
 		this.labelName = labelName;
+	}
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

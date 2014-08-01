@@ -1,15 +1,16 @@
 package internship.issuetracker.repository;
 
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.filters.AssigneeFilter;
 import internship.issuetracker.filters.ContentFilter;
+import internship.issuetracker.filters.CreatorFilter;
+import internship.issuetracker.filters.LabelFilter;
 import internship.issuetracker.filters.SearchFilterInt;
 import internship.issuetracker.filters.StateFilter;
 import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.MultipleSearchParameter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,7 +18,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -89,6 +89,18 @@ public class SearchRepository {
 		}
 		if ( null != parameters.getState()){
 			SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
+		if ( null != parameters.getAssignee()){
+			SearchFilterInt<Issue> filter = new AssigneeFilter(parameters.getAssignee());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
+		if ( null != parameters.getCreator()){
+			SearchFilterInt<Issue> filter = new CreatorFilter(parameters.getCreator());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
+		if (null != parameters.getLabel()){
+			SearchFilterInt<Issue> filter = new LabelFilter(parameters.getLabel());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
 		}
 		

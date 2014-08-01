@@ -1082,3 +1082,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	float: left;
 }
 /* multiple search end*/
+
+#chatRooms{
+	margin-right: 1%;
+}

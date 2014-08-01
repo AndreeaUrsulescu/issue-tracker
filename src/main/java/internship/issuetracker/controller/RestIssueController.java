@@ -1,5 +1,6 @@
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.MultipleSearchParameter;
@@ -9,11 +10,9 @@ import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.LabelService;
 import internship.issuetracker.service.SearchService;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,40 +45,15 @@ public class RestIssueController {
 		return issuesListPojo;
 	}
 
-	@RequestMapping(value = "/searchBy", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> search(
-			@ModelAttribute SearchParameter searchParameters) {
-
-		String searchCriteria = searchParameters.getSearchCriteria();
-
-		List<IssuePojo> resultList = null;
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		if (searchCriteria.equals("state")) {
-			resultList = searchService.findOrderedIssues(searchParameters);
-			map.put("listLength",
-					searchService.numberOfIssues(searchParameters));
-		}
-
-		else {
-			resultList = searchService.findOrderedIssues(searchParameters);
-			map.put("listLength",
-					searchService.numberOfIssues(searchParameters));
-		}
-
-		map.put("issuesList", resultList);
-		map.put("issuesPerPage", SearchRepository.itemsPerPage);
-
-		return map;
-	}
-
 	@RequestMapping(value = "/labels", method = RequestMethod.GET)
 	@ResponseBody
-	public List<LabelPojo> getLabels() {
+	public Map<Long,String> getLabels() {
 
-		List<LabelPojo> issuesListPojo = labelService.getAllLabels();
-		return issuesListPojo;
+		Map<Long,String> labels = new HashMap<>();
+		for(LabelPojo label: labelService.getAllLabels()){
+			labels.put(label.getId(), label.getLabelName());
+		}
+		return labels;
 	}
 
 	@RequestMapping(value = "/issue/{issueId}/addLabel", method = RequestMethod.POST)

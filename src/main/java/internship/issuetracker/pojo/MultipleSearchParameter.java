@@ -9,7 +9,7 @@ public class MultipleSearchParameter {
 	private State state;
 	private String creator;
 	private String assignee;
-	private String label;
+	private Long label;
 	
 	private int pageNumber;
 	private String sortCriteria ;
@@ -46,10 +46,10 @@ public class MultipleSearchParameter {
 	public void setAssignee(String assignee) {
 		this.assignee = assignee;
 	}
-	public String getLabel() {
+	public Long getLabel() {
 		return label;
 	}
-	public void setLabel(String label) {
+	public void setLabel(Long label) {
 		this.label = label;
 	}
 	public int getPageNumber() {
