@@ -1,19 +1,22 @@
 package internship.issuetracker.service;
 
-import internship.issuetracker.filters.CreatorFilter;
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.filters.ContentFilter;
 import internship.issuetracker.filters.AssigneeFilter;
+import internship.issuetracker.filters.ContentFilter;
+import internship.issuetracker.filters.CreatorFilter;
 import internship.issuetracker.filters.SearchFilterInt;
 import internship.issuetracker.filters.StateFilter;
 import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.pojo.MultipleSearchParameter;
 import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.SearchRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +84,24 @@ public class SearchService {
 		}
 		
 		return entityToPojo(issuesListEntity);
+	}
+	
+
+	public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
+
+		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
+
+		if (issuesListEntity.size() == 0)
+			log.log(Level.INFO,
+					"There are no issues for the given search criteria");
+
+		return entityToPojo(issuesListEntity);
+	}
+	
+	public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
+
+		int listSize = searchRepository.numberOfIssuesMultipleSearch(searchParameters);
+		return listSize;
 	}
 
 }
