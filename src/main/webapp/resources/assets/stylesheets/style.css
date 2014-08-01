@@ -1050,3 +1050,35 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-top: 10%;
 }
 
+/* multiple search start*/
+#filtering {
+	margin-left: 20%;
+	margin-right: 20%;
+	margin-bottom: 5%;
+}
+
+.selectOption, .textBox {
+	border: 1px solid rgb(231,231,231);
+	border-radius: 5px;
+	color: rgb(100,100,100);
+}
+
+#slideFilter {
+	width: 100%;
+	color: white;
+	border: 1px solid rgb(231,231,231);
+	border-radius: 10px;
+	height: 33px;
+	background: radial-gradient(#2b669a, white);
+	margin-top: 10px;
+}
+
+#filterBox {
+	margin-top: 5%;
+	
+}
+
+.meniuBtn {
+	float: left;
+}
+/* multiple search end*/

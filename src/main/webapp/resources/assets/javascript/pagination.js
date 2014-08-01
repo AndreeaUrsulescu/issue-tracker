@@ -83,57 +83,21 @@ function searchIssues(){
 	
      countOnSort = 1 ; 
 
-     var searchCriteria = $("#selectS").val().trim(); 
-     var input ; 
-     var state ; 
-     var filterData ;
-     
-     if (searchCriteria == "state") {
-    	 
-      state = $("#selectT").val();
-      filterData = {
-    		 searchCriteria : searchCriteria ,
-    		 state : state,
-    		 pageNumber : 1,
-    		 sortCriteria : $("#criteria").val().trim(),
-    		 sortType : $("#order").val().trim()
-      	};
-     }
-     else {
-    	 input = $("#searchField").val();
-    	 filterData = {
-        		 searchCriteria : searchCriteria ,
-        		 input : input,
-        		 pageNumber : 1,
-        		 sortCriteria : $("#criteria").val().trim(),
-        		 sortType : $("#order").val().trim()
+     var filterData = {
+    		title : $("#searchByTitle").val().trim(),
+    		content : $("#searchByContent").val().trim(),
+    		state : $("#searchByState").val().trim(),
+    		creator : $("#searchByCreator").val().trim(),
+    		assignee : $("#searchByAssignee").val().trim(),
+    		label : $("#searchByLabel").val().trim(),
+    			
+    		pageNumber : 1,
+    		sortCriteria : $("#orderBy").val().trim(),
+    		sortType : $("#orderType").val().trim()
           	};
-     }
-     
-     if (searchCriteria == "state") {
-    	 
-      state = $("#selectT").val().trim();
-      filterData = {
-    		 searchCriteria : searchCriteria ,
-    		 state : state,
-    		 pageNumber : 1,
-    		 sortCriteria : $("#criteria").val().trim(),
-    		 sortType : $("#order").val().trim()
-      	};
-     }
-     else {
-    	 input = $("#searchField").val().trim();
-    	 filterData = {
-        		 searchCriteria : searchCriteria ,
-        		 input : input,
-        		 pageNumber : 1,
-        		 sortCriteria : $("#criteria").val().trim(),
-        		 sortType : $("#order").val().trim()
-          	};
-     }
      
      $.ajax({
- 		url : "issues/searchBy" , // put some URL
+ 		url : "issues/multipleSearchBy" , // put some URL
  		type : "GET",
         data : filterData, 
  		beforeSend : function(xhr) {
@@ -158,8 +122,7 @@ function searchIssues(){
  		 	    document.getElementById("pageNumber").innerHTML = 0;
  		 	 }
  		    
- 	        document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
- 		     
+ 	         document.getElementById("total").innerHTML = "/"+Math.ceil((response.listLength/response.issuesPerPage));
  		     parsingAjaxResponse(response.issuesList);
  			}
  	});
@@ -221,35 +184,21 @@ function sortIssuesPagination(type,issuesListSize,issuesPerPage){
 
 function ajaxForSearchPagination(page){
 	
-	var searchCriteria = $("#selectS").val(); 
-    var input ;  
-    var state ; 
-    var filterData ;
-    
-    if (searchCriteria == "state") {
-   	 
-        state = $("#selectT").val();
-        filterData = {
-      		 searchCriteria : searchCriteria ,
-      		 state : state,
-      		 pageNumber : page,
-      		 sortCriteria : $("#criteria").text(),
-      		 sortType : $("#order").text()
-        	};
-       }
-       else {
-      	 input = $("#searchField").val();
-      	 filterData = {
-          		 searchCriteria : searchCriteria ,
-          		 input : input,
-          		 pageNumber : page,
-          		 sortCriteria : $("#criteria").text(),
-          		 sortType : $("#order").text()
-            	};
-       }
+	var filterData = {
+	    		title : $("#searchByTitle").val().trim(),
+	    		content : $("#searchByContent").val().trim(),
+	    		state : $("#searchByState").val().trim(),
+	    		creator : $("#searchByCreator").val().trim(),
+	    		assignee : $("#searchByAssignee").val().trim(),
+	    		label : $("#searchByLabel").val().trim(),
+	    			
+	    		pageNumber : page,
+	    		sortCriteria : $("#orderBy").val().trim(),
+	    		sortType : $("#orderType").val().trim()
+	          	};
      
 	$.ajax({
- 		url : "issues/searchBy" , 
+ 		url : "issues/multipleSearchBy" , 
  		type : "GET",
         data : filterData, 
  		beforeSend : function(xhr) {
@@ -383,3 +332,8 @@ function parsingAjaxResponse(response){
          }
 }
 
+function slideFilter() {
+	
+	$( "#filterBox" ).slideToggle( "slow", function() {
+	 });
+}
