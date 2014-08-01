@@ -43,6 +43,9 @@ public class SearchService {
 					issueEntity.getTitle(), issueEntity.getContent(),
 					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
 					issueEntity.getState());
+			if(null != issueEntity.getAssignee()){
+			     issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
+			}
 			issuesListPojo.add(index, issuePojo);
 
 		}
