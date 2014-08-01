@@ -46,7 +46,7 @@ public class Comment implements Serializable {
 	@JoinColumn(name = "id_issue", nullable = false)
 	private Issue issue;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date", nullable = false)
 	private Date creationDate;
 
