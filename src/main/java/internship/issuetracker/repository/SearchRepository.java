@@ -141,6 +141,18 @@ public class SearchRepository {
 			SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
 		}
+		if ( null != parameters.getAssignee()){
+			SearchFilterInt<Issue> filter = new AssigneeFilter(parameters.getAssignee());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
+		if ( null != parameters.getCreator()){
+			SearchFilterInt<Issue> filter = new CreatorFilter(parameters.getCreator());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
+		if (null != parameters.getLabel()){
+			SearchFilterInt<Issue> filter = new LabelFilter(parameters.getLabel());
+			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+		}
 		
 		Predicate[] predicates = new Predicate[predicateList.size()];
 		predicates = predicateList.toArray(predicates);
