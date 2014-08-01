@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<div>
+<div style="">
 	<a style="margin-bottom: 100px;" href="${pageContext.request.contextPath}/issues"><img
 		src="${pageContext.request.contextPath}/resources/assets/images/banner.png" /></a>
 	
@@ -15,14 +15,13 @@
 					id="dropdownMenu1" data-toggle="dropdown">
 					<span class=" glyphicon glyphicon-tasks">
 				
-					<span style="font-family: 'Arial Black', Gadget, sans-serif;">My profile</span>
+					<span  style="font-family:Arial,Helvetica,sans-serif;">My profile</span>
 					<span class="caret"></span>
 					</span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
-					<li role="presentation" class="dropdown-header">
-						<span class="glyphicon glyphicon-user"></span>&nbsp;
-							Hello <%=request.getUserPrincipal().getName()%>
+					<li role="presentation" class="dropdown-header">&nbsp;
+							Hello <%=request.getUserPrincipal().getName()%>!
 					</li>
 					<li role="presentation">
 						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Home</a>
@@ -37,16 +36,16 @@
 				<button class="btn btn-primary dropdown-toggle" type="button"
 					id="dropdownMenu1" data-toggle="dropdown">
 					<span class=" glyphicon glyphicon-user">
-					<span style="font-family: 'Arial Black', Gadget, sans-serif;">Chat rooms</span>
+					<span  style="font-family:Arial,Helvetica,sans-serif;">Chat rooms</span>
 					<span class="caret"></span>
 					</span>
 				</button>
-				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
+				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1" >
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues"><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;All issues</a>
+						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues/issuesChatRoom" ><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;All issues</a>
 					</li>
 					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Off-topic</a>
+						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues/off-topicChatRoom"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Off-topic</a>
 					</li>
 				</ul>
 			</div>

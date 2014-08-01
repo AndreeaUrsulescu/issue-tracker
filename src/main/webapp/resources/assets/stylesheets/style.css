@@ -1086,3 +1086,8 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 #chatRooms{
 	margin-right: 1%;
 }
+
+.addMessage{
+	margin: 0 auto;
+	width: 100%;
+}

@@ -3,26 +3,27 @@ package internship.issuetracker.controller;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.pojo.ChatIssuePojo;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
+import internship.issuetracker.service.ChatIssuesService;
 import internship.issuetracker.service.CommentService;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.utils.ApplicationParameters;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/issues")
 public class IssueController {
 
+	@Autowired
+	private ChatIssuesService chatService;
 	
 	@Autowired
 	private IssueService issueService;
@@ -60,6 +63,15 @@ public class IssueController {
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
+	
+	
+	
+	
+	@RequestMapping(value = {"/issuesChatRoom" })
+	public String viewIssuesRoom() {
+		//model.addAttribute("user", new User());
+		return "chatRoomIssues";
+	}	
 	
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
 	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
@@ -97,6 +109,41 @@ public class IssueController {
 		return map;
 	}
 
+	@RequestMapping(value = {"/issuesChatRoom"} , method = RequestMethod.GET)
+	public String viewIssuesRoom(Model model,HttpServletRequest request) {
+		List<ChatIssuePojo> chats=chatService.getMessages();
+		model.addAttribute("chats",chats);
+		model.addAttribute("userName", ((User)request.getSession().getAttribute("user")).getUserName());
+		return "chatRoomIssues";
+	}	
+	
+	@RequestMapping(value = {"/off-topicChatRoom"} , method = RequestMethod.GET)
+	public String viewTopicsRoom(Model model,HttpServletRequest request) {
+		List<ChatIssuePojo> chats=chatService.getMessages();
+		model.addAttribute("chats",chats);
+		model.addAttribute("userName",((User)request.getSession().getAttribute("user")).getUserName());
+		return "chatRoomOff";
+	}	
+	
+	@RequestMapping(value={"/off-topicChatRoom"},method=RequestMethod.POST)
+	@ResponseBody
+		public Map<String,Object> addMessage(@RequestBody @Valid ChatIssuePojo chat, BindingResult bindingResult, HttpServletRequest request)
+		{
+			System.out.println("mesaj");
+			Map<String,Object> map= new HashMap<>();
+			Date currentDate=new Date();
+			ChatIssuePojo chatP=new ChatIssuePojo(((User) request.getSession().getAttribute("user")).getUserName(),chat.getContent(),chat.getLink(),currentDate,chat.getRange());
+			if(bindingResult.hasErrors())
+			{
+				for (ObjectError err: bindingResult.getAllErrors()){
+					System.out.println(err.getCode());
+				}
+			} else {
+				chatService.addMessage(chatP);;
+			}
+			map.put("code", "success");
+			return map;
+		}
 	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addComment(@RequestBody @Valid Comment comment,

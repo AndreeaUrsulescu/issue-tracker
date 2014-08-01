@@ -61,5 +61,19 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 
+	<definition name="chatRoomIssues" extends="mainLayout">
+
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/chatRoomIssues.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+
+	</definition>
+	<definition name="chatRoomOff" extends="mainLayout">
+
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/chatRoomOff.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+
+	</definition>
 
 </tiles-definitions>
