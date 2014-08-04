@@ -18,17 +18,17 @@ function ValidateTitle() {
 
 	var save = $("#send");
 	
-	save.prop('disabled',false);
+	save.prop('disabled',false); $("#send").addClass("validB");
 	if ((title.val().trim().length == 0)) {
 		span.text("Your title cannot be empty");
-		save.prop('disabled',true);
+		save.prop('disabled',true); $("#send").removeClass("validB");
 		return false;
 	}
 
 
 	if ((title.val().trim().length < 5 || title.val().length > 50)) {
 		span.text("Your title has to be between 5 and 50 characters");
-		save.prop('disabled',true);
+		save.prop('disabled',true); $("#send").removeClass("validB");
 		return false;
 	}
 	
@@ -42,7 +42,7 @@ function ValidateContent() {
 	var save = $("#send");	
 	
 	if($(".editIssueContent").is(":visible")){
-		save.prop('disabled',false);
+		save.prop('disabled',false); $("#send").addClass("validB");
 	}
 	return true;
 };
@@ -71,6 +71,8 @@ function assignUser(){
  			document.getElementById("assigneeBr").style.display = "none";
  		}
  	});
+	
+	$("#send").prop('disabled',false);
 }
 
 function unassignUser(){
@@ -94,4 +96,6 @@ function unassignUser(){
  			}
  		}
  	});
+	
+	$("#send").prop('disabled',false);
 }
