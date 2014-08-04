@@ -37,6 +37,15 @@ function ValidateTitle() {
 	return true;
 };
 
+function ValidateContent() {
+	
+	var save = $("#send");	
+	
+	if($(".editIssueContent").is(":visible")){
+		save.prop('disabled',false);
+	}
+	return true;
+};
 
 function assignUser(){
 	var filterData;

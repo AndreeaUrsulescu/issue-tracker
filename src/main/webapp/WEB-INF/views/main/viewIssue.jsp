@@ -3,8 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<script
-	src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/resources/assets/javascript/updateIssue-validation.js"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/tinymce/tinymce.min.js"></script>
 
 
 <script type="text/javascript">
@@ -24,7 +25,19 @@ tinymce.init({
         {title: 'Test template 1', content: 'Test 1'},
         {title: 'Test template 2', content: 'Test 2'}
     ]
+ 
 });
+
+function myListener(){    
+	
+	tinymce.on('AddEditor', function(e) 
+			{ e.editor.on('change', function (e) {ValidateContent();}); });
+	
+    return;
+}
+myListener();
+
+
 </script>
 <div class="container viewIssueContainer">
 
@@ -38,7 +51,7 @@ tinymce.init({
 
 			<div class="viewIssueContent">
 			${viewIssue.content}
-				
+
 			</div>
 			<button id="edit" type="button" class="btn btn-primary pull-right">Edit
 				Issue</button>
@@ -88,14 +101,14 @@ tinymce.init({
 
 <div class="editIssueContent container">
 	<div class="col-xs-8">
-		
+
 		<div>
 			<label for="issueTitle">Title</label> <input id="issueTitle"
 				type="text" class="form-control viewIssueTitleEdit"
 				onkeyup="ValidateTitle()" placeholder="Title"> <span
 				class="error"></span>
 		</div>
-	
+
 		<div>
 			<label for="issueContent">Content</label>
 			<textarea name="content" id="issueContent" class="form-control viewIssueContentEdit"
@@ -105,9 +118,9 @@ tinymce.init({
 		<div class="editIssueFooterAndStates">
 			<div class="editIssueFooterButtons">
 				<button id="reset" type="button" class="btn btn-default">Cancel</button>
-				<button id="send" type="button" class="btn btn-primary" >Save</button>
+				<button id="send" type="button" class="btn btn-primary" disabled="disabled">Save</button>
 			</div>
-		
+
 			<div id="issue-states">
 				<span class="issue-label">Change state:</span>
 				<div class="opened viewIssueState" id="Opened"></div>
@@ -121,7 +134,7 @@ tinymce.init({
 				<span class="error"></span>
 				<br> 
 				<label for="assigneeInput">Assignee:</label>
-				
+
 				<c:choose>
 					<c:when test="${empty viewIssue.assignee}">
 						<br id="assigneeBr" >
@@ -130,7 +143,7 @@ tinymce.init({
 							style="display: none;"><span class="glyphicon glyphicon-remove"></span></span>
 							<input type="text" class="form-control" id="assigneeInput"
 							placeholder="Choose an user">
-							
+
 						<button class="btn btn-warning" onclick="assignUser();"
 							id="assignButton">Assign</button>
 					</c:when>
@@ -141,17 +154,14 @@ tinymce.init({
 							><span class="glyphicon glyphicon-remove"></span></span>
 							<input type="text" class="form-control" id="assigneeInput" style="display:none;"
 							placeholder="Choose an user">
-							
+
 						<button class="btn btn-warning" onclick="assignUser();"
 							id="assignButton" style="display:none;">Assign</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
-		
-	
+
+
 	</div>
 </div>
-
-
-
