@@ -9,6 +9,8 @@ import internship.issuetracker.filters.SearchFilterInt;
 import internship.issuetracker.filters.StateFilter;
 import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.MultipleSearchParameter;
+import internship.issuetracker.utils.ApplicationParameters;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SearchRepository {
 
-	public static int itemsPerPage = 10;
+	public static int itemsPerPage = ApplicationParameters.itemsPerPage;
 
 	@PersistenceContext
 	private EntityManager em;
