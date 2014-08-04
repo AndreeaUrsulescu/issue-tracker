@@ -1,10 +1,11 @@
 $(document).ready(function(){
 
+
     function updateIssue() {
     	var valid = ValidateTitle();
     	
     	if(valid){
-    	$("#send").prop('disabled',false);
+    	$("#send").prop('disabled',false); $("#send").addClass("validB");
     	
     	// se completeaza cu datele din formular (content, title, state)
     	var issue = {
@@ -80,6 +81,7 @@ $(document).ready(function(){
     }
     
     function addLabel(){
+    	$("#send").prop('disabled',false); 
     	//TODO: can still type the name over and over again...
     	if (validateLabel() == true){
 	    	//preia url-ul curent
@@ -114,6 +116,7 @@ $(document).ready(function(){
     }
     
     function removeLabel(){
+    	$("#send").prop('disabled',false); 
     	var url = window.location.origin + window.location.pathname + "/removeLabel";
     	var labelData = {
     			'labelName' : $(this).parent().text().trim()
@@ -140,7 +143,7 @@ $(document).ready(function(){
     $(".viewIssueTitleEdit").focus();
     
     $("#edit").click(editIssue);
-    $("#send").unbind().click(updateIssue);
+    $("#send").unbind().click(savaB);
     $("#label-add-btn").unbind().click(addLabel);
     $(".label-remove").unbind().on("click", removeLabel);
 	
@@ -156,12 +159,12 @@ $(document).ready(function(){
     	
 
      //set current active state
-       $("#send").prop('disabled',false);
+       $("#send").prop('disabled',false); $("#send").addClass("validB");
        
        //issue title is valid?
       	if (($("#issueTitle").val().trim().length < 5)) {
       		$("#issueTitle").parent().find("span").text("Your title cannot be empty");
-      		$("#send").prop('disabled',true);
+      		$("#send").prop('disabled',true); $("#send").removeClass("validB");
    		return false;
       	}
     });
@@ -195,5 +198,10 @@ $(document).ready(function(){
 	    }
 	});
 	
-	
+	function savaB(){
+		if($( "#send" ).hasClass( "validB" ))
+			updateIssue();
+		else
+			location.reload();
+	}
 });

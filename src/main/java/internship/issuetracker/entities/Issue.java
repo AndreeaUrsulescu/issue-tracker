@@ -55,6 +55,8 @@ public class Issue implements Serializable {
 	@Column(name = "content")
 	@Lob
 	private String content;
+	
+	
 
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false)

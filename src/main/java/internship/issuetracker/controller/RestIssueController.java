@@ -8,6 +8,7 @@ import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.LabelService;
 import internship.issuetracker.service.SearchService;
+import internship.issuetracker.utils.HTMLParser;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,8 @@ public class RestIssueController {
 
 		List<IssuePojo> issuesListPojo = issueService
 				.getOrderedIssues(pageNumber);
+		for(IssuePojo issuePojo : issuesListPojo)
+			issuePojo.setContent(HTMLParser.convert(issuePojo.getContent()));
 		return issuesListPojo;
 	}
 
