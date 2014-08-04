@@ -1,6 +1,7 @@
 package internship.issuetracker.pojo;
 
 import internship.issuetracker.enums.State;
+import internship.issuetracker.utils.HTMLParser;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -15,6 +16,8 @@ public class IssuePojo {
 	private String title;
 	
 	private String content;
+	
+	private String contentForSearch;
 	
 	private Date updateDate;
 	
@@ -32,17 +35,20 @@ public class IssuePojo {
 	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state) {
 		this.id = id;
 		this.content = content;
+		this.contentForSearch = HTMLParser.convertForContentSearch(content);
 		this.owner = owner;
 		this.state = state;
 		this.title = title;
 		this.updateDate = updateDate;
 		this.lastDate=lastDate;
 		this.update=getUpdate();
+		
 	}
 	
 	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state, List<CommentPojo> comments, List<LabelPojo> labels) {
 		this.id = id;
 		this.content = content;
+		this.contentForSearch = HTMLParser.convertForContentSearch(content);
 		this.owner = owner;
 		this.state = state;
 		this.title = title;
@@ -53,6 +59,16 @@ public class IssuePojo {
 		this.update=getUpdate();
 	}
 	
+	
+	
+	public String getContentForSearch() {
+		return contentForSearch;
+	}
+
+	public void setContentForSearch(String contentForSearch) {
+		this.contentForSearch = contentForSearch;
+	}
+
 	public List<LabelPojo> getLabels() {
 	    return labels;
 	}

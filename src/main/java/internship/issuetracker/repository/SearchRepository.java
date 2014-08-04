@@ -85,10 +85,10 @@ public class SearchRepository {
 			SearchFilterInt<Issue> filter = new TitleFilter(parameters.getTitle());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
 		}
-		if ( null != parameters.getContent()){
-			SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
+//		if ( null != parameters.getContent()){
+//			SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
+//			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+//		}
 		if ( null != parameters.getState()){
 			SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
@@ -135,10 +135,10 @@ public class SearchRepository {
 			SearchFilterInt<Issue> filter = new TitleFilter(parameters.getTitle());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
 		}
-		if ( null != parameters.getContent()){
-			SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
+//		if ( null != parameters.getContent()){
+//			SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
+//			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+//		}
 		if ( null != parameters.getState()){
 			SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
 			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
