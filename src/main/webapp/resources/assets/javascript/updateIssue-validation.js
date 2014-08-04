@@ -41,9 +41,9 @@ function ValidateContent() {
 	
 	var save = $("#send");	
 	
-	//if($(".editIssueContent").is(":visible")){
+	if($(".editIssueContent").is(":visible")){
 		save.prop('disabled',false);
-	//}
+	}
 	return true;
 };
 
