@@ -10,6 +10,7 @@ import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.MultipleSearchParameter;
 import internship.issuetracker.pojo.SearchParameter;
+import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.SearchRepository;
 
 import java.util.ArrayList;
@@ -28,24 +29,9 @@ public class SearchService {
 
 	@Autowired
 	private SearchRepository searchRepository;
-
-	private SearchFilterInt<Issue> getFilter(String searchCriteria,
-			SearchParameter searchParameters) {
-
-		SearchFilterInt<Issue> filter = null;
-		if (searchCriteria.equals("title")) {
-			filter = new TitleFilter(searchParameters.getInput());
-		} else if (searchCriteria.equals("content")) {
-			filter = new ContentFilter(searchParameters.getInput());
-		} else if (searchCriteria.equals("state")) {
-			filter = new StateFilter(searchParameters.getState());
-		} else if (searchCriteria.equals("creator")){
-			filter = new CreatorFilter(searchParameters.getInput());
-		} else if (searchCriteria.equals("asignee")){
-			filter = new AssigneeFilter(searchParameters.getInput());
-		}
-		return filter;
-	}
+	
+	@Autowired
+	private LabelRepository labelRepository;
 
 	private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity) {
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
@@ -57,43 +43,22 @@ public class SearchService {
 					issueEntity.getTitle(), issueEntity.getContent(),
 					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
 					issueEntity.getState());
+			if(null != issueEntity.getAssignee()){
+			     issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
+			}
 			issuesListPojo.add(index, issuePojo);
 
 		}
 		return issuesListPojo;
 	}
 
-	public int numberOfIssues(SearchParameter searchParameters) {
-		String searchCriteria = searchParameters.getSearchCriteria();
-		SearchFilterInt<Issue> filter = this.getFilter(searchCriteria,
-				searchParameters);
-		return searchRepository.numberOfIssues(filter);
-	}
-
-	public List<IssuePojo> findOrderedIssues(SearchParameter searchParameters) {
-
-		String searchCriteria = searchParameters.getSearchCriteria();
-		SearchFilterInt<Issue> filter = this.getFilter(searchCriteria, searchParameters);
-		List<Issue> issuesListEntity = searchRepository.findOrderedIssues(
-				filter, searchParameters.getPageNumber(),
-				searchParameters.getSortCriteria(),
-				searchParameters.getSortType());
-
-		if (issuesListEntity.isEmpty()){
-			log.log(Level.INFO, "There are no issues for the given search criteria");
-		}
-		
-		return entityToPojo(issuesListEntity);
-	}
-	
-
 	public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
 
 		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
-		if (issuesListEntity.size() == 0)
-			log.log(Level.INFO,
-					"There are no issues for the given search criteria");
+		if (issuesListEntity.size() == 0){
+			log.log(Level.INFO,	"There are no issues for the given search criteria");
+		}
 
 		return entityToPojo(issuesListEntity);
 	}

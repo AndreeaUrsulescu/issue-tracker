@@ -104,17 +104,21 @@ footer a {
 /* Comment section start */
 
 .commentsContainer{
+	margin-top:1.5%;
 	clear: both;
 }
 
+.commentsContainerCol{
+	border-top:1px solid #ccc;
+}
+
 .commentSectionTitle{
-	text-align:center;
 	color:#4dc5dd;
 	padding-bottom:5px;
 }
 
 .commentView {
-	padding-top: 20px;
+
 }
 
 .commentFormButtons {
@@ -124,19 +128,19 @@ footer a {
 }
 
 .commentSection, .labelSection {
-	width: 700px;
+	width: 99%;
 }
 
 .labelSection .input-group{
-	width:64%;
+	width:59%;
 }
 
 #label-editor{
-	margin-top: 20px;
+
 }
 
 .textArea {
-	width: 700px;
+	width: 100%;
 	resize: none;
 }
 
@@ -257,7 +261,6 @@ footer a {
 }
 
 .viewIssueContainer{
-	border-bottom: 1px solid #DFDFDF;
 	padding-bottom:20px;
 }
 
@@ -308,11 +311,6 @@ footer a {
 	border-radius:5px;
 	height:550px;
 	color: #666;
-}
-
-.viewIssueContent p {
-	width: 870px;
-	margin: 0 auto;
 }
 
 .viewIssueDate {
@@ -388,14 +386,12 @@ footer a {
 
 .editIssueContent {
 	margin-top:50px;
-	width: 900px;
 	margin: 0 auto;
 	margin-top: 25px;
 	padding-bottom: 25px;
 }
 
 .viewIssueTitleEdit,.viewIssueContentEdit {
-	width: 870px;
 	margin-bottom: 15px;
 }
 
@@ -908,6 +904,10 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 
 /* label section css */
 
+.labelEditorCol{
+	padding:0;
+}
+
 .selected-labels{
 	margin-top: 10px;
 }
@@ -922,9 +922,9 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 }
 
 .commentSectionTitle{
-	text-align:center;
 	color:#428bca;
 	padding-bottom:5px;
+	font-size:30px;
 }
 .selected-labels{
 	font-size:16px;
@@ -934,7 +934,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	float: left;
 }
 /* label section end*/
-
+commentSectionTitlecommentSectionTitle
 #niceAdd{
 	margin: 0 auto;
 	width: 450px;
@@ -1082,3 +1082,7 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	float: left;
 }
 /* multiple search end*/
+
+#chatRooms{
+	margin-right: 1%;
+}

@@ -68,16 +68,16 @@
 				<div id="searchBox" class="col-xs-6">
 					<form>
 						<div class="form-group row">
-							<label for="searchByTitle" class="col-xs-2 searchBy">Title:</label>
-							<input id="searchByTitle" type="text" class="col-xs-8 textBox">
+							<label for="searchByTitle" class="col-xs-3 searchBy">Title:</label>
+							<input id="searchByTitle" type="text" class="col-xs-7 textBox">
 						</div>
 						<div class="form-group row">
-							<label for="searchByContent" class="col-xs-2 searchBy">Content:</label>
-							<input id="searchByContent" class="col-xs-8 textBox" type="text">
+							<label for="searchByContent" class="col-xs-3 searchBy">Content:</label>
+							<input id="searchByContent" class="col-xs-7 textBox" type="text">
 						</div>
 						<div class="form-group row">
-							<label for="searchByState" class="col-xs-2 searchBy">State:</label>
-							<select id="searchByState" class="col-xs-8 selectOption">
+							<label for="searchByState" class="col-xs-3 searchBy">State:</label>
+							<select id="searchByState" class="col-xs-7 selectOption">
 								<option value=""></option>
 								<option value="New">New</option>
 								<option value="Opened">Opened</option>
@@ -86,16 +86,16 @@
 							</select>
 						</div>
 						<div class="form-group row">
-							<label for="searchByCreator" class="col-xs-2 searchBy">Creator:</label>
-							<input id="searchByCreator" class="col-xs-8 textBox" type="text">
+							<label for="searchByCreator" class="col-xs-3 searchBy">Creator:</label>
+							<input id="searchByCreator" class="col-xs-7 textBox" type="text">
 						</div>
 						<div class="form-group row">
-							<label for="searchByAssignee" class="col-xs-2 searchBy">Assignee:</label>
-							<input id="searchByAssignee" class="col-xs-8 textBox" type="text">
+							<label for="searchByAssignee" class="col-xs-3 searchBy">Assignee:</label>
+							<input id="searchByAssignee" class="col-xs-7 textBox" type="text">
 						</div>
 						<div class="form-group row">
-							<label for="searchByLabel" class="col-xs-2 searchBy">Label:</label>
-							<input id="searchByLabel" class="col-xs-8 textBox" type="text">
+							<label for="searchByLabel" class="col-xs-3 searchBy">Label:</label>
+							<input id="searchByLabel" class="col-xs-7 textBox" type="text">
 						</div>
 						<div class="row">
 							<a class="btn searchBtn btn-default col-xs-4" id="searchBtn" onclick="searchIssues();">
@@ -126,6 +126,9 @@
 				</div>
 			</div>
 		</div>
+		
+
+		
 	</div>
 	<div style="clear: both"></div>
 	<div id="issues" class="row">

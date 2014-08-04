@@ -14,7 +14,7 @@ $(document).ready(function(){
     	dataType: "json",
     	contentType: "application/json;charset=UTF-8",
     	type: "GET",
-    	url: window.location.origin + "/issue-tracker/users",
+    	url: window.location.origin + window.location.pathname + "/../../../users",
     	success: function(rsp) {
     		for (var index = 0 ; index < rsp.usersList.length ; index++ )
     			userList.push(rsp.usersList[index].userName);
