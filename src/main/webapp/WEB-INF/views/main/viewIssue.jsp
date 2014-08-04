@@ -26,7 +26,6 @@ tinymce.init({
     ]
 });
 </script>
-
 <div class="container viewIssueContainer">
 
 	<div class="editIssueView row">
@@ -116,7 +115,7 @@ tinymce.init({
 				<div class="closed viewIssueState" id="Closed"></div>
 			</div>
 		</div>
-		
+
 		<div class="editIssueAssignee">
 			<div class="form-group">
 				<span class="error"></span>
