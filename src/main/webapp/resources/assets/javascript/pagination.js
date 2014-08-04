@@ -18,17 +18,21 @@ window.onload = function() {
 	} else if (numberOfIssues == 0) {
 		document.getElementById("pageNumber").innerHTML = 0;
 	}
-	
-	
-	var labelUrl = window.location.origin + window.location.pathname + "/labels";
+
+	var labelUrl = window.location.origin + window.location.pathname
+			+ "/labels";
 	$.ajax({
-		dataType: "json",
-		type: "GET",
-		url: labelUrl,
-		success: function(rsp) {
+		dataType : "json",
+		type : "GET",
+		url : labelUrl,
+		success : function(rsp) {
 			console.log("cal");
-			for(var key in rsp){
-				availableTags.push({"label":rsp[key], "value":rsp[key],  "id":key});
+			for ( var key in rsp) {
+				availableTags.push({
+					"label" : rsp[key],
+					"value" : rsp[key],
+					"id" : key
+				});
 			}
 		}
 	});
@@ -38,7 +42,7 @@ window.onload = function() {
 };
 
 var availableTags = [];
-var  selected = 0;
+var selected = 0;
 var count = 1;
 
 function issuePagination(type, issuesListSize, issuesPerPage) {
@@ -108,17 +112,20 @@ var countOnSort = 1;
 
 function searchIssues() {
 
+	var span = $("#noSearchResults");
+	span.text(" ");
+
 	var string = $("#searchByLabel").val().trim();
-	
+
 	var selectedLabel = null;
-	
-	for (index in availableTags){
+
+	for (index in availableTags) {
 		var element = availableTags[index];
-		if(element.value === string){
+		if (element.value === string) {
 			selectedLabel = element.id;
 		}
 	}
-	
+
 	countOnSort = 1;
 
 	var filterData = {
@@ -287,93 +294,99 @@ function ajaxForPagination(page) {
 
 function parsingAjaxResponse(response) {
 	document.getElementById("issues").innerHTML = "";
+	if (!response.length == 0) {
+		for ( var index = 0; index < response.length; index++) {
 
-	for (var index = 0; index < response.length; index++) {
+			var stickyNote = document.createElement("A");
+			var stickyNoteHref = "issues/issue/" + response[index].id;
+			stickyNote.setAttribute("href", stickyNoteHref);
 
-		var stickyNote = document.createElement("A");
-		var stickyNoteHref = "issues/issue/" + response[index].id;
-		stickyNote.setAttribute("href", stickyNoteHref);
+			var stickyNoteContent = document.createElement("DIV");
 
-		var stickyNoteContent = document.createElement("DIV");
+			if (response[index].state == "New")
+				stickyNoteContent.setAttribute("class", "issue iss" + 6);
+			if (response[index].state == "Opened")
+				stickyNoteContent.setAttribute("class", "issue iss" + 2);
+			if (response[index].state == "Testing")
+				stickyNoteContent.setAttribute("class", "issue iss" + 0);
+			if (response[index].state == "Closed")
+				stickyNoteContent.setAttribute("class", "issue iss" + 5);
 
-		if (response[index].state == "New")
-			stickyNoteContent.setAttribute("class", "issue iss" + 6);
-		if (response[index].state == "Opened")
-			stickyNoteContent.setAttribute("class", "issue iss" + 2);
-		if (response[index].state == "Testing")
-			stickyNoteContent.setAttribute("class", "issue iss" + 0);
-		if (response[index].state == "Closed")
-			stickyNoteContent.setAttribute("class", "issue iss" + 5);
+			var title = document.createElement("DIV");
+			title.setAttribute("class", "border");
 
-		var title = document.createElement("DIV");
-		title.setAttribute("class", "border");
+			var state = document.createElement("LABEL");
+			state.setAttribute("class", "state");
+			state.appendChild(document.createTextNode(response[index].state));
 
-		var state = document.createElement("LABEL");
-		state.setAttribute("class", "state");
-		state.appendChild(document.createTextNode(response[index].state));
+			// var date = document.createElement("LABEL");
+			// date.setAttribute("class", "date");
+			// date.appendChild(document.createTextNode(response[index].updateDate));
 
-		// var date = document.createElement("LABEL");
-		// date.setAttribute("class", "date");
-		// date.appendChild(document.createTextNode(response[index].updateDate));
+			var assignee = document.createElement("LABEL");
+			assignee.setAttribute("class", "assignee");
+			var assigneeSpan = document.createElement("SPAN");
+			assigneeSpan.setAttribute("class", "glyphicon glyphicon-tag");
+			var newSpan = document.createElement("SPAN");
 
-		var assignee = document.createElement("LABEL");
-		assignee.setAttribute("class", "assignee");
-		var assigneeSpan = document.createElement("SPAN");
-		assigneeSpan.setAttribute("class", "glyphicon glyphicon-tag");
-		var newSpan = document.createElement("SPAN");
+			assignee.appendChild(newSpan);
 
-		assignee.appendChild(newSpan);
+			if (response[index].assignee == null)
+				newSpan.appendChild(document.createTextNode("Unassigned"));
+			else {
+				newSpan.appendChild(document
+						.createTextNode(response[index].assignee + " "));
+				assignee.appendChild(assigneeSpan);
+			}
 
-		if (response[index].assignee == null)
-			newSpan.appendChild(document.createTextNode("Unassigned"));
-		else {
+			title.appendChild(state);
+			title.appendChild(assignee);
+
+			var content = document.createElement("DIV");
+			content.setAttribute("class", "content");
+
+			var contentTitle = document.createElement("H4");
+			contentTitle.setAttribute("class", "title");
+			contentTitle.appendChild(document
+					.createTextNode(response[index].title));
+
+			var paragraf = document.createElement("P");
+			var paragrafContent = response[index].content;
+
+			paragraf.appendChild(document.createTextNode(paragrafContent))
+
+			content.appendChild(contentTitle);
+			content.appendChild(paragraf);
+
+			var assignee = document.createElement("DIV");
+			assignee.setAttribute("class", "assigneeInfoPostIt");
+			var assigneeSpan = document.createElement("SPAN");
+			assigneeSpan.appendChild(document.createTextNode("Assignee:"));
+
+			var newSpan = document.createElement("SPAN");
 			newSpan.appendChild(document
-					.createTextNode(response[index].assignee + " "));
+					.createTextNode(response[index].assignee));
+
 			assignee.appendChild(assigneeSpan);
+			assignee.appendChild(newSpan);
+
+			var owner = document.createElement("LABEL");
+			owner.setAttribute("class", "owner");
+			owner.appendChild(document.createTextNode("Updated "
+					+ response[index].update + " ago by "
+					+ response[index].owner));
+			
+			stickyNoteContent.appendChild(title);
+			stickyNoteContent.appendChild(content);
+			// stickyNoteContent.appendChild(assignee);
+			stickyNoteContent.appendChild(owner);
+
+			stickyNote.appendChild(stickyNoteContent);
+			document.getElementById("issues").appendChild(stickyNote);
 		}
-
-		title.appendChild(state);
-		title.appendChild(assignee);
-
-		var content = document.createElement("DIV");
-		content.setAttribute("class", "content");
-
-		var contentTitle = document.createElement("H4");
-		contentTitle.setAttribute("class", "title");
-		contentTitle
-				.appendChild(document.createTextNode(response[index].title));
-
-		var paragraf = document.createElement("P");
-		var paragrafContent = response[index].content;
-
-		paragraf.appendChild(document.createTextNode(paragrafContent))
-
-		content.appendChild(contentTitle);
-		content.appendChild(paragraf);
-
-		var assignee = document.createElement("DIV");
-		assignee.setAttribute("class", "assigneeInfoPostIt");
-		var assigneeSpan = document.createElement("SPAN");
-		assigneeSpan.appendChild(document.createTextNode("Assignee:"));
-
-		var newSpan = document.createElement("SPAN");
-		newSpan.appendChild(document.createTextNode(response[index].assignee));
-
-		assignee.appendChild(assigneeSpan);
-		assignee.appendChild(newSpan);
-
-		var owner = document.createElement("LABEL");
-		owner.setAttribute("class", "owner");
-		owner.appendChild(document.createTextNode("Updated "
-				+ response[index].update + " ago by " + response[index].owner));
-
-		stickyNoteContent.appendChild(title);
-		stickyNoteContent.appendChild(content);
-		// stickyNoteContent.appendChild(assignee);
-		stickyNoteContent.appendChild(owner);
-
-		stickyNote.appendChild(stickyNoteContent);
-		document.getElementById("issues").appendChild(stickyNote);
+	} else {
+		var span = $("#noSearchResults");
+		span.text("No search results to match the criteria");
 	}
 }
 

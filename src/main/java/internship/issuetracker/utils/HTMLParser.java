@@ -34,12 +34,12 @@ public class HTMLParser {
 		}
 		
 		String result=parsedText.toString();
-		result=result.replaceAll("&lt;", "<");
-		result=result.replaceAll("&gt;", ">");
+		//result=result.replaceAll("&lt;", "<");
+		//result=result.replaceAll("&gt;", ">");
 		
 		if(counter>=147)
 			result=result+"...";
-		
+		result="<p>"+result+"</p>"; //insert a little html
 		return result;
 	}
 }

@@ -3,7 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
 
 <c:set var="plus" value="+" />
 <c:set var="minus" value="-" />
@@ -30,7 +31,6 @@
 		<a href="${pageContext.request.contextPath}/issues/createIssue"
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
 			class="glyphicon glyphicon-plus"></span> Add issue </a>
-
 		<!-- <div id="searchBar">
 			<div id="inSearchBar">
 				<label class="searchBy">Search by </label> 
@@ -60,11 +60,12 @@
 			</div>
 		</div> -->
 		<div id="filtering">
-			<button id="slideFilter" type="button" onclick="slideFilter()" value="Filter">Filter
-				<span class="caret"></span>
+			<button id="slideFilter" type="button" onclick="slideFilter()"
+				value="Filter">
+				Filter <span class="caret"></span>
 			</button>
-			
-			<div id="filterBox" class="row" style="display:none;">
+
+			<div id="filterBox" class="row" style="display: none;">
 				<div id="searchBox" class="col-xs-6">
 					<form>
 						<div class="form-group row">
@@ -98,13 +99,14 @@
 							<input id="searchByLabel" class="col-xs-7 textBox" type="text">
 						</div>
 						<div class="row">
-							<a class="btn searchBtn btn-default col-xs-4" id="searchBtn" onclick="searchIssues();">
-								<span class="glyphicon glyphicon-search"></span> Search
+							<a class="btn searchBtn btn-default col-xs-4" id="searchBtn"
+								onclick="searchIssues();"> <span
+								class="glyphicon glyphicon-search"></span> Search
 							</a>
 						</div>
 					</form>
 				</div>
-				
+
 				<div id="sortBox" class="col-xs-6">
 					<form>
 						<div class="form-group row">
@@ -114,67 +116,65 @@
 								<option value="Title">Title</option>
 							</select>
 						</div>
-						
+
 						<div class="form-group row">
-							<label for="orderType" class="col-xs-4 searchBy">Order type:</label>
-							<select id="orderType" class="col-xs-7 selectOption">
+							<label for="orderType" class="col-xs-4 searchBy">Order
+								type:</label> <select id="orderType" class="col-xs-7 selectOption">
 								<option value="Descending" selected="selected">Descending</option>
 								<option value="Ascending">Ascending</option>
 							</select>
+						</div>
+						
+						<div class="form-group">
+							<label id="noSearchResults"></label>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 		
-
 		
+
 	</div>
 	<div style="clear: both"></div>
 	<div id="issues" class="row">
+
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
-			<div class="col-md-4"><a href="issues/issue/${issue.id}"> 
-<!--			<span class="issue"> -->
+			<div class="col-md-4">
+				<a href="issues/issue/${issue.id}"> <!--			<span class="issue"> -->
 					<c:choose>
-								<c:when test="${issue.state == 'New'}">
-									<span class="issue iss6"></span>
-								</c:when>
-								<c:when test="${issue.state == 'Opened'}">
-									<span class="issue iss2"></span>
-								</c:when>
-								<c:when test="${issue.state == 'Testing'}">
-									<span class="issue iss0"></span>
-								</c:when>
-								<c:otherwise>
-									<span class="issue iss5"></span>				
-								</c:otherwise>
-					</c:choose>		
-						<span class="border"> 
-						<label class="state">${issue.state}</label> 
+						<c:when test="${issue.state == 'New'}">
+							<span class="issue iss6"></span>
+						</c:when>
+						<c:when test="${issue.state == 'Opened'}">
+							<span class="issue iss2"></span>
+						</c:when>
+						<c:when test="${issue.state == 'Testing'}">
+							<span class="issue iss0"></span>
+						</c:when>
+						<c:otherwise>
+							<span class="issue iss5"></span>
+						</c:otherwise>
+					</c:choose> <span class="border"> <label class="state">${issue.state}</label>
 						<label class="assignee"></label>
-						</span> 
-						<span class="content"> <span class="title"> <c:out
+				</span> <span class="content"> <span class="title"> <c:out
 								value="${issue.title}" />
 					</span>
-						</span>
-									${issue.content}
-				<!--<span class="assignee_owner"> -->
-				 
-				<div class="asigneeInfoPostIt">
-					<span>Assignee:</span>
-					<span>${issue.assignee}</span>
-				</div>
-				
-				<label class="owner">Updated ${issue.update} ago by ${issue.owner}</label>
-				<!-- </span>  -->
-			</a>
+				</span> ${issue.content} <!--<span class="assignee_owner"> -->
+
+					<div class="asigneeInfoPostIt">
+						<span>Assignee:</span> <span>${issue.assignee}</span>
+					</div> <label class="owner">Updated ${issue.update} ago by
+						${issue.owner}</label> <!-- </span>  -->
+				</a>
 			</div>
 		</c:forEach>
 	</div>
 	<br>
 
 	<div id="pages">
-	     <label id="pageNumber"></label>
-		<label id="total" style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/ ${pages}</label>
+		<label id="pageNumber"></label> <label id="total"
+			style="color: rgb(47, 95, 150); font-size: 17px;" id="total">/
+			${pages}</label>
 	</div>
 </div>
