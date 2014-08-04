@@ -21,7 +21,7 @@
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
 					<li role="presentation" class="dropdown-header">&nbsp;
-							Hello <%=request.getUserPrincipal().getName()%>!
+							Hello <span id="liUserName"><%=request.getUserPrincipal().getName()%></span>!
 					</li>
 					<li role="presentation">
 						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Home</a>
