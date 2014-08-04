@@ -311,6 +311,7 @@ footer a {
 	border-radius:5px;
 	height:550px;
 	color: #666;
+	overflow-y: scroll;
 }
 
 .viewIssueDate {
