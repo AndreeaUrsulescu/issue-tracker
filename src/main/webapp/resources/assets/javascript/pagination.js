@@ -39,6 +39,16 @@ window.onload = function() {
 	$("#searchByLabel").autocomplete({
 		source : availableTags,
 	});
+	
+	$("#searchBox").find("input").on('keyup', function(e){
+		var key = e.which;
+		if(key == 13){
+			searchIssues();
+			return false;
+		}
+	});
+
+	
 };
 
 var availableTags = [];
@@ -180,6 +190,7 @@ function searchIssues() {
 				}
 			});
 }
+
 
 function sortIssuesPagination(type, issuesListSize, issuesPerPage) {
 	if (type == "+" && (issuesListSize - (countOnSort * issuesPerPage)) > 0) {
@@ -393,3 +404,4 @@ function slideFilter() {
     	});
     
 }
+
