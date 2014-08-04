@@ -1080,9 +1080,21 @@ commentSectionTitlecommentSectionTitle
 	margin-top: 10px;
 }
 
+#searchBox input{
+	margin-left:8%;
+}
+
+#searchBox select{
+	margin-left:8%;
+}
+
 #filterBox {
 	margin-top: 5%;
 	
+}
+
+#filterBox label{
+	font-size:2.3vmin;
 }
 
 .meniuBtn {

@@ -70,15 +70,18 @@
 					<form>
 						<div class="form-group row">
 							<label for="searchByTitle" class="col-xs-3 searchBy">Title:</label>
-							<input id="searchByTitle" type="text" class="col-xs-7 textBox">
+							<br class="hidden-md hidden-lg"> 
+							<input id="searchByTitle" type="text" class="col-xs-6 textBox">
 						</div>
 						<div class="form-group row">
 							<label for="searchByContent" class="col-xs-3 searchBy">Content:</label>
-							<input id="searchByContent" class="col-xs-7 textBox" type="text">
+							<br class="hidden-md hidden-lg"> 
+							<input id="searchByContent" class="col-xs-6 textBox" type="text">
 						</div>
 						<div class="form-group row">
 							<label for="searchByState" class="col-xs-3 searchBy">State:</label>
-							<select id="searchByState" class="col-xs-7 selectOption">
+							<br class="hidden-md hidden-lg"> 
+							<select id="searchByState" class="col-xs-6 selectOption">
 								<option value=""></option>
 								<option value="New">New</option>
 								<option value="Opened">Opened</option>
@@ -88,15 +91,18 @@
 						</div>
 						<div class="form-group row">
 							<label for="searchByCreator" class="col-xs-3 searchBy">Creator:</label>
-							<input id="searchByCreator" class="col-xs-7 textBox" type="text">
+							<br class="hidden-md hidden-lg"> 
+							<input id="searchByCreator" class="col-xs-6 textBox" type="text">
 						</div>
 						<div class="form-group row">
 							<label for="searchByAssignee" class="col-xs-3 searchBy">Assignee:</label>
-							<input id="searchByAssignee" class="col-xs-7 textBox" type="text">
+							<br class="hidden-md hidden-lg"> 
+							<input id="searchByAssignee" class="col-xs-6 textBox" type="text">
 						</div>
 						<div class="form-group row">
 							<label for="searchByLabel" class="col-xs-3 searchBy">Label:</label>
-							<input id="searchByLabel" class="col-xs-7 textBox" type="text">
+							<br class="hidden-md hidden-lg"> 
+							<input id="searchByLabel" class="col-xs-6 textBox" type="text">
 						</div>
 						<div class="row">
 							<a class="btn searchBtn btn-default col-xs-4" id="searchBtn"
@@ -111,6 +117,7 @@
 					<form>
 						<div class="form-group row">
 							<label for="orderBy" class="col-xs-4 searchBy">Order by:</label>
+							<br class="hidden-md hidden-lg"> 
 							<select id="orderBy" class="col-xs-7 selectOption">
 								<option value="Date" selected="selected">Date</option>
 								<option value="Title">Title</option>
@@ -119,10 +126,12 @@
 
 						<div class="form-group row">
 							<label for="orderType" class="col-xs-4 searchBy">Order
-								type:</label> <select id="orderType" class="col-xs-7 selectOption">
-								<option value="Descending" selected="selected">Descending</option>
-								<option value="Ascending">Ascending</option>
-							</select>
+								type:</label>
+								<br class="hidden-md hidden-lg"> 
+								<select id="orderType" class="col-xs-7 selectOption">
+									<option value="Descending" selected="selected">Descending</option>
+									<option value="Ascending">Ascending</option>
+								</select>
 						</div>
 
 						<div class="form-group">
