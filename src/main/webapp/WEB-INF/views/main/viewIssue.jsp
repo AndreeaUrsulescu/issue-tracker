@@ -39,7 +39,6 @@ myListener();
 
 
 </script>
-
 <div class="container viewIssueContainer">
 
 	<div class="editIssueView row">
