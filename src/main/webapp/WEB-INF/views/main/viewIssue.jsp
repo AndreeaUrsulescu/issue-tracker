@@ -24,7 +24,19 @@ tinymce.init({
         {title: 'Test template 1', content: 'Test 1'},
         {title: 'Test template 2', content: 'Test 2'}
     ]
+ 
 });
+
+function myListener(){    
+	
+	tinymce.on('AddEditor', function(e) 
+			{ e.editor.on('change', function (e) {ValidateContent(); }); });
+
+    return;
+}
+myListener();
+
+
 </script>
 
 <div class="container viewIssueContainer">
@@ -138,7 +150,7 @@ tinymce.init({
 	
 	<div class="editIssueFooterButtons">
 		<button id="reset" type="button" class="btn btn-default">Cancel</button>
-		<button id="send" type="button" class="btn btn-primary" >Save</button>
+		<button id="send" type="button" class="btn btn-primary" disabled>Save</button>
 	</div>
 
 	<div id="issue-states">

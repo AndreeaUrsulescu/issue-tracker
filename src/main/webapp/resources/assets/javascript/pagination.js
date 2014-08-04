@@ -378,7 +378,8 @@ function parsingAjaxResponse(response) {
 }
 
 function slideFilter() {
-
-	$("#filterBox").slideToggle("slow", function() {
-	});
+ 
+    	$("#filterBox").slideToggle("slow", function() {
+    	});
+    
 }
