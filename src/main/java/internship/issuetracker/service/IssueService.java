@@ -133,11 +133,13 @@ public class IssueService {
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
+			IssuePojo issuePojo = new IssuePojo(
+					issueEntity.getId(),
 					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), HTMLParser.convert(issueEntity
-							.getContent()), issueEntity.getUpdateDate(),
-					issueEntity.getLastDate(), issueEntity.getState());
+					issueEntity.getTitle(),issueEntity.getContent(), 
+					issueEntity.getUpdateDate(),
+					issueEntity.getLastDate(), 
+					issueEntity.getState());
 
 			if (issueEntity.getAssignee() != null) {
 				issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
