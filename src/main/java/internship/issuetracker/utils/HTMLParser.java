@@ -39,7 +39,6 @@ public class HTMLParser {
 		
 		if(counter>=147)
 			result=result+"...";
-		result="<p>"+result+"</p>"; //insert a little html
 		return result;
 	}
 }

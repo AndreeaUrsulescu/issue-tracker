@@ -124,7 +124,7 @@
 								<option value="Ascending">Ascending</option>
 							</select>
 						</div>
-						
+
 						<div class="form-group">
 							<label id="noSearchResults"></label>
 						</div>
@@ -132,8 +132,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 
 	</div>
 	<div style="clear: both"></div>
@@ -157,10 +157,9 @@
 						</c:otherwise>
 					</c:choose> <span class="border"> <label class="state">${issue.state}</label>
 						<label class="assignee"></label>
-				</span> <span class="content"> <span class="title"> <c:out
-								value="${issue.title}" />
-					</span>
-				</span> ${issue.content} <!--<span class="assignee_owner"> -->
+				</span> <span class="title"> <c:out value="${issue.title}" />
+				</span> <span class="content"> ${issue.content} </span> <!--<span class="assignee_owner"> -->
+
 
 					<div class="asigneeInfoPostIt">
 						<span>Assignee:</span> <span>${issue.assignee}</span>
