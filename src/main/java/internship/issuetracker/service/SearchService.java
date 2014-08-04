@@ -48,7 +48,7 @@ public class SearchService {
 				indexP++;
 			}else{
 			
-			CharSequence cs1 = searchContent;
+			CharSequence cs1 = searchContent.toLowerCase();
 			
 			if(issuePojo.getContentForSearch().contains(cs1)){
 				issuesListPojo.add(indexP, issuePojo);	
