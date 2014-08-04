@@ -154,5 +154,8 @@ tinymce.init({
 	</div>
 </div>
 
+<script
+	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+
 
 
