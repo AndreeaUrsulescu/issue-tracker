@@ -41,7 +41,11 @@
 		</property>
 	</bean>
 
-
+ 	<bean id="securityContextLogoutHandler" 
+        name="securityContextLogoutHandler" 
+        class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler">
+        <property name="invalidateHttpSession" value="true"/>
+    </bean>
 
 
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
