@@ -1,3 +1,15 @@
+window.onload = function() {
+	var element = document.getElementById("liUserName");
+	var username = element.innerText;
+	element = document.getElementById("assigneeLabel");
+	var assignee = element.innerText;
+	
+	if (username !== assignee){
+		document.getElementById("unassignButton").style.display = 'none';
+	}
+}
+
+
 function ValidateTitle() {
 	
 	var title = $("#issueTitle");
@@ -62,13 +74,15 @@ function unassignUser(){
  			xhr.setRequestHeader("Content-Type", "application/json");
  		},
  		success : function(response) {
- 			document.getElementById("assignButton").disabled=true;
- 			document.getElementById("unassignButton").style.display = "none";
- 			document.getElementById("assigneeInput").style.display = "initial";
- 			document.getElementById("assignButton").style.display = "initial";
- 			document.getElementById("assigneeLabel").style.display = "none";
- 			document.getElementById("assign").innerHTML = "Unassigned";
- 			document.getElementById("assigneeBr").style.display = "initial";
+ 			if (response.response === "success"){
+	 			document.getElementById("assignButton").disabled=true;
+	 			document.getElementById("unassignButton").style.display = "none";
+	 			document.getElementById("assigneeInput").style.display = "initial";
+	 			document.getElementById("assignButton").style.display = "initial";
+	 			document.getElementById("assigneeLabel").style.display = "none";
+	 			document.getElementById("assign").innerHTML = "Unassigned";
+	 			document.getElementById("assigneeBr").style.display = "initial";
+ 			}
  		}
  	});
 }
