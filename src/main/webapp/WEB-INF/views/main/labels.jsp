@@ -21,9 +21,9 @@
 				</div>
 			</div>
 	
-	<div id="active-labels" class="row labelSection selected-labels">
+	<div id="active-labels" class="row labelSection ">
 	<br/>
-		<div class="col-xs-8">
+		<div class="col-xs-8 selected-labels">
 			<c:forEach var="label" items="${viewIssue.getLabels()}">
 				<span class="issueLabel label label-primary"> <c:out
 						value="${label.getLabelName()}" /> <span
