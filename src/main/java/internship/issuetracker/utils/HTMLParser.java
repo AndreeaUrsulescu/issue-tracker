@@ -14,12 +14,10 @@ public class HTMLParser {
 
 			if(c=='<')
 			{
-				parsedText.append(c);
 				inTag=true;
 				continue;
 			}else if(c=='>')
 			{
-				parsedText.append(c);
 				inTag=false;	
 				continue;
 			}
@@ -27,23 +25,21 @@ public class HTMLParser {
 			if(!inTag)
 			{
 				counter++;
-				if(counter<150)
+				if(counter<147)
 				{
 					parsedText.append(c);
 				}
 			}
-			else
-			{
-				parsedText.append(c);
-			}
-			
-			
-			
-			
-			
+		
 		}
 		
+		String result=parsedText.toString();
+		result=result.replaceAll("&lt;", "<");
+		result=result.replaceAll("&gt;", ">");
 		
-		return parsedText.toString();
+		if(counter>=147)
+			result=result+"...";
+		
+		return result;
 	}
 }

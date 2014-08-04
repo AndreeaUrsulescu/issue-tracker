@@ -53,7 +53,7 @@
 							<div class="clear"></div>
 	
 							<div class="commentContent">
-								<c:out value="${comment.getContent()}" />
+								${comment.getContent()}
 							</div>
 	
 							<p class="text-right commentDate">

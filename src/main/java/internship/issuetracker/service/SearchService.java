@@ -1,17 +1,11 @@
 package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Issue;
-import internship.issuetracker.filters.AssigneeFilter;
-import internship.issuetracker.filters.ContentFilter;
-import internship.issuetracker.filters.CreatorFilter;
-import internship.issuetracker.filters.SearchFilterInt;
-import internship.issuetracker.filters.StateFilter;
-import internship.issuetracker.filters.TitleFilter;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.MultipleSearchParameter;
-import internship.issuetracker.pojo.SearchParameter;
 import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.SearchRepository;
+import internship.issuetracker.utils.HTMLParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +34,7 @@ public class SearchService {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
 					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), issueEntity.getContent(),
+					issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
 					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
 					issueEntity.getState());
 			if(null != issueEntity.getAssignee()){

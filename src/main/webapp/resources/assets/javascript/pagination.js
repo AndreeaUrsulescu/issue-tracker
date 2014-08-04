@@ -344,13 +344,7 @@ function parsingAjaxResponse(response) {
 				.appendChild(document.createTextNode(response[index].title));
 
 		var paragraf = document.createElement("P");
-		var paragrafContent;
-
-		if ((response[index].content).length > 150) {
-			paragrafContent = (response[index].content).substring(0, 145)
-					+ "...";
-		} else
-			paragrafContent = response[index].content;
+		var paragrafContent = response[index].content;
 
 		paragraf.appendChild(document.createTextNode(paragrafContent))
 

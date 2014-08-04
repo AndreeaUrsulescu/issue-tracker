@@ -23,6 +23,8 @@ public class ContentFilter implements SearchFilterInt<Issue> {
 	String pattern = "%" + content + "%";
 	Path<String> path = root.get("content");
 	Predicate predicate = cb.like(cb.upper(path), pattern);
-	return predicate;
+	//return predicate;
+	
+	return cb.conjunction();
     }
 }

@@ -12,6 +12,7 @@ import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
+import internship.issuetracker.utils.HTMLParser;
 import internship.issuetracker.utils.IssueDifference;
 import internship.issuetracker.utils.MailHelper;
 
@@ -41,11 +42,11 @@ public class IssueService {
 	@Autowired
 	private LabelService labelService;
 
-//	@Autowired
-//	private MailMail mail;
+	// @Autowired
+	// private MailMail mail;
 	@Autowired
 	private MailHelper mh;
-	
+
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
 		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
@@ -68,10 +69,10 @@ public class IssueService {
 			email.setTo(newIssue.getAssignee().getEmail());
 			email.setSubject("IssueTracker - UpdateIssue");
 			email.setContent(x);
-			
+
 			mh.setUp(email);
 			new Thread(mh).start();
-			//mail.sendMail(email);
+			// mail.sendMail(email);
 			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
 		}
 
@@ -122,8 +123,10 @@ public class IssueService {
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
-					.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
+					issueEntity.getOwner().getUserName(), issueEntity.getTitle(),
+					HTMLParser.convert(issueEntity.getContent()), issueEntity.getUpdateDate(),
+					issueEntity.getLastDate(), issueEntity.getState());
 
 			if (issueEntity.getAssignee() != null) {
 				issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
@@ -155,10 +158,10 @@ public class IssueService {
 		email.setTo(issue.getAssignee().getEmail());
 		email.setSubject("IssueTracker - AssigneIssue");
 		email.setContent(x);
-		
+
 		mh.setUp(email);
 		new Thread(mh).start();
-		//mail.sendMail(email);
+		// mail.sendMail(email);
 		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
 
 		issueRepository.update(issue);

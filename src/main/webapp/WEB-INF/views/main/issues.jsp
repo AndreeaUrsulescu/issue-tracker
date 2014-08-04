@@ -157,16 +157,7 @@
 								value="${issue.title}" />
 					</span>
 						</span>
-						
-							<c:choose>
-								<c:when test="${fn:length(issue.content)>150}">
-									<c:out value="${fn:substring(issue.content, 0, 150)} ..." />
-								</c:when>
-								<c:otherwise>
-									<c:out value="${issue.content}" />
-								</c:otherwise>
-							</c:choose>
-						
+									${issue.content}
 				<!--<span class="assignee_owner"> -->
 				 
 				<div class="asigneeInfoPostIt">
