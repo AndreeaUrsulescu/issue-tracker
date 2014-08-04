@@ -296,7 +296,7 @@ function parsingAjaxResponse(response) {
 	document.getElementById("issues").innerHTML = "";
 	if (!response.length == 0) {
 		for ( var index = 0; index < response.length; index++) {
-
+			
 			var stickyNote = document.createElement("A");
 			var stickyNoteHref = "issues/issue/" + response[index].id;
 			stickyNote.setAttribute("href", stickyNoteHref);
@@ -351,10 +351,7 @@ function parsingAjaxResponse(response) {
 					.createTextNode(response[index].title));
 
 			var paragraf = document.createElement("P");
-			var paragrafContent = response[index].content;
-
-			paragraf.appendChild(document.createTextNode(paragrafContent))
-
+			paragraf.innerHTML=response[index].content;
 			content.appendChild(contentTitle);
 			content.appendChild(paragraf);
 
