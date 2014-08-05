@@ -1,5 +1,9 @@
 $(document).ready(function(){
-
+	
+	var activeLabels = [];
+	$("#active-labels > .issueLabel").each(function(){
+		activeLabels.push($(this).text().trim());
+	})
 
 	
     function updateIssue() {
@@ -81,13 +85,14 @@ $(document).ready(function(){
     }
     
     function addLabel(){
-    	$("#send").prop('disabled',false); 
+    	$("#send").prop('disabled',false);
+    	var value = $("#tags").val().trim();
     	//TODO: can still type the name over and over again...
     	if (validateLabel() == true){
 	    	//preia url-ul curent
 	    	var url = window.location.origin + window.location.pathname + "/addLabel";
 	    	var labelData = {
-	    			'labelName' : $("#tags").val().trim()
+	    			'labelName' : value
 	         	};	
 	    	$.ajax({
 	    		data: JSON.stringify(labelData),
@@ -103,7 +108,9 @@ $(document).ready(function(){
 			    					+'<span class="label-remove glyphicon glyphicon-remove"></span>');
 	    				//add label to autocomplete
 	    				availableTags.push($("#tags").val().trim());
-	    				
+	    				if (!exists(value)) {
+	    					activeLabels.push(value);
+	    				}
 	    			} else if(rsp.response === "duplicate"){
 	    				//show error message if label already exists
 	    				$("#tags").parent().parent().find(".error").text("Already exists");
@@ -118,8 +125,9 @@ $(document).ready(function(){
     function removeLabel(){
     	$("#send").prop('disabled',false); 
     	var url = window.location.origin + window.location.pathname + "/removeLabel";
+    	var labelName = $(this).parent().text().trim();
     	var labelData = {
-    			'labelName' : $(this).parent().text().trim()
+    			'labelName' : labelName
          	};
     	var element = $(this).parent();
     	$.ajax({
@@ -131,6 +139,7 @@ $(document).ready(function(){
     		success: function(rsp) {
     			if(rsp.response === "success"){
     				element.remove();
+    				activeLabels.splice(activeLabels.indexOf(labelName), 1);
     			};
     		}
     	});
@@ -167,20 +176,32 @@ $(document).ready(function(){
    		return false;
       	}
     });
+    
+    function exists(label) {
+        for(var index = 0; index < activeLabels.length; index ++){
+        	if(activeLabels[index] == label){
+        		return true;
+        	}
+        }
+        return false;
+    }
+    
     /** Label validation and insert **/
     function validateLabel(){
 		var input=$("#tags");
 		var value=input.val().trim();
 		var label_regex=/^[a-zA-Z0-9]+$/;
 		input.parent().parent().find(".error").text(" ");
-		if(value.length < 3|| value.length > 20)
-		{
+		if(value.length < 3|| value.length > 20) {
 			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
 			return false;
 		}
-		if(!value.match(label_regex))
-		{
+		if(!value.match(label_regex)) {
 			input.parent().parent().find(".error").text("Alpha-numeric characters only");
+			return false;
+		}
+		if (exists(value)) {
+			input.parent().parent().find(".error").text("A label can be added only once");
 			return false;
 		}
 		return true;
