@@ -50,9 +50,14 @@ public class ResetPasswordRepository {
 		return resetPassword;
 	}
 	
-	public boolean exists(User user){
+	public boolean existsForUser(User user){
 		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_USER, ResetPassword.class);
 		query.setParameter("owner", user);
+		return (query.getResultList().size() > 0);
+	}
+	public boolean existsForHash(String keyHash){
+		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
+		query.setParameter("keyHash", keyHash);
 		return (query.getResultList().size() > 0);
 	}
 }

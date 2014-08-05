@@ -26,6 +26,7 @@ public class ApplicationParameters {
 	public static String emailAdress;
 	public static String activationEmailSubject;
 	public static Properties properties;
+	public static String context;
 	
 	static{
 		loadPropertiesFile();
@@ -37,6 +38,7 @@ public class ApplicationParameters {
 		stateHasBeenChangedMessage=properties.getProperty("stateHasBeenChangedMessage");
 		emailAdress=properties.getProperty("emailAdress");
 		activationEmailSubject=properties.getProperty("activationEmailSubject");
+		context=properties.getProperty("contextPath");
 	}
 	
 	public static void loadPropertiesFile()
