@@ -65,6 +65,6 @@ public class HTMLParser {
 			}
 		
 		}		
-		return parsedText.toString();
+		return parsedText.toString().toLowerCase();
 	}
 }
