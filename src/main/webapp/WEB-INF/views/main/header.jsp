@@ -31,24 +31,6 @@
 					</li>
 				</ul>
 			</div>
-				<div class="dropdown control-menu" id="chatRooms">
-			
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					id="dropdownMenu1" data-toggle="dropdown">
-					<span class=" glyphicon glyphicon-user">
-					<span  style="font-family:Arial,Helvetica,sans-serif;">Chat rooms</span>
-					<span class="caret"></span>
-					</span>
-				</button>
-				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1" >
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues/issuesChatRoom" ><span class="glyphicon glyphicon-th-large"></span>&nbsp;&nbsp;All issues</a>
-					</li>
-					<li role="presentation">
-						<a role="menuitem" tabindex="-1" href="${pageContext.request.contextPath}/issues/off-topicChatRoom"><span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Off-topic</a>
-					</li>
-				</ul>
-			</div>
 		</c:when>
 
 		<c:otherwise>
@@ -58,7 +40,8 @@
 					id="dropdownMenu1" data-toggle="dropdown">
 					Control Panel
 					 <span class="glyphicon glyphicon-cog">
-					<span class="caret"></span>
+						<span class="caret"></span>
+					</span>
 				</button>
 				<ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu1">
 					<li role="presentation">
