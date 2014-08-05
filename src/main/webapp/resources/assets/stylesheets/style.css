@@ -1,14 +1,22 @@
 /* Global header start */
-.headerImage {
-	width: 600px;
-	margin: 0 auto;
-}
 
-.headerTitle span {
-	font-size: 44px;
+.headerImage img{
+	width:100%;
 }
 
 /* Global header end */
+
+/* Reset password form start */
+
+#resetPasswordForm{
+	padding:15px 20px;
+	border-radius:15px;
+	border:1px solid #c8c9ca;
+	margin:150px auto 200px auto;
+	width:450px;
+}
+
+/* Reset password form end */
 
 /* Global footer start */
 footer {
@@ -20,9 +28,8 @@ footer {
 	width: 100%;
 }
 .control-menu{
-	//width:10%;
 	float:right;
-	margin-right: 100px;
+	margin-right: 3%;
 	margin-top: 10px;
 	font-family: "Arial Black", Gadget, sans-serif;
 }
@@ -510,11 +517,15 @@ footer a {
 	text-decoration: none;
 	margin-right: 10px;
 	margin-top: 10px;
-	margin-left:90px;
 }
 
 
 /* Menu on view all issues start */
+
+.resetPasswordLink{
+	width:146px;
+	margin-top:5px;
+}
 
 .loginForm {
 	margin: 0 auto;
@@ -693,15 +704,12 @@ footer a {
 
 #all{
 	width:100%;
-	min-height: 700px;
+	min-height:300px;
 }
 
 #pages{
-	margin-left: 920px;
-	//position: absolute;
-	margin-top: 685px;
-	width: 400px;
-	height: 30px;
+	margin-left: 50%;
+	margin-top: 3%;
 }
 
 #pageNumber{
@@ -713,7 +721,6 @@ footer a {
 
 #issues{
 	margin: 0 auto;
-	width: 1700px;
 	font-family:  "Comic Sans MS", cursive, sans-serif;
 	color: rgb(90,90,90);
 	word-wrap: break-word;
@@ -894,14 +901,13 @@ box-shadow:         -3px 3px 29px 0px rgba(50, 50, 50, 0.62);
 	margin-left: 5px;
 }
 #left{
-	position: absolute;
+	position: fixed;
 	margin-top: 340px;
 }
 
 #right{
-	position: absolute;
+	position: fixed;
 	margin-top: 340px;
-	//margin-left: 1848px;
 	float:right;
 	right:0px;
 }
@@ -996,7 +1002,7 @@ commentSectionTitlecommentSectionTitle
 	float: left;
 	color: rgb(176,0,0);//rgb(150,150,150);
 	margin-left: 25%;
-	  font-size: 2.3vmin;
+	  font-size: 2vmin;
 
 }
 
@@ -1076,7 +1082,8 @@ commentSectionTitlecommentSectionTitle
 }
 
 #slideFilter {
-	width: 100%;
+	width: 80%;
+	margin-left:10%;
 	color: white;
 	border: 1px solid rgb(231,231,231);
 	border-radius: 10px;

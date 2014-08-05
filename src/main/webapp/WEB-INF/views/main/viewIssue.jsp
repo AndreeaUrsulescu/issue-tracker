@@ -82,11 +82,10 @@ myListener();
 				</span>
 			</div>
 
-			<div id="active-labels" class="labelSectionView selected-labels">
+			<div id="view-labels" class="labelSectionView selected-labels">
 				<c:forEach var="label" items="${viewIssue.getLabels()}">
 					<span class="issueLabel label label-primary"> <c:out
-							value="${label.getLabelName()}" /> <span
-						class="label-remove glyphicon glyphicon-remove"></span>
+							value="${label.getLabelName()}" />
 					</span>
 				</c:forEach>
 			</div>
@@ -166,9 +165,9 @@ myListener();
 
 	</div>
 </div>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>
+TODO: check if needed
+--%>
 
 
 
