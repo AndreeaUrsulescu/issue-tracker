@@ -1,15 +1,13 @@
 $(document).ready(function(){
-	
 	//clear content on page "re-load" (after closing and reopening tab)
 	$("#comment-area").val('');
 	
   	if($("#current-state").hasClass("closed")){
   		$("#comments").prop('hidden',"display: none;");
-
   	}
   	
 	function clearContent(){
-		$("#comment-area").val('');
+		tinyMCE.get('comment-area').setContent('');
 		$("#error-msg").text(" ");
 	};
 	
@@ -30,7 +28,6 @@ $(document).ready(function(){
 		var content = tinyMCE.get('comment-area').getContent();
 		if (valid){
 			var comment = {
-//					
 					'content' : content
 				};
 				
@@ -59,5 +56,4 @@ $(document).ready(function(){
 	$("#clear-btn").click(clearContent);
 	$("#send-btn").click(sendContent);
 	$("#comment-area").keyup(validateComment);
-	
 });
