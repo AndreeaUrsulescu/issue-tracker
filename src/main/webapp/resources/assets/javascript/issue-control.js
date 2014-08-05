@@ -47,18 +47,17 @@ $(document).ready(function(){
     }
     function editIssue() {
     	
-    	var labelUrl = "../labels";
+    	var labelUrl = window.location.origin + window.location.pathname + "/../../labels";
     	$.ajax({
     		dataType: "json",
     		type: "GET",
     		url: labelUrl,
     		success: function(rsp) {
-    			for(var index = 0; index < rsp.length; index++){
-    				availableTags.push(rsp[index].labelName);
+    			for (var key in rsp) {
+    				availableTags.push(rsp[key]);
     			}
     		}
     	});
-    	
     	var url = window.location.origin + window.location.pathname + "/api";
     	$.ajax({
     		dataType: "json",
@@ -74,6 +73,7 @@ $(document).ready(function(){
 //    			$("#issue-states:nth-child("+rsp.issue.state+")").addClass('current');
     		}
     	});
+    	$("#active-labels").html($("#view-labels").html());
     	$(".editIssueContent").show();
     	$(".editIssueView").hide();
     	$("#newComment").hide();
@@ -101,7 +101,7 @@ $(document).ready(function(){
 			    		
 	    				//show label in UI
 	    				$(".selected-labels").append('<span class="issueLabel label label-primary">'+ $("#tags").val().trim()
-			    					+'<span class="glyphicon glyphicon-remove"></span>');
+			    					+'<span class="label-remove glyphicon glyphicon-remove"></span>');
 	    				//add label to autocomplete
 	    				availableTags.push($("#tags").val().trim());
 	    				
@@ -132,7 +132,6 @@ $(document).ready(function(){
     		success: function(rsp) {
     			if(rsp.response === "success"){
     				element.remove();
-    				
     			};
     		}
     	});
@@ -145,8 +144,8 @@ $(document).ready(function(){
     
     $("#edit").click(editIssue);
     $("#send").unbind().click(savaB);
-    $("#label-add-btn").unbind().click(addLabel);
-    $(".label-remove").unbind().on("click", removeLabel);
+    $("#label-add-btn").click(addLabel);
+    $(".selected-labels").on("click", ".label-remove", removeLabel);
 	
     $("#reset").click(function(){
         location.reload();

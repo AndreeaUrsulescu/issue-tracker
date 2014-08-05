@@ -40,6 +40,7 @@ public class LabelRepository {
 		if(labels.size() > 0){
 		    return labels.get(0);
 		}
-		return (new Label());
+		//we test for null in a later stage
+		return null;
 	}
 }
