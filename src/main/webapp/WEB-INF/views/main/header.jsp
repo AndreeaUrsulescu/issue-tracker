@@ -12,7 +12,7 @@
 			<div class="dropdown control-menu">
 			
 				<button class="btn btn-primary dropdown-toggle" type="button"
-					id="dropdownMenu1" data-toggle="dropdown">
+					id="myDropdownMenu1" data-toggle="dropdown">
 					<span class=" glyphicon glyphicon-tasks">
 				
 					<span  style="font-family:Arial,Helvetica,sans-serif;">My profile</span>

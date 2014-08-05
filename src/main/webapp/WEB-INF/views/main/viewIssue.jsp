@@ -11,11 +11,6 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/dropzone.css" type="text/css">
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -102,6 +97,24 @@ myListener();
 		</div>
 		<div class="clear"></div>
 
+
+	<div id="uploaded">
+		<table id="uploaded-files">
+		        <tr>
+		            <th>File Name</th>
+		            <th>File Type</th>
+		            <th>Download</th>
+		        </tr>
+		        
+		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
+		        	<tr>
+		        		<td>${attachment.filename}</td>
+		        		<td>${attachment.fileType}</td>
+		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
+		        	</tr>
+		        </c:forEach>
+		    </table>
+	</div>
 	</div>
 </div>
 
@@ -193,7 +206,7 @@ myListener();
 		        	</tr>
 		        </c:forEach>
 		    </table>
-</div>
+	</div>
 </div>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>
 TODO: check if needed
