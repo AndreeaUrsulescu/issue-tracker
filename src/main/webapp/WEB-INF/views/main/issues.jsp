@@ -31,34 +31,6 @@
 		<a href="${pageContext.request.contextPath}/issues/createIssue"
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
 			class="glyphicon glyphicon-plus"></span> Add issue </a>
-		<!-- <div id="searchBar">
-			<div id="inSearchBar">
-				<label class="searchBy">Search by </label> 
-				<select	class="searchSelect" id="selectS">
-					<option value="title" selected="selected">title</option>
-					<option value="content">content</option>
-					<option value="state">state</option>
-					<option value="creator">creator</option>
-					<option value="assignee">assignee</option>
-				</select> 
-				<input type="text" id="searchField" class="searchSelect" /> 
-				<select	class="searchSelect" id="selectT">
-					<option value="New" selected="selected">New</option>
-					<option value="Opened">Opened</option>
-					<option value="Testing">Testing</option>
-					<option value="Closed">Closed</option>
-				</select> <label class="searchBy">Ordered by </label> <select
-					class="searchSelect" id="criteria">
-					<option value="latestUpdateDate" selected="selected">Latest Update Date</option>
-					<option value="Title">Title</option>
-				</select> <select class="searchSelect" id="order">
-					<option value="Ascending" selected="selected">Ascending</option>
-					<option value="Descending">Descending</option>
-				</select> <a class="btn searchBtn btn-default" id="searchBtn" onclick="searchIssues();">
-					<span class="glyphicon glyphicon-search"></span> Search
-				</a>
-			</div>
-		</div> -->
 		<div id="filtering">
 			<button id="slideFilter" type="button" onclick="slideFilter()"
 				value="Filter">
