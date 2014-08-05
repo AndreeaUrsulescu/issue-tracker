@@ -42,5 +42,5 @@
 		</div>
 	</div>
 	<!--for resetPassword-->
-	<div class="center-block" ><a href="${pageContext.request.contextPath}/resetPasswordForm" >Forgot your password?</a></div>
+	<div class="center-block resetPasswordLink" ><a href="${pageContext.request.contextPath}/resetPasswordForm" >Forgot your password?</a></div>
 </div>
