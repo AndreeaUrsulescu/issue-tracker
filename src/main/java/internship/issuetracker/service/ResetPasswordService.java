@@ -30,7 +30,11 @@ public class ResetPasswordService {
 	}	
 
 	public boolean existsResetPasswordForUser(User user){
-		return resetPasswordRepository.exists(user);
+		return resetPasswordRepository.existsForUser(user);
+	}
+	
+	public boolean existsResetPasswordForHash(String hash){
+		return resetPasswordRepository.existsForHash(hash);
 	}
 	
 	public void removeResetPassword(ResetPassword resetPassword) {
