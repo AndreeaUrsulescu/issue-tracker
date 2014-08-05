@@ -22,10 +22,30 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/resetPassword.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
+	<definition name="resetPasswordFormSuccess" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPasswordFormSuccess.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="resetPasswordFormFailure" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPasswordFormFailure.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
 
 	<definition name="resetPassword" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/main/resetPassword2.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="resetPasswordSuccess" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPasswordSuccess.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	<definition name="resetPasswordFailure" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPasswordFailure.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/user")
 public class ResetPasswordController {
 	@Autowired
 	private MailHelper mh;
@@ -28,50 +29,52 @@ public class ResetPasswordController {
 	private UserService userService;
 	@Autowired
 	private ResetPasswordService resetPasswordService;
-	
-	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.GET)
-	public String resetPassword(@PathVariable String hashPass,Model model) {
-		if(!resetPasswordService.existsResetPasswordForHash(hashPass))
-				return "error";
+
+	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.GET)	
+	public String resetPassword(@PathVariable String hashPass, Model model) {
+		if (!resetPasswordService.existsResetPasswordForHash(hashPass))
+			return "error";
 		model.addAttribute(new UserName());
 		return "resetPassword";
 	}
-	
+
 	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.POST)
-	public String resetPassword(@Valid UserName userName,@PathVariable String hashPass) {
-		if(!resetPasswordService.existsResetPasswordForHash(hashPass))
-			return "error";
-		ResetPassword resetPassword=resetPasswordService.getResetPassword(hashPass);
-		User user=userService.findUserByUserName(resetPassword.getOwner().getUserName());
-		user.setPassword(EncryptData.sha256(userName.getUserName()));		
+	public String resetPassword(@Valid UserName userName, @PathVariable String hashPass) {
+		if (!resetPasswordService.existsResetPasswordForHash(hashPass))
+			return "resetPasswordFailure";
+		ResetPassword resetPassword = resetPasswordService.getResetPassword(hashPass);
+		User user = userService.findUserByUserName(resetPassword.getOwner().getUserName());
+		user.setPassword(EncryptData.sha256(userName.getUserName()));
 		userService.updateUser(user);
 		resetPasswordService.removeResetPassword(resetPassword);
-		return "redirect:/login";
+		return "resetPasswordSuccess";
 	}
 
 	@RequestMapping(value = "/resetPasswordForm", method = RequestMethod.GET)
-	public String registerPage(Model model) {		
+	public String registerPage(Model model) {
 		model.addAttribute(new UserName());
 		return "resetPasswordForm";
 	}
 
 	@RequestMapping(value = "/resetPasswordForm", method = RequestMethod.POST)
 	public String resetPasswordForm(@Valid UserName userName) {
-		User user=userService.findUserByUserName(userName.getUserName());
-		ResetPassword resetPassword=new ResetPassword(user);
-		if(!resetPasswordService.existsResetPasswordForUser(user)){		
-		resetPasswordService.addResetPassword(resetPassword);
+		if (!userService.exists(userName.getUserName()))
+			return "resetPasswordFormFailure";
+		User user = userService.findUserByUserName(userName.getUserName());
+		ResetPassword resetPassword = new ResetPassword(user);
+		if (!resetPasswordService.existsResetPasswordForUser(user)) {
+			resetPasswordService.addResetPassword(resetPassword);
 		}
-		String msg="To reset your password click the link below :\n"+ApplicationParameters.applicationRoot+ApplicationParameters.context+"/resetPassword/"+resetPassword.getKeyHash();
-		Email email=new Email();	
+		String msg = "To reset your password click the link below :\n" + ApplicationParameters.applicationRoot + ApplicationParameters.context + "/user/resetPassword/"
+				+ resetPassword.getKeyHash();
+		Email email = new Email();
 		email.setTo(user.getEmail());
-		email.setSubject("Activation-issueTracker");	
-		email.setContent(msg);		
+		email.setSubject("Reset password-issueTracker");
+		email.setContent(msg);
 		mh.setUp(email);
 		new Thread(mh).start();
-		
-		return "redirect:/login";
+
+		return "resetPasswordFormSuccess";
 	}
-	
 
 }
