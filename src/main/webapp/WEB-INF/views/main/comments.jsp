@@ -10,7 +10,7 @@
 	
 			<div id="newComment">
 			
-				<form id="comments" role="form">
+				<form id="comments" class="richTextBorder" role="form">
 	
 					<div class="form-group">
 	
@@ -22,8 +22,6 @@
 					<div class="commentFormButtons">
 	
 						<span id="error-msg" class="error"></span>
-	
-						<div id="counter" class="label label-default">500</div>
 	
 						<div id="clear-btn" class="btn btn-default">Clear</div>
 	
@@ -38,9 +36,7 @@
 			<br>
 	
 			<div class="commentView">
-	
-				<!-- Comment template should receive data from the DB. Pending, it seems. -->
-	
+		
 				<c:forEach var="comment" items="${viewIssue.getComments()}">
 					<div class="commentTemplate">
 	

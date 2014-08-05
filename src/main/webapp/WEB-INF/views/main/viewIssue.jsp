@@ -45,7 +45,6 @@ function myListener(){
 }
 myListener();
 
-
 </script>
 <div class="container viewIssueContainer">
 
@@ -91,11 +90,10 @@ myListener();
 				</span>
 			</div>
 
-			<div id="active-labels" class="labelSectionView selected-labels">
+			<div id="view-labels" class="labelSectionView selected-labels">
 				<c:forEach var="label" items="${viewIssue.getLabels()}">
 					<span class="issueLabel label label-primary"> <c:out
-							value="${label.getLabelName()}" /> <span
-						class="label-remove glyphicon glyphicon-remove"></span>
+							value="${label.getLabelName()}" />
 					</span>
 				</c:forEach>
 			</div>
@@ -119,8 +117,10 @@ myListener();
 
 		<div>
 			<label for="issueContent">Content</label>
-			<textarea name="content" id="issueContent" class="form-control viewIssueContentEdit"
-				rows="10" onkeyup="ValidateContent()"></textarea>
+			<div class="richTextBorder">
+				<textarea name="content" id="issueContent" class="form-control viewIssueContentEdit"
+					rows="10" onkeyup="ValidateContent()"></textarea>
+			</div>
 			<span class="error"></span>
 		</div>
 		<div class="editIssueFooterAndStates">
@@ -195,8 +195,9 @@ myListener();
 		    </table>
 </div>
 </div>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>
+TODO: check if needed
+--%>
 
 
 

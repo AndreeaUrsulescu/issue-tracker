@@ -1,6 +1,7 @@
 package internship.issuetracker.entities;
 
 import internship.issuetracker.enums.State;
+import internship.issuetracker.utils.HTMLParser;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -58,7 +59,9 @@ public class Issue implements Serializable {
 	@Lob
 	private String content;
 	
-	
+	@Column(name = "search_content")
+	@Size(max=10000)
+	private String searchContent;
 
     @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "creation_date", nullable = false)
@@ -91,6 +94,17 @@ public class Issue implements Serializable {
 	
 	}
 
+	
+	public String getSearchContent() {
+		return searchContent;
+	}
+
+
+	public void setSearchContent(String searchContent) {
+		this.searchContent = searchContent;
+	}
+
+
 	public Long getId() {
 		return id;
 	}
@@ -121,6 +135,7 @@ public class Issue implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+		this.searchContent = HTMLParser.convertForContentSearch(content);
 	}
 
 	public void setState(State state) {
@@ -174,7 +189,7 @@ public class Issue implements Serializable {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(title).append(owner)
-				.append(updateDate).toHashCode();
+				.append(updateDate).append(lastDate).append(assignee).toHashCode();
 	}
 
 	@Override
@@ -182,9 +197,12 @@ public class Issue implements Serializable {
 		if (obj instanceof Issue) {
 				Issue issue = (Issue) obj;
 				return new EqualsBuilder().append(this.title, issue.title)
+						.append(this.content, issue.content)
 						.append(this.updateDate, issue.updateDate)
 						.append(this.owner, issue.owner)
-						.append(this.state, issue.state).isEquals();
+						.append(this.state, issue.state)
+						.append(this.lastDate,issue.lastDate)
+						.append(this.assignee,issue.assignee).isEquals();
 			}
 		return false;
 	}

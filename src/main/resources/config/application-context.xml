@@ -56,4 +56,6 @@
 
 	<bean id="userValidator" class="internship.issuetracker.validator.UserValidator" />
 	<bean id="activationValidator" class="internship.issuetracker.validator.ActivationValidator" />
+	<bean id="userName" class="internship.issuetracker.utils.UserName" />
+	
 </beans>

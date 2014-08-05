@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-	private static final Logger log = Logger.getLogger(LoginController.class
-			.getName());
-
+	private static final Logger log = Logger.getLogger(LoginController.class.getName());
+	
+	
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login(HttpServletRequest request, ModelMap model) {
 
@@ -35,4 +35,7 @@ public class LoginController {
 	public String logout(ModelMap model) {
 		return "home";
 	}
+
+
+
 }

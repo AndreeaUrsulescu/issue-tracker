@@ -33,8 +33,6 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
 
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
-
-	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 	    
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/bootstrap-tooltip.js"></script>
 	    
