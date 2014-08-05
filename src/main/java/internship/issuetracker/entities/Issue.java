@@ -175,7 +175,7 @@ public class Issue implements Serializable {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(title).append(owner)
-				.append(updateDate).toHashCode();
+				.append(updateDate).append(lastDate).append(assignee).toHashCode();
 	}
 
 	@Override
@@ -183,9 +183,12 @@ public class Issue implements Serializable {
 		if (obj instanceof Issue) {
 				Issue issue = (Issue) obj;
 				return new EqualsBuilder().append(this.title, issue.title)
+						.append(this.content, issue.content)
 						.append(this.updateDate, issue.updateDate)
 						.append(this.owner, issue.owner)
-						.append(this.state, issue.state).isEquals();
+						.append(this.state, issue.state)
+						.append(this.lastDate,issue.lastDate)
+						.append(this.assignee,issue.assignee).isEquals();
 			}
 		return false;
 	}

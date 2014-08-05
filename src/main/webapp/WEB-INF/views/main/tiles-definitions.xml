@@ -25,23 +25,33 @@
 
 	<definition name="checkEmailPage" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body"   value="/WEB-INF/views/main/checkEmailPage.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/checkEmailPage.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="activationFailure" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body"   value="/WEB-INF/views/main/activationFailure.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/activationFailure.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 	<definition name="activationSuccess" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body"   value="/WEB-INF/views/main/activationSuccess.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/activationSuccess.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 
 	<definition name="createIssue" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/createIssue.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/createIssue.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="uploadFile" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/uploadFile.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
 
@@ -72,20 +82,4 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/rteTest.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
-
-	<definition name="chatRoomIssues" extends="mainLayout">
-
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/chatRoomIssues.jsp"></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
-
-	</definition>
-	<definition name="chatRoomOff" extends="mainLayout">
-
-		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/views/main/chatRoomOff.jsp"></put-attribute>
-		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
-
-	</definition>
-
 </tiles-definitions>
