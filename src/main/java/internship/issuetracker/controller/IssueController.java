@@ -117,7 +117,7 @@ public class IssueController {
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
 		CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
-
+		
 		if (!bindingResult.hasErrors()) {
 			commentService.addComment(commentPojo);
 		    map.put("code", "success");
