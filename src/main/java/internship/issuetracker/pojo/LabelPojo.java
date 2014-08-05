@@ -3,7 +3,7 @@ package internship.issuetracker.pojo;
 public class LabelPojo {
 	
 	Long id;
-	String labelName;
+	private String labelName;
 	
 	public LabelPojo(){
 	    

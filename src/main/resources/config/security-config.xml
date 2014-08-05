@@ -26,8 +26,9 @@
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/register" access="isAnonymous()" />
 		<security:intercept-url pattern="/checkEmailPage" access="isAnonymous()" />
-		<security:intercept-url pattern="/activation/**" access="isAnonymous()" />
-		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/activation/**" access="permitAll" />
+<!-- 		<security:intercept-url pattern="/activation/**" access="isAnonymous()" />
+ -->		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 		<security:logout logout-url="/logout" invalidate-session="true" success-handler-ref="logoutSuccessHandler"/>
 	</security:http>
 	

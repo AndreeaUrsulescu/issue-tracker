@@ -39,16 +39,16 @@ public class LabelService {
 	}
 
 	public List<LabelPojo> getAllLabels() {
-		List<Label> Labels = labelRepository.findLabels();
-		List<LabelPojo> PojoLabels = new ArrayList<LabelPojo>();
+		List<Label> labels = labelRepository.findLabels();
+		List<LabelPojo> pojoLabels = new ArrayList<LabelPojo>();
 		
-		if (Labels.size() == 0)
+		if (labels.size() == 0)
 			log.log(Level.INFO, "There are no labels");
 		
-		for (Label label : Labels) {
-			PojoLabels.add(convertLabelEntityToPojoLabel(label));
+		for (Label label : labels) {
+			pojoLabels.add(convertLabelEntityToPojoLabel(label));
 		}
-		return PojoLabels;
+		return pojoLabels;
 	}
 
 	public boolean assignLabelToIssue(Long id, LabelPojo labelPojo) {

@@ -19,12 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ActivationController {
 	@Autowired
 	private ActivationService activationService;
-	
-	@Value("${itemsPerPage}")
-	String items;
 
-	@Value("${StateHasBeenChangedMessage}")
-	String state;
 	@Autowired
 	private UserService userService;
 	
@@ -45,20 +40,6 @@ public class ActivationController {
 	@RequestMapping(value="/activationSuccess",method=RequestMethod.GET)
 	public String activationSuccess ()
 	{
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(state);
 		return "activationSuccess";
 	}
 	
@@ -66,11 +47,5 @@ public class ActivationController {
 	public String activationFailure ()
 	{
 		return "activationFailure";
-	}
-	
-	@RequestMapping(value = { "/rteTest" })
-	public String rte() {
-		
-		return "rteTest";
 	}
 }

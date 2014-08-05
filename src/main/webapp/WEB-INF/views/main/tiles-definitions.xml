@@ -42,6 +42,12 @@
 			value="/WEB-INF/views/main/createIssue.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="uploadFile" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/uploadFile.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
 
 	<definition name="login" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp" />
