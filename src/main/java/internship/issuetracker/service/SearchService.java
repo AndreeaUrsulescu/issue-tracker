@@ -27,11 +27,10 @@ public class SearchService {
 	@Autowired
 	private LabelRepository labelRepository;
 
-	private int listSize;
 	
 	private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity,String searchContent) {
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-		int indexP=0;
+		int count=0;
 		for (int index = 0; index <issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
@@ -41,28 +40,15 @@ public class SearchService {
 					issueEntity.getState());
 			if(null != issueEntity.getAssignee()){
 			     issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
-			}
-			
-			if(null==searchContent){
-				issuesListPojo.add(indexP, issuePojo);	
-				indexP++;
-			}else{
-			
-			CharSequence cs1 = searchContent.toLowerCase();
-			
-			if(issuePojo.getContentForSearch().contains(cs1)){
-				issuesListPojo.add(indexP, issuePojo);	
-				indexP++;
-			}
-			}
-
+			}			
+			issuesListPojo.add(count, issuePojo);
+			count++;
 		}
-		listSize=indexP;
 		return issuesListPojo;
 	}
 
 	public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
-		this.listSize=0;
+
 		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
 		if (issuesListEntity.size() == 0){
@@ -74,7 +60,7 @@ public class SearchService {
 	
 	public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
 
-		//int listSize = searchRepository.numberOfIssuesMultipleSearch(searchParameters);
+		int listSize = searchRepository.numberOfIssuesMultipleSearch(searchParameters);
 		return listSize;
 	}
 

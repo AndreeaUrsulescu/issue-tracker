@@ -13,7 +13,7 @@ public class ContentFilter implements SearchFilterInt<Issue> {
     private String content;
 
     public ContentFilter(String content) {
-	this.content = content.toUpperCase();
+	this.content = content.toLowerCase();
     }
 
     @Override
@@ -21,10 +21,9 @@ public class ContentFilter implements SearchFilterInt<Issue> {
 	    CriteriaBuilder cb, Root<Issue> root) {
 
 	String pattern = "%" + content + "%";
-	Path<String> path = root.get("content");
-	Predicate predicate = cb.like(cb.upper(path), pattern);
-	//return predicate;
+	Path<String> path = root.get("searchContent");
+	Predicate predicate = cb.like(cb.lower(path), pattern);
+	return predicate;
 	
-	return cb.conjunction();
     }
 }

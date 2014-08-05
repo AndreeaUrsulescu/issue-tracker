@@ -3,7 +3,8 @@
 
 <script src="resources/assets/javascript/login-validator.js"></script>
 <div class="container" style="height: 780px;">
-	<img class="loginImg" src="${pageContext.request.contextPath}/resources/assets/images/4login.png"/>
+	<img class="loginImg"
+		src="${pageContext.request.contextPath}/resources/assets/images/4login.png" />
 	<div class="loginForm" style="">
 		<form id="login-form" class="form-horizontal" method="POST"
 			action='j_spring_security_check'>
@@ -40,4 +41,6 @@
 			</c:if>
 		</div>
 	</div>
+	<!--for resetPassword-->
+	<div class="center-block" ><a href="${pageContext.request.contextPath}/resetPasswordForm" >Forgot your password?</a></div>
 </div>

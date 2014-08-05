@@ -16,6 +16,25 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/register.jsp"></put-attribute>
 		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
 	</definition>
+	
+	<definition name="resetPasswordForm" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPassword.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="resetPassword" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/resetPassword2.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="error" extends="mainLayout">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/activationFailure.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/views/main/footer.jsp"></put-attribute>
+	</definition>
 
 	<definition name="checkEmailPage" extends="mainLayout">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"></put-attribute>

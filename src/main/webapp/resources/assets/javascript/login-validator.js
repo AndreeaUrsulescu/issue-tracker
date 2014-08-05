@@ -46,8 +46,8 @@ $(document).ready(function(){
 		return true;
 	};
 	
-	$("#username").keyup(validateUserName);
-	$("#password").keyup(validatePassword);
+	$("#username").focusout(validateUserName);
+	$("#password").focusout(validatePassword);
 	
 	$("#login-form").submit(function(event){
 
