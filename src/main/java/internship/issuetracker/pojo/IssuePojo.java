@@ -31,6 +31,8 @@ public class IssuePojo {
 	private List<CommentPojo> comments;
 
 	private List<LabelPojo> labels;
+	
+	private List<AttachmentPojo> attachments;
 
 	public IssuePojo(Long id, String owner, String title, String content, Date updateDate, Date lastDate, State state) {
 		this.id = id;
@@ -141,6 +143,14 @@ public class IssuePojo {
 		this.comments = comments;
 	}
 	
+	public List<AttachmentPojo> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<AttachmentPojo> attachments) {
+		this.attachments = attachments;
+	}
+
 	public String getUpdate(){
 		Date o= new Date();
 		Date now=new Timestamp(o.getTime());

@@ -24,6 +24,10 @@
 		<!-- Loading custom style -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/style.css" type="text/css">
 
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.iframe-transport.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.fileupload.js"></script>
+
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/comments.js"></script>
 
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/register-validation.js"></script>
