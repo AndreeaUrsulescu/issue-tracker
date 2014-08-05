@@ -1,8 +1,12 @@
 package internship.issuetracker.utils;
 
+import internship.issuetracker.service.LabelService;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -10,6 +14,8 @@ import org.springframework.core.io.Resource;
 
 
 public class ApplicationParameters {
+	
+	private static final Logger log = Logger.getLogger(LabelService.class.getName());
 	
 	public static int itemsPerPage;
 	public static String activationEmailMessagePart1;
@@ -40,17 +46,12 @@ public class ApplicationParameters {
 		resource = new ClassPathResource("applicationParameters.properties");
 		   try {
 			inputStream = resource.getInputStream();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			properties=new Properties();
+			properties.load(inputStream);
+		} catch (Exception e1) {
+			log.log(Level.INFO, "Error while loading the properties file!");
 			e1.printStackTrace();
 		}
-		   
-		properties=new Properties();
-		
-		try {
-			properties.load(inputStream);
-			} catch (IOException e) {
-			e.printStackTrace();
-		}		
+	
 	}
 }

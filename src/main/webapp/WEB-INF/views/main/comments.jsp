@@ -23,8 +23,6 @@
 	
 						<span id="error-msg" class="error"></span>
 	
-						<div id="counter" class="label label-default">500</div>
-	
 						<div id="clear-btn" class="btn btn-default">Clear</div>
 	
 						<div id="send-btn" class="btn btn-primary">Save</div>
@@ -38,9 +36,7 @@
 			<br>
 	
 			<div class="commentView">
-	
-				<!-- Comment template should receive data from the DB. Pending, it seems. -->
-	
+		
 				<c:forEach var="comment" items="${viewIssue.getComments()}">
 					<div class="commentTemplate">
 	
