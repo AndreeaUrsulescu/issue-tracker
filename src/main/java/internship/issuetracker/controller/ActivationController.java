@@ -45,20 +45,7 @@ public class ActivationController {
 	@RequestMapping(value="/activationSuccess",method=RequestMethod.GET)
 	public String activationSuccess ()
 	{
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(items);
-		System.out.println(state);
+
 		return "activationSuccess";
 	}
 	

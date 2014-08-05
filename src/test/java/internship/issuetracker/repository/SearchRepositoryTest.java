@@ -55,7 +55,7 @@ public class SearchRepositoryTest {
 	}
 	@Test
 	public void testConvert() {
-		assert("updateDate".equals(searchRepository.convert("Data")));
+		assert("updateDate".equals(searchRepository.convertToSortType("Data")));
 	}
 
 	@Test

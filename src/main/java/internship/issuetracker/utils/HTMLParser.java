@@ -65,6 +65,11 @@ public class HTMLParser {
 			}
 		
 		}		
-		return parsedText.toString().toLowerCase();
+		String result = parsedText.toString().toLowerCase();
+		
+		result=result.replaceAll("&lt;", "<");
+		result=result.replaceAll("&gt;", ">");
+		result=result.replaceAll("&nbsp;", " ");
+		return result;
 	}
 }
