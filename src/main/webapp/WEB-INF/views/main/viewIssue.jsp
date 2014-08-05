@@ -7,6 +7,9 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/tinymce/tinymce.min.js"></script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/uploadfilefunction.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/dropzone.css" type="text/css">
 
 <script type="text/javascript">
 tinymce.init({
@@ -94,6 +97,24 @@ myListener();
 		</div>
 		<div class="clear"></div>
 
+
+	<div id="uploaded">
+		<table id="uploaded-files">
+		        <tr>
+		            <th>File Name</th>
+		            <th>File Type</th>
+		            <th>Download</th>
+		        </tr>
+		        
+		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
+		        	<tr>
+		        		<td>${attachment.filename}</td>
+		        		<td>${attachment.fileType}</td>
+		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
+		        	</tr>
+		        </c:forEach>
+		    </table>
+	</div>
 	</div>
 </div>
 
@@ -161,8 +182,30 @@ myListener();
 				</c:choose>
 			</div>
 		</div>
-
-
+	</div>
+	
+	<div style="width:500px;padding:20px">
+			<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple>
+		 
+		    <div id="progress">
+		        <div class="bar" style="width: 0%;"></div>
+		    </div>
+		 
+		    <table id="uploaded-files">
+		        <tr>
+		            <th>File Name</th>
+		            <th>File Type</th>
+		            <th>Download</th>
+		        </tr>
+		        
+		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
+		        	<tr>
+		        		<td>${attachment.filename}</td>
+		        		<td>${attachment.fileType}</td>
+		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
+		        	</tr>
+		        </c:forEach>
+		    </table>
 	</div>
 </div>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>

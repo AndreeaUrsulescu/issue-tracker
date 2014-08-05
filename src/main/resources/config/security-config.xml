@@ -22,9 +22,8 @@
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"/>
         <security:intercept-url pattern="/home" access="permitAll" />
         <security:intercept-url pattern="/" access="permitAll" />
-        <security:intercept-url pattern="/resetPassword/**" access="isAnonymous()" />
-        <security:intercept-url pattern="/resetPasswordForm" access="isAnonymous()" />      
-        <security:intercept-url pattern="/resources/**" access="permitAll" />
+        <security:intercept-url pattern="/user/**" access="isAnonymous()" />
+         <security:intercept-url pattern="/resources/**" access="permitAll" />
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/register" access="isAnonymous()" />
 		<security:intercept-url pattern="/checkEmailPage" access="isAnonymous()" />

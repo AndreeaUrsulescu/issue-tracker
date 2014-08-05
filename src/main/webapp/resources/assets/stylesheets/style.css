@@ -1,8 +1,22 @@
 /* Global header start */
 
-
+.headerImage img{
+	width:100%;
+}
 
 /* Global header end */
+
+/* Reset password form start */
+
+#resetPasswordForm{
+	padding:15px 20px;
+	border-radius:15px;
+	border:1px solid #c8c9ca;
+	margin:150px auto 200px auto;
+	width:450px;
+}
+
+/* Reset password form end */
 
 /* Global footer start */
 footer {
@@ -508,6 +522,11 @@ footer a {
 
 /* Menu on view all issues start */
 
+.resetPasswordLink{
+	width:146px;
+	margin-top:5px;
+}
+
 .loginForm {
 	margin: 0 auto;
 	width: 520px;
@@ -983,7 +1002,7 @@ commentSectionTitlecommentSectionTitle
 	float: left;
 	color: rgb(176,0,0);//rgb(150,150,150);
 	margin-left: 25%;
-	  font-size: 2.3vmin;
+	  font-size: 2vmin;
 
 }
 

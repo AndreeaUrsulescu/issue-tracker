@@ -12,7 +12,7 @@
 			<div class="form-group" style="margin-top: 10px;">
 				<label for="inputEmail" class="col-sm-2 control-label">Username</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="username"
+					<input type="text" class="form-control" id="usernameX"
 						placeholder="Username" name="j_username" /> <span class="error"></span>
 					<!--for UI validation-->
 				</div>
@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label for="inputPassword" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password"
+					<input type="password" class="form-control" id="passwordX"
 						placeholder="Password" name="j_password" /> <span class="error"></span>
 					<!--for UI validation-->
 				</div>
@@ -42,5 +42,5 @@
 		</div>
 	</div>
 	<!--for resetPassword-->
-	<div class="center-block" ><a href="${pageContext.request.contextPath}/resetPasswordForm" >Forgot your password?</a></div>
+	<div class="center-block resetPasswordLink" ><a href="${pageContext.request.contextPath}/user/resetPasswordForm" >Forgot your password?</a></div>
 </div>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="container" style="height:200px;width:300px;">
+<div class="container">
 	<sf:form id="resetPasswordForm" method="POST" role="form"
 		modelAttribute="userName">
 

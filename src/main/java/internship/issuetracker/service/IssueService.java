@@ -1,10 +1,12 @@
 package internship.issuetracker.service;
 
+import internship.issuetracker.entities.Attachment;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
+import internship.issuetracker.pojo.AttachmentPojo;
 import internship.issuetracker.pojo.CommentPojo;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
@@ -113,6 +115,22 @@ public class IssueService {
 				pojoComments, labelPojoList);
 		if (issue.getAssignee() != null) {
 			issuePojo.setAssignee(issue.getAssignee().getUserName());
+		}
+		
+		if (issue.getAttachments() != null) {
+			List<AttachmentPojo> attachments = new ArrayList<AttachmentPojo>();
+			
+			for (Attachment attachment : issue.getAttachments()) {
+				AttachmentPojo attachmentPojo = new AttachmentPojo();
+				attachmentPojo.setIssueId(issue.getId());
+				attachmentPojo.setId(attachment.getId());
+				attachmentPojo.setFilename(attachment.getFilename());
+				attachmentPojo.setFileType(attachment.getContentType());
+				attachmentPojo.setContent(attachment.getContent());
+				attachments.add(attachmentPojo);
+			}
+			
+			issuePojo.setAttachments(attachments);
 		}
 		return issuePojo;
 

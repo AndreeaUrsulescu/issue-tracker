@@ -5,7 +5,9 @@ import internship.issuetracker.utils.HTMLParser;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,6 +82,10 @@ public class Issue implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_assignee", nullable = true)
 	private User assignee;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "issue_id", referencedColumnName = "id")
+	private Set<Attachment> attachments = new HashSet<Attachment>();
 	
 	public Issue() {
 		state = State.New;
@@ -170,6 +176,14 @@ public class Issue implements Serializable {
 
 	public void setAssignee(User assignee) {
 		this.assignee = assignee;
+	}
+
+	public Set<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(Set<Attachment> attachments) {
+		this.attachments = attachments;
 	}
 
 	@Override

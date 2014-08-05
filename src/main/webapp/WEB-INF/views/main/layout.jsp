@@ -22,6 +22,9 @@
 		<!-- 		jquery UI JavaScript -->
 		<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.iframe-transport.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.fileupload.js"></script>
 		
 		<!-- Loading custom style -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/style.css" type="text/css">
