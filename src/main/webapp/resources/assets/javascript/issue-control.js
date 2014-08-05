@@ -73,7 +73,6 @@ $(document).ready(function(){
 //    			$("#issue-states:nth-child("+rsp.issue.state+")").addClass('current');
     		}
     	});
-    	$("#active-labels").html($("#view-labels").html());
     	$(".editIssueContent").show();
     	$(".editIssueView").hide();
     	$("#newComment").hide();

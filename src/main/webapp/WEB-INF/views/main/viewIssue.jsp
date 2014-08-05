@@ -85,8 +85,7 @@ myListener();
 			<div id="view-labels" class="labelSectionView selected-labels">
 				<c:forEach var="label" items="${viewIssue.getLabels()}">
 					<span class="issueLabel label label-primary"> <c:out
-							value="${label.getLabelName()}" /> <span
-						class="label-remove glyphicon glyphicon-remove"></span>
+							value="${label.getLabelName()}" />
 					</span>
 				</c:forEach>
 			</div>
