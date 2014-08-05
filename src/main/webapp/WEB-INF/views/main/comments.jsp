@@ -10,7 +10,7 @@
 	
 			<div id="newComment">
 			
-				<form id="comments" role="form">
+				<form id="comments" class="richTextBorder" role="form">
 	
 					<div class="form-group">
 	
