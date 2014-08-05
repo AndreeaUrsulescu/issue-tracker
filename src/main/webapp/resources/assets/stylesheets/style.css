@@ -131,6 +131,11 @@ footer a {
 	width: 99%;
 }
 
+.richTextBorder{
+	border-right:2px solid #ccc;
+	border-radius:5px;	
+}
+
 .labelSection .input-group{
 	width:59%;
 }
@@ -1110,3 +1115,10 @@ commentSectionTitlecommentSectionTitle
 	margin: 0 auto;
 	width: 100%;
 }
+
+
+/* tinyMCE  start */
+
+
+
+/* tinyMCE  end */
