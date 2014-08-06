@@ -1,4 +1,12 @@
 $(function () {
+	
+	$("#fileupload").on("click", function(){
+		$('#progress .bar').css(
+                'width',
+                '0' + '%'
+            );
+	});
+	
     $('#fileupload').fileupload({
         dataType: 'json',
  

@@ -186,9 +186,7 @@ myListener();
 				</c:choose>
 			</div>
 		</div>
-	</div>
-	
-	<div style="width:500px;padding:20px">
+		<div class="editIssueFileUpload">
 			
 			<c:choose>
 				<c:when test="${fn:length(viewIssue.attachments) > 5}">
@@ -199,32 +197,39 @@ myListener();
 				</c:otherwise>
 			</c:choose>
 		 
-		    <div id="progress">
-		        <div class="bar" style="width: 0%;"></div>
+		    <div id="progress" class="progress">
+		        <div class="progress-bar-success progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+   					
+    			</div>
 		    </div>
-		 
-		    <table id="uploaded-files">
-		        <tr>
-		            <th>File Name</th>
-		            <th>File Type</th>
-		            <th>Download</th>
-		            <th>Remove</th>
-		        </tr>
-		        
-		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
-		        	<tr>
-		        		<td>${attachment.filename}</td>
-		        		<td>${attachment.fileType}</td>
-		        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
-		        		<td><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png" onclick="removeAttachment(${attachment.id})"></td>
-		        	</tr>
-		        </c:forEach>
-		    </table>
+		 	<div class="table-responsive">
+			    <table id="uploaded-files" class="table">
+			    	<thead>
+				        <tr>
+				            <th>File Name</th>
+				            <th>File Type</th>
+				            <th>Download</th>
+				            <th>Remove</th>
+				        </tr>
+			        </thead>
+			        <tbody>
+				        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
+				        	<tr>
+				        		<td>${attachment.filename}</td>
+				        		<td>${attachment.fileType}</td>
+				        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
+				        		<td><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png" onclick="removeAttachment(${attachment.id})"></td>
+				        	</tr>
+				        </c:forEach>
+			        </tbody>
+			    </table>
+		    </div>
+		</div>
 	</div>
+	
+	
 </div>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/tinyMCECSSModifier.js"></script>
-TODO: check if needed
---%>
+
 
 
 

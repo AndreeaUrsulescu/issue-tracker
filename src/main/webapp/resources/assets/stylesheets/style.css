@@ -1148,3 +1148,30 @@ commentSectionTitlecommentSectionTitle
 }
 
 /* Success and failure pages end */
+
+/* Edit issue upload file start */
+
+.editIssueFileUpload{
+	width:100%;
+	padding-top:6%;
+	padding-bottom:12%;
+	margin-top:6%;
+	margin-bottom:4%;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+}
+
+.editIssueFileUpload th{
+	text-align: center;
+}
+
+.editIssueFileUpload td{
+	text-align:center;
+}
+
+#progress{
+	margin-top:2%;
+}
+/* Edit issue upload file end */
+
+
