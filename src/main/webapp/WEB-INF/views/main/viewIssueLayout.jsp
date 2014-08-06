@@ -3,6 +3,9 @@
 
 <html>
 	<head>	
+		<!-- dropzone css for loading bars -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/dropzone.css" type="text/css">
+	
 		<!-- Loading JQuery latest build -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 

@@ -9,7 +9,6 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/assets/javascript/uploadfilefunction.js"></script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/dropzone.css" type="text/css">
 
 <script type="text/javascript">
 	var ctx = '${pageContext.request.contextPath}';
@@ -198,7 +197,7 @@ myListener();
 			</c:choose>
 		 
 		    <div id="progress" class="progress">
-		        <div class="progress-bar-success progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+		        <div class="bar progress-bar-success progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
    					
     			</div>
 		    </div>
