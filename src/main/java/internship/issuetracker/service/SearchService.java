@@ -17,30 +17,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SearchService {
-	
-	private static final Logger log = Logger.getLogger(SearchService.class
-			.getName());
+
+	private static final Logger log = Logger.getLogger(SearchService.class.getName());
 
 	@Autowired
 	private SearchRepository searchRepository;
-	
+
 	@Autowired
 	private LabelRepository labelRepository;
 
-	
-	private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity,String searchContent) {
+	private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity, String searchContent) {
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-		int count=0;
-		for (int index = 0; index <issuesListEntity.size(); index++) {
+		int count = 0;
+		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(),
-					issueEntity.getOwner().getUserName(),
-					issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
-					issueEntity.getUpdateDate(), issueEntity.getLastDate(),
-					issueEntity.getState());
-			if(null != issueEntity.getAssignee()){
-			     issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
-			}			
+			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
+					issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+			if (null != issueEntity.getAssignee()) {
+				issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
+			}
 			issuesListPojo.add(count, issuePojo);
 			count++;
 		}
@@ -51,13 +46,13 @@ public class SearchService {
 
 		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
-		if (issuesListEntity.size() == 0){
-			log.log(Level.INFO,	"There are no issues for the given search criteria");
+		if (issuesListEntity.size() == 0) {
+			log.log(Level.INFO, "There are no issues for the given search criteria");
 		}
 
-		return entityToPojo(issuesListEntity,searchParameters.getContent());
+		return entityToPojo(issuesListEntity, searchParameters.getContent());
 	}
-	
+
 	public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
 
 		int listSize = searchRepository.numberOfIssuesMultipleSearch(searchParameters);

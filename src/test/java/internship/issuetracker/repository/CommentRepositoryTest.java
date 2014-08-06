@@ -56,16 +56,7 @@ public class CommentRepositoryTest {
 	assert (commentRepository.findCommentByOwner(comment.getOwner()).size() > 0);
     }
 
-    @Test
-    public void testUpdate() {
-	Comment comment = createComment();
-	commentRepository.create(comment);
-	comment.setContent("New content");
-	commentRepository.update(comment);
-	List<Comment> compare = commentRepository.findCommentByOwner(comment
-		.getOwner());
-	assert (comment.equals(compare));
-    }
+
 
     @Test
     public void testFindByUser() {

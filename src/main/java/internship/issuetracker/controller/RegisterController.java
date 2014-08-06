@@ -37,8 +37,6 @@ public class RegisterController {
 	@Autowired
 	private ActivationValidator activationValidator;
 	
-//	@Autowired
-//	private MailMail mail;
 	@Autowired
 	private MailHelper mh;
 	@Autowired
