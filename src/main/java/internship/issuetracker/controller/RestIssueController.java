@@ -1,5 +1,6 @@
 package internship.issuetracker.controller;
 
+import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.MultipleSearchParameter;
@@ -13,6 +14,8 @@ import internship.issuetracker.utils.HTMLParser;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -99,10 +102,9 @@ public class RestIssueController {
 	@RequestMapping(value = "/issue/{issueId}/unassignUser", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Map<String, Object> unassignUser(
-			@PathVariable("issueId") Long issueId) {
+			@PathVariable("issueId") Long issueId,HttpServletRequest request) {
 		Map<String, Object> response = new HashMap<>();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
+		String username =((User)request.getSession().getAttribute("user")).getUserName();
 		if (issueService.unassignUserToIssue(issueId,username)){
 			response.put("response", "success");
 		} else {
