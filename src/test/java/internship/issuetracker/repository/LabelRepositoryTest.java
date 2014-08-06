@@ -90,13 +90,4 @@ public class LabelRepositoryTest {
 	}
 
 	
-	@Test
-	@Transactional
-	public void updateTest() {
-		Label label = createLabel();
-		label.setLabelName("AnotherName");
-		labelRepository.update(label);
-		assertEquals(labelRepository.findLabelByName(label.getLabelName())
-				.getLabelName(), "AnotherName");
-	}
 }

@@ -25,37 +25,33 @@ public class ResetPasswordRepository {
 	public void create(ResetPassword resetPassword) {
 		em.persist(resetPassword);
 	}
-	
-	public void remove(ResetPassword resetPassword)
-	{
+
+	public void remove(ResetPassword resetPassword) {
 		em.remove(this.findResetPasswordByKeyHash(resetPassword.getKeyHash()));
 	}
-	
-	public ResetPassword findResetPasswordByKeyHash(String keyHash)
-	{
-		ResetPassword resetPassword=new ResetPassword();
-		
-		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH,ResetPassword.class);
-		query.setParameter("keyHash",keyHash);
-		try
-		{
-			resetPassword=query.getSingleResult();
+
+	public ResetPassword findResetPasswordByKeyHash(String keyHash) {
+		ResetPassword resetPassword = new ResetPassword();
+
+		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
+		query.setParameter("keyHash", keyHash);
+		try {
+			resetPassword = query.getSingleResult();
 			log.log(Level.INFO, "An ResetPassword was found for " + resetPassword.getOwner().getUserName());
-		}
-		catch(NoResultException ex)
-		{
-			resetPassword=null;
+		} catch (NoResultException ex) {
+			resetPassword = null;
 			log.log(Level.INFO, "No ResetPassword was found for given key!");
 		}
 		return resetPassword;
 	}
-	
-	public boolean existsForUser(User user){
+
+	public boolean existsForUser(User user) {
 		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_USER, ResetPassword.class);
 		query.setParameter("owner", user);
 		return (query.getResultList().size() > 0);
 	}
-	public boolean existsForHash(String keyHash){
+
+	public boolean existsForHash(String keyHash) {
 		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
 		query.setParameter("keyHash", keyHash);
 		return (query.getResultList().size() > 0);

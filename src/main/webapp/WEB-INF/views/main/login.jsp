@@ -1,7 +1,6 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script src="resources/assets/javascript/login-validator.js"></script>
 <div class="container" style="height: 780px;">
 	<img class="loginImg"
 		src="${pageContext.request.contextPath}/resources/assets/images/4login.png" />
@@ -13,16 +12,14 @@
 				<label for="inputEmail" class="col-sm-2 control-label">Username</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="usernameX"
-						placeholder="Username" name="j_username" /> <span class="error"></span>
-					<!--for UI validation-->
+						placeholder="Username" name="j_username" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="inputPassword" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
 					<input type="password" class="form-control" id="passwordX"
-						placeholder="Password" name="j_password" /> <span class="error"></span>
-					<!--for UI validation-->
+						placeholder="Password" name="j_password" />
 				</div>
 
 			</div>

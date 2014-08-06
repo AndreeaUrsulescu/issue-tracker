@@ -44,6 +44,7 @@ public class UserService {
 	public User findUserByUserName(String userName) {
 		return userRepository.findUserByUserName(userName);
 	}
+
 	public List<UserPojo> findAllUsers() {
 		List<User> allUsers = userRepository.findAll();
 		List<UserPojo> allUsersPojo = new ArrayList<>();

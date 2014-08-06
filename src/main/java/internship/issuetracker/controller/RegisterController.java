@@ -6,6 +6,7 @@ import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
 import internship.issuetracker.service.UserService;
+import internship.issuetracker.utils.ApplicationParameters;
 import internship.issuetracker.utils.MailHelper;
 import internship.issuetracker.validator.ActivationValidator;
 import internship.issuetracker.validator.UserValidator;
@@ -36,8 +37,6 @@ public class RegisterController {
 	@Autowired
 	private ActivationValidator activationValidator;
 	
-//	@Autowired
-//	private MailMail mail;
 	@Autowired
 	private MailHelper mh;
 	@Autowired
@@ -76,7 +75,7 @@ public class RegisterController {
 		}
 		
 		
-		String msg=msg1+"http://localhost:8080"+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
+		String msg=msg1+ApplicationParameters.applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
 		Email email=new Email();
 		email.setTo(activation.getEmail());
 		email.setSubject("Activation-issueTracker");	

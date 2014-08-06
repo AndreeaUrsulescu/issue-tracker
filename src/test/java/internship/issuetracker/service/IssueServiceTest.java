@@ -75,16 +75,6 @@ public class IssueServiceTest {
 		Mockito.verify(issueRepository).create(issue);
 	}
 	
-	
-
-	
-	
-	@Test
-	public void tesGetNrOftPages() {
-		Mockito.when(issueRepository.nrOfPages()).thenReturn(2);
-		int actualResult = issueService.getNrOfPages();
-		assertEquals(2, actualResult);
-	}
 
     @Test
     public void testAssignUserToIssue(){
