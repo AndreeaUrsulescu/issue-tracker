@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/stylesheets/dropzone.css" type="text/css">
 
 <script type="text/javascript">
+	var ctx = '${pageContext.request.contextPath}';
+</script>
+
+<script type="text/javascript">
 tinymce.init({
     selector: "textarea",
     theme: "modern",
@@ -104,15 +108,13 @@ myListener();
 		            <th>File Name</th>
 		            <th>File Type</th>
 		            <th>Download</th>
-		            <!-- <th>Remove</th> -->
 		        </tr>
 		        
 		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
 		        	<tr>
 		        		<td>${attachment.filename}</td>
 		        		<td>${attachment.fileType}</td>
-		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
-		        		<%-- <td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png"></a></td> --%>
+		        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
 		        	</tr>
 		        </c:forEach>
 		    </table>
@@ -198,15 +200,15 @@ myListener();
 		            <th>File Name</th>
 		            <th>File Type</th>
 		            <th>Download</th>
-		            <!-- <th>Remove</th> -->
+		            <th>Remove</th>
 		        </tr>
 		        
 		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
 		        	<tr>
 		        		<td>${attachment.filename}</td>
 		        		<td>${attachment.fileType}</td>
-		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
-		        		<%-- <td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png"></a></td> --%>
+		        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
+		        		<td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png" onclick="removeAttachment(${attachment.id})"></a></td>
 		        	</tr>
 		        </c:forEach>
 		    </table>
