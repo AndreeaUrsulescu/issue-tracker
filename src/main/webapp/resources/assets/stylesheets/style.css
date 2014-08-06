@@ -84,7 +84,6 @@ footer a {
 .registerForm label {
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 18px;
-	margin-left: 20px;
 }
 
 .error {
@@ -321,7 +320,7 @@ footer a {
 	word-wrap: break-word;      /* IE 5+ */
 	border:1px solid #ccc;
 	border-radius:5px;
-	height:550px;
+	height:400px;
 	color: #666;
 	overflow-y: scroll;
 }
@@ -1106,7 +1105,7 @@ commentSectionTitlecommentSectionTitle
 }
 
 #filterBox label{
-	font-size:2.3vmin;
+	font-size:1.7vmin;
 }
 
 .meniuBtn {
@@ -1124,8 +1123,27 @@ commentSectionTitlecommentSectionTitle
 }
 
 
-/* tinyMCE  start */
+/* Success and failure pages  start */
 
+.SuccessOrErrorPages{
+	margin:8% auto;
+}
 
+.textForSuccessOrErrorPages{
+	margin-top:8%;
+}
 
-/* tinyMCE  end */
+.textForSuccessOrErrorPages p{
+	text-align:center;
+}
+
+.textForSuccessOrErrorPages p:nth-child(1){
+	font-size:2.7vmin;
+}
+
+.textForSuccessOrErrorPages p:nth-child(2){
+	font-size:2.5vmin;
+	color:red;
+}
+
+/* Success and failure pages end */
