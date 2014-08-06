@@ -27,7 +27,7 @@ public class ActivationRepository {
 	}
 
 	public Activation findActivationByKeyHash(String keyHash) {
-		Activation activation = new Activation();
+		Activation activation;
 
 		TypedQuery<Activation> query = em.createNamedQuery(Activation.FIND_KEYHASH, Activation.class);
 		query.setParameter("keyHash", keyHash);

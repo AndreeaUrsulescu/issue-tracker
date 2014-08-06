@@ -112,7 +112,7 @@ public class IssueController {
 			HttpServletRequest request) {
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		List<CommentPojo> pojoComments = new LinkedList<CommentPojo>();
+		List<CommentPojo> pojoComments;
 		IssuePojo issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
