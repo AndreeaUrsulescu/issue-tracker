@@ -28,10 +28,6 @@ public class LabelRepository {
 		em.persist(label);
 	}
 
-	public void update(Label label) {
-		em.merge(label);
-	}
-
 	public Label findLabelByName(String labelName) {
 		TypedQuery<Label> query = em.createNamedQuery(Label.FIND_BY_NAME,
 				Label.class);

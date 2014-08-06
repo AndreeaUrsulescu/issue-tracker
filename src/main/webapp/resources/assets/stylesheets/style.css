@@ -88,8 +88,6 @@ footer a {
 
 .error {
 	color: red;
-	width: 50px;
-	dispay: block;
 	margin: 0 auto;
 }
 
@@ -1122,6 +1120,9 @@ commentSectionTitlecommentSectionTitle
 	width: 100%;
 }
 
+.right-space{
+	margin-right: 20px;
+}
 
 /* Success and failure pages  start */
 

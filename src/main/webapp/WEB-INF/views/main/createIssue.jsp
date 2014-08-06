@@ -44,9 +44,9 @@ window.onload=function(){
 					src="${pageContext.request.contextPath}/resources/assets/images/paperclip2.png" />
 			</div>
 			<div id="inIssue">
-
-				<label for="inputEmail" class="comic" require="required">Title</label>
-				<span id="createTitleSpan" style="margin-left: 90px;" class="error"></span>
+				
+				<label for=createTitle class="comic right-space">Title</label>
+				<span id="createTitleSpan" class="error"></span>
 				<sf:input type="text" class="form-control" id="createTitle" 
 					path="title" />
 
@@ -57,13 +57,13 @@ window.onload=function(){
 				<label class="addedBy">Added by ${user}</label>
 			</div>
 		</div>
-		<a href="${pageContext.request.contextPath}/issues"> <!--<a onclick="window.location='./'; $('#createTitle').text(''); $('#createContent').text('');">-->
-			<div id="backBtn">
+		<div id="backBtn">
+			<a href="${pageContext.request.contextPath}/issues">
 				<img class="pinB"
 					src="${pageContext.request.contextPath}/resources/assets/images/large2.jpg" />
-				<label class="backLabel"> Go back</label>
-			</div>
-		</a>
+				<label class="backLabel">Go back</label>
+			</a>
+		</div>
 		<div id="createBtn">
 			<a><input type="submit" value="Add issue" class="noBtn" /></a> <img
 				class="pinB"

@@ -19,9 +19,6 @@ public class AttachmentRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	/*@Autowired
-	private IssueRepository issueRepository;*/
-
 	public void create(Attachment attachment) {
 		em.persist(attachment);
 		log.log(Level.INFO, "An attachment was persisted!");
@@ -37,17 +34,4 @@ public class AttachmentRepository {
 		Attachment attachment = this.getAttachment(attachmentId);
 		em.remove(attachment);
 	}
-
-	/*public void save(Attachment attachment, MultipartFile file, Long issueId) {
-		
-		 * Session session = (Session)em.getDelegate(); Blob blob =
-		 * session.getLobHelper().createBlob(file.getInputStream(),
-		 * file.getSize());
-		 
-
-		Issue issue = issueRepository.findIssue(issueId);
-		this.create(attachment);
-		issue.getAttachments().add(attachment);
-		issueRepository.update(issue);
-	}*/
 }
