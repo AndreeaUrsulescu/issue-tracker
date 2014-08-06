@@ -1172,6 +1172,11 @@ commentSectionTitlecommentSectionTitle
 #progress{
 	margin-top:2%;
 }
+
+#viewuploadfiles{
+	margin-top:4%;
+	border-bottom:1px solid #ccc;
+}
 /* Edit issue upload file end */
 
 
