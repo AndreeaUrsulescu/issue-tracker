@@ -14,6 +14,7 @@ import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
+import internship.issuetracker.utils.ApplicationParameters;
 import internship.issuetracker.utils.IssueDifference;
 import internship.issuetracker.utils.MailHelper;
 
@@ -159,7 +160,7 @@ public class IssueService {
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
 
-		String x = "\n\nYou became the assignee for the issue :\n\n" + "http://localhost:8080/issue-tracker/issues/issue/" + issue.getId();
+		String x = "\n\nYou became the assignee for the issue :\n\n" + ApplicationParameters.applicationRoot + ApplicationParameters.contextPath + "/" + issue.getId();
 		Email email = new Email();
 		email.setTo(issue.getAssignee().getEmail());
 		email.setSubject("IssueTracker - AssigneIssue");
