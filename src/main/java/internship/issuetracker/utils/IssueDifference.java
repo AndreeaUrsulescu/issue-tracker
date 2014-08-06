@@ -6,7 +6,7 @@ public class IssueDifference {
 	public static String generateDifference(Issue newIssue, Issue oldIssue) {
 		String title = getStringDifferences(newIssue.getTitle(), oldIssue.getTitle());
 		String content = getStringDifferences(newIssue.getContent(), oldIssue.getContent());
-		String msg = ApplicationParameters.changedIssueEmail + newIssue.getId();
+		String msg = ApplicationParameters.changedIssueEmail +ApplicationParameters.contextPath + "/issues/issue/" + newIssue.getId();
 		
 		StringBuilder result = new StringBuilder();
 

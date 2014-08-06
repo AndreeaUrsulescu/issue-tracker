@@ -189,7 +189,15 @@ myListener();
 	</div>
 	
 	<div style="width:500px;padding:20px">
-			<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple>
+			
+			<c:choose>
+				<c:when test="${fn:length(viewIssue.attachments) > 5}">
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled>
+				</c:when>
+				<c:otherwise>
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple>
+				</c:otherwise>
+			</c:choose>
 		 
 		    <div id="progress">
 		        <div class="bar" style="width: 0%;"></div>
@@ -208,7 +216,7 @@ myListener();
 		        		<td>${attachment.filename}</td>
 		        		<td>${attachment.fileType}</td>
 		        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
-		        		<td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png" onclick="removeAttachment(${attachment.id})"></a></td>
+		        		<td><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png" onclick="removeAttachment(${attachment.id})"></td>
 		        	</tr>
 		        </c:forEach>
 		    </table>

@@ -2,6 +2,7 @@ package internship.issuetracker.controller;
 
 import internship.issuetracker.pojo.AttachmentPojo;
 import internship.issuetracker.service.AttachmentService;
+import internship.issuetracker.service.IssueService;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,13 +21,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
-@RequestMapping("/issues/issue/{id}")
+/*@RequestMapping("/issues/issue/{id}")*/
 public class FileUploadController {
 
 	@Autowired
 	private AttachmentService attachmentService;
+	
+	@Autowired
+	private IssueService issueService;
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/issues/issue/{id}/upload", method = RequestMethod.POST)
 	public @ResponseBody LinkedList<AttachmentPojo> upload(
 			@PathVariable Long id, MultipartHttpServletRequest request,
 			HttpServletResponse response) {
@@ -45,14 +49,16 @@ public class FileUploadController {
 		return files;
 	}
 
-	@RequestMapping(value = "/remove/{attachmentId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/issues/issue/{id}/remove/{attachmentId}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public Map<String, Object> removeAttachment(@PathVariable Long id,
 			@PathVariable Long attachmentId) {
+		System.out.println("remove controller");
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		attachmentService.removeAttachment(attachmentId, id);
-		map.put("result", "success");
+		map.put("result", issueService.getIssue(id).getAttachments().size());
+		map.put("attachments", attachmentService.convertToPojo(id));
 		return map;
 	}
 }
