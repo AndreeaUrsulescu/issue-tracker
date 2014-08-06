@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ActivationRepository {
 
-	private static final Logger log = Logger
+	private static final Logger LOG = Logger
 			.getLogger(ActivationRepository.class.getName());
 
 	@PersistenceContext
@@ -35,10 +35,10 @@ public class ActivationRepository {
 		query.setParameter("keyHash", keyHash);
 		try {
 			activation = query.getSingleResult();
-			log.log(Level.INFO,	"An activation was found for " + activation.getUserName());
+			LOG.log(Level.INFO,	"An activation was found for " + activation.getUserName());
 		} catch (NoResultException ex) {
 			activation = null;
-			log.log(Level.INFO, "No activation was found for given key!");
+			LOG.log(Level.INFO, "No activation was found for given key!");
 		}
 		return activation;
 	}

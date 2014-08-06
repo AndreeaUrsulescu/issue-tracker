@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class IssueService {
 
-	private static final Logger log = Logger.getLogger(IssueService.class.getName());
+	private static final Logger LOG = Logger.getLogger(IssueService.class.getName());
 
 	@Autowired
 	private IssueRepository issueRepository;
@@ -49,7 +49,7 @@ public class IssueService {
 
 	public void addIssue(Issue issue) {
 		this.issueRepository.create(issue);
-		log.log(Level.INFO, "Issue " + issue.getId() + " was created");
+		LOG.log(Level.INFO, "Issue " + issue.getId() + " was created");
 	}
 
 	public void updateIssue(Issue issue) {
@@ -60,7 +60,7 @@ public class IssueService {
 		newIssue.setState(issue.getState());
 
 		if (null == newIssue.getAssignee()) {
-			log.log(Level.INFO, "Issue " + newIssue.getId() + " doesn't have an assignee , no email send.");
+			LOG.log(Level.INFO, "Issue " + newIssue.getId() + " doesn't have an assignee , no email send.");
 
 		} else {
 
@@ -72,11 +72,11 @@ public class IssueService {
 
 			mh.setUp(email);
 			new Thread(mh).start();
-			log.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
+			LOG.log(Level.INFO, "Email send to assignee of issue " + newIssue.getId());
 		}
 
 		this.issueRepository.update(newIssue);
-		log.log(Level.INFO, "Issue " + newIssue.getId() + " was updated");
+		LOG.log(Level.INFO, "Issue " + newIssue.getId() + " was updated");
 	}
 
 	public IssuePojo getIssue(Long id) {
@@ -91,8 +91,9 @@ public class IssueService {
 
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
-		if (labels.isEmpty())
-			log.log(Level.INFO, "There are no labels for issue " + id);
+		if (labels.isEmpty()){
+			LOG.log(Level.INFO, "There are no labels for issue " + id);
+		}
 
 		for (Label label : labels) {
 			LabelPojo pojoLabel = labelService.convertLabelEntityToPojoLabel(label);
@@ -130,9 +131,9 @@ public class IssueService {
 		List<Issue> issuesListEntity = issueRepository.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
-		if (issuesListEntity.isEmpty())
-			log.log(Level.INFO, "There are no issues for current page");
-
+		if (issuesListEntity.isEmpty()) {
+			LOG.log(Level.INFO, "There are no issues for current page");
+		}
 		for (int index = 0; index < issuesListEntity.size(); index++) {
 			Issue issueEntity = issuesListEntity.get(index);
 			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
@@ -169,10 +170,10 @@ public class IssueService {
 		mh.setUp(email);
 		new Thread(mh).start();
 		// mail.sendMail(email);
-		log.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
+		LOG.log(Level.INFO, "Email send to assignee of issue " + issue.getId());
 
 		issueRepository.update(issue);
-		log.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
+		LOG.log(Level.INFO, "Issue " + issueId + " was assigned to " + assignee.getUserName());
 	}
 
 	public boolean unassignUserToIssue(Long issueId, String username) {
@@ -184,12 +185,12 @@ public class IssueService {
 			if (dBIssueUsername.equals(username)) {
 				issue.setAssignee(null);
 				issueRepository.update(issue);
-				log.log(Level.INFO, "Issue " + issueId + " is not assigned to anybody");
+				LOG.log(Level.INFO, "Issue " + issueId + " is not assigned to anybody");
 				return true;
 			}
 
 		} else {
-			log.log(Level.INFO, "Issue " + issueId + " does not have an assignee");
+			LOG.log(Level.INFO, "Issue " + issueId + " does not have an assignee");
 		}
 		return false;
 	}

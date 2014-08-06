@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LabelService {
 	
-	private static final Logger log = Logger.getLogger(LabelService.class
+	private static final Logger LOG = Logger.getLogger(LabelService.class
 			.getName());
 	
 	@Autowired
@@ -42,9 +42,9 @@ public class LabelService {
 		List<Label> labels = labelRepository.findLabels();
 		List<LabelPojo> pojoLabels = new ArrayList<LabelPojo>();
 		
-		if (labels.isEmpty())
-			log.log(Level.INFO, "There are no labels");
-		
+		if (labels.isEmpty()){
+			LOG.log(Level.INFO, "There are no labels");
+		}
 		for (Label label : labels) {
 			pojoLabels.add(convertLabelEntityToPojoLabel(label));
 		}
@@ -58,25 +58,25 @@ public class LabelService {
 					.contains(label);
 			if (!exists) {
 				issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-				log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
+				LOG.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
 				return true;
 			} else {
-				log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' is already assigned to issue " + id);
+				LOG.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' is already assigned to issue " + id);
 				return false;
 			}
 		} else {
 			label = new Label();
 			convertPojoLabelToLabelEntity(labelPojo, label);
 			labelRepository.create(label);
-			log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was created");
+			LOG.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was created");
 			issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-			log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
+			LOG.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
 		}
 		return true;
 	}
 	
 	public void removeLabelFromIssue(Long issueId, LabelPojo labelToRemove) {
 		issueLabelRepository.removeLabelFromIssue(issueId, labelToRemove.getLabelName());
-		log.log(Level.INFO, "Label '" + labelToRemove.getLabelName() + "' was removed from issue " + issueId);
+		LOG.log(Level.INFO, "Label '" + labelToRemove.getLabelName() + "' was removed from issue " + issueId);
 	}
 }

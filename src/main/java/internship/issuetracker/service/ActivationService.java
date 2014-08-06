@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActivationService {
 
-	private static final Logger log = Logger.getLogger(ActivationService.class
+	private static final Logger LOG = Logger.getLogger(ActivationService.class
 			.getName());
 
 	@Autowired
@@ -20,7 +20,7 @@ public class ActivationService {
 
 	public void addActivation(Activation activation) {
 		this.activationRepository.create(activation);
-		log.log(Level.INFO, "Activation entity was persisted");
+		LOG.log(Level.INFO, "Activation entity was persisted");
 	}
 
 	public Activation getActivation(String keyHash) {
@@ -29,7 +29,7 @@ public class ActivationService {
 
 	public void removeActivation(Activation activation) {
 		this.activationRepository.remove(activation);
-		log.log(Level.INFO, "Activation entity was removed");
+		LOG.log(Level.INFO, "Activation entity was removed");
 	}
 
 }

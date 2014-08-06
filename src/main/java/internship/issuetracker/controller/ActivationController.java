@@ -23,9 +23,9 @@ public class ActivationController {
 	@RequestMapping(value = "/{hashKey}", method = RequestMethod.GET)
 	public String activate(@PathVariable String hashKey) {
 		Activation activation = activationService.getActivation(hashKey);
-		if (null == activation)
+		if (null == activation) {
 			return "activationFailure";
-		else {
+		} else {
 			User user = activation.getUserFromActivation();
 			userService.addUser(user);
 			activationService.removeActivation(activation);

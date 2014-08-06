@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchService {
 
-	private static final Logger log = Logger.getLogger(SearchService.class.getName());
+	private static final Logger LOG = Logger.getLogger(SearchService.class.getName());
 
 	@Autowired
 	private SearchRepository searchRepository;
@@ -47,7 +47,7 @@ public class SearchService {
 		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
 		if (issuesListEntity.isEmpty()) {
-			log.log(Level.INFO, "There are no issues for the given search criteria");
+			LOG.log(Level.INFO, "There are no issues for the given search criteria");
 		}
 
 		return entityToPojo(issuesListEntity, searchParameters.getContent());

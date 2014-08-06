@@ -54,11 +54,11 @@ public class SearchRepository {
 		String orderField = convertToSortType(parameters.getSortCriteria());
 		criteriaQuery.where(predicates);
 
-		if ("Descending".equals(parameters.getSortType()))
+		if ("Descending".equals(parameters.getSortType())) {
 			criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
-		else
+		} else {
 			criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
-
+		}
 		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
 		query.setMaxResults(itemsPerPage);
 		query.setFirstResult((parameters.getPageNumber() - 1) * itemsPerPage);

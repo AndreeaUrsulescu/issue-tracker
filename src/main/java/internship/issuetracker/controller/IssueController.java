@@ -12,7 +12,6 @@ import internship.issuetracker.utils.ApplicationParameters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +53,9 @@ public class IssueController {
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
 	public String createIssuePage(@Valid Issue issue,
 			HttpServletRequest request, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
 			return "createIssue";
+		}
 		issue.setOwner((User) request.getSession().getAttribute("user"));
 		issueService.addIssue(issue);
 		return "redirect:/issues";
@@ -63,7 +63,6 @@ public class IssueController {
 
 	@RequestMapping(value = { "/issuesChatRoom" })
 	public String viewIssuesRoom() {
-		// model.addAttribute("user", new User());
 		return "chatRoomIssues";
 	}
 
@@ -110,7 +109,7 @@ public class IssueController {
 			HttpServletRequest request) {
 
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		List<CommentPojo> pojoComments = new LinkedList<CommentPojo>();
+		List<CommentPojo> pojoComments = null;
 		IssuePojo issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
