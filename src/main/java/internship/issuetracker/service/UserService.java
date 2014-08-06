@@ -23,12 +23,12 @@ public class UserService {
 
 	public void addUser(User user) {
 		this.userRepository.create(user);
-		log.log(Level.INFO, "User " + user.getUserName() + " was registered");
+		LOG.log(Level.INFO, "User " + user.getUserName() + " was registered");
 	}
 
 	public void updateUser(User user) {
 		this.userRepository.update(user);
-		log.log(Level.INFO, "User " + user.getUserName() + " was updated!");
+		LOG.log(Level.INFO, "User " + user.getUserName() + " was updated!");
 	}
 
 	
@@ -52,9 +52,9 @@ public class UserService {
 		List<User> allUsers = userRepository.findAll();
 		List<UserPojo> allUsersPojo = new ArrayList<>();
 
-		if (allUsers.size() == 0)
-			log.log(Level.INFO, "There are no users");
-
+		if (allUsers.isEmpty()){
+			LOG.log(Level.INFO, "There are no users");
+		}
 		for (int index = 0; index < allUsers.size(); index++) {
 			User userEntity = allUsers.get(index);
 			UserPojo userPojo = new UserPojo();

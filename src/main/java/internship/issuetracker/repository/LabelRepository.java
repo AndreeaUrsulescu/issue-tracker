@@ -33,7 +33,7 @@ public class LabelRepository {
 				Label.class);
 		List<Label>labels = query.setParameter("labelName", labelName).getResultList();
 		//we need this check in case this is a new label
-		if(labels.size() > 0){
+		if(labels.isEmpty()){
 		    return labels.get(0);
 		}
 		//we test for null in a later stage

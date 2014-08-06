@@ -12,9 +12,12 @@ $(function () {
                         .append($('<td/>').text(file.filename))
                         .append($('<td/>').text(file.fileType))
                         .append($('<td/>').html("<a href='" + file.issueId + "/download/" + file.id + "'><img src='" + ctx +"/resources/assets/images/Save-icon.png'></a>"))
-                        .append($('<td/>').html("<a href='" + file.issueId + "/remove/" + file.id + "'><img src='" + ctx + "/resources/assets/images/unX.png' onclick='removeAttachment(" + file.id + ")'></a>"))
+                        .append($('<td/>').html("<img src='" + ctx + "/resources/assets/images/unX.png' onclick='removeAttachment(" + file.id + ")'>"))
                         );//end $("#uploaded-files").append()
-            }); 
+            });
+            if (data.result.length == 5) {
+            	$('#fileupload').prop("disabled", true);
+            }
         },
  
         progressall: function (e, data) {
@@ -23,19 +26,30 @@ $(function () {
                 'width',
                 progress + '%'
             );
-        },
- 
-        dropZone: $('#dropzone')
+        }
     });
 });
 
 function removeAttachment(id) {
-	alert("i'm in");
 	$.ajax({
 		type : "DELETE",
-		url : "remove/" + id,
+		url : "227/remove/" + id,
 		success : function(rsp) {
 			console.log(rsp.result);
+			if (rsp.result < 5)
+				$('#fileupload').prop("disabled", false);
+			
+			 $("tr:has(td)").remove();
+	            $.each(rsp.attachments, function (index, file) {
+	 
+	                $("#uploaded-files").append(
+	                        $('<tr/>')
+	                        .append($('<td/>').text(file.filename))
+	                        .append($('<td/>').text(file.fileType))
+	                        .append($('<td/>').html("<a href='" + file.issueId + "/download/" + file.id + "'><img src='" + ctx +"/resources/assets/images/Save-icon.png'></a>"))
+	                        .append($('<td/>').html("<img src='" + ctx + "/resources/assets/images/unX.png' onclick='removeAttachment(" + file.id + ")'>"))
+	                        );//end $("#uploaded-files").append()
+	            });
 		}
 	});
 }

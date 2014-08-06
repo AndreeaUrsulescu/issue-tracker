@@ -16,11 +16,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 	private static final Logger log = Logger
 			.getLogger(LogoutSuccessHandler.class.getName());
 
-	public void logout(HttpServletRequest request,
-			HttpServletResponse response, Authentication authentication) {
-		
-	}
-
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication)
