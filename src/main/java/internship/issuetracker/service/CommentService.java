@@ -45,11 +45,6 @@ public class CommentService {
 				"An comment was created for issue " + comment.getIssueId());
 	}
 
-	public void updateComment(Comment comment) {
-		this.commentRepository.update(comment);
-		log.log(Level.INFO, "A comment was updated for issue "
-				+ comment.getIssue().getId());
-	}
 
 	public List<CommentPojo> getCommentsForIssue(IssuePojo issuePojo) {
 		Issue issue = issueRepository.findIssue(issuePojo.getId());
@@ -70,14 +65,4 @@ public class CommentService {
 		return pojoComments;
 	}
 
-	public List<Comment> getCommentForOwner(User user) {
-		List<Comment> comments = this.commentRepository
-				.findCommentByOwner(user);
-
-		if (comments.size() == 0) {
-			log.log(Level.INFO,	"There are no comments posted by " + user.getUserName());
-		}
-
-		return comments;
-	}
 }

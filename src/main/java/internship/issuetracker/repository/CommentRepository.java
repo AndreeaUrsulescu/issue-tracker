@@ -24,10 +24,6 @@ public class CommentRepository {
 		em.persist(comment);
 	}
 
-	public void update(Comment comment) {
-		em.merge(comment);
-	}
-
 	public List<Comment> findCommentsByIssue(Issue issue) {
 		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_ISSUE,
 				Comment.class);
