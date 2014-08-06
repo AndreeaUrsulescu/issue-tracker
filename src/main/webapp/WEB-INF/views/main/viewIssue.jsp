@@ -99,11 +99,12 @@ myListener();
 
 
 	<div id="uploaded">
-		<table id="uploaded-files">
+		<table id="viewuploadedfiles">
 		        <tr>
 		            <th>File Name</th>
 		            <th>File Type</th>
 		            <th>Download</th>
+		            <!-- <th>Remove</th> -->
 		        </tr>
 		        
 		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
@@ -111,6 +112,7 @@ myListener();
 		        		<td>${attachment.filename}</td>
 		        		<td>${attachment.fileType}</td>
 		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
+		        		<%-- <td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png"></a></td> --%>
 		        	</tr>
 		        </c:forEach>
 		    </table>
@@ -196,6 +198,7 @@ myListener();
 		            <th>File Name</th>
 		            <th>File Type</th>
 		            <th>Download</th>
+		            <!-- <th>Remove</th> -->
 		        </tr>
 		        
 		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
@@ -203,6 +206,7 @@ myListener();
 		        		<td>${attachment.filename}</td>
 		        		<td>${attachment.fileType}</td>
 		        		<td><a href='${viewIssue.id}/download/${attachment.id}'>Download</a></td>
+		        		<%-- <td><a href='${viewIssue.id}/remove/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/unX.png"></a></td> --%>
 		        	</tr>
 		        </c:forEach>
 		    </table>

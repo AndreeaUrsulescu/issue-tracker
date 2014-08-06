@@ -2,11 +2,14 @@ package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Attachment;
 import internship.issuetracker.entities.Issue;
+import internship.issuetracker.pojo.AttachmentPojo;
 import internship.issuetracker.repository.AttachmentRepository;
 import internship.issuetracker.repository.IssueRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +27,7 @@ public class AttachmentService {
 	@Autowired
 	private IssueRepository issueRepository;
 	
-	public Long uploadFile(Long issueId, MultipartFile mpf) {
+	public void uploadFile(Long issueId, MultipartFile mpf) {
 		Attachment attachment = new Attachment();
 		attachment.setFilename(mpf.getOriginalFilename());
 		attachment.setCreationDate(new Date());
@@ -40,10 +43,32 @@ public class AttachmentService {
 		attachmentRepository.create(attachment);
 		issue.getAttachments().add(attachment);
 		issueRepository.update(issue);
-		return attachment.getId();
 	}
 	
 	public Attachment getAttachment(Long id) {
 		return attachmentRepository.getAttachment(id);
 	}
+	
+	public void removeAttachment(Long id, Long issueId) {
+		attachmentRepository.remove(id);
+		System.out.println(issueRepository.findIssue(issueId).getAttachments().size());
+	}
+	
+	public List<AttachmentPojo> convertToPojo(Long issueId) {
+		List<AttachmentPojo> attachmentPojos = new ArrayList<AttachmentPojo>();
+		
+		Issue issue = issueRepository.findIssue(issueId);
+		if (issue.getAttachments().size() > 0) {
+			for (Attachment attachment : issue.getAttachments()) {
+				AttachmentPojo attachmentPojo = new AttachmentPojo();
+				attachmentPojo.setIssueId(issue.getId());
+				attachmentPojo.setId(attachment.getId());
+				attachmentPojo.setFilename(attachment.getFilename());
+				attachmentPojo.setFileType(attachment.getContentType());
+				attachmentPojo.setContent(attachment.getContent());
+				attachmentPojos.add(attachmentPojo);
+			}
+		}
+		return attachmentPojos;
+	} 
 }

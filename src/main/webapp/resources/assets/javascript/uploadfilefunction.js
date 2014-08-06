@@ -11,7 +11,8 @@ $(function () {
                         .append($('<td/>').text(file.filename))
                         .append($('<td/>').text(file.fileType))
                         .append($('<td/>').html("<a href='" + file.issueId + "/download/" + file.id + "'>Download</a>"))
-                        );
+                        
+                        )//end $("#uploaded-files").append()
             }); 
         },
  
@@ -21,6 +22,9 @@ $(function () {
                 'width',
                 progress + '%'
             );
-        }
+        },
+ 
+        dropZone: $('#dropzone')
     });
 });
+
