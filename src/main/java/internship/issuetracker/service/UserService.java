@@ -15,9 +15,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-	
-	private static final Logger log = Logger.getLogger(UserService.class
-			.getName());
+
+	private static final Logger log = Logger.getLogger(UserService.class.getName());
 
 	@Autowired
 	private UserRepository userRepository;
@@ -26,16 +25,20 @@ public class UserService {
 		this.userRepository.create(user);
 		log.log(Level.INFO, "User " + user.getUserName() + " was registered");
 	}
-	
+
 	public void updateUser(User user) {
 		this.userRepository.update(user);
 		log.log(Level.INFO, "User " + user.getUserName() + " was updated!");
 	}
 
+	
+	
 	public boolean exists(String userName) {
 		return this.userRepository.exists(userName);
 	}
 
+	
+	
 	public boolean matchPassword(String userName, String password) {
 		String hashPassword = EncryptData.sha256(password);
 		return this.userRepository.matchPassword(userName, hashPassword);
@@ -48,7 +51,7 @@ public class UserService {
 	public List<UserPojo> findAllUsers() {
 		List<User> allUsers = userRepository.findAll();
 		List<UserPojo> allUsersPojo = new ArrayList<>();
-		
+
 		if (allUsers.size() == 0)
 			log.log(Level.INFO, "There are no users");
 
