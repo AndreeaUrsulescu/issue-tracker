@@ -42,7 +42,7 @@ public class LabelService {
 		List<Label> labels = labelRepository.findLabels();
 		List<LabelPojo> pojoLabels = new ArrayList<LabelPojo>();
 		
-		if (labels.size() == 0)
+		if (labels.isEmpty())
 			log.log(Level.INFO, "There are no labels");
 		
 		for (Label label : labels) {

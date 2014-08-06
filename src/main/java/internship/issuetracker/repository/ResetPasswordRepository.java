@@ -31,7 +31,7 @@ public class ResetPasswordRepository {
 	}
 
 	public ResetPassword findResetPasswordByKeyHash(String keyHash) {
-		ResetPassword resetPassword = new ResetPassword();
+		ResetPassword resetPassword = null;
 
 		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
 		query.setParameter("keyHash", keyHash);

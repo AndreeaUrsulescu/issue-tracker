@@ -90,7 +90,7 @@ public class IssueService {
 
 		List<Label> labels = issueLabelRepository.getLabelsForIssue(id);
 
-		if (labels.size() == 0)
+		if (labels.isEmpty())
 			log.log(Level.INFO, "There are no labels for issue " + id);
 
 		for (Label label : labels) {
@@ -129,7 +129,7 @@ public class IssueService {
 		List<Issue> issuesListEntity = issueRepository.findOrderedIssues(currentPage);
 		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
 
-		if (issuesListEntity.size() == 0)
+		if (issuesListEntity.isEmpty())
 			log.log(Level.INFO, "There are no issues for current page");
 
 		for (int index = 0; index < issuesListEntity.size(); index++) {

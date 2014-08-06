@@ -51,7 +51,7 @@ public class CommentService {
 		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
 		List<Comment> comments = commentRepository.findCommentsByIssue(issue);
 
-		if (comments.size() == 0){
+		if (comments.isEmpty()){
 			log.log(Level.INFO,	"There are no comments for issue " + issuePojo.getId());
 		}
 

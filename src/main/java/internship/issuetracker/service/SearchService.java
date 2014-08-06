@@ -46,7 +46,7 @@ public class SearchService {
 
 		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
-		if (issuesListEntity.size() == 0) {
+		if (issuesListEntity.isEmpty()) {
 			log.log(Level.INFO, "There are no issues for the given search criteria");
 		}
 

@@ -38,7 +38,7 @@ public class IssueController {
 
 	@Autowired
 	private CommentService commentService;
-	
+
 	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
 	public String createIssuePage(Model model, HttpServletRequest request) {
 
@@ -46,7 +46,8 @@ public class IssueController {
 		Issue issue = new Issue();
 		model.addAttribute("user", user.getUserName());
 		model.addAttribute("issue", issue);
-		model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
+		model.addAttribute("date",
+				issue.getUpdateDate().toString().substring(0, 11));
 		return "createIssue";
 	}
 
@@ -59,16 +60,13 @@ public class IssueController {
 		issueService.addIssue(issue);
 		return "redirect:/issues";
 	}
-	
-	
-	
-	
-	@RequestMapping(value = {"/issuesChatRoom" })
+
+	@RequestMapping(value = { "/issuesChatRoom" })
 	public String viewIssuesRoom() {
-		//model.addAttribute("user", new User());
+		// model.addAttribute("user", new User());
 		return "chatRoomIssues";
-	}	
-	
+	}
+
 	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
 	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("viewIssue", issueService.getIssue(id));
@@ -107,7 +105,7 @@ public class IssueController {
 
 	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody  @Valid Comment comment,
+	public Map<String, Object> addComment(@RequestBody @Valid Comment comment,
 			@PathVariable Long id, BindingResult bindingResult,
 			HttpServletRequest request) {
 
@@ -116,40 +114,39 @@ public class IssueController {
 		IssuePojo issue = issueService.getIssue(id);
 		User user = (User) request.getSession().getAttribute("user");
 		Date currentDate = new Date();
-		CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
-		
+		CommentPojo commentPojo = new CommentPojo(user.getUserName(),
+				comment.getContent(), currentDate, issue.getId());
+
 		if (!bindingResult.hasErrors()) {
 			commentService.addComment(commentPojo);
-		    map.put("code", "success");
+			map.put("code", "success");
 		} else {
-		    map.put("code", "error");
+			map.put("code", "error");
 		}
-		
+
 		pojoComments = commentService.getCommentsForIssue(issue);
-		map.put("comments", pojoComments);				
-		
+		map.put("comments", pojoComments);
+
 		return map;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewIssuesPage(Model model) {
-				
-		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
-		
+
+		List<IssuePojo> issuesListPojo = issueService.getOrderedIssues(1);
+
 		model.addAttribute("issuesList", issuesListPojo);
-		model.addAttribute("listLength",issueService.numberOfIssues());
-		model.addAttribute("itemsPerPage", ApplicationParameters.itemsPerPage );
-		if(issueService.numberOfIssues()%ApplicationParameters.itemsPerPage==0)
-		{
-		model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage));
+		model.addAttribute("listLength", issueService.numberOfIssues());
+		model.addAttribute("itemsPerPage", ApplicationParameters.itemsPerPage);
+		if (issueService.numberOfIssues() % ApplicationParameters.itemsPerPage == 0) {
+			model.addAttribute(
+					"pages",
+					(int) (issueService.numberOfIssues() / ApplicationParameters.itemsPerPage));
+		} else {
+			model.addAttribute("pages", (int) (issueService.numberOfIssues()
+					/ ApplicationParameters.itemsPerPage + 1));
 		}
-		else
-		{
-			model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage+1));
-		}
-			return "issues";
+		return "issues";
 	}
-	
-	
 
 }

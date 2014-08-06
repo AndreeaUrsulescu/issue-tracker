@@ -49,7 +49,7 @@ public class UserService {
 		List<User> allUsers = userRepository.findAll();
 		List<UserPojo> allUsersPojo = new ArrayList<>();
 		
-		if (allUsers.size() == 0)
+		if (allUsers.isEmpty())
 			log.log(Level.INFO, "There are no users");
 
 		for (int index = 0; index < allUsers.size(); index++) {
