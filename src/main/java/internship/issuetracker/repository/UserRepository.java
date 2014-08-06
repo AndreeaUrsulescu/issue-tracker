@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserRepository {
-	private static final Logger log = Logger.getLogger( UserRepository.class.getName() );
-	
+	private static final Logger log = Logger.getLogger(UserRepository.class.getName());
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -26,7 +26,7 @@ public class UserRepository {
 		TypedQuery<User> query = em.createNamedQuery(User.FIND_ALL, User.class);
 		return query.getResultList();
 	}
-	
+
 	public void create(User user) {
 		em.persist(user);
 	}
@@ -58,7 +58,7 @@ public class UserRepository {
 		try {
 			user = query.getSingleResult();
 		} catch (NoResultException ex) {
-			log.log( Level.FINE, "NoResultException in userRepository.findUserByUserName({0})", userName);
+			log.log(Level.FINE, "NoResultException in userRepository.findUserByUserName({0})", userName);
 		}
 
 		return user;

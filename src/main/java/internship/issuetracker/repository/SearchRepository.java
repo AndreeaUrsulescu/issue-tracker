@@ -43,36 +43,6 @@ public class SearchRepository {
 		return "lastDate";
 	}
 
-	public List<Issue> findOrderedIssues(SearchFilterInt<Issue> filter, int currentPage, String orderField, String orderType) {
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
-		Root<Issue> root = criteriaQuery.from(Issue.class);
-		// //
-		orderField = convertToSortType(orderField);
-		criteriaQuery.where(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-
-		// //
-		if ("Descending".equals(orderType))
-			criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)), criteriaBuilder.desc(root.get("id")));
-		else
-			criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)), criteriaBuilder.asc(root.get("id")));
-		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
-		query.setMaxResults(itemsPerPage);
-		query.setFirstResult((currentPage - 1) * itemsPerPage);
-		return query.getResultList();
-	}
-
-	public int numberOfIssues(SearchFilterInt<Issue> filter) {
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
-		Root<Issue> root = criteriaQuery.from(Issue.class);
-		// //
-		criteriaQuery.where(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		// //
-		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
-		return query.getResultList().size();
-	}
-
 	public List<Issue> multiplePredicates(MultipleSearchParameter parameters) {
 
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
