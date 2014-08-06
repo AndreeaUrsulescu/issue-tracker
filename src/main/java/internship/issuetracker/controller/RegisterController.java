@@ -75,7 +75,7 @@ public class RegisterController {
 		}
 		
 		
-		String msg=msg1+ApplicationParameters.applicationRoot+ApplicationParameters.contextPath+"/activation/"+activation.getKeyHash()+msg2;
+		String msg=msg1+ApplicationParameters.applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
 		Email email=new Email();
 		email.setTo(activation.getEmail());
 		email.setSubject("Activation-issueTracker");	

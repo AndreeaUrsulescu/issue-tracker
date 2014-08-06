@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var comment = tinyMCE.get('comment-area').getContent();
 		$("#error-msg").text(" ");		
 		if(comment.length == 0){
-			$("#error-msg").text("Comment must not be empty");
+			$("#error-msg").text("Comment cannot be empty");
 			return false;
 		}
 		

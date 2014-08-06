@@ -38,12 +38,10 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 	
 	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
-	    
-	    <script src="${pageContext.request.contextPath}/resources/assets/javascript/issue-control.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/search.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/assets/javascript/chat.js"></script>
-	
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/createissue-validation.js"></script>
 	
 		<!-- rte -->
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/tinymce/tinymce.min.js"></script>

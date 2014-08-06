@@ -190,14 +190,10 @@ $(document).ready(function(){
     function validateLabel(){
 		var input=$("#tags");
 		var value=input.val().trim();
-		var label_regex=/^[a-zA-Z0-9]+$/;
+		var label_regex=/^[a-zA-Z0-9]{3,20}$/;
 		input.parent().parent().find(".error").text(" ");
-		if(value.length < 3|| value.length > 20) {
-			input.parent().parent().find(".error").text("The label's text has to be between 3 and 20 characters");
-			return false;
-		}
 		if(!value.match(label_regex)) {
-			input.parent().parent().find(".error").text("Alpha-numeric characters only");
+			input.parent().parent().find(".error").text("Label must have between 3 and 20 letters and numbers");
 			return false;
 		}
 		if (exists(value)) {
