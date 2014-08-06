@@ -14,7 +14,6 @@ import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.UserRepository;
-import internship.issuetracker.utils.HTMLParser;
 import internship.issuetracker.utils.IssueDifference;
 import internship.issuetracker.utils.MailHelper;
 
