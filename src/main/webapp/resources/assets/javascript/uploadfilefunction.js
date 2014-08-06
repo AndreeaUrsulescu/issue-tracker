@@ -33,7 +33,7 @@ $(function () {
 function removeAttachment(id) {
 	$.ajax({
 		type : "DELETE",
-		url : "227/remove/" + id,
+		url : window.location.origin + window.location.pathname+ "/remove/" + id,
 		success : function(rsp) {
 			console.log(rsp.result);
 			if (rsp.result < 5)
