@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class IssueRepository {
-	private static final Logger LOG = Logger.getLogger(UserRepository.class.getName());
+	private static final Logger log = Logger.getLogger(UserRepository.class.getName());
 
 	@PersistenceContext
 	private EntityManager em;
@@ -53,7 +53,7 @@ public class IssueRepository {
 		try {
 			return query.getSingleResult();
 		} catch (NoResultException ex) {
-			LOG.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")");
+			log.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")");
 			return new Issue();
 		}
 	}

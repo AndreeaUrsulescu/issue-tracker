@@ -14,18 +14,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AttachmentRepository {
-	private static final Logger LOG = Logger
+	private static final Logger log = Logger
 			.getLogger(ActivationRepository.class.getName());
 	@PersistenceContext
 	private EntityManager em;
 
 	public void create(Attachment attachment) {
 		em.persist(attachment);
-		LOG.log(Level.INFO, "An attachment was persisted!");
+		log.log(Level.INFO, "An attachment was persisted!");
 	}
 
 	public Attachment getAttachment(Long attachmentId) {
-		Attachment attachment = em.find(Attachment.class, attachmentId);
+		Attachment attachment = new Attachment();
+		attachment = em.find(Attachment.class, attachmentId);
 		return attachment;
 	}
 

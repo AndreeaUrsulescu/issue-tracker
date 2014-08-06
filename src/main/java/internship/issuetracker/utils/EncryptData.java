@@ -2,12 +2,8 @@ package internship.issuetracker.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class EncryptData {
-	
-	private static final Logger log = Logger.getLogger(EncryptData.class.getName());
 	public static String sha256(String password) {
 		String hashPassword = "";
 
@@ -24,7 +20,8 @@ public class EncryptData {
 			}
 			hashPassword = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
-			log.log(Level.SEVERE,"NoSuchAlgorithmException for " + password);
+
+			e.printStackTrace();
 			return "";
 		}
 		return hashPassword;

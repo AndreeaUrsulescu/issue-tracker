@@ -156,36 +156,20 @@ public class IssuePojo {
 		Date now=new Timestamp(o.getTime());
 		long dif=((now.getTime()-lastDate.getTime())/1000)/60;
 		
-		if(dif<=1){
-			update="about a minute";
-		}
-		else if((dif>1)&&(dif<60)){
-			update=dif+" minutes";
-		}
+		if(dif<=1) update="about a minute";
+		else if((dif>1)&&(dif<60)) update=dif+" minutes";
 		else{ 
 			dif/=60;
-			if((dif>=1)&&(dif<2)){
-				update="one hour";
-			}
-			else if((dif>=2)&&(dif<24)){
-				update=dif+" hours";
-			}
+			if((dif>=1)&&(dif<2)) update="one hour";
+			else if((dif>=2)&&(dif<24)) update=dif+" hours";
 			else{
 				dif/=24;
-				if((dif>=1)&&(dif<2)){
-					update="one day";
-				}
-				else if((dif>=2)&&(dif<7)){
-					update=dif+" days";
-				}
+				if((dif>=1)&&(dif<2)) update="one day";
+				else if((dif>=2)&&(dif<7)) update=dif+" days";
 				else{
 					dif/=7;
-					if((dif>1)&&(dif<2)){
-						update="one week";
-					}
-					else {
-						update=dif+" weeks";
-					}
+					if((dif>1)&&(dif<2)) update="one week";
+					else update=dif+" weeks";
 				}
 			}
 		}

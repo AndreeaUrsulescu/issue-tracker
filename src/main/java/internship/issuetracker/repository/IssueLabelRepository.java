@@ -61,7 +61,7 @@ public class IssueLabelRepository {
 
 		List<IssueLabel> result = query.getResultList();
 
-		if (result.isEmpty()) {
+		if (result.size() > 0) {
 			return result.get(0);
 		}
 		return null;

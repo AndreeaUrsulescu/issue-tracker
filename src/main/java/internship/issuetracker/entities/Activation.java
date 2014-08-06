@@ -15,18 +15,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = Activation.FIND_KEYHASH, query = "select a from Activation a where keyHash = :keyHash") })
+@NamedQueries({
+@NamedQuery(name = Activation.FIND_KEYHASH, query = "select a from Activation a where keyHash = :keyHash")})
 @Entity
 @Table(name = "Activations")
 public class Activation implements Serializable {
-
-	public static final String FIND_KEYHASH = "Activation.findKeyHash";
-
+	
+	public static final String FIND_KEYHASH="Activation.findKeyHash";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -46,18 +46,20 @@ public class Activation implements Serializable {
 	@Column(name = "user_password", nullable = false)
 	@Size(min = 5)
 	private String password;
-
-	public Activation() {
+	
+	public Activation()
+	{
 	}
-
-	public Activation(User user) {
-		this.email = user.getEmail();
-		this.userName = user.getUserName();
-		this.password = user.getPassword();
+	
+	public Activation(User user)
+	{
+		this.email=user.getEmail();
+		this.userName=user.getUserName();
+		this.password=user.getPassword();
 		this.EncryptPasswordAndKeyHash();
-
+		
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -69,7 +71,7 @@ public class Activation implements Serializable {
 	public String getKeyHash() {
 		return keyHash;
 	}
-
+	
 	public void setKeyHash(String keyHash) {
 		this.keyHash = keyHash;
 	}
@@ -98,29 +100,19 @@ public class Activation implements Serializable {
 		this.password = password;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(userName).append(email)
 				.append(password).toHashCode();
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Activation) {
-			Activation act = (Activation) obj;
-			return new EqualsBuilder().append(this.email, act.email)
-					.append(this.keyHash, act.keyHash)
-					.append(this.password, act.password)
-					.append(this.userName, act.userName).isEquals();
-		}
-		return false;
-	}
-
-	public void EncryptPasswordAndKeyHash() {
+		
+	public void EncryptPasswordAndKeyHash()
+	{
 		this.setKeyHash(EncryptData.sha256(this.getUserName()));
 		this.setPassword(EncryptData.sha256(password));
 	}
-
+	
 	public User getUserFromActivation() {
 		User user = new User();
 		user.setEmail(email);
@@ -128,5 +120,6 @@ public class Activation implements Serializable {
 		user.setUserName(userName);
 		return user;
 	}
-
+	
+	
 }

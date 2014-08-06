@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 	
-	private static final Logger LOG = Logger.getLogger(UserService.class
+	private static final Logger log = Logger.getLogger(UserService.class
 			.getName());
 
 	@Autowired
@@ -24,12 +24,12 @@ public class UserService {
 
 	public void addUser(User user) {
 		this.userRepository.create(user);
-		LOG.log(Level.INFO, "User " + user.getUserName() + " was registered");
+		log.log(Level.INFO, "User " + user.getUserName() + " was registered");
 	}
 	
 	public void updateUser(User user) {
 		this.userRepository.update(user);
-		LOG.log(Level.INFO, "User " + user.getUserName() + " was updated!");
+		log.log(Level.INFO, "User " + user.getUserName() + " was updated!");
 	}
 
 	public boolean exists(String userName) {
@@ -49,9 +49,9 @@ public class UserService {
 		List<User> allUsers = userRepository.findAll();
 		List<UserPojo> allUsersPojo = new ArrayList<>();
 		
-		if (allUsers.isEmpty()){
-			LOG.log(Level.INFO, "There are no users");
-		}
+		if (allUsers.size() == 0)
+			log.log(Level.INFO, "There are no users");
+
 		for (int index = 0; index < allUsers.size(); index++) {
 			User userEntity = allUsers.get(index);
 			UserPojo userPojo = new UserPojo();

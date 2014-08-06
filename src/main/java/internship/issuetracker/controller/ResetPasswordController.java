@@ -7,6 +7,7 @@ import internship.issuetracker.service.ResetPasswordService;
 import internship.issuetracker.service.UserService;
 import internship.issuetracker.utils.ApplicationParameters;
 import internship.issuetracker.utils.EncryptData;
+import internship.issuetracker.utils.HTMLParser;
 import internship.issuetracker.utils.MailHelper;
 import internship.issuetracker.utils.UserName;
 
@@ -29,25 +30,20 @@ public class ResetPasswordController {
 	@Autowired
 	private ResetPasswordService resetPasswordService;
 
-	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.GET)
+	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.GET)	
 	public String resetPassword(@PathVariable String hashPass, Model model) {
-		if (!resetPasswordService.existsResetPasswordForHash(hashPass)) {
+		if (!resetPasswordService.existsResetPasswordForHash(hashPass))
 			return "error";
-		}
 		model.addAttribute(new UserName());
 		return "resetPassword";
 	}
 
 	@RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.POST)
-	public String resetPassword(@Valid UserName userName,
-			@PathVariable String hashPass) {
-		if (!resetPasswordService.existsResetPasswordForHash(hashPass)) {
+	public String resetPassword(@Valid UserName userName, @PathVariable String hashPass) {
+		if (!resetPasswordService.existsResetPasswordForHash(hashPass))
 			return "resetPasswordFailure";
-		}
-		ResetPassword resetPassword = resetPasswordService
-				.getResetPassword(hashPass);
-		User user = userService.findUserByUserName(resetPassword.getOwner()
-				.getUserName());
+		ResetPassword resetPassword = resetPasswordService.getResetPassword(hashPass);
+		User user = userService.findUserByUserName(resetPassword.getOwner().getUserName());
 		user.setPassword(EncryptData.sha256(userName.getUserName()));
 		userService.updateUser(user);
 		resetPasswordService.removeResetPassword(resetPassword);
@@ -62,17 +58,14 @@ public class ResetPasswordController {
 
 	@RequestMapping(value = "/resetPasswordForm", method = RequestMethod.POST)
 	public String resetPasswordForm(@Valid UserName userName) {
-		if (!userService.exists(userName.getUserName())) {
+		if (!userService.exists(userName.getUserName()))
 			return "resetPasswordFormFailure";
-		}
 		User user = userService.findUserByUserName(userName.getUserName());
 		ResetPassword resetPassword = new ResetPassword(user);
 		if (!resetPasswordService.existsResetPasswordForUser(user)) {
 			resetPasswordService.addResetPassword(resetPassword);
 		}
-		String msg = "To reset your password click the link below :\n"
-				+ ApplicationParameters.applicationRoot
-				+ ApplicationParameters.contextPath + "/user/resetPassword/"
+		String msg = "To reset your password click the link below :\n" + ApplicationParameters.applicationRoot + ApplicationParameters.contextPath + "/user/resetPassword/"
 				+ resetPassword.getKeyHash();
 		Email email = new Email();
 		email.setTo(user.getEmail());

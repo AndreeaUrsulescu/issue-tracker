@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/issues")
+@RequestMapping( "/issues")
 public class RestIssueController {
 
 	@Autowired
@@ -45,9 +45,8 @@ public class RestIssueController {
 
 		List<IssuePojo> issuesListPojo = issueService
 				.getOrderedIssues(pageNumber);
-		for (IssuePojo issuePojo : issuesListPojo) {
+		for(IssuePojo issuePojo : issuesListPojo)
 			issuePojo.setContent(HTMLParser.convert(issuePojo.getContent()));
-		}
 		return issuesListPojo;
 	}
 
@@ -102,10 +101,9 @@ public class RestIssueController {
 	public Map<String, Object> unassignUser(
 			@PathVariable("issueId") Long issueId) {
 		Map<String, Object> response = new HashMap<>();
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
-		if (issueService.unassignUserToIssue(issueId, username)) {
+		if (issueService.unassignUserToIssue(issueId,username)){
 			response.put("response", "success");
 		} else {
 			response.put("response", "failure");

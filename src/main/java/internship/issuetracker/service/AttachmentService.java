@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class AttachmentService {
 	
-	private static final Logger LOG = Logger.getLogger(AttachmentService.class	.getName());
+	/*private static final Logger log = Logger.getLogger(CommentService.class
+			.getName());*/
 	
 	@Autowired
 	private AttachmentRepository attachmentRepository;
@@ -28,16 +27,16 @@ public class AttachmentService {
 	@Autowired
 	private IssueRepository issueRepository;
 	
-	public void uploadFile(Long issueId, MultipartFile multipartfile) {
+	public void uploadFile(Long issueId, MultipartFile mpf) {
 		Attachment attachment = new Attachment();
-		attachment.setFilename(multipartfile.getOriginalFilename());
+		attachment.setFilename(mpf.getOriginalFilename());
 		attachment.setCreationDate(new Date());
-		attachment.setContentType(multipartfile.getContentType());
+		attachment.setContentType(mpf.getContentType());
 		
 		try {
-			attachment.setContent(multipartfile.getBytes());
+			attachment.setContent(mpf.getBytes());
 		} catch (IOException e) {
-			LOG.log(Level.WARNING, "IOException for multipartfile getBytes");
+			e.printStackTrace();
 		}
 		
 		Issue issue = issueRepository.findIssue(issueId);
