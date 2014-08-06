@@ -51,7 +51,6 @@ public class AttachmentService {
 	
 	public void removeAttachment(Long id, Long issueId) {
 		attachmentRepository.remove(id);
-		System.out.println(issueRepository.findIssue(issueId).getAttachments().size());
 	}
 	
 	public List<AttachmentPojo> convertToPojo(Long issueId) {
