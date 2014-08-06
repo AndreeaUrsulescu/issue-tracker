@@ -15,9 +15,11 @@ import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.pojo.UserPojo;
+import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.service.IssueService;
 import internship.issuetracker.service.LabelService;
 import internship.issuetracker.service.SearchService;
+import internship.issuetracker.utils.ApplicationParameters;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +46,7 @@ public class RestIssueControllerTest {
 	UserPojo userPojo;
 	Issue issue;
 	IssuePojo issuePojo;
+	List<IssuePojo> issuePojoList;
 	Label label;
 	LabelPojo labelPojo;
 	List<LabelPojo> labelPojoList;
@@ -66,7 +69,7 @@ public class RestIssueControllerTest {
 		issue.setUpdateDate(new Date());
 		issue.setId((long)10);
 		issuePojo=new IssuePojo(issue.getId(),issue.getOwner().getUserName(),issue.getTitle(),issue.getContent(),issue.getUpdateDate(),issue.getLastDate(),issue.getState()); //nice...can't obtain an IssuePojo directly from an issue
-		
+		issuePojoList=new ArrayList<IssuePojo>(); 
 		label=new Label();
 		label.setId((long)10);
 		label.setLabelName("randomLabel");
@@ -129,6 +132,18 @@ public class RestIssueControllerTest {
 		Mockito.when(issueService.unassignUserToIssue((long)10, user.getUserName())).thenReturn(false);
 		result=restIssueController.unassignUser((long)10,request);
 		assertEquals(result.get("response"),"failure");
+	}
+	
+	@Test
+	public void multipleSearchTest()
+	{
+		Mockito.when(searchService.multiplePredicates(null)).thenReturn(issuePojoList);
+		Mockito.when(searchService.numberOfIssuesMultipleSearch(null)).thenReturn(2);
+		
+		Map<String,Object> result=restIssueController.multipleSearch(null);
+		assertEquals(result.get("issuesList"),issuePojoList);
+		assertEquals(result.get("listLength"),2);
+		assertEquals(result.get("issuesPerPage"),SearchRepository.itemsPerPage);		
 	}
 	
 	
