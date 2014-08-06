@@ -27,19 +27,16 @@
 
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<a data-toggle="popover" data-placement="right"
-						data-content="Parola" onclick="return validateForm();"><input
-						class=" btn btn-primary myBtn" type="submit" value="Sign in" /></a>
-				</div>
+				<button class='btn btn-primary myBtn center-block' type="submit">Sign in</button>
+			</div>
+			<div class="label label-primary registerError center-block">
+				<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+					<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />.
+	<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+				</c:if>
 			</div>
 		</form>
-		<div class="label label-warning registerError">
-			<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-				<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />.
-<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
-			</c:if>
-		</div>
+		
 	</div>
 	<!--for resetPassword-->
 	<div class="center-block resetPasswordLink" ><a href="${pageContext.request.contextPath}/user/resetPasswordForm" >Forgot your password?</a></div>
