@@ -25,14 +25,14 @@ public class ResetPasswordControllerTest {
     ResetPasswordService resetPasswordService;
     @InjectMocks
     ResetPasswordController resetPasswordController = new ResetPasswordController();
-    User user;
+    User user = new User();
+
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(userService.findUserByUserName("randomPierre")).thenReturn(user);
         Mockito.when(resetPasswordService.getResetPassword("randomPassword")).thenReturn(new ResetPassword(user));
-        user = new User();
         user.setEmail("random@random.fr");
         user.setPassword("randomPassword");
         user.setUserName("randomPierre");
