@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+    static private String msg1 = "To activate your account please click the link below \n\n";
+    static private String msg2 = "\n\n Thank you for your interest.";
 
     @Autowired
     private UserValidator userValidator;
@@ -35,9 +37,7 @@ public class RegisterController {
     @Autowired
     private ActivationService activationService;
 
-    static private String msg1 = "To activate your account please click the link below \n\n";
-    static private String msg2 = "\n\n Thank you for your interest.";
-
+   
     @RequestMapping(method = RequestMethod.GET)
     public String registerPage(Model model) {
         model.addAttribute(new User());

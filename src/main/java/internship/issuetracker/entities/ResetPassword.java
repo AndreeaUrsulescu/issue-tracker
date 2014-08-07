@@ -19,7 +19,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = ResetPassword.FIND_KEYHASH, query = "select a from ResetPassword a where keyHash = :keyHash"), @NamedQuery(name = ResetPassword.FIND_USER, query = "select a from ResetPassword a where owner = :owner") })
+@NamedQueries({ @NamedQuery(name = ResetPassword.FIND_KEYHASH, query = "select a from ResetPassword a where keyHash = :keyHash"),
+        @NamedQuery(name = ResetPassword.FIND_USER, query = "select a from ResetPassword a where owner = :owner") })
 @Entity
 @Table(name = "ResetPasswords")
 public class ResetPassword implements Serializable {

@@ -18,7 +18,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"), @NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password"), @NamedQuery(name = User.FIND_ALL, query = "select a from User a ") })
+@NamedQueries({ @NamedQuery(name = User.FIND_NAME, query = "select a from User a where lower(user_name) = lower(:user_name)"),
+        @NamedQuery(name = User.FIND_PASS, query = "select a from User a where lower(user_name) = lower(:user_name) AND user_password = :user_password"),
+        @NamedQuery(name = User.FIND_ALL, query = "select a from User a ") })
 @Entity
 @Table(name = "Users")
 public class User implements Serializable {

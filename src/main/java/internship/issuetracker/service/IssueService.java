@@ -99,7 +99,8 @@ public class IssueService {
             labelPojoList.add(pojoLabel);
         }
 
-        IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue.getState(), pojoComments, labelPojoList);
+        IssuePojo issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue
+                .getState(), pojoComments, labelPojoList);
         if (issue.getAssignee() != null) {
             issuePojo.setAssignee(issue.getAssignee().getUserName());
         }
@@ -133,7 +134,8 @@ public class IssueService {
         }
         for (int index = 0; index < issuesListEntity.size(); index++) {
             Issue issueEntity = issuesListEntity.get(index);
-            IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+            IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), issueEntity.getContent(), issueEntity
+                    .getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
 
             if (issueEntity.getAssignee() != null) {
                 issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
@@ -156,7 +158,8 @@ public class IssueService {
         Issue issue = issueRepository.findIssue(issueId);
         issue.setAssignee(assignee);
 
-        String x = "\n\nYou became the assignee for the issue :\n\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/issues/issue/" + issue.getId();
+        String x = "\n\nYou became the assignee for the issue :\n\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/issues/issue/"
+                + issue.getId();
         Email email = new Email();
         email.setTo(issue.getAssignee().getEmail());
         email.setSubject("IssueTracker - AssigneIssue");

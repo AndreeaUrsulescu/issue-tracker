@@ -70,6 +70,11 @@ public class IssueServiceTest {
         issueService.addIssue(issue);
         Mockito.verify(issueRepository).create(issue);
     }
+    
+    @Test
+    public void testNumberOfIssues(){
+        assert(issueService.numberOfIssues() > 0);
+    }
 
     @Test
     public void testAssignUserToIssue() {
