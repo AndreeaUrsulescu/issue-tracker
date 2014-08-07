@@ -21,7 +21,7 @@ public final class ApplicationParameters {
     public static final String STATE_CHANGED_MSG;
     public static final String EMAIL_ADDRESS;
     public static final String ACTIVATION_EMAIL_SUBJECT;
-    public static Properties properties;
+    private static Properties properties;
     public static final String CONTEXT_PATH;
     
     private ApplicationParameters() {
@@ -31,15 +31,8 @@ public final class ApplicationParameters {
 
 
     static {
-        int tempitemsPerPage;
         loadPropertiesFile();
-        try {
-            tempitemsPerPage = Integer.parseInt(properties.getProperty("itemsPerPage"));
-        } catch (NumberFormatException numberFormatException) {
-            LOG.log(Level.INFO, "Could not parse number of items per page, using default 10", numberFormatException);
-            tempitemsPerPage = 6;
-        }
-        ITEMS_PER_PAGE = tempitemsPerPage;
+        ITEMS_PER_PAGE = setNumberofIssuesPerPage();
         ACTIVATION_EMAIL_PART_1 = properties.getProperty("activationEmailContentPart1");
         ACTIVATION_EMAIL_PART_2 = properties.getProperty("activationEmailContentPart2");
         APPLICATION_ROOT = properties.getProperty("applicationRoot");
@@ -50,7 +43,16 @@ public final class ApplicationParameters {
         ACTIVATION_EMAIL_SUBJECT = properties.getProperty("activationEmailSubject");
 
     }
-
+    private static int setNumberofIssuesPerPage(){
+        int tempitemsPerPage;
+        try {
+            tempitemsPerPage = Integer.parseInt(properties.getProperty("itemsPerPage"));
+        } catch (NumberFormatException numberFormatException) {
+            LOG.log(Level.INFO, "Could not parse number of items per page, using default 10", numberFormatException);
+            tempitemsPerPage = 6;
+        }
+        return tempitemsPerPage;
+    }
     public static void loadPropertiesFile() {
         Resource resource = null;
         InputStream inputStream = null;
