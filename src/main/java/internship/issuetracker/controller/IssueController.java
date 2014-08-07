@@ -150,6 +150,8 @@ public class IssueController {
 			return "issues";
 	}
 	
-	
-
+	@RequestMapping(value = "/",method = RequestMethod.GET)
+	public String redirect() {
+			return "redirect:/issues";
+	}
 }
