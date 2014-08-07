@@ -27,7 +27,8 @@ public class SearchService {
         int count = 0;
         for (int index = 0; index < issuesListEntity.size(); index++) {
             Issue issueEntity = issuesListEntity.get(index);
-            IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()), issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+            IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
+                    issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
             if (null != issueEntity.getAssignee()) {
                 issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
             }

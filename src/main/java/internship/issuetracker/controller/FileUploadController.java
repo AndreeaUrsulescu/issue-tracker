@@ -32,8 +32,8 @@ public class FileUploadController {
     private IssueService issueService;
 
     @RequestMapping(value = "/issues/issue/{id}/upload", method = RequestMethod.POST)
-    public @ResponseBody
-    List<AttachmentPojo> upload(@PathVariable Long id, MultipartHttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public List<AttachmentPojo> upload(@PathVariable Long id, MultipartHttpServletRequest request, HttpServletResponse response) {
 
         List<AttachmentPojo> files = new LinkedList<AttachmentPojo>();
         Iterator<String> itr = request.getFileNames();

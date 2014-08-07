@@ -17,7 +17,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"), @NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
+@NamedQueries({ @NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
+        @NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
 @Entity
 @Table(name = "Labels")
 public class Label implements Serializable {

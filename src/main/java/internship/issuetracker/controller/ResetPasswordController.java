@@ -67,7 +67,8 @@ public class ResetPasswordController {
         if (!resetPasswordService.existsResetPasswordForUser(user)) {
             resetPasswordService.addResetPassword(resetPassword);
         }
-        String msg = "To reset your password click the link below :\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/user/resetPassword/" + resetPassword.getKeyHash();
+        String msg = "To reset your password click the link below :\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/user/resetPassword/"
+                + resetPassword.getKeyHash();
         Email email = new Email();
         email.setTo(user.getEmail());
         email.setSubject("Reset password-issueTracker");

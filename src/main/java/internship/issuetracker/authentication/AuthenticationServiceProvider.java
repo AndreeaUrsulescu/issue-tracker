@@ -20,7 +20,7 @@ public class AuthenticationServiceProvider implements AuthenticationProvider {
     private UserService userService;
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) {
 
         String userName = authentication.getName();
         String password = authentication.getCredentials().toString();

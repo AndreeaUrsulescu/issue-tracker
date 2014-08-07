@@ -30,6 +30,10 @@
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.iframe-transport.js"></script>
 		
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.fileupload.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.fileupload-process.js"></script>
+		
+		<script src="${pageContext.request.contextPath}/resources/assets/javascript/jquery.fileupload-validate.js"></script>
 
 		<script src="${pageContext.request.contextPath}/resources/assets/javascript/comments.js"></script>
 

@@ -20,9 +20,8 @@ public class ContentFilter implements SearchFilterInt<Issue> {
     public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
 
         String pattern = "%" + content + "%";
-        Path<String> path = root.get("searchContent");
-        Predicate predicate = cb.like(cb.lower(path), pattern);
-        return predicate;
+        Path<String> path = root.get("searchContent");       
+        return cb.like(cb.lower(path), pattern);
 
     }
 }
