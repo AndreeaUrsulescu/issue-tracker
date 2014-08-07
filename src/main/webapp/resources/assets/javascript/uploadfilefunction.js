@@ -1,4 +1,12 @@
 $(function () {
+		
+		$("#fileupload").on("click", function(){
+			$('#progress .bar').css(
+	                'width',
+	                '0' + '%'
+	            );
+		});
+		
     $('#fileupload').fileupload({
         dataType: 'json',
  
@@ -16,7 +24,7 @@ $(function () {
                         );//end $("#uploaded-files").append()
             });
             if (data.result.length == 5) {
-            	$('#fileupload').prop("disabled", true);
+            	$('.fileUploadButton').prop("disabled", true);
             }
         },
  
@@ -33,11 +41,11 @@ $(function () {
 function removeAttachment(id) {
 	$.ajax({
 		type : "DELETE",
-		url : "227/remove/" + id,
+		url : window.location.origin + window.location.pathname+ "/remove/" + id,
 		success : function(rsp) {
 			console.log(rsp.result);
 			if (rsp.result < 5)
-				$('#fileupload').prop("disabled", false);
+				$('.fileUploadButton').prop("disabled", false);
 			
 			 $("tr:has(td)").remove();
 	            $.each(rsp.attachments, function (index, file) {
@@ -53,3 +61,9 @@ function removeAttachment(id) {
 		}
 	});
 }
+
+$(document).ready(function(){
+	$(".fileUploadButton").click(function() {
+		  $("#fileupload").click();
+		});
+});
