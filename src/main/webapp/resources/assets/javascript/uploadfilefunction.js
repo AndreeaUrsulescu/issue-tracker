@@ -10,26 +10,6 @@ $(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
         
-        add: function(e, data) {
-            var uploadErrors = [];
-            var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
-            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
-                uploadErrors.push('Not an accepted file type');
-            }
-            
-            if(data.originalFiles[0]['size'] != 0 && data.originalFiles[0]['size'] > 5000000) {
-                uploadErrors.push('Filesize is too big');
-            }
-            if(uploadErrors.length > 0) {
-            	for (var i = 0; i < uploadErrors.length; i++) {
-            		$("#editIssueFileUpload").children('.error').append(uploadErrors[i]).append("<br>");
-            	}
-            } else {
-                data.submit();
-            }
-            
-    },
- 
         done: function (e, data) {
         	
             $("tr:has(td)").remove();
@@ -56,7 +36,13 @@ $(function () {
                 'width',
                 progress + '%'
             );
-        }
+        },
+        processfail: function(e, data) {
+        	$("#editIssueFileUpload").children('.error').append(data.files[data.index].error);
+        },
+        
+        acceptFileTypes: /(\.|\/)(jpe?g|png|gif|pdf|txt|doc|ppt|pptx|xls|xlsx|docx)$/i,
+        maxFileSize: 5000000
     });
 	});
 });
