@@ -141,9 +141,9 @@
 				</span> <span class="title"> <c:out value="${issue.title}" /> </span> 
 				<span class="content"> ${issue.content} </span>
 				
-					<div class="asigneeInfoPostIt">
+					<span class="asigneeInfoPostIt">
 						<span>Assignee:</span> <span>${issue.assignee}</span>
-					</div> <label class="owner">Updated ${issue.update} ago by
+					</span> <label class="owner">Updated ${issue.update} ago by
 						${issue.owner}</label> <!-- </span>  -->
 				</a>
 			</div>

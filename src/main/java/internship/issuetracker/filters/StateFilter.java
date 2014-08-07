@@ -18,8 +18,7 @@ public class StateFilter implements SearchFilterInt<Issue> {
 
     @Override
     public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
-        Predicate builtPredicate = cb.equal(root.get("state"), state);
-        return builtPredicate;
+        return  cb.equal(root.get("state"), state);
     }
 
 }
