@@ -5,7 +5,7 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
-<<script type="text/javascript">
+<script type="text/javascript">
 $("#searchBtn").click();
 </script>
 
