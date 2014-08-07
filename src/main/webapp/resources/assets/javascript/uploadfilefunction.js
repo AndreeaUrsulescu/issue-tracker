@@ -21,7 +21,9 @@ $(function () {
                 uploadErrors.push('Filesize is too big');
             }
             if(uploadErrors.length > 0) {
-            	$("#editIssueFileUpload").children('.error').text(uploadErrors.join("\n"));
+            	for (var i = 0; i < uploadErrors.length; i++) {
+            		$("#editIssueFileUpload").children('.error').append(uploadErrors[i]).append("<br>");
+            	}
             } else {
                 data.submit();
             }

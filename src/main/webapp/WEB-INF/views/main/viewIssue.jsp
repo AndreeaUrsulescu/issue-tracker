@@ -210,7 +210,7 @@ myListener();
 					</button>
 				</c:otherwise>
 			</c:choose>
-		    
+		    <br>
 		    <span class = "error"></span>
 		 
 		    <div id="progress" class="progress">
