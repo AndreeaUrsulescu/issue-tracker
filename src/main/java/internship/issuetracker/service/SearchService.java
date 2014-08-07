@@ -3,7 +3,6 @@ package internship.issuetracker.service;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.pojo.IssuePojo;
 import internship.issuetracker.pojo.MultipleSearchParameter;
-import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.utils.HTMLParser;
 
@@ -18,41 +17,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchService {
 
-	private static final Logger LOG = Logger.getLogger(SearchService.class.getName());
+    private static final Logger LOG = Logger.getLogger(SearchService.class.getName());
 
-	@Autowired
-	private SearchRepository searchRepository;
+    @Autowired
+    private SearchRepository searchRepository;
 
-	private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity, String searchContent) {
-		List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
-		int count = 0;
-		for (int index = 0; index < issuesListEntity.size(); index++) {
-			Issue issueEntity = issuesListEntity.get(index);
-			IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
-					issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
-			if (null != issueEntity.getAssignee()) {
-				issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
-			}
-			issuesListPojo.add(count, issuePojo);
-			count++;
-		}
-		return issuesListPojo;
-	}
+    private List<IssuePojo> entityToPojo(List<Issue> issuesListEntity, String searchContent) {
+        List<IssuePojo> issuesListPojo = new ArrayList<IssuePojo>();
+        int count = 0;
+        for (int index = 0; index < issuesListEntity.size(); index++) {
+            Issue issueEntity = issuesListEntity.get(index);
+            IssuePojo issuePojo = new IssuePojo(issueEntity.getId(), issueEntity.getOwner().getUserName(), issueEntity.getTitle(), HTMLParser.convert(issueEntity.getContent()),
+                    issueEntity.getUpdateDate(), issueEntity.getLastDate(), issueEntity.getState());
+            if (null != issueEntity.getAssignee()) {
+                issuePojo.setAssignee(issueEntity.getAssignee().getUserName());
+            }
+            issuesListPojo.add(count, issuePojo);
+            count++;
+        }
+        return issuesListPojo;
+    }
 
-	public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
+    public List<IssuePojo> multiplePredicates(MultipleSearchParameter searchParameters) {
 
-		List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
+        List<Issue> issuesListEntity = searchRepository.multiplePredicates(searchParameters);
 
-		if (issuesListEntity.isEmpty()) {
-			LOG.log(Level.INFO, "There are no issues for the given search criteria");
-		}
+        if (issuesListEntity.isEmpty()) {
+            LOG.log(Level.INFO, "There are no issues for the given search criteria");
+        }
 
-		return entityToPojo(issuesListEntity, searchParameters.getContent());
-	}
+        return entityToPojo(issuesListEntity, searchParameters.getContent());
+    }
 
-	public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
+    public int numberOfIssuesMultipleSearch(MultipleSearchParameter searchParameters) {
 
-		return searchRepository.numberOfIssuesMultipleSearch(searchParameters);
-	}
+        return searchRepository.numberOfIssuesMultipleSearch(searchParameters);
+    }
 
 }
