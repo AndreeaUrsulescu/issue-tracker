@@ -239,7 +239,7 @@ footer a {
 	width:100%;
 }
 .labelSectionView span{
-	font-size:1.2vmin;
+	font-size:1.5vmin;
 }
 
 #edit{
@@ -317,7 +317,7 @@ footer a {
 	padding: 3px 7px;
 	border: 1px solid;
 	width: 8%;
-	font-size:0.6vmax;
+	font-size:0.65vmax;
 	text-align: center;
 	font-style: Verdana, sans-serif, Arial;
 	color: white;
@@ -571,7 +571,6 @@ footer a {
 	min-width: 540px;
 	height: 700px;
 	background-color: rgb(47, 95, 150);
-	margin-top: 150px;
 }
 
 #middleHome {
@@ -1091,7 +1090,7 @@ commentSectionTitlecommentSectionTitle
 
 .loginImg{
 	margin-left: 35%;
-	margin-top: 10%;
+	margin-top: 6%;
 }
 
 /* multiple search start*/
@@ -1108,8 +1107,7 @@ commentSectionTitlecommentSectionTitle
 }
 
 #slideFilter {
-	width: 80%;
-	margin-left:10%;
+	width: 100%;
 	color: white;
 	border: 1px solid rgb(231,231,231);
 	border-radius: 10px;
