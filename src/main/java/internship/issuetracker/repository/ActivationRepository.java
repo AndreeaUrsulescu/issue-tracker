@@ -17,31 +17,32 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ActivationRepository {
 
-	private static final Logger log = Logger.getLogger(ActivationRepository.class.getName());
+    private static final Logger LOG = Logger.getLogger(ActivationRepository.class.getName());
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public void create(Activation activation) {
-		em.persist(activation);
-	}
+    public void create(Activation activation) {
+        em.persist(activation);
+    }
 
-	public Activation findActivationByKeyHash(String keyHash) {
-		Activation activation;
+    public Activation findActivationByKeyHash(String keyHash) {
+        Activation activation;
 
-		TypedQuery<Activation> query = em.createNamedQuery(Activation.FIND_KEYHASH, Activation.class);
-		query.setParameter("keyHash", keyHash);
-		try {
-			activation = query.getSingleResult();
-			log.log(Level.INFO, "An activation was found for " + activation.getUserName());
-		} catch (NoResultException ex) {
-			activation = null;
-			log.log(Level.INFO, "No activation was found for given key!");
-		}
-		return activation;
-	}
+        TypedQuery<Activation> query = em.createNamedQuery(Activation.FIND_KEYHASH, Activation.class);
+        query.setParameter("keyHash", keyHash);
+        try {
+            activation = query.getSingleResult();
+            LOG.log(Level.INFO, "An activation was found for " + activation.getUserName());
+            return activation;
+        } catch (NoResultException ex) {
+            LOG.log(Level.INFO, "No activation was found for given key!", ex);
+            return null;
+        }
 
-	public void remove(Activation activation) {
-		em.remove(this.findActivationByKeyHash(activation.getKeyHash()));
-	}
+    }
+
+    public void remove(Activation activation) {
+        em.remove(this.findActivationByKeyHash(activation.getKeyHash()));
+    }
 }

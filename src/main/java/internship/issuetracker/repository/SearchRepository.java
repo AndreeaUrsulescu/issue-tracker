@@ -13,6 +13,7 @@ import internship.issuetracker.utils.ApplicationParameters;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +21,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,88 +29,88 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SearchRepository {
 
-	public static int itemsPerPage = ApplicationParameters.itemsPerPage;
-	public static final String DATE = "latestUpdateDate";
-	public static final String TITLE = "Title";
+    public static final int ITEMS_PER_PAGE = ApplicationParameters.ITEMS_PER_PAGE;
+    public static final String DATE = "latestUpdateDate";
+    public static final String TITLE = "Title";
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public String convertToSortType(String x) {
-		if (DATE.equals(x)) {
-			return "lastDate";
-		} else if (TITLE.equals(x)) {
-			return "title";
-		}
-		return "lastDate";
-	}
+    public String convertToSortType(String x) {
+        if (DATE.equals(x)) {
+            return "lastDate";
+        } else if (TITLE.equals(x)) {
+            return "title";
+        }
+        return "lastDate";
+    }
 
-	public List<Issue> multiplePredicates(MultipleSearchParameter parameters) {
+    public List<Issue> multiplePredicates(MultipleSearchParameter parameters) {
 
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
-		Root<Issue> root = criteriaQuery.from(Issue.class);
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
+        Root<Issue> root = criteriaQuery.from(Issue.class);
 
-		Predicate[] predicates = generratePredicates(parameters, criteriaBuilder, criteriaQuery, root);
+        Predicate[] predicates = generratePredicates(parameters, criteriaBuilder, criteriaQuery, root);
 
-		String orderField = convertToSortType(parameters.getSortCriteria());
-		criteriaQuery.where(predicates);
+        String orderField = convertToSortType(parameters.getSortCriteria());
+        criteriaQuery.where(predicates);
 
-		if ("Descending".equals(parameters.getSortType()))
-			criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
-		else
-			criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
+        if ("Descending".equals(parameters.getSortType())) {
+            criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
+        } else {
+            criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
+        }
+        TypedQuery<Issue> query = em.createQuery(criteriaQuery);
+        query.setMaxResults(ITEMS_PER_PAGE);
+        query.setFirstResult((parameters.getPageNumber() - 1) * ITEMS_PER_PAGE);
+        return query.getResultList();
+    }
 
-		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
-		query.setMaxResults(itemsPerPage);
-		query.setFirstResult((parameters.getPageNumber() - 1) * itemsPerPage);
-		return query.getResultList();
-	}
+    public int numberOfIssuesMultipleSearch(MultipleSearchParameter parameters) {
 
-	public int numberOfIssuesMultipleSearch(MultipleSearchParameter parameters) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
+        Root<Issue> root = criteriaQuery.from(Issue.class);
 
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Issue> criteriaQuery = criteriaBuilder.createQuery(Issue.class);
-		Root<Issue> root = criteriaQuery.from(Issue.class);
+        Predicate[] predicates = generratePredicates(parameters, criteriaBuilder, criteriaQuery, root);
 
-		Predicate[] predicates = generratePredicates(parameters, criteriaBuilder, criteriaQuery, root);
+        criteriaQuery.where(predicates);
+        TypedQuery<Issue> query = em.createQuery(criteriaQuery);
+        return query.getResultList().size();
+    }
 
-		criteriaQuery.where(predicates);
-		TypedQuery<Issue> query = em.createQuery(criteriaQuery);
-		return query.getResultList().size();
-	}
+    public Predicate[] generratePredicates(MultipleSearchParameter parameters, CriteriaBuilder criteriaBuilder, CriteriaQuery<Issue> criteriaQuery, Root<Issue> root) {
+        List<Predicate> predicateList = new ArrayList<Predicate>();
 
-	public Predicate[] generratePredicates(MultipleSearchParameter parameters, CriteriaBuilder criteriaBuilder, CriteriaQuery<Issue> criteriaQuery, Root<Issue> root) {
-		List<Predicate> predicateList = new ArrayList<Predicate>();
+        if (null != parameters.getTitle()) {
+            SearchFilterInt<Issue> filter = new TitleFilter(parameters.getTitle());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
+        if (null != parameters.getContent()) {
+            SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
+        if (null != parameters.getState()) {
+            SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
+        if (null != parameters.getAssignee()) {
+            SearchFilterInt<Issue> filter = new AssigneeFilter(parameters.getAssignee());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
+        if (null != parameters.getCreator()) {
+            SearchFilterInt<Issue> filter = new CreatorFilter(parameters.getCreator());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
+        if (null != parameters.getLabel()) {
+            SearchFilterInt<Issue> filter = new LabelFilter(parameters.getLabel());
+            predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
+        }
 
-		if (null != parameters.getTitle()) {
-			SearchFilterInt<Issue> filter = new TitleFilter(parameters.getTitle());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
-		if (null != parameters.getContent()) {
-			SearchFilterInt<Issue> filter = new ContentFilter(parameters.getContent());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
-		if (null != parameters.getState()) {
-			SearchFilterInt<Issue> filter = new StateFilter(parameters.getState());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
-		if (null != parameters.getAssignee()) {
-			SearchFilterInt<Issue> filter = new AssigneeFilter(parameters.getAssignee());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
-		if (null != parameters.getCreator()) {
-			SearchFilterInt<Issue> filter = new CreatorFilter(parameters.getCreator());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
-		if (null != parameters.getLabel()) {
-			SearchFilterInt<Issue> filter = new LabelFilter(parameters.getLabel());
-			predicateList.add(filter.buildPredicate(criteriaQuery, criteriaBuilder, root));
-		}
+        Predicate[] predicates = new Predicate[predicateList.size()];
+        predicates = predicateList.toArray(predicates);
 
-		Predicate[] predicates = new Predicate[predicateList.size()];
-		predicates = predicateList.toArray(predicates);
-
-		return predicates;
-	}
+        return predicates;
+    }
 }

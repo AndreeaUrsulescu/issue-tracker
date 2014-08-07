@@ -19,72 +19,70 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({
-@NamedQuery(name = ResetPassword.FIND_KEYHASH, query = "select a from ResetPassword a where keyHash = :keyHash"),
-@NamedQuery(name = ResetPassword.FIND_USER, query = "select a from ResetPassword a where owner = :owner")
-})
+@NamedQueries({ @NamedQuery(name = ResetPassword.FIND_KEYHASH, query = "select a from ResetPassword a where keyHash = :keyHash"),
+        @NamedQuery(name = ResetPassword.FIND_USER, query = "select a from ResetPassword a where owner = :owner") })
 @Entity
 @Table(name = "ResetPasswords")
 public class ResetPassword implements Serializable {
-	
-	public static final String FIND_KEYHASH="ResetPassword.findKeyHash";
-	public static final String FIND_USER="ResetPassword.findUser";
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 
-	@Column(name = "keyHash", nullable = false, unique = true)
-	private String keyHash;
+    public static final String FIND_KEYHASH = "ResetPassword.findKeyHash";
+    public static final String FIND_USER = "ResetPassword.findUser";
 
-	@OneToOne
-	@JoinColumn(name = "id_owner", nullable = false)
-	private User owner;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public ResetPassword() {
-	}
+    @Column(name = "keyHash", nullable = false, unique = true)
+    private String keyHash;
 
-	public ResetPassword(User user) {
-		this.owner = user;
-		this.keyHash = EncryptData.sha256(owner.getEmail() + owner.getPassword() + owner.getUserName());
+    @OneToOne
+    @JoinColumn(name = "id_owner", nullable = false)
+    private User owner;
 
-	}
+    public ResetPassword() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public ResetPassword(User user) {
+        this.owner = user;
+        this.keyHash = EncryptData.sha256(owner.getEmail() + owner.getPassword() + owner.getUserName());
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    }
 
-	public String getKeyHash() {
-		return keyHash;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setKeyHash(String keypass) {
-		this.keyHash = keypass;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public User getOwner() {
-		return owner;
-	}
+    public String getKeyHash() {
+        return keyHash;
+    }
 
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
+    public void setKeyHash(String keypass) {
+        this.keyHash = keypass;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(keyHash).toHashCode();
-	}
+    public User getOwner() {
+        return owner;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof ResetPassword) {
-			ResetPassword resetPassword = (ResetPassword) obj;
-			return new EqualsBuilder().append(this.keyHash, resetPassword.keyHash).isEquals();
-		}
-		return false;
-	}
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(keyHash).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ResetPassword) {
+            ResetPassword resetPassword = (ResetPassword) obj;
+            return new EqualsBuilder().append(this.keyHash, resetPassword.keyHash).isEquals();
+        }
+        return false;
+    }
 }

@@ -3,7 +3,6 @@ package internship.issuetracker.service;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.pojo.LabelPojo;
 import internship.issuetracker.repository.IssueLabelRepository;
-import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.LabelRepository;
 
 import java.util.ArrayList;
@@ -16,67 +15,62 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LabelService {
-	
-	private static final Logger log = Logger.getLogger(LabelService.class
-			.getName());
-	
-	@Autowired
-	private LabelRepository labelRepository;
 
-	@Autowired
-	private IssueRepository issueRepository;
+    private static final Logger LOG = Logger.getLogger(LabelService.class.getName());
 
-	@Autowired
-	private IssueLabelRepository issueLabelRepository;
+    String labelString = "Label '";
+    @Autowired
+    private LabelRepository labelRepository;
 
-	LabelPojo convertLabelEntityToPojoLabel(Label label) {
-		LabelPojo pojo = new LabelPojo(label.getId(),label.getLabelName());
-		return pojo;
-	}
+    @Autowired
+    private IssueLabelRepository issueLabelRepository;
 
-	public void convertPojoLabelToLabelEntity(LabelPojo pojo, Label entity) {
-		entity.setLabelName(pojo.getLabelName());
-	}
+    LabelPojo convertLabelEntityToPojoLabel(Label label) {
+        return new LabelPojo(label.getId(), label.getLabelName());
+    }
 
-	public List<LabelPojo> getAllLabels() {
-		List<Label> labels = labelRepository.findLabels();
-		List<LabelPojo> pojoLabels = new ArrayList<LabelPojo>();
-		
-		if (labels.size() == 0)
-			log.log(Level.INFO, "There are no labels");
-		
-		for (Label label : labels) {
-			pojoLabels.add(convertLabelEntityToPojoLabel(label));
-		}
-		return pojoLabels;
-	}
+    public void convertPojoLabelToLabelEntity(LabelPojo pojo, Label entity) {
+        entity.setLabelName(pojo.getLabelName());
+    }
 
-	public boolean assignLabelToIssue(Long id, LabelPojo labelPojo) {
-		Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
-		if (null != label) {
-			boolean exists = issueLabelRepository.getLabelsForIssue(id)
-					.contains(label);
-			if (!exists) {
-				issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-				log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
-				return true;
-			} else {
-				log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' is already assigned to issue " + id);
-				return false;
-			}
-		} else {
-			label = new Label();
-			convertPojoLabelToLabelEntity(labelPojo, label);
-			labelRepository.create(label);
-			log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was created");
-			issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-			log.log(Level.INFO, "Label '" + labelPojo.getLabelName() + "' was assigned to issue " + id);
-		}
-		return true;
-	}
-	
-	public void removeLabelFromIssue(Long issueId, LabelPojo labelToRemove) {
-		issueLabelRepository.removeLabelFromIssue(issueId, labelToRemove.getLabelName());
-		log.log(Level.INFO, "Label '" + labelToRemove.getLabelName() + "' was removed from issue " + issueId);
-	}
+    public List<LabelPojo> getAllLabels() {
+        List<Label> labels = labelRepository.findLabels();
+        List<LabelPojo> pojoLabels = new ArrayList<LabelPojo>();
+
+        if (labels.isEmpty()) {
+            LOG.log(Level.INFO, "There are no labels");
+        }
+        for (Label label : labels) {
+            pojoLabels.add(convertLabelEntityToPojoLabel(label));
+        }
+        return pojoLabels;
+    }
+
+    public boolean assignLabelToIssue(Long id, LabelPojo labelPojo) {
+        Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
+        if (null != label) {
+            boolean exists = issueLabelRepository.getLabelsForIssue(id).contains(label);
+            if (!exists) {
+                issueLabelRepository.addLabelForIssue(id, label.getLabelName());
+                LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was assigned to issue " + id);
+                return true;
+            } else {
+                LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' is already assigned to issue " + id);
+                return false;
+            }
+        } else {
+            label = new Label();
+            convertPojoLabelToLabelEntity(labelPojo, label);
+            labelRepository.create(label);
+            LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was created");
+            issueLabelRepository.addLabelForIssue(id, label.getLabelName());
+            LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was assigned to issue " + id);
+        }
+        return true;
+    }
+
+    public void removeLabelFromIssue(Long issueId, LabelPojo labelToRemove) {
+        issueLabelRepository.removeLabelFromIssue(issueId, labelToRemove.getLabelName());
+        LOG.log(Level.INFO, labelString + labelToRemove.getLabelName() + "' was removed from issue " + issueId);
+    }
 }

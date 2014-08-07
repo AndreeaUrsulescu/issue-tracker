@@ -21,92 +21,95 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({
-		@NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by a.creationDate DESC,a.id DESC"),
-		@NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by a.creationDate DESC,a.id DESC") })
+@NamedQueries({ @NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by a.creationDate DESC,a.id DESC"),
+        @NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by a.creationDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Comments")
 public class Comment implements Serializable {
 
-	public static final String FIND_COMMENTS_BY_ISSUE = "Comment.findCommentsByIssue";
-	public static final String FIND_COMMENTS_BY_OWNER = "Comment.findCommentsByOwner";
+    public static final String FIND_COMMENTS_BY_ISSUE = "Comment.findCommentsByIssue";
+    public static final String FIND_COMMENTS_BY_OWNER = "Comment.findCommentsByOwner";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	
-	@Column(name = "content")
-	@Lob
-	private String content;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "id_owner", nullable = false)
-	private User owner;
+    @Column(name = "content")
+    @Lob
+    private String content;
 
-	@ManyToOne
-	@JoinColumn(name = "id_issue", nullable = false)
-	private Issue issue;
+    @ManyToOne
+    @JoinColumn(name = "id_owner", nullable = false)
+    private User owner;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "creation_date", nullable = false)
-	private Date creationDate;
+    @ManyToOne
+    @JoinColumn(name = "id_issue", nullable = false)
+    private Issue issue;
 
-	public Issue getIssue() {
-		return issue;
-	}
+    @Temporal(TemporalType.DATE)
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
 
-	public void setIssue(Issue issue) {
-		this.issue = issue;
-	}
+    public Issue getIssue() {
+        return issue;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setIssue(Issue issue) {
+        this.issue = issue;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public User getOwner() {
-		return owner;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
+    public User getOwner() {
+        return owner;
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Date getCreationDate() {
+        if (creationDate == null) {
+            return null;
+        }
+        return (Date) creationDate.clone();
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(content).append(owner)
-				.append(issue).append(creationDate).toHashCode();
-	}
+    public void setCreationDate(Date creationDate) {
+        if (creationDate == null) {
+            this.creationDate = null;
+        } else {
+            this.creationDate = (Date) creationDate.clone();
+        }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Comment) {
-			Comment comment = (Comment) obj;
-			return new EqualsBuilder().append(this.content, comment.content)
-					.append(this.creationDate, comment.creationDate)
-					.append(this.owner, comment.owner)
-					.append(this.issue, comment.issue).isEquals();
-		}
-		return false;
-	}
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(content).append(owner).append(issue).append(creationDate).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Comment) {
+            Comment comment = (Comment) obj;
+            return new EqualsBuilder().append(this.content, comment.content).append(this.creationDate, comment.creationDate).append(this.owner, comment.owner).append(this.issue,
+                    comment.issue).isEquals();
+        }
+        return false;
+    }
 }

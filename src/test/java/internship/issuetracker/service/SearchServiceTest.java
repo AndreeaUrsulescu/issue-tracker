@@ -2,12 +2,10 @@ package internship.issuetracker.service;
 
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
-import internship.issuetracker.pojo.CommentPojo;
-import internship.issuetracker.repository.CommentRepository;
+import internship.issuetracker.pojo.MultipleSearchParameter;
 import internship.issuetracker.repository.IssueRepository;
+import internship.issuetracker.repository.SearchRepository;
 import internship.issuetracker.repository.UserRepository;
-
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,10 +16,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommentServiceTest {
+public class SearchServiceTest {
 
     @Mock
-    private CommentRepository commentRepository;
+    private SearchRepository searchRepository;
 
     @Mock
     private UserRepository userRepository;
@@ -30,15 +28,11 @@ public class CommentServiceTest {
     private IssueRepository issueRepository;
 
     @InjectMocks
-    private CommentService commentService = new CommentService();
+    private SearchService searchservice = new SearchService();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void test() {
         User user = new User();
         user.setUserName("username");
         user.setEmail("email@end.com");
@@ -50,10 +44,22 @@ public class CommentServiceTest {
         issue.setOwner(user);
         issue.setContent("Content for issue nr 1");
         issueRepository.create(issue);
+    }
 
-        CommentPojo commentPojo = new CommentPojo(user.getUserName(), "commentContent", new Date(), issue.getId());
-        commentService.addComment(commentPojo);
-        assert (commentRepository.findCommentByOwner(user) != null);
+    @Test
+    public void testMultiplePredicates() {
+        MultipleSearchParameter multipleSearchParameter = new MultipleSearchParameter();
+        multipleSearchParameter.setTitle("issue");
+        multipleSearchParameter.setContent("content");
+        assert (searchservice.multiplePredicates(multipleSearchParameter).isEmpty() == false);
+    }
+
+    @Test
+    public void testNumberOfIssuesMultipleSearch() {
+        MultipleSearchParameter multipleSearchParameter = new MultipleSearchParameter();
+        multipleSearchParameter.setTitle("issue");
+        multipleSearchParameter.setContent("content");
+        assert (searchservice.numberOfIssuesMultipleSearch(multipleSearchParameter) > 0);
     }
 
 }

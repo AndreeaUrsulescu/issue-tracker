@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EmailRepository {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public void create(Email email) {
-		em.persist(email);
-	}
+    public void create(Email email) {
+        em.persist(email);
+    }
 }

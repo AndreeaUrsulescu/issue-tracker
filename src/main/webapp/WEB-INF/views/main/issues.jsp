@@ -5,6 +5,9 @@
 
 <script
 	src="${pageContext.request.contextPath}/resources/assets/javascript/pagination.js"></script>
+<script type="text/javascript">
+$("#searchBtn").click();
+</script>
 
 <c:set var="plus" value="+" />
 <c:set var="minus" value="-" />
@@ -120,34 +123,6 @@
 	<div style="clear: both"></div>
 	<div id="issues" class="row" style="margin-top:-50px;">
 
-		<c:forEach var="issue" items="${issuesList}" varStatus="i">
-			<div class="col-md-4">
-				<a href="issues/issue/${issue.id}"> <!--			<span class="issue"> -->
-					<c:choose>
-						<c:when test="${issue.state == 'New'}">
-							<span class="issue iss6"></span>
-						</c:when>
-						<c:when test="${issue.state == 'Opened'}">
-							<span class="issue iss2"></span>
-						</c:when>
-						<c:when test="${issue.state == 'Testing'}">
-							<span class="issue iss0"></span>
-						</c:when>
-						<c:otherwise>
-							<span class="issue iss5"></span>
-						</c:otherwise>
-					</c:choose> <span class="border"> <label class="state">${issue.state}</label>
-						<label class="assignee"></label>
-				</span> <span class="title"> <c:out value="${issue.title}" /> </span> 
-				<span class="content"> ${issue.content} </span>
-				
-					<div class="asigneeInfoPostIt">
-						<span>Assignee:</span> <span>${issue.assignee}</span>
-					</div> <label class="owner">Updated ${issue.update} ago by
-						${issue.owner}</label> <!-- </span>  -->
-				</a>
-			</div>
-		</c:forEach>
 	</div>
 	<br>
 

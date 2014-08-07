@@ -12,7 +12,6 @@ import internship.issuetracker.utils.ApplicationParameters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,123 +32,115 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/issues")
 public class IssueController {
 
-	@Autowired
-	private IssueService issueService;
+    @Autowired
+    private IssueService issueService;
 
-	@Autowired
-	private CommentService commentService;
-	
-	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
-	public String createIssuePage(Model model, HttpServletRequest request) {
+    @Autowired
+    private CommentService commentService;
 
-		User user = (User) request.getSession().getAttribute("user");
-		Issue issue = new Issue();
-		model.addAttribute("user", user.getUserName());
-		model.addAttribute("issue", issue);
-		model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
-		return "createIssue";
-	}
+    @RequestMapping(value = { "/createIssue" }, method = RequestMethod.GET)
+    public String createIssuePage(Model model, HttpServletRequest request) {
 
-	@RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
-	public String createIssuePage(@Valid Issue issue,
-			HttpServletRequest request, BindingResult bindingResult) {
-		if (bindingResult.hasErrors())
-			return "createIssue";
-		issue.setOwner((User) request.getSession().getAttribute("user"));
-		issueService.addIssue(issue);
-		return "redirect:/issues";
-	}
-	
-	
-	
-	
-	@RequestMapping(value = {"/issuesChatRoom" })
-	public String viewIssuesRoom() {
-		//model.addAttribute("user", new User());
-		return "chatRoomIssues";
-	}	
-	
-	@RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
-	public String viewIssuePage(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("viewIssue", issueService.getIssue(id));
-		return "viewIssue";
-	}
+        User user = (User) request.getSession().getAttribute("user");
+        Issue issue = new Issue();
+        model.addAttribute("user", user.getUserName());
+        model.addAttribute("issue", issue);
+        model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
+        return "createIssue";
+    }
 
-	@RequestMapping(value = "/issue/{id}/api", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, Object> editIssue(@PathVariable Long id) {
+    @RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
+    public String createIssuePage(@Valid Issue issue, HttpServletRequest request, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "createIssue";
+        }
+        issue.setOwner((User) request.getSession().getAttribute("user"));
+        issueService.addIssue(issue);
+        return "redirect:/issues";
+    }
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		IssuePojo issue = issueService.getIssue(id);
+    @RequestMapping(value = { "/issuesChatRoom" })
+    public String viewIssuesRoom() {
+        return "chatRoomIssues";
+    }
 
-		map.put("issue", issue);
-		return map;
-	}
+    @RequestMapping(value = "/issue/{id}", method = RequestMethod.GET)
+    public String viewIssuePage(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("viewIssue", issueService.getIssue(id));
+        return "viewIssue";
+    }
 
-	@RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> updateIssue(@PathVariable Long id,
-			@RequestBody @Valid Issue issue, BindingResult bindingResult) {
+    @RequestMapping(value = "/issue/{id}/api", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> editIssue(@PathVariable Long id) {
 
-		Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>();
+        IssuePojo issue = issueService.getIssue(id);
 
-		if (bindingResult.hasErrors()) {
-			IssuePojo oldIssue = issueService.getIssue(id);
-			map.put("issue", oldIssue);
-			return map;
-		}
+        map.put("issue", issue);
+        return map;
+    }
 
-		issue.setId(id);
-		map.put("issue", "success");
-		issueService.updateIssue(issue);
-		return map;
-	}
+    @RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
 
-	@RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> addComment(@RequestBody  @Valid Comment comment,
-			@PathVariable Long id, BindingResult bindingResult,
-			HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
 
-		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		List<CommentPojo> pojoComments;
-		IssuePojo issue = issueService.getIssue(id);
-		User user = (User) request.getSession().getAttribute("user");
-		Date currentDate = new Date();
-		CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
-		
-		if (!bindingResult.hasErrors()) {
-			commentService.addComment(commentPojo);
-		    map.put("code", "success");
-		} else {
-		    map.put("code", "error");
-		}
-		
-		pojoComments = commentService.getCommentsForIssue(issue);
-		map.put("comments", pojoComments);				
-		
-		return map;
-	}
+        if (bindingResult.hasErrors()) {
+            IssuePojo oldIssue = issueService.getIssue(id);
+            map.put("issue", oldIssue);
+            return map;
+        }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String viewIssuesPage(Model model) {
-				
-		List<IssuePojo> issuesListPojo =  issueService.getOrderedIssues(1);
-		
-		model.addAttribute("issuesList", issuesListPojo);
-		model.addAttribute("listLength",issueService.numberOfIssues());
-		model.addAttribute("itemsPerPage", ApplicationParameters.itemsPerPage );
-		if(issueService.numberOfIssues()%ApplicationParameters.itemsPerPage==0)
-		{
-		model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage));
-		}
-		else
-		{
-			model.addAttribute("pages", (int)(issueService.numberOfIssues()/ApplicationParameters.itemsPerPage+1));
-		}
-			return "issues";
-	}
-	
-	
+        issue.setId(id);
+        map.put("issue", "success");
+        issueService.updateIssue(issue);
+        return map;
+    }
 
+    @RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult, HttpServletRequest request) {
+
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
+        List<CommentPojo> pojoComments;
+        IssuePojo issue = issueService.getIssue(id);
+        User user = (User) request.getSession().getAttribute("user");
+        Date currentDate = new Date();
+        CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
+
+        if (!bindingResult.hasErrors()) {
+            commentService.addComment(commentPojo);
+            map.put("code", "success");
+        } else {
+            map.put("code", "error");
+        }
+
+        pojoComments = commentService.getCommentsForIssue(issue);
+        map.put("comments", pojoComments);
+
+        return map;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewIssuesPage(Model model) {
+
+        List<IssuePojo> issuesListPojo = issueService.getOrderedIssues(1);
+
+        model.addAttribute("issuesList", issuesListPojo);
+        model.addAttribute("listLength", issueService.numberOfIssues());
+        model.addAttribute("itemsPerPage", ApplicationParameters.ITEMS_PER_PAGE);
+        if (issueService.numberOfIssues() % ApplicationParameters.ITEMS_PER_PAGE == 0) {
+            model.addAttribute("pages", (int) (issueService.numberOfIssues() / ApplicationParameters.ITEMS_PER_PAGE));
+        } else {
+            model.addAttribute("pages", (int) (issueService.numberOfIssues() / ApplicationParameters.ITEMS_PER_PAGE + 1));
+        }
+        return "issues";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String redirect() {
+        return "redirect:/issues";
+    }
 }

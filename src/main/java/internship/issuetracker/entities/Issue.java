@@ -33,177 +33,181 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({
-		@NamedQuery(name = Issue.FIND_BY_ID , query = "select a from Issue a where id = :id"),
-	@NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.lastDate DESC,a.id DESC") })
+@NamedQueries({ @NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
+        @NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.lastDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
 
-	public static final String FIND_BY_ID = "Issue.findByID";
-	public static final String FIND_ALL = "Issue.findAll";
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    public static final String FIND_BY_ID = "Issue.findByID";
+    public static final String FIND_ALL = "Issue.findAll";
 
-	@ManyToOne
-	@JoinColumn(name = "id_owner", nullable = false)
-	private User owner;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Column(name = "title", nullable = false)
-	@Size(min = 5, max = 50)
-	private String title;
+    @ManyToOne
+    @JoinColumn(name = "id_owner", nullable = false)
+    private User owner;
 
-	@Column(name = "content")
-	@Lob
-	private String content;
-	
-	@Column(name = "search_content")
-	@Size(max=10000)
-	private String searchContent;
+    @Column(name = "title", nullable = false)
+    @Size(min = 5, max = 50)
+    private String title;
+
+    @Column(name = "content")
+    @Lob
+    private String content;
+
+    @Column(name = "search_content")
+    @Size(max = 10000)
+    private String searchContent;
 
     @Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "creation_date", nullable = false)
-	private Date updateDate;
+    @Column(name = "creation_date", nullable = false)
+    private Date updateDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "last_date", nullable = false)
-	private Date lastDate;
-	
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "state", nullable = false)
-	private State state;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="issue")
-	@OrderBy("creationDate DESC, id DESC")
-	private List<Comment> comments;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_assignee", nullable = true)
-	private User assignee;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "issue_id", referencedColumnName = "id")
-	private Set<Attachment> attachments = new HashSet<Attachment>();
-	
-	public Issue() {
-		state = State.New;
-		updateDate=new Date();
-		lastDate=new Date();
-	
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_date", nullable = false)
+    private Date lastDate;
 
-	
-	public String getSearchContent() {
-		return searchContent;
-	}
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "state", nullable = false)
+    private State state;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "issue")
+    @OrderBy("creationDate DESC, id DESC")
+    private List<Comment> comments;
 
-	public void setSearchContent(String searchContent) {
-		this.searchContent = searchContent;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_assignee", nullable = true)
+    private User assignee;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "issue_id", referencedColumnName = "id")
+    private Set<Attachment> attachments = new HashSet<Attachment>();
 
-	public Long getId() {
-		return id;
-	}
+    public Issue() {
+        state = State.New;
+        updateDate = new Date();
+        lastDate = new Date();
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    }
 
-	public User getOwner() {
-		return owner;
-	}
+    public String getSearchContent() {
+        return searchContent;
+    }
 
-	public void setOwner(User user) {
-		this.owner = user;
-	}
+    public void setSearchContent(String searchContent) {
+        this.searchContent = searchContent;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public User getOwner() {
+        return owner;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-		this.searchContent = HTMLParser.convertForContentSearch(content);
-	}
+    public void setOwner(User user) {
+        this.owner = user;
+    }
 
-	public void setState(State state) {
-		this.state = state;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Date getLastDate(){
-		return lastDate;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setContent(String content) {
+        this.content = content;
+        this.searchContent = HTMLParser.convertForContentSearch(content);
+    }
 
-	public void setLastDate(Date lastDate) {
-		this.lastDate = lastDate;
-	}
+    public void setState(State state) {
+        this.state = state;
+    }
 
-	public State getState() {
-		return state;
-	}
+    public Date getUpdateDate() {
+        if (updateDate == null) {
+            return null;
+        }
+        return (Date) updateDate.clone();
+    }
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+    public Date getLastDate() {
+        if (lastDate == null) {
+            return null;
+        }
+        return (Date) lastDate.clone();
+    }
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    public void setUpdateDate(Date updateDate) {
+        if (updateDate == null) {
+            this.updateDate = null;
+        } else {
+            this.updateDate = (Date) updateDate.clone();
+        }
+    }
 
-	public User getAssignee() {
-		return assignee;
-	}
+    public void setLastDate(Date lastDate) {
+        if (lastDate == null) {
+            this.lastDate = null;
+        } else {
+            this.lastDate = (Date) lastDate.clone();
+        }
+    }
 
-	public void setAssignee(User assignee) {
-		this.assignee = assignee;
-	}
+    public State getState() {
+        return state;
+    }
 
-	public Set<Attachment> getAttachments() {
-		return attachments;
-	}
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	public void setAttachments(Set<Attachment> attachments) {
-		this.attachments = attachments;
-	}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(title).append(owner)
-				.append(updateDate).append(lastDate).append(assignee).toHashCode();
-	}
+    public User getAssignee() {
+        return assignee;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Issue) {
-				Issue issue = (Issue) obj;
-				return new EqualsBuilder().append(this.title, issue.title)
-						.append(this.content, issue.content)
-						.append(this.updateDate, issue.updateDate)
-						.append(this.owner, issue.owner)
-						.append(this.state, issue.state)
-						.append(this.lastDate,issue.lastDate)
-						.append(this.assignee,issue.assignee).isEquals();
-			}
-		return false;
-	}
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(title).append(owner).append(updateDate).append(lastDate).append(assignee).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Issue) {
+            Issue issue = (Issue) obj;
+            return new EqualsBuilder().append(this.title, issue.title).append(this.content, issue.content).append(this.updateDate, issue.updateDate)
+                    .append(this.owner, issue.owner).append(this.state, issue.state).append(this.lastDate, issue.lastDate).append(this.assignee, issue.assignee).isEquals();
+        }
+        return false;
+    }
 }

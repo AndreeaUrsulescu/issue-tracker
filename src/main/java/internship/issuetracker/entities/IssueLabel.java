@@ -12,51 +12,50 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@NamedQueries({ 
-	@NamedQuery(name = IssueLabel.FIND_LABELS_FOR_ISSUE, query = "select a from IssueLabel a inner join a.issue b where b.id = :issueId"),
-	@NamedQuery(name = IssueLabel.FIND_ISSUE_LABEL, query = "select a from IssueLabel a inner join a.issue b inner join a.label l where b.id = :issueId and l.labelName = :labelName")
-})
+@NamedQueries({
+        @NamedQuery(name = IssueLabel.FIND_LABELS_FOR_ISSUE, query = "select a from IssueLabel a inner join a.issue b where b.id = :issueId"),
+        @NamedQuery(name = IssueLabel.FIND_ISSUE_LABEL, query = "select a from IssueLabel a inner join a.issue b inner join a.label l where b.id = :issueId and l.labelName = :labelName") })
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "issues_labels")
 public class IssueLabel implements Serializable {
 
-	public static final String FIND_LABELS_FOR_ISSUE = "IssueLabel.findLabelsForIssue";
-	public static final String FIND_ISSUE_LABEL = "IssueLabel.findIssueLabel";
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    public static final String FIND_LABELS_FOR_ISSUE = "IssueLabel.findLabelsForIssue";
+    public static final String FIND_ISSUE_LABEL = "IssueLabel.findIssueLabel";
 
-	@JoinColumn(name = "issue_id")
-	@ManyToOne
-	private Issue issue;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@JoinColumn(name = "label_id")
-	@ManyToOne
-	private Label label;
+    @JoinColumn(name = "issue_id")
+    @ManyToOne
+    private Issue issue;
 
-	public Long getId() {
-		return id;
-	}
+    @JoinColumn(name = "label_id")
+    @ManyToOne
+    private Label label;
 
-	public Issue getIssue() {
-		return issue;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setIssue(Issue issue) {
-		this.issue = issue;
-	}
+    public Issue getIssue() {
+        return issue;
+    }
 
-	public Label getLabel() {
-		return label;
-	}
+    public void setIssue(Issue issue) {
+        this.issue = issue;
+    }
 
-	public void setLabel(Label label) {
-		this.label = label;
-	}
+    public Label getLabel() {
+        return label;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

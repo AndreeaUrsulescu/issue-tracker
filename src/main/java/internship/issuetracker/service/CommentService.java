@@ -20,49 +20,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentService {
 
-	private static final Logger log = Logger.getLogger(CommentService.class
-			.getName());
+    private static final Logger LOG = Logger.getLogger(CommentService.class.getName());
 
-	@Autowired
-	private CommentRepository commentRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private IssueRepository issueRepository;
+    @Autowired
+    private IssueRepository issueRepository;
 
-	public void addComment(CommentPojo comment) {
-		Comment com = new Comment();
-		User owner = userRepository.findUserByUserName(comment.getOwner());
-		Issue issue = issueRepository.findIssue(comment.getIssueId());
-		com.setContent(comment.getContent());
-		com.setCreationDate(comment.getCreationDate());
-		com.setOwner(owner);
-		com.setIssue(issue);
-		this.commentRepository.create(com);
-		log.log(Level.INFO,
-				"An comment was created for issue " + comment.getIssueId());
-	}
+    public void addComment(CommentPojo comment) {
+        Comment com = new Comment();
+        User owner = userRepository.findUserByUserName(comment.getOwner());
+        Issue issue = issueRepository.findIssue(comment.getIssueId());
+        com.setContent(comment.getContent());
+        com.setCreationDate(comment.getCreationDate());
+        com.setOwner(owner);
+        com.setIssue(issue);
+        this.commentRepository.create(com);
+        LOG.log(Level.INFO, "An comment was created for issue " + comment.getIssueId());
+    }
 
+    public List<CommentPojo> getCommentsForIssue(IssuePojo issuePojo) {
+        Issue issue = issueRepository.findIssue(issuePojo.getId());
+        List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
+        List<Comment> comments = commentRepository.findCommentsByIssue(issue);
 
-	public List<CommentPojo> getCommentsForIssue(IssuePojo issuePojo) {
-		Issue issue = issueRepository.findIssue(issuePojo.getId());
-		List<CommentPojo> pojoComments = new ArrayList<CommentPojo>();
-		List<Comment> comments = commentRepository.findCommentsByIssue(issue);
+        if (comments.isEmpty()) {
+            LOG.log(Level.INFO, "There are no comments for issue " + issuePojo.getId());
+        }
 
-		if (comments.size() == 0){
-			log.log(Level.INFO,	"There are no comments for issue " + issuePojo.getId());
-		}
+        for (Comment com : comments) {
+            CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(), com.getContent(), com.getCreationDate(), com.getIssue().getId());
+            pojoComments.add(pojoComment);
+        }
 
-		for (Comment com : comments) {
-			CommentPojo pojoComment = new CommentPojo(com.getOwner()
-					.getUserName(), com.getContent(), com.getCreationDate(),
-					com.getIssue().getId());
-			pojoComments.add(pojoComment);
-		}
-
-		return pojoComments;
-	}
+        return pojoComments;
+    }
 
 }

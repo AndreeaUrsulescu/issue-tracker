@@ -7,6 +7,7 @@ import internship.issuetracker.service.IssueService;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,44 +22,41 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
-/*@RequestMapping("/issues/issue/{id}")*/
+/* @RequestMapping("/issues/issue/{id}") */
 public class FileUploadController {
 
-	@Autowired
-	private AttachmentService attachmentService;
-	
-	@Autowired
-	private IssueService issueService;
+    @Autowired
+    private AttachmentService attachmentService;
 
-	@RequestMapping(value = "/issues/issue/{id}/upload", method = RequestMethod.POST)
-	public @ResponseBody LinkedList<AttachmentPojo> upload(
-			@PathVariable Long id, MultipartHttpServletRequest request,
-			HttpServletResponse response) {
+    @Autowired
+    private IssueService issueService;
 
-		LinkedList<AttachmentPojo> files = new LinkedList<AttachmentPojo>();
-		Iterator<String> itr = request.getFileNames();
-		MultipartFile mpf = null;
+    @RequestMapping(value = "/issues/issue/{id}/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public List<AttachmentPojo> upload(@PathVariable Long id, MultipartHttpServletRequest request, HttpServletResponse response) {
 
-		while (itr.hasNext()) {
+        List<AttachmentPojo> files = new LinkedList<AttachmentPojo>();
+        Iterator<String> itr = request.getFileNames();
+        MultipartFile mpf = null;
 
-			mpf = request.getFile(itr.next());
-			attachmentService.uploadFile(id, mpf);
-		}
+        while (itr.hasNext()) {
 
-		files.addAll(attachmentService.convertToPojo(id));
-		return files;
-	}
+            mpf = request.getFile(itr.next());
+            attachmentService.uploadFile(id, mpf);
+        }
 
-	@RequestMapping(value = "/issues/issue/{id}/remove/{attachmentId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public Map<String, Object> removeAttachment(@PathVariable Long id,
-			@PathVariable Long attachmentId) {
-		System.out.println("remove controller");
-		Map<String, Object> map = new HashMap<String, Object>();
+        files.addAll(attachmentService.convertToPojo(id));
+        return files;
+    }
 
-		attachmentService.removeAttachment(attachmentId, id);
-		map.put("result", issueService.getIssue(id).getAttachments().size());
-		map.put("attachments", attachmentService.convertToPojo(id));
-		return map;
-	}
+    @RequestMapping(value = "/issues/issue/{id}/remove/{attachmentId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Map<String, Object> removeAttachment(@PathVariable Long id, @PathVariable Long attachmentId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        attachmentService.removeAttachment(attachmentId, id);
+        map.put("result", issueService.getIssue(id).getAttachments().size());
+        map.put("attachments", attachmentService.convertToPojo(id));
+        return map;
+    }
 }

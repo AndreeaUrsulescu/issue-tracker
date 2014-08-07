@@ -166,19 +166,19 @@ footer a {
 }
 
 .commentTemplate {
-	width: 700px;
+	width: 100%;
 	margin-top: 20px;
 	padding-top: 15px;
 	border-top: 1px solid #b5b9bc;
 }
 
 .commentBox {
-	width: 660px;
+	width: 90%;
 	margin: 0 auto;
 }
 
 .commentUser {
-	font-size: 18px;
+	font-size: 1.9vmin;
 	margin-left: 10px;
 	color: #3DADF7;
 }
@@ -189,6 +189,10 @@ footer a {
 	font-weight: bold;
 	color: #2359AF;
 	font-family: Arial, sans-serif, Verdana;
+}
+
+.commentDate small{
+	font-size:1.6vmin;
 }
 
 .commentContent {
@@ -202,17 +206,46 @@ footer a {
 	word-wrap: break-word;      /* IE 5+ */
 	font-family: Verdana, sans-serif, Arial;
 	color: #2C420D;
+	font-size:2vmin;
 }	
+
+.commentContent h1{
+	font-size:3.7vmin;
+}
+
+.commentContent h2{
+	font-size:3.1vmin;
+}
+
+.commentContent h3{
+	font-size:2.5vmin;
+}
+
+.commentContent h4{
+	font-size:1.9vmin;
+}
+
+.commentContent h5{
+	font-size:1.4vmin;
+}
+
+.commentContent h6{
+	font-size:1.2vmin;
+}
 
 /* Comment section end */
 
 /* View/Update Issue start */
 
+#backBtnViewIssue span:hover{
+	text-decoration:none;
+}
+
 .labelSectionView{
 	width:100%;
 }
 .labelSectionView span{
-	font-size:1.2vmin;
+	font-size:1.5vmin;
 }
 
 #edit{
@@ -290,7 +323,7 @@ footer a {
 	padding: 3px 7px;
 	border: 1px solid;
 	width: 8%;
-	font-size:0.6vmax;
+	font-size:0.65vmax;
 	text-align: center;
 	font-style: Verdana, sans-serif, Arial;
 	color: white;
@@ -544,7 +577,6 @@ footer a {
 	min-width: 540px;
 	height: 700px;
 	background-color: rgb(47, 95, 150);
-	margin-top: 150px;
 }
 
 #middleHome {
@@ -1064,7 +1096,7 @@ commentSectionTitlecommentSectionTitle
 
 .loginImg{
 	margin-left: 35%;
-	margin-top: 10%;
+	margin-top: 6%;
 }
 
 /* multiple search start*/
@@ -1181,6 +1213,20 @@ commentSectionTitlecommentSectionTitle
 #viewuploadfiles{
 	margin-top:4%;
 	border-bottom:1px solid #ccc;
+}
+
+#backBtnViewIssue
+{
+	margin-top:0.5%;
+	margin-left:1%;
+	float:left;	
+	font-weight: bold;
+
+}
+
+#backBtnViewIssue a
+{
+	text-decoration: none;	
 }
 /* Edit issue upload file end */
 
