@@ -1,6 +1,6 @@
 package internship.issuetracker.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import internship.issuetracker.entities.ResetPassword;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ResetPasswordService;
@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ResetPasswordControllerTest {
 
