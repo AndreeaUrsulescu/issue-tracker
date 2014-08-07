@@ -15,14 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ResetPasswordService {
 
-	private static final Logger log = Logger.getLogger(ActivationService.class.getName());
+	private static final Logger LOG = Logger.getLogger(ActivationService.class.getName());
 
 	@Autowired
 	private ResetPasswordRepository resetPasswordRepository;
 
 	public void addResetPassword(ResetPassword resetPassword) {
 		this.resetPasswordRepository.create(resetPassword);
-		log.log(Level.INFO, "Activation entity was persisted");
+		LOG.log(Level.INFO, "Activation entity was persisted");
 	}
 
 	public ResetPassword getResetPassword(String keyHash) {
@@ -39,6 +39,6 @@ public class ResetPasswordService {
 	
 	public void removeResetPassword(ResetPassword resetPassword) {
 		this.resetPasswordRepository.remove(resetPassword);
-		log.log(Level.INFO, "Activation entity was removed");
+		LOG.log(Level.INFO, "Activation entity was removed");
 	}
 }

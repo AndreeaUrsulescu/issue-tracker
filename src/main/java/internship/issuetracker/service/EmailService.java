@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 	
-	private static final Logger log = Logger.getLogger(EmailService.class
+	private static final Logger LOG = Logger.getLogger(EmailService.class
 			.getName());
 	
 	@Autowired
@@ -20,6 +20,6 @@ public class EmailService {
 	
 	public void saveEmail(Email email) {
 		emailRepository.create(email);
-		log.log(Level.INFO, "An email was saved for " + email.getTo());
+		LOG.log(Level.INFO, "An email was saved for " + email.getTo());
 	}
 }
