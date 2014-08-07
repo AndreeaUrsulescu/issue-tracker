@@ -53,7 +53,6 @@ public class FileUploadController {
 	@ResponseBody
 	public Map<String, Object> removeAttachment(@PathVariable Long id,
 			@PathVariable Long attachmentId) {
-		System.out.println("remove controller");
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		attachmentService.removeAttachment(attachmentId, id);
