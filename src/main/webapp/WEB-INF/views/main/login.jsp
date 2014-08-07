@@ -1,7 +1,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="container" style="height: 780px;">
+<div class="container">
 	<img class="loginImg"
 		src="${pageContext.request.contextPath}/resources/assets/images/4login.png" />
 	<div class="loginForm" style="">
