@@ -9,14 +9,14 @@
 			action='j_spring_security_check'>
 
 			<div class="form-group" style="margin-top: 10px;">
-				<label for="inputEmail" class="col-sm-2 control-label">Username</label>
+				<label for="usernameX" class="col-sm-2 control-label">Username</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="usernameX"
-						placeholder="Username" name="j_username" />
+						placeholder="Username" name="j_username" autofocus />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+				<label for="passwordX" class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
 					<input type="password" class="form-control" id="passwordX"
 						placeholder="Password" name="j_password" />

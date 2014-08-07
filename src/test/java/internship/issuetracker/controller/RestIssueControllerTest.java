@@ -143,7 +143,7 @@ public class RestIssueControllerTest {
 		Map<String,Object> result=restIssueController.multipleSearch(null);
 		assertEquals(result.get("issuesList"),issuePojoList);
 		assertEquals(result.get("listLength"),2);
-		assertEquals(result.get("issuesPerPage"),SearchRepository.itemsPerPage);		
+		assertEquals(result.get("issuesPerPage"),SearchRepository.ITEMS_PER_PAGE);		
 	}
 	
 	
