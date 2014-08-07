@@ -45,8 +45,8 @@ myListener();
 
 </script>
 <div id="backBtnViewIssue">
-	<a href="/issue-tracker/issues"> <img class="pinB"
-		src="/issue-tracker/resources/assets/images/large2.jpg">
+	<a href="${pageContext.request.contextPath}/issues"> <img class="pinB"
+		src="${pageContext.request.contextPath}/resources/assets/images/arrow2.png">
 		<span style="cursor:pointer">Go back</span>
 	</a>
 </div>

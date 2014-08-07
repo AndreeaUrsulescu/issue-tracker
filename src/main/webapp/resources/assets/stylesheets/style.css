@@ -1213,8 +1213,14 @@ commentSectionTitlecommentSectionTitle
 {
 	margin-top:0.5%;
 	margin-left:1%;
-	float:left
-	
+	float:left;	
+	font-weight: bold;
+
+}
+
+#backBtnViewIssue a
+{
+	text-decoration: none;	
 }
 /* Edit issue upload file end */
 
