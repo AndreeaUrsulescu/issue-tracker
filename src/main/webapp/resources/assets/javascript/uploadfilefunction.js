@@ -90,8 +90,8 @@ function removeAttachment(id) {
 }
 
 $(document).ready(function(){
-	$(".fileUploadButton").click(function() {
-		$("#send").prop('disabled',false);
+	$(".fileUploadButton").click(function() {		
 		  $("#fileupload").click();
+		  $("#send").prop('disabled',false);
 		});
 });
