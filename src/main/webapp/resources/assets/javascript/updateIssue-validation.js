@@ -4,7 +4,7 @@ window.onload = function() {
 	element = document.getElementById("assigneeLabel");
 	var assignee = element.innerText;
 	
-	if (username !== assignee){
+	if (username.toLowerCase() !== assignee.toLowerCase()){
 		document.getElementById("unassignButton").style.display = 'none';
 	}
 }
@@ -40,9 +40,11 @@ function ValidateContent() {
 
 function assignUser(){
 	var filterData;
-	
+	var element = document.getElementById("liUserName");
+	var userName = element.innerText;
+	var userNameInput = $("#assigneeInput").val().trim();
 	filterData = {
-			userName : $("#assigneeInput").val().trim() // change it with input value
+			userName : userNameInput
      	};
 	$.ajax({
  		url : window.location.origin + window.location.pathname + "/assignUser" , // put some URL
@@ -54,7 +56,11 @@ function assignUser(){
  		},
  		success : function(response) {
  			$("#assigneeInput").val('');
- 			document.getElementById("unassignButton").style.display = "initial";
+ 			if (userNameInput.toLowerCase() === userName.toLowerCase()){
+ 				document.getElementById("unassignButton").style.display = "initial";
+ 			} else {
+ 				document.getElementById("unassignButton").style.display = "none";
+ 			}
  			document.getElementById("assigneeInput").style.display = "none";
  			document.getElementById("assignButton").style.display = "none";
  			document.getElementById("assigneeLabel").style.display = "inline";

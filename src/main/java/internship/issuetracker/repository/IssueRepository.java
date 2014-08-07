@@ -23,7 +23,7 @@ public class IssueRepository {
     @PersistenceContext
     private EntityManager em;
 
-    private static final int ITEMS_PER_PAGE = ApplicationParameters.itemsPerPage;
+    private static final int ITEMS_PER_PAGE = ApplicationParameters.ITEMS_PER_PAGE;
 
     public void create(Issue issue) {
         em.persist(issue);
@@ -53,7 +53,7 @@ public class IssueRepository {
         try {
             return query.getSingleResult();
         } catch (NoResultException ex) {
-            LOG.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")",ex);
+            LOG.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")", ex);
             return new Issue();
         }
     }

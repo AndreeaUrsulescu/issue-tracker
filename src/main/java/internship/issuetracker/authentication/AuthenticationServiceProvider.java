@@ -1,13 +1,12 @@
 package internship.issuetracker.authentication;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,36 +16,33 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class AuthenticationServiceProvider implements AuthenticationProvider {
 
-	
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Override
-	public Authentication authenticate(Authentication authentication)
-			throws AuthenticationException {
-		
-		String userName = authentication.getName();
-		String password = authentication.getCredentials().toString();
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		User user = userService.findUserByUserName(userName);
+        String userName = authentication.getName();
+        String password = authentication.getCredentials().toString();
 
-		if (user == null) {
-			throw new BadCredentialsException("Username not found");
-		}
-		
-		if (!userService.matchPassword(userName, password)) {
-			throw new BadCredentialsException("Wrong username or password");
-		}
-		
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		return new UsernamePasswordAuthenticationToken(userName, null,
-				grantedAuthorities);
-	}
+        User user = userService.findUserByUserName(userName);
 
-	@Override
-	public boolean supports(Class<? extends Object> authentication) {
+        if (user == null) {
+            throw new BadCredentialsException("Username not found");
+        }
 
-		return UsernamePasswordAuthenticationToken.class.equals(authentication);
-	}
+        if (!userService.matchPassword(userName, password)) {
+            throw new BadCredentialsException("Wrong username or password");
+        }
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        return new UsernamePasswordAuthenticationToken(userName, null, grantedAuthorities);
+    }
+
+    @Override
+    public boolean supports(Class<? extends Object> authentication) {
+
+        return UsernamePasswordAuthenticationToken.class.equals(authentication);
+    }
 
 }

@@ -17,57 +17,50 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({
-	@NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"),
-	@NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
+@NamedQueries({ @NamedQuery(name = Label.FIND_BY_NAME, query = "select a from Label a where a.labelName = :labelName"), @NamedQuery(name = Label.FIND_ALL, query = "select a from Label a") })
 @Entity
 @Table(name = "Labels")
 public class Label implements Serializable {
 
-	public static final String FIND_BY_NAME = "Label.findByName";
-	public static final String FIND_ALL = "Label.findAll";
+    public static final String FIND_BY_NAME = "Label.findByName";
+    public static final String FIND_ALL = "Label.findAll";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Column(name = "label_name", nullable = false, unique = true)
-	@Size(min = 3, max = 20)
-	@Pattern(regexp = "^[a-zA-Z0-9]{3,20}$")
-	private String labelName;
+    @Column(name = "label_name", nullable = false, unique = true)
+    @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[a-zA-Z0-9]{3,20}$")
+    private String labelName;
 
-
-	
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getLabelName() {
-	return labelName;
+        return labelName;
     }
 
     public void setLabelName(String labelName) {
-	this.labelName = labelName;
+        this.labelName = labelName;
     }
 
     @Override
     public int hashCode() {
-	return new HashCodeBuilder().append(labelName).toHashCode();
+        return new HashCodeBuilder().append(labelName).toHashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof Label) {
-	    Label label = (Label) obj;
-	    return new EqualsBuilder()
-			.append(this.labelName, label.labelName)
-			.isEquals();
-	}
-	return false;
+        if (obj instanceof Label) {
+            Label label = (Label) obj;
+            return new EqualsBuilder().append(this.labelName, label.labelName).isEquals();
+        }
+        return false;
     }
 }

@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LabelService {
 
-    private static final Logger LOG = Logger.getLogger(LabelService.class
-            .getName());
+    private static final Logger LOG = Logger.getLogger(LabelService.class.getName());
 
     String labelString = "Label '";
     @Autowired
@@ -50,35 +49,28 @@ public class LabelService {
     public boolean assignLabelToIssue(Long id, LabelPojo labelPojo) {
         Label label = labelRepository.findLabelByName(labelPojo.getLabelName());
         if (null != label) {
-            boolean exists = issueLabelRepository.getLabelsForIssue(id)
-                    .contains(label);
+            boolean exists = issueLabelRepository.getLabelsForIssue(id).contains(label);
             if (!exists) {
                 issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-                LOG.log(Level.INFO, labelString + labelPojo.getLabelName()
-                        + "' was assigned to issue " + id);
+                LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was assigned to issue " + id);
                 return true;
             } else {
-                LOG.log(Level.INFO, labelString + labelPojo.getLabelName()
-                        + "' is already assigned to issue " + id);
+                LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' is already assigned to issue " + id);
                 return false;
             }
         } else {
             label = new Label();
             convertPojoLabelToLabelEntity(labelPojo, label);
             labelRepository.create(label);
-            LOG.log(Level.INFO, labelString + labelPojo.getLabelName()
-                    + "' was created");
+            LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was created");
             issueLabelRepository.addLabelForIssue(id, label.getLabelName());
-            LOG.log(Level.INFO, labelString + labelPojo.getLabelName()
-                    + "' was assigned to issue " + id);
+            LOG.log(Level.INFO, labelString + labelPojo.getLabelName() + "' was assigned to issue " + id);
         }
         return true;
     }
 
     public void removeLabelFromIssue(Long issueId, LabelPojo labelToRemove) {
-        issueLabelRepository.removeLabelFromIssue(issueId,
-                labelToRemove.getLabelName());
-        LOG.log(Level.INFO, labelString + labelToRemove.getLabelName()
-                + "' was removed from issue " + issueId);
+        issueLabelRepository.removeLabelFromIssue(issueId, labelToRemove.getLabelName());
+        LOG.log(Level.INFO, labelString + labelToRemove.getLabelName() + "' was removed from issue " + issueId);
     }
 }

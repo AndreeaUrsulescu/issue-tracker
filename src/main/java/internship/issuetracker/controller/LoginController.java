@@ -15,27 +15,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-	private static final Logger log = Logger.getLogger(LoginController.class.getName());
-	
-	
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String login(HttpServletRequest request, ModelMap model) {
+    private static final Logger LOG = Logger.getLogger(LoginController.class.getName());
 
-		boolean isLoggedIn = false;
-		User user = (User) request.getSession().getAttribute("user");
-		log.log(Level.INFO, "checking for logged in:" + user);
-		isLoggedIn = user != null;
-		if (isLoggedIn) {
-			return "redirect:/issues";
-		}
-		return "login";
-	}
+    @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+    public String login(HttpServletRequest request, ModelMap model) {
 
-	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
-	public String logout(ModelMap model) {
-		return "home";
-	}
+        boolean isLoggedIn = false;
+        User user = (User) request.getSession().getAttribute("user");
+        LOG.log(Level.INFO, "checking for logged in:" + user);
+        isLoggedIn = user != null;
+        if (isLoggedIn) {
+            return "redirect:/issues";
+        }
+        return "login";
+    }
 
-
+    @RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
+    public String logout(ModelMap model) {
+        return "home";
+    }
 
 }

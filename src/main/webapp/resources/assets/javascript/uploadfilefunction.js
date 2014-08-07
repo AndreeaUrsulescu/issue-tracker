@@ -62,6 +62,8 @@ $(function () {
 });
 
 function removeAttachment(id) {
+	$("#send").prop('disabled',false);
+	
 	$.ajax({
 		type : "DELETE",
 		url : window.location.origin + window.location.pathname+ "/remove/" + id,
@@ -89,6 +91,7 @@ function removeAttachment(id) {
 
 $(document).ready(function(){
 	$(".fileUploadButton").click(function() {
+		$("#send").prop('disabled',false);
 		  $("#fileupload").click();
 		});
 });

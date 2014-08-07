@@ -20,8 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class AttachmentService {
 
-    private static final Logger LOG = Logger.getLogger(AttachmentService.class
-            .getName());
+    private static final Logger LOG = Logger.getLogger(AttachmentService.class.getName());
 
     @Autowired
     private AttachmentRepository attachmentRepository;
@@ -38,7 +37,7 @@ public class AttachmentService {
         try {
             attachment.setContent(mpf.getBytes());
         } catch (IOException e) {
-            LOG.log(Level.WARNING, "Could not copy contents of attachement",e);
+            LOG.log(Level.WARNING, "Could not copy contents of attachement", e);
         }
 
         Issue issue = issueRepository.findIssue(issueId);
