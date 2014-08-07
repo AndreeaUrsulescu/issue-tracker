@@ -192,30 +192,33 @@ myListener();
 				</c:choose>
 			</div>
 		</div>
-		<div class="editIssueFileUpload">
+		<div class="editIssueFileUpload" id="editIssueFileUpload">
 			
 			<c:choose>
 				<c:when test="${fn:length(viewIssue.attachments) >= 5}">
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled style="display:none">
-					<fieldset disabled>
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" disabled style="display:none">
+					<fieldset id="fieldsetRemove" disabled>
 						<button class="fileUploadButton btn btn-primary">
 							Upload File <span class="glyphicon glyphicon-plus"></span>
 						</button>
 					</fieldset>
 				</c:when>
 				<c:otherwise>
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple style="display:none">
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" style="display:none">
 					<button class="fileUploadButton btn btn-primary">
 						Upload File <span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</c:otherwise>
 			</c:choose>
+		    
+		    <span class = "error"></span>
 		 
 		    <div id="progress" class="progress">
 		        <div class="bar progress-bar-success progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
    					
     			</div>
 		    </div>
+		 	
 		 	<div class="table-responsive">
 			    <table id="uploaded-files" class="table">
 			    	<thead>

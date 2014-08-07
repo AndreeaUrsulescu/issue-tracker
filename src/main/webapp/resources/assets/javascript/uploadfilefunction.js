@@ -1,6 +1,7 @@
 $(function () {
 		
 	$("#fileupload").on("click", function(){
+		$("#editIssueFileUpload").children('.error').text("");
 		$('#progress .bar').css(
 	               'width',
 	               '0' + '%'
@@ -8,6 +9,24 @@ $(function () {
 		
     $('#fileupload').fileupload({
         dataType: 'json',
+        
+        add: function(e, data) {
+            var uploadErrors = [];
+            var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                uploadErrors.push('Not an accepted file type');
+            }
+            
+            if(data.originalFiles[0]['size'] != 0 && data.originalFiles[0]['size'] > 5000000) {
+                uploadErrors.push('Filesize is too big');
+            }
+            if(uploadErrors.length > 0) {
+            	$("#editIssueFileUpload").children('.error').text(uploadErrors.join("\n"));
+            } else {
+                data.submit();
+            }
+            
+    },
  
         done: function (e, data) {
         	
@@ -24,25 +43,11 @@ $(function () {
             });
             if (data.result.length >= 5) {
             	$('.fileUploadButton').prop("disabled", true);
+            	$('#fieldsetRemove').prop("disabled", true);
+            	$('#fileupload').prop("disabled", true);
             };
         },
         
-        send: function(e, data) {
-        	var uploadedFiles = $('#tableSize').children();
-        	var tableSize = uploadedFiles.length;
-        	
-        	alert("tata");
-        	//alert(5 - tableSize + data.files.length + 1);
-        	if ( (5 - tableSize + data.files.length + 1) > 0)
-        	{
-        		alert(5 - tableSize + data.files.length);
-        		return false;
-        	};
-     
-        },
-        
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        maxFileSize: 5,
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .bar').css(
@@ -60,9 +65,11 @@ function removeAttachment(id) {
 		url : window.location.origin + window.location.pathname+ "/remove/" + id,
 		success : function(rsp) {
 			console.log(rsp.result);
-			if (rsp.result < 5)
+			if (rsp.result < 5) {
 				$('.fileUploadButton').prop("disabled", false);
-			
+				$('#fieldsetRemove').prop("disabled", false);
+				$('#fileupload').prop("disabled", false);
+			}
 			 $("tr:has(td)").remove();
 	            $.each(rsp.attachments, function (index, file) {
 	 
