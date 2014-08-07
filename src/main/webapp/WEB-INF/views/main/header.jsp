@@ -2,7 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <div>
-	<a class="headerImage" style="margin-bottom: 100px;" href="${pageContext.request.contextPath}/issues"><img
+	<a class="headerImage" style="margin-bottom: 100px;" href="${pageContext.request.contextPath}"><img
 		src="${pageContext.request.contextPath}/resources/assets/images/banner.png" /></a>
 	
 
