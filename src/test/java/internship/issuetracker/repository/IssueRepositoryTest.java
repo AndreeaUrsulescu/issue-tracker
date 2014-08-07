@@ -9,11 +9,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml", "classpath:config/Spring-Mail.xml" })
+@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
 public class IssueRepositoryTest {
 
     @Autowired
@@ -23,8 +26,10 @@ public class IssueRepositoryTest {
 
     private User user;
     private Issue issue;
+    
+    private Long id;
 
-    static int ucount = 65;
+    private static boolean run = true;
 
     public Issue createIssue() {
         Issue issue = new Issue();
@@ -37,19 +42,25 @@ public class IssueRepositoryTest {
 
     @Before
     public void setUp() {
-        user = new User();
-        user.setUserName("usernam" + (char) ucount);
-        user.setEmail("email@end.com");
-        user.setPassword("parola");
-        userRepository.create(user);
-        ucount++;
-        issue = createIssue();
-        issueRepository.create(issue);
+        if (run == true) {
+            user = new User();
+            user.setUserName("usernam");
+            user.setEmail("email@end.com");
+            user.setPassword("parola");
+            userRepository.create(user);
+            issue = createIssue();
+            issueRepository.create(issue);
+            id = issue.getId();
+            run = false;
+        } else {
+            issue = issueRepository.findIssue(id);
+            id = issue.getId();
+        }
     }
 
     @Test
     public void testCreate() {
-        assert (issueRepository.findIssue(issue.getId()) == issue);
+        assert (issueRepository.findIssue(issue.getId()).equals(issue));
     }
 
     @Test
@@ -60,10 +71,9 @@ public class IssueRepositoryTest {
 
     @Test
     public void testUpdate() {
-        issue = issueRepository.findIssue(issue.getId());
-        issue.setTitle("boobari");
-        issue.setUpdateDate(new Date());
-        issueRepository.update(issue);
-        assert (issueRepository.findIssue(issue.getId()).equals(issue));
+        Issue dbIssue = issueRepository.findIssue(issue.getId());
+        dbIssue.setTitle("A randomtitle");
+        issueRepository.update(dbIssue);
+        assert (issueRepository.findIssue(id).equals(dbIssue));
     }
 }

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,19 +19,26 @@ public class ActivationRepositoryTest {
     ActivationRepository activationRepository;
 
     Activation activation;
-    
+
+    private static boolean run = true;
+
     @Before
     public void setUp() {
-        activation = new Activation();
-        activation.setEmail("foo@foo.foo");
-        activation.setPassword("password");
-        activation.setUserName("userName");
-        activation.encryptPasswordAndKeyHash();
+        if (run) {
+            activation = new Activation();
+            activation.setEmail("foo@foo.foo");
+            activation.setPassword("password");
+            activation.setUserName("userName");
+            activation.encryptPasswordAndKeyHash();
+            activationRepository.create(activation);
+            run = false;
+        } else {
+            activation = activationRepository.findActivationByKeyHash(activation.getKeyHash());
+        }
     }
 
     @Test
     public void testCreateAndFind() {
-        activationRepository.create(activation);
         assert (null != activationRepository.findActivationByKeyHash(activation.getKeyHash()));
     }
 
