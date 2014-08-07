@@ -34,10 +34,10 @@ public class RegisterController {
 
     @Autowired
     private MailHelper mh;
+
     @Autowired
     private ActivationService activationService;
 
-   
     @RequestMapping(method = RequestMethod.GET)
     public String registerPage(Model model) {
         model.addAttribute(new User());

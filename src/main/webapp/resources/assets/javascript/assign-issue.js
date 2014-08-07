@@ -27,6 +27,7 @@ $(document).ready(function(){
 		var value=input.val();
 		var findUser = false;
 		
+		
 		input.parent().find(".error").text(" ");
 		for(var index = 0; index < userList.length; index++){
 			if(userList[index] == value){
@@ -34,15 +35,17 @@ $(document).ready(function(){
 			}
 		}
 		
+		
 		if(findUser === false)
 		{
-			input.parent().find(".error").text("The user doesn`t exist in the database");
+			input.parent().find(".error").text(" ");
 			document.getElementById("assignButton").disabled=true;
 			return false;
 		}
 		else {
 			document.getElementById("assignButton").disabled=false;
 		}
+		
 		return true;
 	}
     
