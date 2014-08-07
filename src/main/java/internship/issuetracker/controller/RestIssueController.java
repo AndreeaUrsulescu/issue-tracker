@@ -125,7 +125,7 @@ public class RestIssueController {
 		map.put("issuesList", resultList);
 		map.put("listLength",
 				searchService.numberOfIssuesMultipleSearch(searchParameters));
-		map.put("issuesPerPage", SearchRepository.itemsPerPage);
+		map.put("issuesPerPage", SearchRepository.ITEMS_PER_PAGE);
 
 		return map;
 	}
