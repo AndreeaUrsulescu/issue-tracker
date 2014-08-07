@@ -160,7 +160,7 @@ public class IssueService {
 		Issue issue = issueRepository.findIssue(issueId);
 		issue.setAssignee(assignee);
 
-		String x = "\n\nYou became the assignee for the issue :\n\n" + ApplicationParameters.applicationRoot + ApplicationParameters.contextPath + "/issues/issue/" + issue.getId();
+		String x = "\n\nYou became the assignee for the issue :\n\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/issues/issue/" + issue.getId();
 		Email email = new Email();
 		email.setTo(issue.getAssignee().getEmail());
 		email.setSubject("IssueTracker - AssigneIssue");

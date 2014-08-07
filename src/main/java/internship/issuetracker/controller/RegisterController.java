@@ -1,4 +1,3 @@
-
 package internship.issuetracker.controller;
 
 import internship.issuetracker.entities.Activation;
@@ -22,75 +21,72 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private UserValidator userValidator;
 
-	
-	@Autowired
-	private ActivationValidator activationValidator;
-	
-	@Autowired
-	private MailHelper mh;
-	@Autowired
-	private ActivationService activationService;
-	
-	static private String msg1="To activate your account please click the link below \n\n";
-	static private String msg2="\n\n Thank you for your interest.";
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public String registerPage(Model model) {
-		model.addAttribute(new User());
-		return "register";
-	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView registerUser(@Valid User user,BindingResult bindingResult,HttpServletRequest request) {
-	
-		ModelAndView mv = new ModelAndView();
+    @Autowired
+    private UserService userService;
 
-		userValidator.validate(user, bindingResult);
+    @Autowired
+    private UserValidator userValidator;
 
-		if (bindingResult.hasErrors()) {
-			mv.setViewName("register");
-			mv.addObject("errors", bindingResult.getAllErrors());
-			return mv;
-		}
-		
-		Activation activation=new Activation(user);
-		
-		activationValidator.validate(activation, bindingResult);
-		
-		if (bindingResult.hasErrors()) {
-			mv.setViewName("register");
-			mv.addObject("errors", bindingResult.getAllErrors());
-			return mv;
-		}
-		
-		
-		String msg=msg1+ApplicationParameters.applicationRoot+request.getContextPath()+"/activation/"+activation.getKeyHash()+msg2;
-		Email email=new Email();
-		email.setTo(activation.getEmail());
-		email.setSubject("Activation-issueTracker");	
-		email.setContent(msg);
-		
-		mh.setUp(email);
-		new Thread(mh).start();
-		//mail.sendMail(email);		
-		activationService.addActivation(activation);
-		mv.setViewName("checkEmailPage");
-		return mv;
-	}
-	
-	@RequestMapping(value = { "/checkEmailPage"}, method = RequestMethod.GET)
-	public String checkEmailPage() {
-		return "checkEmailPage";
-	}
+    @Autowired
+    private ActivationValidator activationValidator;
+
+    @Autowired
+    private MailHelper mh;
+    @Autowired
+    private ActivationService activationService;
+
+    static private String msg1 = "To activate your account please click the link below \n\n";
+    static private String msg2 = "\n\n Thank you for your interest.";
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String registerPage(Model model) {
+        model.addAttribute(new User());
+        return "register";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+
+        ModelAndView mv = new ModelAndView();
+
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("register");
+            mv.addObject("errors", bindingResult.getAllErrors());
+            return mv;
+        }
+
+        Activation activation = new Activation(user);
+
+        activationValidator.validate(activation, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("register");
+            mv.addObject("errors", bindingResult.getAllErrors());
+            return mv;
+        }
+
+        String msg = msg1 + ApplicationParameters.APPLICATION_ROOT + request.getContextPath() + "/activation/" + activation.getKeyHash() + msg2;
+        Email email = new Email();
+        email.setTo(activation.getEmail());
+        email.setSubject("Activation-issueTracker");
+        email.setContent(msg);
+
+        mh.setUp(email);
+        new Thread(mh).start();
+        // mail.sendMail(email);
+        activationService.addActivation(activation);
+        mv.setViewName("checkEmailPage");
+        return mv;
+    }
+
+    @RequestMapping(value = { "/checkEmailPage" }, method = RequestMethod.GET)
+    public String checkEmailPage() {
+        return "checkEmailPage";
+    }
 }

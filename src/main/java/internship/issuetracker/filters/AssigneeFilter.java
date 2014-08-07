@@ -9,8 +9,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.criterion.Expression;
-
 public class AssigneeFilter implements SearchFilterInt<Issue> {
 
 	private String assignee;

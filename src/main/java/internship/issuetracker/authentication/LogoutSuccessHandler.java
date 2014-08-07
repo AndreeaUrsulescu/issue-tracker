@@ -13,11 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
-    private static final Logger log = Logger.getLogger(LogoutSuccessHandler.class.getName());
+    private static final Logger LOG = Logger.getLogger(LogoutSuccessHandler.class.getName());
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.log(Level.INFO, "User logged out succesfully");
+        LOG.log(Level.INFO, "User logged out succesfully");
         SecurityContextHolder.clearContext();
         request.getSession().setAttribute("user", null);
         super.onLogoutSuccess(request, response, null);

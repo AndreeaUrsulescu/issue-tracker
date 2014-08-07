@@ -21,27 +21,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/issues/issue/{id}/download")
 public class FileDownloadController {
-	
-	@Autowired
-	private AttachmentService attachmentService;
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/{attachmentId}")
-    public void doDownload(HttpServletRequest request,
-            HttpServletResponse response, @PathVariable Long id, @PathVariable Long attachmentId) throws IOException {
-     
-		Attachment attachment = attachmentService.getAttachment(attachmentId);
-		
-		response.setContentType(attachment.getContentType());
-		String headerKey = "Content-Disposition";
-	    String headerValue = String.format("attachment; filename=\"%s\"",
-	                attachment.getFilename());
-	    response.setHeader(headerKey, headerValue);
-	    
-	    OutputStream out = response.getOutputStream();
-	    InputStream is = new ByteArrayInputStream(attachment.getContent());
-	    IOUtils.copy(is, out);
+
+    @Autowired
+    private AttachmentService attachmentService;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{attachmentId}")
+    public void doDownload(HttpServletRequest request, HttpServletResponse response, @PathVariable Long id, @PathVariable Long attachmentId) throws IOException {
+
+        Attachment attachment = attachmentService.getAttachment(attachmentId);
+
+        response.setContentType(attachment.getContentType());
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", attachment.getFilename());
+        response.setHeader(headerKey, headerValue);
+
+        OutputStream out = response.getOutputStream();
+        InputStream is = new ByteArrayInputStream(attachment.getContent());
+        IOUtils.copy(is, out);
         out.flush();
         out.close();
-        is.close();	
-	}
+        is.close();
+    }
 }

@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SearchRepository {
 
-    public static final int ITEMS_PER_PAGE = ApplicationParameters.itemsPerPage;
+    public static final int ITEMS_PER_PAGE = ApplicationParameters.ITEMS_PER_PAGE;
     public static final String DATE = "latestUpdateDate";
     public static final String TITLE = "Title";
 
