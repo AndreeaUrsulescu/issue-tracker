@@ -17,7 +17,7 @@ public class ActivationRepositoryTest {
     ActivationRepository activationRepository;
 
     Activation activation;
-
+    
     @Before
     public void setUp() {
         activation = new Activation();
