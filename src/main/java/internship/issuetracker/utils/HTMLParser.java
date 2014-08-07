@@ -16,13 +16,9 @@ public final class HTMLParser {
 
             if (c == '<') {
                 inTag = true;
-                continue;
             } else if (c == '>') {
                 inTag = false;
-                continue;
-            }
-
-            if (!inTag) {
+            } else if (!inTag) {
                 counter++;
                 if (counter < 147) {
                     parsedText.append(c);
@@ -44,16 +40,11 @@ public final class HTMLParser {
         char c;
         for (int i = 0; i < fullText.length(); i++) {
             c = fullText.charAt(i);
-
             if (c == '<') {
                 inTag = true;
-                continue;
-            }
-            if (c == '>') {
+            } else if (c == '>') {
                 inTag = false;
-                continue;
-            }
-            if (!inTag) {
+            } else if (!inTag) {
                 parsedText.append(c);
             }
         }
