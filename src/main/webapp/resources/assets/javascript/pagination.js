@@ -1,5 +1,6 @@
 window.onload = function() {
-
+	
+	
 	$("#nextButton").on("click",
 			issuePagination('${plus}', '${listLength}', '${itemsPerPage}'));
 	$("#previousButton").on("click",
