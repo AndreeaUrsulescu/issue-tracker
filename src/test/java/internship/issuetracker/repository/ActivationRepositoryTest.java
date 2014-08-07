@@ -26,7 +26,7 @@ public class ActivationRepositoryTest {
 	activation.setEmail("foo@foo.foo");
 	activation.setPassword("password");
 	activation.setUserName("userName");
-	activation.EncryptPasswordAndKeyHash();
+	activation.encryptPasswordAndKeyHash();
     }
 
     @Test

@@ -34,7 +34,7 @@ public class ActivationServiceTest {
 		activation.setEmail("activation@activation.mock");
 		activation.setUserName("userActivation");
 		activation.setPassword("activationIsTheAccessPassword");
-		activation.EncryptPasswordAndKeyHash();
+		activation.encryptPasswordAndKeyHash();
 		activationService.addActivation(activation);
 		Mockito.verify(activationRepository).create(activation);
 	}
@@ -45,7 +45,7 @@ public class ActivationServiceTest {
 		activation.setEmail("activation@activation.mock");
 		activation.setUserName("userActivation");
 		activation.setPassword("activationIsTheAccessPassword");
-		activation.EncryptPasswordAndKeyHash();
+		activation.encryptPasswordAndKeyHash();
 		
 		Mockito.when(activationRepository.findActivationByKeyHash(activation.getKeyHash())).thenReturn(activation);
 
@@ -62,7 +62,7 @@ public class ActivationServiceTest {
 		activation.setEmail("activation@activation.mock");
 		activation.setUserName("userActivation");
 		activation.setPassword("activationIsTheAccessPassword");
-		activation.EncryptPasswordAndKeyHash();
+		activation.encryptPasswordAndKeyHash();
 		
 		activationService.addActivation(activation);
 		
