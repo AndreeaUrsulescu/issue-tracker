@@ -195,11 +195,19 @@ myListener();
 		<div class="editIssueFileUpload">
 			
 			<c:choose>
-				<c:when test="${fn:length(viewIssue.attachments) > 5}">
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled>
+				<c:when test="${fn:length(viewIssue.attachments) >= 5}">
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled style="display:none">
+					<fieldset disabled>
+						<button class="fileUploadButton btn btn-primary">
+							Upload File <span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</fieldset>
 				</c:when>
 				<c:otherwise>
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple>
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple style="display:none">
+					<button class="fileUploadButton btn btn-primary">
+						Upload File <span class="glyphicon glyphicon-plus"></span>
+					</button>
 				</c:otherwise>
 			</c:choose>
 		 

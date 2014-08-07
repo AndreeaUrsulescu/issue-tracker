@@ -164,19 +164,19 @@ footer a {
 }
 
 .commentTemplate {
-	width: 700px;
+	width: 100%;
 	margin-top: 20px;
 	padding-top: 15px;
 	border-top: 1px solid #b5b9bc;
 }
 
 .commentBox {
-	width: 660px;
+	width: 90%;
 	margin: 0 auto;
 }
 
 .commentUser {
-	font-size: 18px;
+	font-size: 1.9vmin;
 	margin-left: 10px;
 	color: #3DADF7;
 }
@@ -187,6 +187,10 @@ footer a {
 	font-weight: bold;
 	color: #2359AF;
 	font-family: Arial, sans-serif, Verdana;
+}
+
+.commentDate small{
+	font-size:1.6vmin;
 }
 
 .commentContent {
@@ -200,7 +204,32 @@ footer a {
 	word-wrap: break-word;      /* IE 5+ */
 	font-family: Verdana, sans-serif, Arial;
 	color: #2C420D;
+	font-size:2vmin;
 }	
+
+.commentContent h1{
+	font-size:3.7vmin;
+}
+
+.commentContent h2{
+	font-size:3.1vmin;
+}
+
+.commentContent h3{
+	font-size:2.5vmin;
+}
+
+.commentContent h4{
+	font-size:1.9vmin;
+}
+
+.commentContent h5{
+	font-size:1.4vmin;
+}
+
+.commentContent h6{
+	font-size:1.2vmin;
+}
 
 /* Comment section end */
 
