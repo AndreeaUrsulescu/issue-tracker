@@ -38,14 +38,14 @@ public class UserRepository {
     public boolean exists(String userName) {
         TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
         query.setParameter("user_name", userName.toCharArray());
-        return (query.getResultList().size() > 0);
+        return !query.getResultList().isEmpty();
     }
 
     public boolean matchPassword(String userName, String password) {
         TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
         query.setParameter("user_name", userName);
         query.setParameter("user_password", password);
-        return (query.getResultList().size() > 0);
+        return !query.getResultList().isEmpty();
     }
 
     public User findUserByUserName(String userName) {

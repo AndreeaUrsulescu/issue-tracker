@@ -2,12 +2,15 @@ package internship.issuetracker.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.IssueLabel;
 import internship.issuetracker.entities.Label;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -18,7 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class IssueLabelRepository {
-
+    private static final Logger LOG = Logger.getLogger(IssueLabelRepository.class.getName());
+    
     @PersistenceContext
     private EntityManager em;
 
@@ -55,13 +59,13 @@ public class IssueLabelRepository {
 
         query.setParameter("issueId", issueId);
         query.setParameter("labelName", labelName);
-
-        List<IssueLabel> result = query.getResultList();
-
-        if (result.size() > 0) {
-            return result.get(0);
+        
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException ex) {
+            LOG.log(Level.FINE, "NoResultException in IssueLabelRepository.findIssueLabel(" + issueId + ", " + labelName + ")",ex);
+            return null;
         }
-        return null;
     }
 
     public void removeLabelFromIssue(Long issueId, String labelName) {

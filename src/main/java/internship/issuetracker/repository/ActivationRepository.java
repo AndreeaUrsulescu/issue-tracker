@@ -34,11 +34,12 @@ public class ActivationRepository {
         try {
             activation = query.getSingleResult();
             LOG.log(Level.INFO, "An activation was found for " + activation.getUserName());
-        } catch (NoResultException ex) {
-            activation = null;
-            LOG.log(Level.INFO, "No activation was found for given key!");
+            return activation;
+        } catch (NoResultException ex) {        
+            LOG.log(Level.INFO, "No activation was found for given key!",ex);
+            return null;
         }
-        return activation;
+
     }
 
     public void remove(Activation activation) {

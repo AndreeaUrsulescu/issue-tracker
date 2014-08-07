@@ -40,7 +40,7 @@ public class ResetPasswordRepository {
             LOG.log(Level.INFO, "An ResetPassword was found for " + resetPassword.getOwner().getUserName());
         } catch (NoResultException ex) {
             resetPassword = null;
-            LOG.log(Level.INFO, "No ResetPassword was found for given key!");
+            LOG.log(Level.INFO, "No ResetPassword was found for given key!",ex);
         }
         return resetPassword;
     }
@@ -48,12 +48,12 @@ public class ResetPasswordRepository {
     public boolean existsForUser(User user) {
         TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_USER, ResetPassword.class);
         query.setParameter("owner", user);
-        return query.getResultList().size() > 0;
+        return !query.getResultList().isEmpty();
     }
 
     public boolean existsForHash(String keyHash) {
         TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
         query.setParameter("keyHash", keyHash);
-        return query.getResultList().size() > 0;
+        return !query.getResultList().isEmpty();
     }
 }
