@@ -12,7 +12,6 @@ import internship.issuetracker.utils.ApplicationParameters;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,14 +45,12 @@ public class IssueController {
         Issue issue = new Issue();
         model.addAttribute("user", user.getUserName());
         model.addAttribute("issue", issue);
-        model.addAttribute("date",
-                issue.getUpdateDate().toString().substring(0, 11));
+        model.addAttribute("date", issue.getUpdateDate().toString().substring(0, 11));
         return "createIssue";
     }
 
     @RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
-    public String createIssuePage(@Valid Issue issue,
-            HttpServletRequest request, BindingResult bindingResult) {
+    public String createIssuePage(@Valid Issue issue, HttpServletRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "createIssue";
         issue.setOwner((User) request.getSession().getAttribute("user"));
@@ -86,8 +83,7 @@ public class IssueController {
 
     @RequestMapping(value = "/issue/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> updateIssue(@PathVariable Long id,
-            @RequestBody @Valid Issue issue, BindingResult bindingResult) {
+    public Map<String, Object> updateIssue(@PathVariable Long id, @RequestBody @Valid Issue issue, BindingResult bindingResult) {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -105,17 +101,14 @@ public class IssueController {
 
     @RequestMapping(value = "/issue/{id}/comment", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addComment(@RequestBody @Valid Comment comment,
-            @PathVariable Long id, BindingResult bindingResult,
-            HttpServletRequest request) {
+    public Map<String, Object> addComment(@RequestBody @Valid Comment comment, @PathVariable Long id, BindingResult bindingResult, HttpServletRequest request) {
 
         Map<String, Object> map = new LinkedHashMap<String, Object>();
         List<CommentPojo> pojoComments;
         IssuePojo issue = issueService.getIssue(id);
         User user = (User) request.getSession().getAttribute("user");
         Date currentDate = new Date();
-        CommentPojo commentPojo = new CommentPojo(user.getUserName(),
-                comment.getContent(), currentDate, issue.getId());
+        CommentPojo commentPojo = new CommentPojo(user.getUserName(), comment.getContent(), currentDate, issue.getId());
 
         if (!bindingResult.hasErrors()) {
             commentService.addComment(commentPojo);
@@ -139,14 +132,15 @@ public class IssueController {
         model.addAttribute("listLength", issueService.numberOfIssues());
         model.addAttribute("itemsPerPage", ApplicationParameters.itemsPerPage);
         if (issueService.numberOfIssues() % ApplicationParameters.itemsPerPage == 0) {
-            model.addAttribute(
-                    "pages",
-                    (int) (issueService.numberOfIssues() / ApplicationParameters.itemsPerPage));
+            model.addAttribute("pages", (int) (issueService.numberOfIssues() / ApplicationParameters.itemsPerPage));
         } else {
-            model.addAttribute("pages", (int) (issueService.numberOfIssues()
-                    / ApplicationParameters.itemsPerPage + 1));
+            model.addAttribute("pages", (int) (issueService.numberOfIssues() / ApplicationParameters.itemsPerPage + 1));
         }
         return "issues";
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String redirect() {
+        return "redirect:/issues";
+    }
 }

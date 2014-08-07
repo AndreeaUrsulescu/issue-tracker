@@ -17,50 +17,50 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserRepository {
-	private static final Logger log = Logger.getLogger(UserRepository.class.getName());
+    private static final Logger LOG = Logger.getLogger(UserRepository.class.getName());
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public List<User> findAll() {
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_ALL, User.class);
-		return query.getResultList();
-	}
+    public List<User> findAll() {
+        TypedQuery<User> query = em.createNamedQuery(User.FIND_ALL, User.class);
+        return query.getResultList();
+    }
 
-	public void create(User user) {
-		em.persist(user);
-	}
+    public void create(User user) {
+        em.persist(user);
+    }
 
-	public void update(User user) {
-		em.merge(user);
-	}
+    public void update(User user) {
+        em.merge(user);
+    }
 
-	public boolean exists(String userName) {
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
-		query.setParameter("user_name", userName.toCharArray());
-		return (query.getResultList().size() > 0);
-	}
+    public boolean exists(String userName) {
+        TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
+        query.setParameter("user_name", userName.toCharArray());
+        return !query.getResultList().isEmpty();
+    }
 
-	public boolean matchPassword(String userName, String password) {
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
-		query.setParameter("user_name", userName);
-		query.setParameter("user_password", password);
-		return (query.getResultList().size() > 0);
-	}
+    public boolean matchPassword(String userName, String password) {
+        TypedQuery<User> query = em.createNamedQuery(User.FIND_PASS, User.class);
+        query.setParameter("user_name", userName);
+        query.setParameter("user_password", password);
+        return !query.getResultList().isEmpty();
+    }
 
-	public User findUserByUserName(String userName) {
+    public User findUserByUserName(String userName) {
 
-		User user = new User();
+        User user = new User();
 
-		TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
-		query.setParameter("user_name", userName);
+        TypedQuery<User> query = em.createNamedQuery(User.FIND_NAME, User.class);
+        query.setParameter("user_name", userName);
 
-		try {
-			user = query.getSingleResult();
-		} catch (NoResultException ex) {
-			log.log(Level.FINE, "NoResultException in userRepository.findUserByUserName({0})", userName);
-		}
+        try {
+            user = query.getSingleResult();
+        } catch (NoResultException ex) {
+            LOG.log(Level.FINE, "NoResultException in userRepository.findUserByUserName({0})", userName);
+        }
 
-		return user;
-	}
+        return user;
+    }
 }

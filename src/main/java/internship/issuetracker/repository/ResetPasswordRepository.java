@@ -17,43 +17,43 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class ResetPasswordRepository {
-	private static final Logger log = Logger.getLogger(ResetPasswordRepository.class.getName());
+    private static final Logger LOG = Logger.getLogger(ResetPasswordRepository.class.getName());
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public void create(ResetPassword resetPassword) {
-		em.persist(resetPassword);
-	}
+    public void create(ResetPassword resetPassword) {
+        em.persist(resetPassword);
+    }
 
-	public void remove(ResetPassword resetPassword) {
-		em.remove(this.findResetPasswordByKeyHash(resetPassword.getKeyHash()));
-	}
+    public void remove(ResetPassword resetPassword) {
+        em.remove(this.findResetPasswordByKeyHash(resetPassword.getKeyHash()));
+    }
 
-	public ResetPassword findResetPasswordByKeyHash(String keyHash) {
-		ResetPassword resetPassword;
+    public ResetPassword findResetPasswordByKeyHash(String keyHash) {
+        ResetPassword resetPassword;
 
-		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
-		query.setParameter("keyHash", keyHash);
-		try {
-			resetPassword = query.getSingleResult();
-			log.log(Level.INFO, "An ResetPassword was found for " + resetPassword.getOwner().getUserName());
-		} catch (NoResultException ex) {
-			resetPassword = null;
-			log.log(Level.INFO, "No ResetPassword was found for given key!");
-		}
-		return resetPassword;
-	}
+        TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
+        query.setParameter("keyHash", keyHash);
+        try {
+            resetPassword = query.getSingleResult();
+            LOG.log(Level.INFO, "An ResetPassword was found for " + resetPassword.getOwner().getUserName());
+        } catch (NoResultException ex) {
+            resetPassword = null;
+            LOG.log(Level.INFO, "No ResetPassword was found for given key!",ex);
+        }
+        return resetPassword;
+    }
 
-	public boolean existsForUser(User user) {
-		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_USER, ResetPassword.class);
-		query.setParameter("owner", user);
-		return (query.getResultList().size() > 0);
-	}
+    public boolean existsForUser(User user) {
+        TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_USER, ResetPassword.class);
+        query.setParameter("owner", user);
+        return !query.getResultList().isEmpty();
+    }
 
-	public boolean existsForHash(String keyHash) {
-		TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
-		query.setParameter("keyHash", keyHash);
-		return (query.getResultList().size() > 0);
-	}
+    public boolean existsForHash(String keyHash) {
+        TypedQuery<ResetPassword> query = em.createNamedQuery(ResetPassword.FIND_KEYHASH, ResetPassword.class);
+        query.setParameter("keyHash", keyHash);
+        return !query.getResultList().isEmpty();
+    }
 }
