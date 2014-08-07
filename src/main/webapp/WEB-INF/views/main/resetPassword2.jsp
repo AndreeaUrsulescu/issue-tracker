@@ -25,6 +25,6 @@
 			</div>
 		<br>
 		<input type="submit" id="submitButton"
-			class="btn btn-primary center-block" value="resetPassword">
+			class="btn btn-primary center-block" value="Change password">
 	</sf:form>
 </div>
