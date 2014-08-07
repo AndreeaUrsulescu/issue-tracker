@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActivationService {
 
-    private static final Logger LOG = Logger.getLogger(ActivationService.class
-            .getName());
+    private static final Logger LOG = Logger.getLogger(ActivationService.class.getName());
 
     @Autowired
     private ActivationRepository activationRepository;

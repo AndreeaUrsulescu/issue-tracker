@@ -23,12 +23,10 @@ public final class ApplicationParameters {
     public static final String ACTIVATION_EMAIL_SUBJECT;
     private static Properties properties;
     public static final String CONTEXT_PATH;
-    
+
     private ApplicationParameters() {
 
     }
-
-
 
     static {
         loadPropertiesFile();
@@ -43,7 +41,8 @@ public final class ApplicationParameters {
         ACTIVATION_EMAIL_SUBJECT = properties.getProperty("activationEmailSubject");
 
     }
-    private static int setNumberofIssuesPerPage(){
+
+    private static int setNumberofIssuesPerPage() {
         int tempitemsPerPage;
         try {
             tempitemsPerPage = Integer.parseInt(properties.getProperty("itemsPerPage"));
@@ -53,6 +52,7 @@ public final class ApplicationParameters {
         }
         return tempitemsPerPage;
     }
+
     public static void loadPropertiesFile() {
         Resource resource = null;
         InputStream inputStream = null;

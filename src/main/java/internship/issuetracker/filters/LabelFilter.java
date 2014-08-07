@@ -10,25 +10,23 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
-	public class LabelFilter implements SearchFilterInt<Issue> {
+public class LabelFilter implements SearchFilterInt<Issue> {
 
-	private Long id;
+    private Long id;
 
-	public LabelFilter(Long id) {
-		super();
-		this.id = id;
-	}
+    public LabelFilter(Long id) {
+        super();
+        this.id = id;
+    }
 
-	
-	@Override
-	public Predicate buildPredicate(CriteriaQuery<Issue> cq,
-		CriteriaBuilder cb, Root<Issue> root) {
-		Subquery<Issue> subquery = cq.subquery(Issue.class);
-		Root<IssueLabel> issueLabel = subquery.from(IssueLabel.class);
-		subquery.where(cb.equal(issueLabel.get("label"),id));
-		Path<Issue> issue = issueLabel.get("issue");
-		subquery.select(issue);
-		return root.in(subquery);
-	}
+    @Override
+    public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
+        Subquery<Issue> subquery = cq.subquery(Issue.class);
+        Root<IssueLabel> issueLabel = subquery.from(IssueLabel.class);
+        subquery.where(cb.equal(issueLabel.get("label"), id));
+        Path<Issue> issue = issueLabel.get("issue");
+        subquery.select(issue);
+        return root.in(subquery);
+    }
 
 }

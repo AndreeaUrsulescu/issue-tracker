@@ -11,23 +11,22 @@ import javax.persistence.criteria.Root;
 
 public class AssigneeFilter implements SearchFilterInt<Issue> {
 
-	private String assignee;
+    private String assignee;
 
-	public AssigneeFilter(String creator) {
-		this.assignee = creator.toUpperCase();
-	}
+    public AssigneeFilter(String creator) {
+        this.assignee = creator.toUpperCase();
+    }
 
-	@Override
-	public Predicate buildPredicate(CriteriaQuery<Issue> cq,
-			CriteriaBuilder cb, Root<Issue> root) {
-		Path<User> userPath = root.get("assignee");
-		Path<String> userNamePath = userPath.get("userName");
-		String aux = "%" + assignee + "%";
+    @Override
+    public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
+        Path<User> userPath = root.get("assignee");
+        Path<String> userNamePath = userPath.get("userName");
+        String aux = "%" + assignee + "%";
 
-		if ("%%".equals(aux)) {
-			return cb.conjunction();
-		} else {
-			return cb.like(cb.upper(userNamePath), aux);
-		}
-	}
+        if ("%%".equals(aux)) {
+            return cb.conjunction();
+        } else {
+            return cb.like(cb.upper(userNamePath), aux);
+        }
+    }
 }

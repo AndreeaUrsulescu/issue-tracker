@@ -40,7 +40,7 @@ public class ResetPasswordRepository {
             LOG.log(Level.INFO, "An ResetPassword was found for " + resetPassword.getOwner().getUserName());
         } catch (NoResultException ex) {
             resetPassword = null;
-            LOG.log(Level.INFO, "No ResetPassword was found for given key!",ex);
+            LOG.log(Level.INFO, "No ResetPassword was found for given key!", ex);
         }
         return resetPassword;
     }

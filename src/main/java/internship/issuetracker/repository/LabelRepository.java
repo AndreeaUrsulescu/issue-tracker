@@ -31,11 +31,11 @@ public class LabelRepository {
     }
 
     public Label findLabelByName(String labelName) {
-        TypedQuery<Label> query = em.createNamedQuery(Label.FIND_BY_NAME, Label.class);           
+        TypedQuery<Label> query = em.createNamedQuery(Label.FIND_BY_NAME, Label.class);
         try {
             return query.setParameter("labelName", labelName).getSingleResult();
         } catch (NoResultException ex) {
-            LOG.log(Level.FINE, "NoResultException in LabelRepository.findLabelByName(" + labelName + ")",ex);
+            LOG.log(Level.FINE, "NoResultException in LabelRepository.findLabelByName(" + labelName + ")", ex);
             return null;
         }
     }

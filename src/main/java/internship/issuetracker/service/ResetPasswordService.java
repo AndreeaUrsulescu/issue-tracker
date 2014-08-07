@@ -15,30 +15,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ResetPasswordService {
 
-	private static final Logger LOG = Logger.getLogger(ActivationService.class.getName());
+    private static final Logger LOG = Logger.getLogger(ActivationService.class.getName());
 
-	@Autowired
-	private ResetPasswordRepository resetPasswordRepository;
+    @Autowired
+    private ResetPasswordRepository resetPasswordRepository;
 
-	public void addResetPassword(ResetPassword resetPassword) {
-		this.resetPasswordRepository.create(resetPassword);
-		LOG.log(Level.INFO, "Activation entity was persisted");
-	}
+    public void addResetPassword(ResetPassword resetPassword) {
+        this.resetPasswordRepository.create(resetPassword);
+        LOG.log(Level.INFO, "Activation entity was persisted");
+    }
 
-	public ResetPassword getResetPassword(String keyHash) {
-		return resetPasswordRepository.findResetPasswordByKeyHash(keyHash);
-	}	
+    public ResetPassword getResetPassword(String keyHash) {
+        return resetPasswordRepository.findResetPasswordByKeyHash(keyHash);
+    }
 
-	public boolean existsResetPasswordForUser(User user){
-		return resetPasswordRepository.existsForUser(user);
-	}
-	
-	public boolean existsResetPasswordForHash(String hash){
-		return resetPasswordRepository.existsForHash(hash);
-	}
-	
-	public void removeResetPassword(ResetPassword resetPassword) {
-		this.resetPasswordRepository.remove(resetPassword);
-		LOG.log(Level.INFO, "Activation entity was removed");
-	}
+    public boolean existsResetPasswordForUser(User user) {
+        return resetPasswordRepository.existsForUser(user);
+    }
+
+    public boolean existsResetPasswordForHash(String hash) {
+        return resetPasswordRepository.existsForHash(hash);
+    }
+
+    public void removeResetPassword(ResetPassword resetPassword) {
+        this.resetPasswordRepository.remove(resetPassword);
+        LOG.log(Level.INFO, "Activation entity was removed");
+    }
 }

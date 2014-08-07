@@ -4,7 +4,6 @@ import internship.issuetracker.entities.Activation;
 import internship.issuetracker.entities.Email;
 import internship.issuetracker.entities.User;
 import internship.issuetracker.service.ActivationService;
-import internship.issuetracker.service.UserService;
 import internship.issuetracker.utils.ApplicationParameters;
 import internship.issuetracker.utils.MailHelper;
 import internship.issuetracker.validator.ActivationValidator;
@@ -24,9 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private UserValidator userValidator;
@@ -79,7 +75,6 @@ public class RegisterController {
 
         mh.setUp(email);
         new Thread(mh).start();
-        // mail.sendMail(email);
         activationService.addActivation(activation);
         mv.setViewName("checkEmailPage");
         return mv;

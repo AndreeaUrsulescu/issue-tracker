@@ -21,8 +21,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by a.creationDate DESC,a.id DESC"),
-        @NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by a.creationDate DESC,a.id DESC") })
+@NamedQueries({ @NamedQuery(name = Comment.FIND_COMMENTS_BY_ISSUE, query = "select a from Comment a where a.issue = :issue order by a.creationDate DESC,a.id DESC"), @NamedQuery(name = Comment.FIND_COMMENTS_BY_OWNER, query = "select a from Comment a where a.owner= :owner order by a.creationDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Comments")
 public class Comment implements Serializable {
@@ -107,8 +106,7 @@ public class Comment implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Comment) {
             Comment comment = (Comment) obj;
-            return new EqualsBuilder().append(this.content, comment.content).append(this.creationDate, comment.creationDate).append(this.owner, comment.owner).append(this.issue,
-                    comment.issue).isEquals();
+            return new EqualsBuilder().append(this.content, comment.content).append(this.creationDate, comment.creationDate).append(this.owner, comment.owner).append(this.issue, comment.issue).isEquals();
         }
         return false;
     }

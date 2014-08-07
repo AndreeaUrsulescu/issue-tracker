@@ -7,6 +7,7 @@ import internship.issuetracker.service.IssueService;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +33,9 @@ public class FileUploadController {
 
     @RequestMapping(value = "/issues/issue/{id}/upload", method = RequestMethod.POST)
     public @ResponseBody
-    LinkedList<AttachmentPojo> upload(@PathVariable Long id, MultipartHttpServletRequest request, HttpServletResponse response) {
+    List<AttachmentPojo> upload(@PathVariable Long id, MultipartHttpServletRequest request, HttpServletResponse response) {
 
-        LinkedList<AttachmentPojo> files = new LinkedList<AttachmentPojo>();
+        List<AttachmentPojo> files = new LinkedList<AttachmentPojo>();
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf = null;
 

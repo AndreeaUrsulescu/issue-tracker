@@ -31,16 +31,18 @@ public class ResetPasswordController {
 
     @RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.GET)
     public String resetPassword(@PathVariable String hashPass, Model model) {
-        if (!resetPasswordService.existsResetPasswordForHash(hashPass))
+        if (!resetPasswordService.existsResetPasswordForHash(hashPass)) {
             return "error";
+        }
         model.addAttribute(new UserName());
         return "resetPassword";
     }
 
     @RequestMapping(value = "/resetPassword/{hashPass}", method = RequestMethod.POST)
     public String resetPassword(@Valid UserName userName, @PathVariable String hashPass) {
-        if (!resetPasswordService.existsResetPasswordForHash(hashPass))
+        if (!resetPasswordService.existsResetPasswordForHash(hashPass)) {
             return "resetPasswordFailure";
+        }
         ResetPassword resetPassword = resetPasswordService.getResetPassword(hashPass);
         User user = userService.findUserByUserName(resetPassword.getOwner().getUserName());
         user.setPassword(EncryptData.sha256(userName.getUserName()));
@@ -57,15 +59,15 @@ public class ResetPasswordController {
 
     @RequestMapping(value = "/resetPasswordForm", method = RequestMethod.POST)
     public String resetPasswordForm(@Valid UserName userName) {
-        if (!userService.exists(userName.getUserName()))
+        if (!userService.exists(userName.getUserName())) {
             return "resetPasswordFormFailure";
+        }
         User user = userService.findUserByUserName(userName.getUserName());
         ResetPassword resetPassword = new ResetPassword(user);
         if (!resetPasswordService.existsResetPasswordForUser(user)) {
             resetPasswordService.addResetPassword(resetPassword);
         }
-        String msg = "To reset your password click the link below :\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/user/resetPassword/"
-                + resetPassword.getKeyHash();
+        String msg = "To reset your password click the link below :\n" + ApplicationParameters.APPLICATION_ROOT + ApplicationParameters.CONTEXT_PATH + "/user/resetPassword/" + resetPassword.getKeyHash();
         Email email = new Email();
         email.setTo(user.getEmail());
         email.setSubject("Reset password-issueTracker");
