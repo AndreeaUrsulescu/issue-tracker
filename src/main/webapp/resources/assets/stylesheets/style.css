@@ -235,6 +235,10 @@ footer a {
 
 /* View/Update Issue start */
 
+#backBtnViewIssue span:hover{
+	text-decoration:none;
+}
+
 .labelSectionView{
 	width:100%;
 }
@@ -1205,6 +1209,14 @@ commentSectionTitlecommentSectionTitle
 #viewuploadfiles{
 	margin-top:4%;
 	border-bottom:1px solid #ccc;
+}
+
+#backBtnViewIssue
+{
+	margin-top:0.5%;
+	margin-left:1%;
+	float:left
+	
 }
 /* Edit issue upload file end */
 
