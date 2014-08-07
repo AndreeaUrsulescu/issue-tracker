@@ -1,4 +1,3 @@
-
 package internship.issuetracker.controller;
 
 import internship.issuetracker.pojo.UserPojo;
@@ -17,18 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-	@Autowired
-	private UserService userService;
-	
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String,Object> viewAllUsers () {
+    @Autowired
+    private UserService userService;
 
-		Map<String,Object> allUsers = new HashMap<>();
-		List<UserPojo> allUsersPojo = userService.findAllUsers();
-		allUsers.put("usersList",allUsersPojo);
-		
-		return allUsers;
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> viewAllUsers() {
+
+        Map<String, Object> allUsers = new HashMap<>();
+        List<UserPojo> allUsersPojo = userService.findAllUsers();
+        allUsers.put("usersList", allUsersPojo);
+
+        return allUsers;
+    }
 }
-
