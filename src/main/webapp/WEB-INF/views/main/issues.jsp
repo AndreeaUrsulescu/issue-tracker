@@ -32,9 +32,9 @@
 			class="meniuBtn btn btn-primary issuesMenuButtons"><span
 			class="glyphicon glyphicon-plus"></span> Add issue </a>
 		<div id="filtering">
-			<button id="slideFilter" type="button" onclick="slideFilter()"
-				value="Filter">
-				Filter <span class="caret"></span>
+			<button id="slideFilter" class="btn btn-primary" type="button" onclick="slideFilter()"
+				value="Filter"><span class=" glyphicon glyphicon-th-large">
+				Filter <span class="caret"></span>	
 			</button>
 
 			<div id="filterBox" class="row" style="display: none;">
@@ -118,7 +118,7 @@
 
 	</div>
 	<div style="clear: both"></div>
-	<div id="issues" class="row">
+	<div id="issues" class="row" style="margin-top:-50px;">
 
 		<c:forEach var="issue" items="${issuesList}" varStatus="i">
 			<div class="col-md-4">

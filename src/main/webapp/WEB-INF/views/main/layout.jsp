@@ -49,6 +49,7 @@
 	
 	</head>
 	<body>
+			<img class="backgrImg" src="${pageContext.request.contextPath}/resources/assets/images/background.png" />
 			<tiles:insertAttribute name="header" />
 	
 			<tiles:insertAttribute name="body" />
