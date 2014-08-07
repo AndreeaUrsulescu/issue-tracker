@@ -1,11 +1,10 @@
 $(function () {
 		
-		$("#fileupload").on("click", function(){
-			$('#progress .bar').css(
-	                'width',
-	                '0' + '%'
-	            );
-		});
+	$("#fileupload").on("click", function(){
+		$('#progress .bar').css(
+	               'width',
+	               '0' + '%'
+	           );
 		
     $('#fileupload').fileupload({
         dataType: 'json',
@@ -21,13 +20,29 @@ $(function () {
                         .append($('<td/>').text(file.fileType))
                         .append($('<td/>').html("<a href='" + file.issueId + "/download/" + file.id + "'><img src='" + ctx +"/resources/assets/images/Save-icon.png'></a>"))
                         .append($('<td/>').html("<img src='" + ctx + "/resources/assets/images/unX.png' onclick='removeAttachment(" + file.id + ")'>"))
-                        );//end $("#uploaded-files").append()
+                        );
             });
-            if (data.result.length == 5) {
+            if (data.result.length >= 5) {
             	$('#fileupload').prop("disabled", true);
-            }
+            };
         },
- 
+        
+        send: function(e, data) {
+        	var uploadedFiles = $('#tableSize').children();
+        	var tableSize = uploadedFiles.length;
+        	
+        	alert("tata");
+        	//alert(5 - tableSize + data.files.length + 1);
+        	if ( (5 - tableSize + data.files.length + 1) > 0)
+        	{
+        		alert(5 - tableSize + data.files.length);
+        		return false;
+        	};
+     
+        },
+        
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5,
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .bar').css(
@@ -36,6 +51,7 @@ $(function () {
             );
         }
     });
+	});
 });
 
 function removeAttachment(id) {
@@ -56,7 +72,7 @@ function removeAttachment(id) {
 	                        .append($('<td/>').text(file.fileType))
 	                        .append($('<td/>').html("<a href='" + file.issueId + "/download/" + file.id + "'><img src='" + ctx +"/resources/assets/images/Save-icon.png'></a>"))
 	                        .append($('<td/>').html("<img src='" + ctx + "/resources/assets/images/unX.png' onclick='removeAttachment(" + file.id + ")'>"))
-	                        );//end $("#uploaded-files").append()
+	                        );
 	            });
 		}
 	});

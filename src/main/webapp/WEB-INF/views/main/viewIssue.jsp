@@ -211,7 +211,7 @@ myListener();
 				            <th>Remove</th>
 				        </tr>
 			        </thead>
-			        <tbody>
+			        <tbody id="tableSize">
 				        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
 				        	<tr>
 				        		<td>${attachment.filename}</td>
