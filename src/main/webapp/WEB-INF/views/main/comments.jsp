@@ -2,7 +2,7 @@
 
 
 
-<div class="container commentsContainer">
+<div id="commentsViewSection" class="container commentsContainer">
 	<div class="col-xs-8 commentsContainerCol">
 		<h1 class="commentSectionTitle">Comment section</h1>
 	
