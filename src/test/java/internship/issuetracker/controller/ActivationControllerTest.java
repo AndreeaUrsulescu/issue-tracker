@@ -36,7 +36,7 @@ public class ActivationControllerTest {
 		activation.setEmail("random@random.fr");
 		activation.setPassword("randomPass");
 		activation.setUserName("randomPierre");
-		activation.EncryptPasswordAndKeyHash();
+		activation.encryptPasswordAndKeyHash();
 		String hashKey=activation.getKeyHash();
 		
 		Mockito.when(activationService.getActivation(hashKey)).thenReturn(activation);
