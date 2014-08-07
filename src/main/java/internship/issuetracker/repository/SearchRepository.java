@@ -13,6 +13,7 @@ import internship.issuetracker.utils.ApplicationParameters;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +21,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,9 +56,9 @@ public class SearchRepository {
         String orderField = convertToSortType(parameters.getSortCriteria());
         criteriaQuery.where(predicates);
 
-        if ("Descending".equals(parameters.getSortType())){
+        if ("Descending".equals(parameters.getSortType())) {
             criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
-        }else{
+        } else {
             criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
         }
         TypedQuery<Issue> query = em.createQuery(criteriaQuery);

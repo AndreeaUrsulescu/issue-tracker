@@ -1,14 +1,14 @@
 package internship.issuetracker.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import internship.issuetracker.entities.User;
 import internship.issuetracker.pojo.UserPojo;
 import internship.issuetracker.repository.UserRepository;
 import internship.issuetracker.utils.EncryptData;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private static final Logger LOG = Logger.getLogger(UserService.class
-            .getName());
+    private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
     @Autowired
     private UserRepository userRepository;

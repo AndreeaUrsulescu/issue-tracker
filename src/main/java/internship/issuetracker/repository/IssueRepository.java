@@ -53,7 +53,7 @@ public class IssueRepository {
         try {
             return query.getSingleResult();
         } catch (NoResultException ex) {
-            LOG.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")",ex);
+            LOG.log(Level.FINE, "NoResultException in issueRepository.findIssue(" + id + ")", ex);
             return new Issue();
         }
     }

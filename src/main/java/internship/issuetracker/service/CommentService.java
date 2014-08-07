@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentService {
 
-    private static final Logger LOG = Logger.getLogger(CommentService.class
-            .getName());
+    private static final Logger LOG = Logger.getLogger(CommentService.class.getName());
 
     @Autowired
     private CommentRepository commentRepository;
@@ -41,8 +40,7 @@ public class CommentService {
         com.setOwner(owner);
         com.setIssue(issue);
         this.commentRepository.create(com);
-        LOG.log(Level.INFO,
-                "An comment was created for issue " + comment.getIssueId());
+        LOG.log(Level.INFO, "An comment was created for issue " + comment.getIssueId());
     }
 
     public List<CommentPojo> getCommentsForIssue(IssuePojo issuePojo) {
@@ -51,14 +49,11 @@ public class CommentService {
         List<Comment> comments = commentRepository.findCommentsByIssue(issue);
 
         if (comments.isEmpty()) {
-            LOG.log(Level.INFO,
-                    "There are no comments for issue " + issuePojo.getId());
+            LOG.log(Level.INFO, "There are no comments for issue " + issuePojo.getId());
         }
 
         for (Comment com : comments) {
-            CommentPojo pojoComment = new CommentPojo(com.getOwner()
-                    .getUserName(), com.getContent(), com.getCreationDate(),
-                    com.getIssue().getId());
+            CommentPojo pojoComment = new CommentPojo(com.getOwner().getUserName(), com.getContent(), com.getCreationDate(), com.getIssue().getId());
             pojoComments.add(pojoComment);
         }
 
