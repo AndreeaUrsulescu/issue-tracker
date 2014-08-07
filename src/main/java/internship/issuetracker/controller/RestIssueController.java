@@ -44,8 +44,9 @@ public class RestIssueController {
     public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
 
         List<IssuePojo> issuesListPojo = issueService.getOrderedIssues(pageNumber);
-        for (IssuePojo issuePojo : issuesListPojo)
+        for (IssuePojo issuePojo : issuesListPojo) {
             issuePojo.setContent(HTMLParser.convert(issuePojo.getContent()));
+        }
         return issuesListPojo;
     }
 

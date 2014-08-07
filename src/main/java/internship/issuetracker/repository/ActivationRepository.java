@@ -35,8 +35,8 @@ public class ActivationRepository {
             activation = query.getSingleResult();
             LOG.log(Level.INFO, "An activation was found for " + activation.getUserName());
             return activation;
-        } catch (NoResultException ex) {        
-            LOG.log(Level.INFO, "No activation was found for given key!",ex);
+        } catch (NoResultException ex) {
+            LOG.log(Level.INFO, "No activation was found for given key!", ex);
             return null;
         }
 

@@ -51,8 +51,9 @@ public class IssueController {
 
     @RequestMapping(value = { "/createIssue" }, method = RequestMethod.POST)
     public String createIssuePage(@Valid Issue issue, HttpServletRequest request, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "createIssue";
+        }
         issue.setOwner((User) request.getSession().getAttribute("user"));
         issueService.addIssue(issue);
         return "redirect:/issues";
@@ -60,7 +61,6 @@ public class IssueController {
 
     @RequestMapping(value = { "/issuesChatRoom" })
     public String viewIssuesRoom() {
-        // model.addAttribute("user", new User());
         return "chatRoomIssues";
     }
 

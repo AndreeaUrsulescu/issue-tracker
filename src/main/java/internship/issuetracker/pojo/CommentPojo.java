@@ -36,14 +36,14 @@ public class CommentPojo {
     }
 
     public Date getCreationDate() {
-        if (creationDate == null){
+        if (creationDate == null) {
             return null;
         }
         return (Date) creationDate.clone();
     }
 
     public void setCreationDate(Date creationDate) {
-        if (creationDate == null){
+        if (creationDate == null) {
             this.creationDate = null;
         } else {
             this.creationDate = (Date) creationDate.clone();

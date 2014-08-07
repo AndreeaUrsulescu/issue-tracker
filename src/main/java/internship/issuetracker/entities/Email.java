@@ -15,80 +15,75 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Emails")
-public class Email implements Serializable{
+public class Email implements Serializable {
 
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Column(name = "mailTo", nullable = false)
-	private String to;
+    @Column(name = "mailTo", nullable = false)
+    private String to;
 
-	@Column(name = "mailFrom", nullable = false)
-	private String from;
+    @Column(name = "mailFrom", nullable = false)
+    private String from;
 
-	@Column(name = "content", nullable = false)
-	private String content;
+    @Column(name = "content", nullable = false)
+    private String content;
 
-	@Column(name = "subject", nullable = false)
-	private String subject;
+    @Column(name = "subject", nullable = false)
+    private String subject;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getTo() {
-		return to;
-	}
+    public String getTo() {
+        return to;
+    }
 
-	public void setTo(String to) {
-		this.to = to;
-	}
+    public void setTo(String to) {
+        this.to = to;
+    }
 
-	public String getFrom() {
-		return from;
-	}
+    public String getFrom() {
+        return from;
+    }
 
-	public void setFrom(String from) {
-		this.from = from;
-	}
+    public void setFrom(String from) {
+        this.from = from;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getSubject() {
-		return subject;
-	}
+    public String getSubject() {
+        return subject;
+    }
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(to).append(from)
-				.append(content).append(subject).toHashCode();
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Email) {
-			Email email = (Email) obj;
-			return new EqualsBuilder().append(this.to, email.to)
-						.append(this.from, email.from)
-						.append(this.content, email.content)
-						.append(this.subject, email.subject).isEquals();
-		}
-		return false;
-	}
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(to).append(from).append(content).append(subject).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Email) {
+            Email email = (Email) obj;
+            return new EqualsBuilder().append(this.to, email.to).append(this.from, email.from).append(this.content, email.content).append(this.subject, email.subject).isEquals();
+        }
+        return false;
+    }
 }

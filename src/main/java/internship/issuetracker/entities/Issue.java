@@ -33,8 +33,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @SuppressWarnings("serial")
-@NamedQueries({ @NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"),
-        @NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.lastDate DESC,a.id DESC") })
+@NamedQueries({ @NamedQuery(name = Issue.FIND_BY_ID, query = "select a from Issue a where id = :id"), @NamedQuery(name = Issue.FIND_ALL, query = "select a from Issue a order by a.lastDate DESC,a.id DESC") })
 @Entity
 @Table(name = "Issues")
 public class Issue implements Serializable {
@@ -161,8 +160,8 @@ public class Issue implements Serializable {
     }
 
     public void setLastDate(Date lastDate) {
-        if (lastDate == null){
-            this.lastDate =null;
+        if (lastDate == null) {
+            this.lastDate = null;
         } else {
             this.lastDate = (Date) lastDate.clone();
         }
@@ -205,8 +204,7 @@ public class Issue implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Issue) {
             Issue issue = (Issue) obj;
-            return new EqualsBuilder().append(this.title, issue.title).append(this.content, issue.content).append(this.updateDate, issue.updateDate)
-                    .append(this.owner, issue.owner).append(this.state, issue.state).append(this.lastDate, issue.lastDate).append(this.assignee, issue.assignee).isEquals();
+            return new EqualsBuilder().append(this.title, issue.title).append(this.content, issue.content).append(this.updateDate, issue.updateDate).append(this.owner, issue.owner).append(this.state, issue.state).append(this.lastDate, issue.lastDate).append(this.assignee, issue.assignee).isEquals();
         }
         return false;
     }

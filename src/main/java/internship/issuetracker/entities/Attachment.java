@@ -105,8 +105,7 @@ public class Attachment implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof Attachment) {
             Attachment attachment = (Attachment) obj;
-            return new EqualsBuilder().append(this.filename, attachment.filename).append(this.content, attachment.content).append(this.contentType, attachment.contentType).append(
-                    this.creationDate, attachment.creationDate).isEquals();
+            return new EqualsBuilder().append(this.filename, attachment.filename).append(this.content, attachment.content).append(this.contentType, attachment.contentType).append(this.creationDate, attachment.creationDate).isEquals();
         }
         return false;
     }

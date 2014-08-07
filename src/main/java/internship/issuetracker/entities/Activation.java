@@ -107,8 +107,7 @@ public class Activation implements Serializable {
     public boolean equals(Object object) {
         if (object instanceof Activation) {
             Activation activation = (Activation) object;
-            return new EqualsBuilder().append(activation.email, this.email).append(activation.keyHash, this.keyHash).append(activation.password, this.password).append(
-                    activation.userName, this.userName).isEquals();
+            return new EqualsBuilder().append(activation.email, this.email).append(activation.keyHash, this.keyHash).append(activation.password, this.password).append(activation.userName, this.userName).isEquals();
         }
         return false;
     }
