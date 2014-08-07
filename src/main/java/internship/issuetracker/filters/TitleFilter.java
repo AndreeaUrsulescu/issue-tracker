@@ -10,18 +10,18 @@ import javax.persistence.criteria.Root;
 
 public class TitleFilter implements SearchFilterInt<Issue> {
 
-	private String title;
+    private String title;
 
-	public TitleFilter(String title) {
-		this.title = title.toUpperCase();
-	}
+    public TitleFilter(String title) {
+        this.title = title.toUpperCase();
+    }
 
-	@Override
-	public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
-		String pattern = "%" + title + "%";
-		Path<String> path = root.get("title");
-		Predicate builtPredicate = cb.like(cb.upper(path), pattern);
-		return builtPredicate;
-	}
+    @Override
+    public Predicate buildPredicate(CriteriaQuery<Issue> cq, CriteriaBuilder cb, Root<Issue> root) {
+        String pattern = "%" + title + "%";
+        Path<String> path = root.get("title");
+        Predicate builtPredicate = cb.like(cb.upper(path), pattern);
+        return builtPredicate;
+    }
 
 }

@@ -13,6 +13,7 @@ import internship.issuetracker.utils.ApplicationParameters;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +21,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SearchRepository {
 
-    public static final int ITEMS_PER_PAGE = ApplicationParameters.itemsPerPage;
+    public static final int ITEMS_PER_PAGE = ApplicationParameters.ITEMS_PER_PAGE;
     public static final String DATE = "latestUpdateDate";
     public static final String TITLE = "Title";
 
@@ -54,9 +56,9 @@ public class SearchRepository {
         String orderField = convertToSortType(parameters.getSortCriteria());
         criteriaQuery.where(predicates);
 
-        if ("Descending".equals(parameters.getSortType())){
+        if ("Descending".equals(parameters.getSortType())) {
             criteriaQuery.orderBy(criteriaBuilder.desc(root.get(orderField)));
-        }else{
+        } else {
             criteriaQuery.orderBy(criteriaBuilder.asc(root.get(orderField)));
         }
         TypedQuery<Issue> query = em.createQuery(criteriaQuery);

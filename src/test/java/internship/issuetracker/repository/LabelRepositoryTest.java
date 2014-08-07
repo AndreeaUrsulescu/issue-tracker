@@ -15,79 +15,73 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml",
-	"classpath:config/application-context.xml",
-	"classpath:config/Spring-Mail.xml" })
+@ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml", "classpath:config/Spring-Mail.xml" })
 public class LabelRepositoryTest {
 
-	@Autowired
-	private LabelRepository labelRepository;
+    @Autowired
+    private LabelRepository labelRepository;
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private IssueRepository issueRepository;
-	
-	@Autowired
-	private IssueLabelRepository issueLabelRepository;
+    @Autowired
+    private IssueRepository issueRepository;
 
-	private Issue issue;
-	private User user;
+    @Autowired
+    private IssueLabelRepository issueLabelRepository;
 
-	static int count = 65;
-	static int icount = 65;
-	static int ucount = 65;
+    private Issue issue;
+    private User user;
 
-	public Label createLabel() {
-		Label label = new Label();
-		label.setLabelName("title" + (char) count);
-		labelRepository.create(label);
-		IssueLabel issueLabel = new IssueLabel();
-		issueLabel.setIssue(issue);
-		issueLabel.setLabel(label);
-		issueLabelRepository.create(issueLabel);
-		count++;
-		return label;
-	}
+    static int count = 65;
+    static int icount = 65;
+    static int ucount = 65;
 
-	@Before
-	@Transactional
-	public void setUp() {
-		user = new User();
-		user.setUserName("user" + (char) ucount);
-		user.setPassword("parola");
-		user.setEmail("user@gmail.com");
-		userRepository.create(user);
-		ucount++;
-		issue = new Issue();
-		issue.setTitle("issue" + (char) icount);
-		issue.setContent("content");
-		issue.setOwner(user);
-		issueRepository.create(issue);
-		icount++;
-	}
+    public Label createLabel() {
+        Label label = new Label();
+        label.setLabelName("title" + (char) count);
+        labelRepository.create(label);
+        IssueLabel issueLabel = new IssueLabel();
+        issueLabel.setIssue(issue);
+        issueLabel.setLabel(label);
+        issueLabelRepository.create(issueLabel);
+        count++;
+        return label;
+    }
 
-	@Test
-	public void findLabelsTest() {
-		createLabel();
-		assert (labelRepository.findLabels().size() == 1);
-	}
+    @Before
+    @Transactional
+    public void setUp() {
+        user = new User();
+        user.setUserName("user" + (char) ucount);
+        user.setPassword("parola");
+        user.setEmail("user@gmail.com");
+        userRepository.create(user);
+        ucount++;
+        issue = new Issue();
+        issue.setTitle("issue" + (char) icount);
+        issue.setContent("content");
+        issue.setOwner(user);
+        issueRepository.create(issue);
+        icount++;
+    }
 
-	@Test
-	public void findLabelByNameTest() {
-		Label label = createLabel();
-		assertEquals(labelRepository.findLabelByName(label.getLabelName())
-				.getLabelName(), label.getLabelName());
-	}
+    @Test
+    public void findLabelsTest() {
+        createLabel();
+        assert (labelRepository.findLabels().size() == 1);
+    }
 
-	
-	@Test
-	public void createTest() {
-		Label label = createLabel();
-		assertEquals(labelRepository.findLabelByName(label.getLabelName())
-				.getLabelName(), label.getLabelName());
-	}
+    @Test
+    public void findLabelByNameTest() {
+        Label label = createLabel();
+        assertEquals(labelRepository.findLabelByName(label.getLabelName()).getLabelName(), label.getLabelName());
+    }
 
-	
+    @Test
+    public void createTest() {
+        Label label = createLabel();
+        assertEquals(labelRepository.findLabelByName(label.getLabelName()).getLabelName(), label.getLabelName());
+    }
+
 }

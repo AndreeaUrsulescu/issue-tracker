@@ -11,7 +11,7 @@ public final class IssueDifference {
     public static String generateDifference(Issue newIssue, Issue oldIssue) {
         String title = getStringDifferences(newIssue.getTitle(), oldIssue.getTitle());
         String content = getStringDifferences(newIssue.getContent(), oldIssue.getContent());
-        String msg = ApplicationParameters.changedIssueEmail + ApplicationParameters.contextPath + "/issues/issue/" + newIssue.getId();
+        String msg = ApplicationParameters.CHANGED_ISSUE_EMAIL + ApplicationParameters.CONTEXT_PATH + "/issues/issue/" + newIssue.getId();
 
         StringBuilder result = new StringBuilder();
 
@@ -23,7 +23,7 @@ public final class IssueDifference {
             result.append("Content").append(content).append(" .\n\n");
         }
         if (newIssue.getState() != oldIssue.getState()) {
-            result.append(ApplicationParameters.stateHasBeenChangedMessage).append(" from \"").append(oldIssue.getState()).append("\" to \"").append(newIssue.getState()).append("\" .\n\n");
+            result.append(ApplicationParameters.STATE_CHANGED_MSG).append(" from \"").append(oldIssue.getState()).append("\" to \"").append(newIssue.getState()).append("\" .\n\n");
         }
 
         return result.append(msg).toString();

@@ -18,8 +18,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,13 +41,12 @@ public class RestIssueController {
 
     @RequestMapping(value = "/page/{pageNumber}", method = RequestMethod.GET)
     @ResponseBody
-    public List<IssuePojo> viewIssuesPage(
-            @PathVariable("pageNumber") Integer pageNumber) {
+    public List<IssuePojo> viewIssuesPage(@PathVariable("pageNumber") Integer pageNumber) {
 
-        List<IssuePojo> issuesListPojo = issueService
-                .getOrderedIssues(pageNumber);
-        for (IssuePojo issuePojo : issuesListPojo)
+        List<IssuePojo> issuesListPojo = issueService.getOrderedIssues(pageNumber);
+        for (IssuePojo issuePojo : issuesListPojo) {
             issuePojo.setContent(HTMLParser.convert(issuePojo.getContent()));
+        }
         return issuesListPojo;
     }
 
@@ -66,8 +63,7 @@ public class RestIssueController {
 
     @RequestMapping(value = "/issue/{issueId}/addLabel", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addLabel(@PathVariable("issueId") Long issueId,
-            @RequestBody LabelPojo addLabel) {
+    public Map<String, Object> addLabel(@PathVariable("issueId") Long issueId, @RequestBody LabelPojo addLabel) {
         boolean exists = labelService.assignLabelToIssue(issueId, addLabel);
         Map<String, Object> map = new HashMap<String, Object>();
         if (exists) {
@@ -80,8 +76,7 @@ public class RestIssueController {
 
     @RequestMapping(value = "/issue/{id}/removeLabel", method = RequestMethod.DELETE)
     @ResponseBody
-    public Map<String, Object> removeLabel(@PathVariable Long id,
-            @RequestBody LabelPojo labelToRemove) {
+    public Map<String, Object> removeLabel(@PathVariable Long id, @RequestBody LabelPojo labelToRemove) {
         Map<String, Object> map = new HashMap<String, Object>();
         labelService.removeLabelFromIssue(id, labelToRemove);
         map.put("response", "success");
@@ -90,9 +85,7 @@ public class RestIssueController {
 
     @RequestMapping(value = "/issue/{issueId}/assignUser", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> assignUser(
-            @PathVariable("issueId") Long issueId,
-            @RequestBody UserPojo assignedUser) {
+    public Map<String, Object> assignUser(@PathVariable("issueId") Long issueId, @RequestBody UserPojo assignedUser) {
         Map<String, Object> response = new HashMap<>();
         issueService.assignUserToIssue(issueId, assignedUser);
         response.put("response", "success");
@@ -101,11 +94,9 @@ public class RestIssueController {
 
     @RequestMapping(value = "/issue/{issueId}/unassignUser", method = RequestMethod.DELETE)
     @ResponseBody
-    public Map<String, Object> unassignUser(
-            @PathVariable("issueId") Long issueId, HttpServletRequest request) {
+    public Map<String, Object> unassignUser(@PathVariable("issueId") Long issueId, HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
-        String username = ((User) request.getSession().getAttribute("user"))
-                .getUserName();
+        String username = ((User) request.getSession().getAttribute("user")).getUserName();
         if (issueService.unassignUserToIssue(issueId, username)) {
             response.put("response", "success");
         } else {
@@ -116,17 +107,15 @@ public class RestIssueController {
 
     @RequestMapping(value = "/multipleSearchBy", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> multipleSearch(
-            @ModelAttribute MultipleSearchParameter searchParameters) {
+    public Map<String, Object> multipleSearch(@ModelAttribute MultipleSearchParameter searchParameters) {
 
         List<IssuePojo> resultList = null;
         Map<String, Object> map = new HashMap<String, Object>();
 
-		resultList = searchService.multiplePredicates(searchParameters);
-		map.put("issuesList", resultList);
-		map.put("listLength",
-				searchService.numberOfIssuesMultipleSearch(searchParameters));
-		map.put("issuesPerPage", SearchRepository.ITEMS_PER_PAGE);
+        resultList = searchService.multiplePredicates(searchParameters);
+        map.put("issuesList", resultList);
+        map.put("listLength", searchService.numberOfIssuesMultipleSearch(searchParameters));
+        map.put("issuesPerPage", SearchRepository.ITEMS_PER_PAGE);
 
         return map;
     }

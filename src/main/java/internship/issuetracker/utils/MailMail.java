@@ -20,7 +20,7 @@ public class MailMail {
     public void sendMail(Email email) {
 
         SimpleMailMessage message = new SimpleMailMessage();
-        email.setFrom(ApplicationParameters.emailAdress);
+        email.setFrom(ApplicationParameters.EMAIL_ADDRESS);
 
         message.setFrom(email.getFrom());
         message.setTo(email.getTo());
