@@ -17,21 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CommentRepository {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	public void create(Comment comment) {
-		em.persist(comment);
-	}
+    public void create(Comment comment) {
+        em.persist(comment);
+    }
 
-	public List<Comment> findCommentsByIssue(Issue issue) {
-		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_ISSUE,
-				Comment.class);
-		return query.setParameter("issue", issue).getResultList();
-	}	
-	public List<Comment> findCommentByOwner(User user) {
-		TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_OWNER,
-				Comment.class);
-		return query.setParameter("owner", user).getResultList();
-	}
+    public List<Comment> findCommentsByIssue(Issue issue) {
+        TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_ISSUE, Comment.class);
+        return query.setParameter("issue", issue).getResultList();
+    }
+
+    public List<Comment> findCommentByOwner(User user) {
+        TypedQuery<Comment> query = em.createNamedQuery(Comment.FIND_COMMENTS_BY_OWNER, Comment.class);
+        return query.setParameter("owner", user).getResultList();
+    }
 }

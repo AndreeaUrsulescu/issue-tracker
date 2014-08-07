@@ -14,23 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class AttachmentRepository {
-	private static final Logger log = Logger
-			.getLogger(ActivationRepository.class.getName());
-	@PersistenceContext
-	private EntityManager em;
+    private static final Logger LOG = Logger.getLogger(ActivationRepository.class.getName());
+    @PersistenceContext
+    private EntityManager em;
 
-	public void create(Attachment attachment) {
-		em.persist(attachment);
-		log.log(Level.INFO, "An attachment was persisted!");
-	}
+    public void create(Attachment attachment) {
+        em.persist(attachment);
+        LOG.log(Level.INFO, "An attachment was persisted!");
+    }
 
-	public Attachment getAttachment(Long attachmentId) {
-		Attachment attachment = em.find(Attachment.class, attachmentId);
-		return attachment;
-	}
+    public Attachment getAttachment(Long attachmentId) {
+        Attachment attachment = em.find(Attachment.class, attachmentId);
+        return attachment;
+    }
 
-	public void remove(Long attachmentId) {
-		Attachment attachment = this.getAttachment(attachmentId);
-		em.remove(attachment);
-	}
+    public void remove(Long attachmentId) {
+        Attachment attachment = this.getAttachment(attachmentId);
+        em.remove(attachment);
+    }
 }
