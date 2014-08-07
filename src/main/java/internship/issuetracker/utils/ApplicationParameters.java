@@ -12,12 +12,7 @@ import org.springframework.core.io.Resource;
 
 public final class ApplicationParameters {
 
-    private ApplicationParameters() {
-
-    }
-
     private static final Logger LOG = Logger.getLogger(LabelService.class.getName());
-
     public static final int ITEMS_PER_PAGE;
     public static final String ACTIVATION_EMAIL_PART_1;
     public static final String ACTIVATION_EMAIL_PART_2;
@@ -28,6 +23,12 @@ public final class ApplicationParameters {
     public static final String ACTIVATION_EMAIL_SUBJECT;
     private static Properties properties;
     public static final String CONTEXT_PATH;
+    
+    private ApplicationParameters() {
+
+    }
+
+
 
     static {
         loadPropertiesFile();
