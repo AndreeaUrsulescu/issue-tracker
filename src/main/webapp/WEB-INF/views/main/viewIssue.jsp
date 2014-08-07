@@ -47,6 +47,12 @@ function myListener(){
 myListener();
 
 </script>
+<div id="backBtnViewIssue">
+	<a href="/issue-tracker/issues"> <img class="pinB"
+		src="/issue-tracker/resources/assets/images/large2.jpg">
+		<span style="cursor:pointer">Go back</span>
+	</a>
+</div>
 <div class="container viewIssueContainer">
 
 	<div class="editIssueView row">
