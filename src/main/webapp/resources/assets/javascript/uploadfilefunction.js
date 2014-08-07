@@ -41,7 +41,7 @@ $(function () {
         	$("#editIssueFileUpload").children('.error').append(data.files[data.index].error);
         },
         
-        acceptFileTypes: /(\.|\/)(jpe?g|png|gif|pdf|txt|doc|ppt|pptx|xls|xlsx|docx)$/i,
+        acceptFileTypes: /(\.|\/)(jpe?g|png|gif|pdf|txt|doc|ppt|pptx|xls|xlsx|docx|zip|rar)$/i,
         maxFileSize: 5000000
     });
 	});
