@@ -36,10 +36,12 @@ public class LoginControllerTest {
 
     @Test
     public void loginTest() {
+        
         String response = loginController.login(request, null);
         assertEquals(response, "redirect:/issues");
         request.getSession().setAttribute("user", null);
         response = loginController.login(request, null);
         assertEquals(response, "login");
+    
     }
 }
