@@ -23,7 +23,7 @@ public class IssueRepository {
     @PersistenceContext
     private EntityManager em;
 
-    private static final int itemsPerPage = ApplicationParameters.itemsPerPage;
+    private static final int ITEMS_PER_PAGE = ApplicationParameters.itemsPerPage;
 
     public void create(Issue issue) {
         em.persist(issue);
@@ -42,8 +42,8 @@ public class IssueRepository {
     public List<Issue> findOrderedIssues(int currentPage) {
 
         TypedQuery<Issue> query = em.createNamedQuery(Issue.FIND_ALL, Issue.class);
-        query.setMaxResults(itemsPerPage);
-        query.setFirstResult((currentPage - 1) * itemsPerPage);
+        query.setMaxResults(ITEMS_PER_PAGE);
+        query.setFirstResult((currentPage - 1) * ITEMS_PER_PAGE);
         return query.getResultList();
     }
 

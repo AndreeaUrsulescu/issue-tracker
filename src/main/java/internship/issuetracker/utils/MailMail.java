@@ -8,27 +8,26 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 public class MailMail {
-	@Autowired
-	EmailService emailService;
+    @Autowired
+    EmailService emailService;
 
-	private MailSender mailSender;
+    private MailSender mailSender;
 
-	public void setMailSender(MailSender mailSender) {
-		this.mailSender = mailSender;
-	}
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
-	public void sendMail(Email email) {
+    public void sendMail(Email email) {
 
-		
-			SimpleMailMessage message = new SimpleMailMessage();
-			email.setFrom(ApplicationParameters.emailAdress);
+        SimpleMailMessage message = new SimpleMailMessage();
+        email.setFrom(ApplicationParameters.emailAdress);
 
-			message.setFrom(email.getFrom());
-			message.setTo(email.getTo());
-			message.setSubject(email.getSubject());
-			message.setText(email.getContent());
-			emailService.saveEmail(email);
-			mailSender.send(message);
-		
-	}
+        message.setFrom(email.getFrom());
+        message.setTo(email.getTo());
+        message.setSubject(email.getSubject());
+        message.setText(email.getContent());
+        emailService.saveEmail(email);
+        mailSender.send(message);
+
+    }
 }

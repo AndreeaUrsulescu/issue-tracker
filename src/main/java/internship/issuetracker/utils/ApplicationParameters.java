@@ -2,7 +2,6 @@ package internship.issuetracker.utils;
 
 import internship.issuetracker.service.LabelService;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -13,24 +12,35 @@ import org.springframework.core.io.Resource;
 
 
 
-public class ApplicationParameters {
+public final class ApplicationParameters {
 	
-	private static final Logger log = Logger.getLogger(LabelService.class.getName());
+    private ApplicationParameters(){
+        
+    }
+    
+	private static final Logger LOG = Logger.getLogger(LabelService.class.getName());
 	
-	public static int itemsPerPage;
-	public static String activationEmailMessagePart1;
-	public static String activationEmailMessagepart2;
-	public static String applicationRoot;
-	public static String changedIssueEmail;
-	public static String stateHasBeenChangedMessage;
-	public static String emailAdress;
-	public static String activationEmailSubject;
+	public static final int itemsPerPage;
+	public static final String activationEmailMessagePart1;
+	public static final String activationEmailMessagepart2;
+	public static final String applicationRoot;
+	public static final String changedIssueEmail;
+	public static final String stateHasBeenChangedMessage;
+	public static final String emailAdress;
+	public static final String activationEmailSubject;
 	public static Properties properties;
-	public static String contextPath;
+	public static final String contextPath;
 	
 	static{
+	    int tempitemsPerPage;
 		loadPropertiesFile();
-		itemsPerPage=Integer.parseInt(properties.getProperty("itemsPerPage"));
+		try{
+		    tempitemsPerPage=Integer.parseInt(properties.getProperty("itemsPerPage"));
+		} catch (NumberFormatException numberFormatException){
+		    LOG.log(Level.INFO, "Could not parse number of items per page, using default 10",numberFormatException);
+		    tempitemsPerPage=6;
+		}
+		itemsPerPage = tempitemsPerPage;
 		activationEmailMessagePart1=properties.getProperty("activationEmailContentPart1");
 		activationEmailMessagepart2=properties.getProperty("activationEmailContentPart2");
 		applicationRoot=properties.getProperty("applicationRoot");
@@ -52,8 +62,8 @@ public class ApplicationParameters {
 			properties=new Properties();
 			properties.load(inputStream);
 		} catch (Exception e1) {
-			log.log(Level.INFO, "Error while loading the properties file!");
-		}
-	
-	}
+			LOG.log(Level.INFO, "Error while loading the properties file!",e1);
+        }
+
+    }
 }

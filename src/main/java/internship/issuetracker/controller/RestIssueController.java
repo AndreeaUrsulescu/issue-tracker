@@ -122,11 +122,11 @@ public class RestIssueController {
         List<IssuePojo> resultList = null;
         Map<String, Object> map = new HashMap<String, Object>();
 
-        resultList = searchService.multiplePredicates(searchParameters);
-        map.put("issuesList", resultList);
-        map.put("listLength",
-                searchService.numberOfIssuesMultipleSearch(searchParameters));
-        map.put("issuesPerPage", SearchRepository.itemsPerPage);
+		resultList = searchService.multiplePredicates(searchParameters);
+		map.put("issuesList", resultList);
+		map.put("listLength",
+				searchService.numberOfIssuesMultipleSearch(searchParameters));
+		map.put("issuesPerPage", SearchRepository.ITEMS_PER_PAGE);
 
         return map;
     }
