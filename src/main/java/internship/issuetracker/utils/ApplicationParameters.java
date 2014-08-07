@@ -53,7 +53,6 @@ public class ApplicationParameters {
 			properties.load(inputStream);
 		} catch (Exception e1) {
 			log.log(Level.INFO, "Error while loading the properties file!");
-			e1.printStackTrace();
 		}
 	
 	}
