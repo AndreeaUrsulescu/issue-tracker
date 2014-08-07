@@ -1,6 +1,5 @@
 package internship.issuetracker.repository;
 
-import static org.junit.Assert.*;
 import internship.issuetracker.entities.ResetPassword;
 import internship.issuetracker.entities.User;
 
@@ -24,10 +23,10 @@ public class ResetPasswordRepositoryTest {
     private User user2;
     
     public void userCreate() {
-        if(!userRepository.exists("boobar")){
+        if(!userRepository.exists("rrboobar")){
             user2=new User();
-            user2.setUserName("boobar");
-            user2.setEmail("notjust@mail.a");
+            user2.setUserName("rrboobar");
+            user2.setEmail("notjust@mail.aa");
             user2.setPassword("parolascr");
             userRepository.create(user2);
         }

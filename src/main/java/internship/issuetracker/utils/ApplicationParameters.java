@@ -20,16 +20,16 @@ public final class ApplicationParameters {
     
 	private static final Logger LOG = Logger.getLogger(LabelService.class.getName());
 	
-	public static final int itemsPerPage;
-	public static final String activationEmailMessagePart1;
-	public static final String activationEmailMessagepart2;
-	public static final String applicationRoot;
-	public static final String changedIssueEmail;
-	public static final String stateHasBeenChangedMessage;
-	public static final String emailAdress;
-	public static final String activationEmailSubject;
+	public static final int ITEMS_PER_PAGE;
+	public static final String ACTIVATION_EMAIL_PART_1;
+	public static final String ACTIVATION_EMAIL_PART_2;
+	public static final String APPLICATION_ROOT;
+	public static final String CHANGED_ISSUE_EMAIL;
+	public static final String STATE_CHANGED_MSG;
+	public static final String EMAIL_ADDRESS;
+	public static final String ACTIVATION_EMAIL_SUBJECT;
 	public static Properties properties;
-	public static final String contextPath;
+	public static final String CONTEXT_PATH;
 	
 	static{
 	    int tempitemsPerPage;
@@ -40,15 +40,15 @@ public final class ApplicationParameters {
 		    LOG.log(Level.INFO, "Could not parse number of items per page, using default 10",numberFormatException);
 		    tempitemsPerPage=6;
 		}
-		itemsPerPage = tempitemsPerPage;
-		activationEmailMessagePart1=properties.getProperty("activationEmailContentPart1");
-		activationEmailMessagepart2=properties.getProperty("activationEmailContentPart2");
-		applicationRoot=properties.getProperty("applicationRoot");
-		contextPath=properties.getProperty("contextPath");
-		changedIssueEmail=properties.getProperty("changedIssueEmailP")+applicationRoot+contextPath+properties.getProperty("changedIssueEmailS");
-		stateHasBeenChangedMessage=properties.getProperty("stateHasBeenChangedMessage");
-		emailAdress=properties.getProperty("emailAdress");
-		activationEmailSubject=properties.getProperty("activationEmailSubject");
+		ITEMS_PER_PAGE = tempitemsPerPage;
+		ACTIVATION_EMAIL_PART_1=properties.getProperty("activationEmailContentPart1");
+		ACTIVATION_EMAIL_PART_2=properties.getProperty("activationEmailContentPart2");
+		APPLICATION_ROOT=properties.getProperty("applicationRoot");
+		CONTEXT_PATH=properties.getProperty("contextPath");
+		CHANGED_ISSUE_EMAIL=properties.getProperty("changedIssueEmailP")+APPLICATION_ROOT+CONTEXT_PATH+properties.getProperty("changedIssueEmailS");
+		STATE_CHANGED_MSG=properties.getProperty("stateHasBeenChangedMessage");
+		EMAIL_ADDRESS=properties.getProperty("emailAdress");
+		ACTIVATION_EMAIL_SUBJECT=properties.getProperty("activationEmailSubject");
 		
 	}
 	

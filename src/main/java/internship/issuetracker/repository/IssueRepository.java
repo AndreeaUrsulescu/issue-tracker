@@ -23,7 +23,7 @@ public class IssueRepository {
     @PersistenceContext
     private EntityManager em;
 
-    private static final int ITEMS_PER_PAGE = ApplicationParameters.itemsPerPage;
+    private static final int ITEMS_PER_PAGE = ApplicationParameters.ITEMS_PER_PAGE;
 
     public void create(Issue issue) {
         em.persist(issue);
