@@ -1,11 +1,6 @@
 package internship.issuetracker.service;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.Label;
 import internship.issuetracker.entities.User;
@@ -14,6 +9,9 @@ import internship.issuetracker.repository.IssueLabelRepository;
 import internship.issuetracker.repository.IssueRepository;
 import internship.issuetracker.repository.LabelRepository;
 import internship.issuetracker.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -91,16 +89,13 @@ public class LabelServiceTest {
         labelService.assignLabelToIssue(issue2.getId(), label);
         issue = issueRepository.findIssue(issue.getId());
         issue2 = issueRepository.findIssue(issue2.getId());
-        assert (issueLabelRepository.getLabelsForIssue(issue.getId()).get(0)
-                .getId() == issueLabelRepository
-                .getLabelsForIssue(issue2.getId()).get(0).getId());
+        assert (issueLabelRepository.getLabelsForIssue(issue.getId()).get(0).getId() == issueLabelRepository.getLabelsForIssue(issue2.getId()).get(0).getId());
     }
 
     @Test
     public void testConversions() {
 
-        assertEquals(labelPojo.getLabelName(), labelService
-                .convertLabelEntityToPojoLabel(label).getLabelName());
+        assertEquals(labelPojo.getLabelName(), labelService.convertLabelEntityToPojoLabel(label).getLabelName());
         Label labAux = new Label();
         labelService.convertPojoLabelToLabelEntity(labelPojo, labAux);
         assertEquals(labAux.getLabelName(), label.getLabelName());
@@ -116,8 +111,7 @@ public class LabelServiceTest {
 
         Mockito.when(labelRepository.findLabels()).thenReturn(labels);
 
-        assertEquals(labelService.getAllLabels().get(0).getLabelName(),
-                label.getLabelName());
+        assertEquals(labelService.getAllLabels().get(0).getLabelName(), label.getLabelName());
 
     }
 }

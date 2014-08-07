@@ -23,12 +23,10 @@ public final class ApplicationParameters {
     public static final String ACTIVATION_EMAIL_SUBJECT;
     private static Properties properties;
     public static final String CONTEXT_PATH;
-    
+
     private ApplicationParameters() {
 
     }
-
-
 
     static {
         loadPropertiesFile();
