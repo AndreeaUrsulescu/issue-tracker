@@ -88,6 +88,27 @@ myListener();
 				</span>
 			</div>
 
+			<div id="uploaded" class="table-responsive">
+			    <table id="viewuploadfiles" class="table">
+			    	<thead>
+				        <tr>
+				            <th>File Name</th>
+				            <th>File Type</th>
+				            <th>Download</th>
+				        </tr>
+			        </thead>
+			        <tbody>
+				        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
+				        	<tr>
+				        		<td>${attachment.filename}</td>
+				        		<td>${attachment.fileType}</td>
+				        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
+				        	</tr>
+				        </c:forEach>
+			        </tbody>
+			    </table>
+		    </div>
+
 			<div id="view-labels" class="labelSectionView selected-labels">
 				<c:forEach var="label" items="${viewIssue.getLabels()}">
 					<span class="issueLabel label label-primary"> <c:out
@@ -101,23 +122,9 @@ myListener();
 		<div class="clear"></div>
 
 
-	<div id="uploaded">
-		<table id="viewuploadedfiles">
-		        <tr>
-		            <th>File Name</th>
-		            <th>File Type</th>
-		            <th>Download</th>
-		        </tr>
-		        
-		        <c:forEach var="attachment" items="${viewIssue.attachments}" varStatus="i">
-		        	<tr>
-		        		<td>${attachment.filename}</td>
-		        		<td>${attachment.fileType}</td>
-		        		<td><a href='${viewIssue.id}/download/${attachment.id}'><img src="${pageContext.request.contextPath}/resources/assets/images/Save-icon.png"></a></td>
-		        	</tr>
-		        </c:forEach>
-		    </table>
-	</div>
+
+		    
+
 	</div>
 </div>
 
@@ -188,11 +195,19 @@ myListener();
 		<div class="editIssueFileUpload">
 			
 			<c:choose>
-				<c:when test="${fn:length(viewIssue.attachments) > 5}">
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled>
+				<c:when test="${fn:length(viewIssue.attachments) >= 5}">
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple disabled style="display:none">
+					<fieldset disabled>
+						<button class="fileUploadButton btn btn-primary">
+							Upload File <span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</fieldset>
 				</c:when>
 				<c:otherwise>
-					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple>
+					<input id="fileupload" type="file" name="files[]" data-url="${viewIssue.id}/upload" multiple style="display:none">
+					<button class="fileUploadButton btn btn-primary">
+						Upload File <span class="glyphicon glyphicon-plus"></span>
+					</button>
 				</c:otherwise>
 			</c:choose>
 		 

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 
@@ -105,6 +106,19 @@ public class Activation implements Serializable {
 	public int hashCode() {
 		return new HashCodeBuilder().append(userName).append(email)
 				.append(password).toHashCode();
+	}
+	
+	@Override
+	public boolean equals(Object object){
+		if( object instanceof Activation){
+			Activation activation = (Activation) object;
+			return new EqualsBuilder().append(activation.email, this.email)
+									  .append(activation.keyHash, this.keyHash)
+									  .append(activation.password, this.password)
+									  .append(activation.userName, this.userName)
+									  .isEquals();
+		}
+		return false;
 	}
 		
 	public void EncryptPasswordAndKeyHash()

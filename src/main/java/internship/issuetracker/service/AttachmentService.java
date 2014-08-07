@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class AttachmentService {
 	
-	/*private static final Logger log = Logger.getLogger(CommentService.class
-			.getName());*/
+	private static final Logger LOG = Logger.getLogger(AttachmentService.class
+			.getName());
 	
 	@Autowired
 	private AttachmentRepository attachmentRepository;
@@ -36,7 +38,7 @@ public class AttachmentService {
 		try {
 			attachment.setContent(mpf.getBytes());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.log(Level.WARNING,"Could not copy contents of attachement");
 		}
 		
 		Issue issue = issueRepository.findIssue(issueId);

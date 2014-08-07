@@ -25,8 +25,7 @@ public class AttachmentRepository {
 	}
 
 	public Attachment getAttachment(Long attachmentId) {
-		Attachment attachment = new Attachment();
-		attachment = em.find(Attachment.class, attachmentId);
+		Attachment attachment = em.find(Attachment.class, attachmentId);
 		return attachment;
 	}
 
