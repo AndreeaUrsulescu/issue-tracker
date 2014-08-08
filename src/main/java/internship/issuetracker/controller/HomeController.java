@@ -19,6 +19,7 @@ public class HomeController {
         if (isLoggedIn) {
             return "redirect:/issues";
         }
+       
         model.addAttribute("user", new User());
         return "home";
     }
