@@ -6,11 +6,14 @@ import internship.issuetracker.entities.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml", "classpath:config/Spring-Mail.xml" })
+@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
 public class ResetPasswordRepositoryTest {
 
     @Autowired
@@ -18,25 +21,23 @@ public class ResetPasswordRepositoryTest {
     @Autowired
     private ResetPasswordRepository resetPasswordRepository;
 
-    private User user2;
+    private User user;
 
     public void userCreate() {
-        if (!userRepository.exists("rrboobar")) {
-            user2 = new User();
-            user2.setUserName("rrboobar");
-            user2.setEmail("notjust@mail.aa");
-            user2.setPassword("parolascr");
-            userRepository.create(user2);
-        }
+        user = new User();
+        user.setUserName("sername");
+        user.setEmail("notjust@mail.aa");
+        user.setPassword("parolascr");
+        userRepository.create(user);
     }
 
     @Test
     public void testCreate() {
         userCreate();
-        ResetPassword rr = new ResetPassword(user2);
-        rr.setKeyHash("abcde");
-        resetPasswordRepository.create(rr);
-        assert (resetPasswordRepository.existsForHash("abcd") && resetPasswordRepository.existsForUser(user2));
+        ResetPassword resetPassword = new ResetPassword(user);
+        resetPassword.setKeyHash("abcde");
+        resetPasswordRepository.create(resetPassword);
+        assert (resetPasswordRepository.existsForHash("abcde") && resetPasswordRepository.existsForUser(user));
     }
 
     @Test
@@ -46,7 +47,6 @@ public class ResetPasswordRepositoryTest {
 
     @Test
     public void testExistsForHash() {
-        User user = new User();
         assert (!resetPasswordRepository.existsForUser(user));
     }
 

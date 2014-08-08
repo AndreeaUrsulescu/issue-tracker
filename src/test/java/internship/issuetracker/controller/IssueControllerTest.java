@@ -1,6 +1,6 @@
 package internship.issuetracker.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
@@ -25,11 +25,14 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.support.BindingAwareModelMap;
 
 @RunWith(MockitoJUnitRunner.class)
+@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
 public class IssueControllerTest {
     @Mock
     CommentService commentService;
@@ -66,14 +69,6 @@ public class IssueControllerTest {
         issue.setId((long) 10);
 
         issuePojo = new IssuePojo(issue.getId(), issue.getOwner().getUserName(), issue.getTitle(), issue.getContent(), issue.getUpdateDate(), issue.getLastDate(), issue.getState()); // nice...can't
-                                                                                                                                                                                      // obtain
-                                                                                                                                                                                      // an
-                                                                                                                                                                                      // IssuePojo
-                                                                                                                                                                                      // directly
-                                                                                                                                                                                      // from
-                                                                                                                                                                                      // an
-                                                                                                                                                                                      // issue
-
         model = new BindingAwareModelMap();
         request = new MockHttpServletRequest();
         request.getSession().setAttribute("user", user);
@@ -85,8 +80,8 @@ public class IssueControllerTest {
         assertEquals(view, "createIssue");
         Map<String, Object> attributesOfTheModel = model.asMap();
         assertEquals(attributesOfTheModel.get("user"), user.getUserName());
-        assert (attributesOfTheModel.containsValue("issue"));
-        assert (attributesOfTheModel.containsValue("date"));
+        assertTrue (attributesOfTheModel.get("issue").equals(new Issue()));
+        assertTrue (attributesOfTheModel.get("date") != null);
     }
 
     @Test

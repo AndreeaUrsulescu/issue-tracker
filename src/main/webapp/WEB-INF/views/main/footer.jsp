@@ -1,5 +1,5 @@
-<footer class="footer nav navbar-default" style="width:100%;">
-	<div class="container" style="position:relative;">
+<footer class="footer nav navbar-default" >
+	<div class="container" style="position:relative;" >
 		<small> <a href="#" target="blank" style="font-size: 2.5vmin"> &copy; Issue Tracker</a>
 		</small>
 

@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script src="resources/assets/javascript/register-validation.js"></script>
-<div class="container registerContainer">
-	
+<div class="container registerContainer" style="margin-left: -15px;">
+
 	<div class="registerForm" style="margin-top: 150px;">
 
 		<sf:form id="registerForm" method="POST" role="form"
@@ -56,7 +56,7 @@
 
 		</sf:form>
 	</div>
-	<div id="niceAdd">
+	<div id="niceAdd" style="margin-left: 35%; margin-top: 20px;">
 		<p id="promo1" class="promo" style="">1. Create an account</p>
 		<p id="promo2" class="promo">2. Sign in to your page</p>
 		<p id="promo3" class="promo">3. Share and fulfill your issues</p>

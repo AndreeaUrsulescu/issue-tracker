@@ -34,10 +34,10 @@ window.onload=function(){
 	$('#createContent').text('');}
 </script>
 
-<div class="container">
+<div class="container" style="height: 785px;">
 	<sf:form id="createIssueForm" class="form-horizontal" method="POST"
 		action='createIssue' modelAttribute="issue">
-		<div id="createIssue">
+		<div id="createIssue" style="background-color: white;">
 			<div class="issueTitle">
 
 				<label class="addedBy2">${date}</label> <img class="pinB2"

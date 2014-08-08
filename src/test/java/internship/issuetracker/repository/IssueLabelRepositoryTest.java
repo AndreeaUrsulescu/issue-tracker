@@ -10,12 +10,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/datasource/h2.xml", "classpath:config/application-context.xml", "classpath:config/Spring-Mail.xml" })
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class IssueLabelRepositoryTest {
 
     @Autowired
@@ -33,78 +37,84 @@ public class IssueLabelRepositoryTest {
     private Label label;
     private Issue issue;
     private User user;
+    private IssueLabel issueLabel;
 
     static int count = 65;
-    static int icount = 65;
-    static int ucount = 65;
-    static int lcount = 65;
 
-    public IssueLabel createIssueLabel() {
-        IssueLabel issueLabel = new IssueLabel();
+    Long id;
+    private static boolean run = true;
+    private static boolean removed = false;
+
+    public void createIssueLabel() {
+        issueLabel = new IssueLabel();
         issueLabel.setIssue(issue);
         issueLabel.setLabel(label);
         issueLabelRepository.create(issueLabel);
-        return issueLabel;
     }
 
     @Before
     @Transactional
     public void setUp() {
-        user = new User();
-        user.setUserName("username" + (char) ucount);
-        user.setPassword("parola");
-        user.setEmail("user@gmail.com");
-        userRepository.create(user);
-        ucount++;
-        issue = new Issue();
-        issue.setTitle("issue" + (char) icount);
-        issue.setContent("content");
-        issue.setOwner(user);
-        issueRepository.create(issue);
-        icount++;
-        label = new Label();
-        label.setLabelName("label" + (char) lcount);
-        labelRepository.create(label);
-        lcount++;
-    }
+        if (run == true) {
+            user = new User();
+            user.setUserName("username");
+            user.setPassword("parola");
+            user.setEmail("user@gmail.com");
+            userRepository.create(user);
 
-    @Test
-    public void removeLabelForIssueTest() {
-        createIssueLabel();
-        issueLabelRepository.removeLabelFromIssue(issue.getId(), "labelA");
-        assert (issueLabelRepository.findIssueLabel(issue.getId(), "labelA") == null);
+            issue = new Issue();
+            issue.setTitle("issue");
+            issue.setContent("content");
+            issue.setOwner(user);
+            issueRepository.create(issue);
+            id= issue.getId();
+
+            label = new Label();
+            label.setLabelName("label");
+            labelRepository.create(label);
+            
+            createIssueLabel();
+            
+            run = false;
+        } else {
+            if (removed){
+                createIssueLabel();
+            }
+            label = labelRepository.findLabelByName("label");
+            issue = issueRepository.findIssue(id);
+        }
     }
 
     @Test
     public void createTest() {
-        IssueLabel issueLabel = createIssueLabel();
         assertEquals(issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId(), issueLabel.getId());
     }
 
     @Test
+    public void removeLabelForIssueTest() {
+        issueLabelRepository.removeLabelFromIssue(issue.getId(), label.getLabelName());
+        removed = true;
+        assert (issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()) == null);
+    }
+
+    @Test
     public void deleteTest() {
-        IssueLabel issueLabel = createIssueLabel();
         issueLabelRepository.delete(issueLabel.getId());
         assert (issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()) == null);
     }
 
     @Test
     public void getLabelsForIssueTest() {
-        for (int i = 0; i < 10; i++) {
-            createIssueLabel();
-        }
-        assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 11);
+        assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() > 0);
     }
 
     @Test
     public void addLabelForIssueTest() {
-        issueLabelRepository.addLabelForIssue(issue.getId(), label.getLabelName());
         assert (issueLabelRepository.getLabelsForIssue(issue.getId()).size() == 1);
     }
 
     @Test
     public void findIssueLabelTest() {
-        IssueLabel issueLabel = createIssueLabel();
         assert (issueLabelRepository.findIssueLabel(issue.getId(), label.getLabelName()).getId() == issueLabel.getId());
     }
 }
