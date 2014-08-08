@@ -21,10 +21,11 @@ public class ActivationRepositoryTest {
     Activation activation;
 
     private static boolean run = true;
+    private static boolean removed = false;
 
     @Before
     public void setUp() {
-        if (run) {
+        if (run || removed) {
             activation = new Activation();
             activation.setEmail("foo@foo.foo");
             activation.setPassword("password");
@@ -46,6 +47,7 @@ public class ActivationRepositoryTest {
     public void testFindAndRemove() {
         activation = activationRepository.findActivationByKeyHash(activation.getKeyHash());
         activationRepository.remove(activation);
+        removed = true;
         assert (null == activationRepository.findActivationByKeyHash(activation.getKeyHash()));
     }
 }
