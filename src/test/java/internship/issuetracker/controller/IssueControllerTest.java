@@ -1,6 +1,6 @@
 package internship.issuetracker.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import internship.issuetracker.entities.Comment;
 import internship.issuetracker.entities.Issue;
 import internship.issuetracker.entities.User;
@@ -80,8 +80,8 @@ public class IssueControllerTest {
         assertEquals(view, "createIssue");
         Map<String, Object> attributesOfTheModel = model.asMap();
         assertEquals(attributesOfTheModel.get("user"), user.getUserName());
-        assert (attributesOfTheModel.containsValue("issue"));
-        assert (attributesOfTheModel.containsValue("date"));
+        assertTrue (attributesOfTheModel.get("issue").equals(new Issue()));
+        assertTrue (attributesOfTheModel.get("date") != null);
     }
 
     @Test
